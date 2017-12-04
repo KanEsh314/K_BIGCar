@@ -1,0 +1,168 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+    <RelativeLayout
+        android:background="@color/colorAccent"
+        android:layout_marginBottom="5dp"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/profileItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="48sp"
+            android:layout_toStartOf="@+id/profileIcon"
+            android:text="KanEsh"/>
+
+        <TextView
+            android:id="@+id/profilesubItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/profileItem"
+            android:text="@string/view_edit" />
+
+        <ImageView
+            android:id="@+id/profileIcon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/user" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@color/colorAccent"
+        android:layout_marginBottom="5dp"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/travelItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="21sp"
+            android:layout_toStartOf="@+id/travelIcon"
+            android:text="@string/travel"/>
+
+        <ImageView
+            android:id="@+id/travelIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_travel"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@color/colorAccent"
+        android:layout_marginBottom="5dp"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/spaceItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="21sp"
+            android:text="@string/space"
+            android:layout_toStartOf="@+id/spaceIcon" />
+
+        <ImageView
+            android:id="@+id/spaceIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_space"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@color/colorAccent"
+        android:layout_marginBottom="5dp"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/settingItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="21sp"
+            android:text="@string/setting"
+            android:layout_toStartOf="@+id/settingIcon" />
+
+        <ImageView
+            android:id="@+id/settingIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_setting" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@color/colorAccent"
+        android:layout_marginBottom="5dp"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/helpItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="21sp"
+            android:text="@string/help"
+            android:layout_toStartOf="@+id/helpIcon" />
+
+        <ImageView
+            android:id="@+id/helpIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_help" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@color/colorAccent"
+        android:layout_marginBottom="5dp"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/feedbackItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="21sp"
+            android:text="@string/feedback"
+            android:layout_toStartOf="@+id/feedbackIcon" />
+
+        <ImageView
+            android:id="@+id/feedbackIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_feedback" />
+    </RelativeLayout>
+
+</LinearLayout>
