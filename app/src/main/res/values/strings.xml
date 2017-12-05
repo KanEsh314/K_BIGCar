@@ -3,36 +3,36 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    
+
     <!-- Profile Item -->
-        <string name="view_edit">View and Edit Profile</string>
-        <string name="travel">Travel Credit</string>
-        <string name="space">List Your Space</string>
-        <string name="setting">Setting</string>
-        <string name="help">Help</string>
-        <string name="feedback">Give Us Feedback</string>
+    <string name="view_edit">View and Edit Profile</string>
+    <string name="travel">Travel Credit</string>
+    <string name="space">List Your Space</string>
+    <string name="setting">Setting</string>
+    <string name="help">Help</string>
+    <string name="feedback">Give Us Feedback</string>
 
     <!-- Inbox Item -->
-        <string name="inboxEmpty">
+    <string name="inboxEmpty">
             When you find a place you love, connect
             with the host.Tell them a bit about
             yourself and the purpose of your trip.
         </string>
-        <string name="inboxTitle">Inbox</string>
-        <string name="nomessage">No Message Yet</string>
-        <string name="inboxButton">Start Exploring</string>
+    <string name="inboxTitle">Inbox</string>
+    <string name="nomessage">No Message Yet</string>
+    <string name="inboxButton">Start Exploring</string>
 
     <!-- Trips Item -->
-        <string name="tripsButton">Start Exploring</string>
-        <string name="tripsTitle">What will be your first adventure?</string>
+    <string name="tripsButton">Start Exploring</string>
+    <string name="tripsTitle">What will be your first adventure?</string>
 
     <!-- Saved Item -->
-        <string name="savedTitle">Saved</string>
-        <string name="savedEmpty">
+    <string name="savedTitle">Saved</string>
+    <string name="savedEmpty">
             When you see something you like, tap on
             the heart to save it.If you are planning a
             trip with others, invite them so they can
             save and vote on their favorites
         </string>
-        <string name="savedButton">Start Exploring</string>
+    <string name="savedButton">Start Exploring</string>
 </resources>

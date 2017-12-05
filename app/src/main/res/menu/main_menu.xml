@@ -10,4 +10,11 @@
         app:showAsAction="always" >
     </item>
 
+    <item
+        android:id="@+id/bell"
+        android:icon="@drawable/ic_bell"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="Bell">
+    </item>
 </menu>
