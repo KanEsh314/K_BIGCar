@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="universalMargin">21dp</dimen>
     <dimen name="universalPadding">21dp</dimen>
     <dimen name="purposeMargin">80dp</dimen>
@@ -7,4 +8,11 @@
     <dimen name="smallUniversalText">14sp</dimen>
     <dimen name="universalText">21sp</dimen>
     <dimen name="largeUniversalText">35sp</dimen>
+
+    <dimen name="pictureHeight">100dp</dimen>
+    <dimen name="pictureWidth">100dp</dimen>
+
+    <dimen name="pictureTextSmall">12sp</dimen>
+    <dimen name="pictureTextLarge">18sp</dimen>
+
 </resources>
