@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_explore_content.*
 import java.util.ArrayList
 
@@ -29,7 +30,7 @@ class ExploreContentFragment : Fragment() {
         val list = ArrayList<Trend>()
         prepareList(list)
         val mAdapter = ExploreContentAdapter(this,list)
-        val mLayoutManager = LinearLayoutManager(this.activity)
+        val mLayoutManager = LinearLayoutManager(this.activity, LinearLayout.HORIZONTAL, false)
         recycleView!!.layoutManager = mLayoutManager
         recycleView!!.itemAnimator = DefaultItemAnimator()
         recycleView!!.adapter = mAdapter

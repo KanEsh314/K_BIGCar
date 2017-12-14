@@ -14,5 +14,8 @@
 
     <dimen name="pictureTextSmall">12sp</dimen>
     <dimen name="pictureTextLarge">18sp</dimen>
+    <dimen name="pictureSmallPadding">8dp</dimen>
+
+    <dimen name="exploreTitle">28sp</dimen>
 
 </resources>
