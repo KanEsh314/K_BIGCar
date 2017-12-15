@@ -39,8 +39,8 @@ class ExploreContentFragment : Fragment() {
     private fun prepareList(list: ArrayList<Trend>) {
         list.add(Trend(R.drawable.photo,"Kan","Kan","Kan"))
         list.add(Trend(R.drawable.photo,"Esh","Esh","Esh"))
-        list.add(Trend(R.drawable.photo,"Kan","Kan","Kan"))
-        list.add(Trend(R.drawable.photo,"Esh","Esh","Esh"))
+        list.add(Trend(R.drawable.photo,"Kan1","Kan1","Kan1"))
+        list.add(Trend(R.drawable.photo,"Esh1","Esh1","Esh1"))
     }
 
 }// Required empty public constructor

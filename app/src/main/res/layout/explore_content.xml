@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/cardViewContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/commonContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/universalPadding">
+
+            <ImageView
+                android:id="@+id/trendImg"
+                android:layout_width="@dimen/pictureWidth"
+                android:layout_height="@dimen/pictureHeight"
+                android:layout_margin="16dp"
+                android:src="@drawable/photo" />
+
+            <TextView
+                android:id="@+id/trendText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/trendImg"
+                android:layout_alignStart="@+id/trendImg"
+                android:layout_below="@id/trendImg"
+                android:text="Photo"
+                android:textSize="@dimen/pictureTextSmall"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/trendDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/trendImg"
+                android:layout_alignStart="@id/trendImg"
+                android:layout_below="@id/trendText"
+                android:text="Photo Description"
+                android:textSize="@dimen/pictureTextLarge"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/trendPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/trendImg"
+                android:layout_alignStart="@id/trendImg"
+                android:layout_below="@id/trendDesc"
+                android:text="Photo Price"
+                android:textSize="@dimen/pictureTextSmall" />
+
+            <ImageButton
+                android:id="@+id/trendLike"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignEnd="@+id/trendImg"
+                android:layout_alignTop="@+id/trendImg"
+                android:src="@drawable/ic_like" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
