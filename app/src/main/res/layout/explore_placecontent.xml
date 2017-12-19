@@ -1,64 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardViewPlaceContent"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-    <RelativeLayout
-        android:id="@+id/placeContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/universalPadding">
+    android:id="@+id/placeContent"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:padding="@dimen/universalPadding">
 
         <ImageView
             android:id="@+id/placeImg"
-            android:layout_width="@dimen/pictureWidth"
-            android:layout_height="@dimen/pictureHeight"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="16dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/photo" />
 
         <TextView
-            android:id="@+id/placeText"
-            android:layout_width="wrap_content"
+            android:id="@+id/placeName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/placeImg"
             android:layout_alignStart="@+id/placeImg"
             android:layout_below="@id/placeImg"
             android:text="Photo"
-            android:textSize="@dimen/pictureTextSmall"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/placeDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/placeImg"
-            android:layout_alignStart="@id/placeImg"
-            android:layout_below="@id/placeText"
-            android:text="Photo Description"
             android:textSize="@dimen/pictureTextLarge"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/placePrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/placeImg"
-            android:layout_alignStart="@id/placeImg"
-            android:layout_below="@id/placeDesc"
-            android:text="Photo Price"
-            android:textSize="@dimen/pictureTextSmall" />
-
-        <ImageButton
-            android:id="@+id/placeLike"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignEnd="@+id/placeImg"
-            android:layout_alignTop="@+id/placeImg"
-            android:src="@drawable/ic_like" />
-
-    </RelativeLayout>
-
-</android.support.v7.widget.CardView>
+</RelativeLayout>

@@ -5,14 +5,16 @@
     <dimen name="universalPadding">21dp</dimen>
     <dimen name="purposeMargin">80dp</dimen>
 
+    <dimen name="universalPaddingPic">8dp</dimen>
+
     <dimen name="smallUniversalText">14sp</dimen>
     <dimen name="universalText">21sp</dimen>
     <dimen name="largeUniversalText">35sp</dimen>
 
-    <dimen name="pictureHeight">100dp</dimen>
-    <dimen name="pictureWidth">100dp</dimen>
+    <dimen name="pictureHeight">180dp</dimen>
+    <dimen name="pictureWidth">120dp</dimen>
 
-    <dimen name="pictureTextSmall">12sp</dimen>
+    <dimen name="pictureTextSmall">14sp</dimen>
     <dimen name="pictureTextLarge">18sp</dimen>
     <dimen name="pictureSmallPadding">8dp</dimen>
 

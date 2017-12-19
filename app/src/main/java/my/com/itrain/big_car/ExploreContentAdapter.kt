@@ -13,22 +13,24 @@ import android.widget.TextView
  */
 class ExploreContentAdapter(private val context: ExploreContentFragment, private val list: List<Trend>) : RecyclerView.Adapter<ExploreContentAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var trendImg: ImageView
         var trendText: TextView
+        var trendTextEla: TextView
         var trendDesc: TextView
         var trendPrice: TextView
 
         init {
             trendImg = itemView.findViewById(R.id.trendImg)
             trendText = itemView.findViewById(R.id.trendText)
+            trendTextEla = itemView.findViewById(R.id.trendTextEla)
             trendDesc = itemView.findViewById(R.id.trendDesc)
             trendPrice = itemView.findViewById(R.id.trendPrice)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val view : View = LayoutInflater.from(parent?.context).inflate(R.layout.explore_list, parent, false)
+        val view : View = LayoutInflater.from(parent?.context).inflate(R.layout.explore_content, parent, false)
         return ViewHolder(view)
     }
 
@@ -36,6 +38,7 @@ class ExploreContentAdapter(private val context: ExploreContentFragment, private
         val trend : Trend = list.get(position)
         holder?.trendImg?.setImageResource(trend.img)
         holder?.trendText?.text = trend.text
+        holder?.trendTextEla?.text = trend.textela
         holder?.trendDesc?.text = trend.desc
         holder?.trendPrice?.text = trend.price
     }
