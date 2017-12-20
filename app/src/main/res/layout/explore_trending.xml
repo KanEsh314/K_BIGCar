@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/placeContent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/popularImg"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_margin="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/photo" />
+
+    <TextView
+        android:id="@+id/popularName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/popularImg"
+        android:layout_alignStart="@+id/popularImg"
+        android:layout_alignEnd="@id/popularImg"
+        android:text="Malaysia"
+        android:textAlignment="center"
+        android:textSize="@dimen/pictureTextLarge"
+        android:textStyle="bold" />
+
+</RelativeLayout>

@@ -12,7 +12,7 @@ import android.widget.TextView
  * Created by iTrain on 19-Dec-17.
  */
 
-class ExplorePlaceContentAdapter(private val context: ExploreContentFragment, private val loc: List<Place>) : RecyclerView.Adapter<ExplorePlaceContentAdapter.ViewHolder>(){
+class ExplorePlaceContentAdapter(private val context: ExploreContentFragment, private val destination: List<Place>) : RecyclerView.Adapter<ExplorePlaceContentAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var placeImg: ImageView
@@ -30,13 +30,13 @@ class ExplorePlaceContentAdapter(private val context: ExploreContentFragment, pr
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val place : Place = loc.get(position)
+        val place : Place = destination.get(position)
         holder?.placeImg?.setImageResource(place.pimg)
         holder?.placeName?.text = place.pname
     }
 
     override fun getItemCount(): Int {
-        return loc.size
+        return destination.size
     }
 
 
