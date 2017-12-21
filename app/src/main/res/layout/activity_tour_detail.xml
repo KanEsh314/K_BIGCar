@@ -1,28 +1,410 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    tools:context="my.com.itrain.big_car.TourDetailActivity"
     android:layout_height="wrap_content"
-    tools:context="my.com.itrain.big_car.TourDetailActivity">
-
-    <RelativeLayout
+    android:layout_width="match_parent">
+    
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        
-        <android.support.v4.view.ViewPager
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    
+        <ImageView
+            android:id="@+id/tourImage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-            
-            <me.relex.circleindicator.CircleIndicator
-                android:id="@+id/indicator"
+            android:layout_height="@dimen/tourImage"
+            android:src="@drawable/tour1"
+            android:scaleType="fitXY" />
+        
+        <TextView
+            android:id="@+id/tourName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/universalPadding"
+            android:text="Independent cottage, mountain view"
+            android:textSize="@dimen/tourTitle"
+            android:textColor="@color/colorDark"
+            android:textStyle="bold"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/universalPadding">
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/universalPadding">
+
+                <TextView
+                    android:id="@+id/tourPortition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Entire Place"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/tourOwnerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hosted By Acer"
+                    android:textSize="@dimen/smallUniversalText" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/tourOwner"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:src="@mipmap/ic_logo_round" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/universalPadding">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/guestIcon"
+                    android:layout_width="@dimen/tourAvailabilitySize"
+                    android:layout_height="@dimen/tourAvailabilitySize"
+                    android:src="@mipmap/guest"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/numberOfGuest"
+                    android:layout_width="@dimen/tourAvailabilitySize"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/guestIcon"
+                    android:layout_alignEnd="@+id/guestIcon"
+                    android:text="2 Guest"
+                    android:textColor="@color/colorDark"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/pictureTextSmall"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/roomIcon"
+                    android:layout_width="@dimen/tourAvailabilitySize"
+                    android:layout_height="@dimen/tourAvailabilitySize"
+                    android:src="@mipmap/room"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/numberOfRoom"
+                    android:layout_width="@dimen/tourAvailabilitySize"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/roomIcon"
+                    android:layout_alignEnd="@+id/roomIcon"
+                    android:text="1 Room"
+                    android:textColor="@color/colorDark"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/pictureTextSmall"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/bedIcon"
+                    android:layout_width="@dimen/tourAvailabilitySize"
+                    android:layout_height="@dimen/tourAvailabilitySize"
+                    android:src="@mipmap/bed"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/numberOfBed"
+                    android:layout_width="@dimen/tourAvailabilitySize"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/bedIcon"
+                    android:layout_alignEnd="@+id/bedIcon"
+                    android:text="1 Bed"
+                    android:textColor="@color/colorDark"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/pictureTextSmall"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/bathIcon"
+                    android:layout_width="@dimen/tourAvailabilitySize"
+                    android:layout_height="@dimen/tourAvailabilitySize"
+                    android:src="@mipmap/bath"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/numberOfBath"
+                    android:layout_width="@dimen/tourAvailabilitySize"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/bathIcon"
+                    android:layout_alignEnd="@+id/bathIcon"
+                    android:text="1 Bath"
+                    android:textColor="@color/colorDark"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/pictureTextSmall"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/universalPadding">
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_alignParentBottom="true">
+                android:layout_height="wrap_content"
+                android:text="About  this home"
+                android:textSize="@dimen/smallUniversalText"
+                android:textStyle="bold"
+                android:textColor="@color/colorDark"/>
 
-            </me.relex.circleindicator.CircleIndicator>
+            <TextView
+                android:id="@+id/aboutHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="la ecotasa"
+                android:textSize="@dimen/smallUniversalText" />
 
-    </RelativeLayout>
+        </LinearLayout>
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/universalPadding">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="The Space"
+                android:textSize="@dimen/smallUniversalText"
+                android:textStyle="bold"
+                android:textColor="@color/colorDark"/>
+
+            <TextView
+                android:id="@+id/aboutSpace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Son Marimon, this B and B, is located in themunicipality of Selve, at the feet of..."
+                android:textSize="@dimen/smallUniversalText" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/nightMin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4 Night Min"
+            android:textSize="@dimen/smallUniversalText"
+            android:padding="@dimen/universalPadding"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amenities"
+            android:textSize="@dimen/smallUniversalText"
+            android:paddingTop="@dimen/universalPadding"
+            android:paddingLeft="@dimen/universalPadding"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/universalPadding">
+
+            <ImageView
+                android:layout_width="@dimen/tourAvailabilitySize"
+                android:layout_height="@dimen/tourAvailabilitySize"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/park"/>
+
+            <ImageView
+                android:layout_width="@dimen/tourAvailabilitySize"
+                android:layout_height="@dimen/tourAvailabilitySize"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/food"/>
+
+            <ImageView
+                android:layout_width="@dimen/tourAvailabilitySize"
+                android:layout_height="@dimen/tourAvailabilitySize"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/plug"/>
+
+            <ImageView
+                android:layout_width="@dimen/tourAvailabilitySize"
+                android:layout_height="@dimen/tourAvailabilitySize"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/cooler"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tourImage"
+            android:scaleType="fitXY"
+            android:src="@mipmap/alternatemap"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/universalPadding">
+
+            <TextView
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:text="Check-In-Time"
+                android:textSize="@dimen/universalText"
+                android:textColor="@color/colorDark" />
+
+            <TextView
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:text="After 14:00"
+                android:textSize="@dimen/universalText"
+                android:textColor="@color/colorDark"
+                android:textAlignment="textEnd"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/universalPadding">
+
+            <TextView
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:text="Check-Out-Time"
+                android:textSize="@dimen/universalText"
+                android:textColor="@color/colorDark" />
+
+            <TextView
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:text="Before 11:00"
+                android:textSize="@dimen/universalText"
+                android:textColor="@color/colorDark"
+                android:textAlignment="textEnd"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/universalPadding"
+            android:text="Reviews"
+            android:textSize="@dimen/pictureTextSmall"
+            android:textColor="@color/colorDark"
+            android:textStyle="bold"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/profileImage"
+                android:layout_height="@dimen/profileImage"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_logo_round"
+                android:layout_margin="@dimen/universalPadding"
+                android:id="@+id/imageView2" />
+
+            <LinearLayout
+                android:id="@+id/userInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/imageView2"
+                android:layout_toEndOf="@+id/imageView2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/pictureSmallPadding"
+                    android:text="Laura"
+                    android:textSize="@dimen/smallUniversalText" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/pictureSmallPadding"
+                    android:text="Nov 2017"
+                    android:textSize="@dimen/smallUniversalText" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="We stayed at Tomeu's cottage for a week in November to celebrate our honeymoon and had a amazing time"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/smallUniversalText"
+                android:layout_below="@+id/userInfo"
+                android:padding="@dimen/smallUniversalText"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="203dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/universalPadding"
+                android:text="RM229 per Night"
+                android:textColor="@color/colorDark" />
+
+            <Button
+                android:id="@+id/checkDates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check Availability" />
+
+        </LinearLayout>
+        
+    </LinearLayout>
+    
+</ScrollView>

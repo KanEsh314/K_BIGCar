@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/universalPadding"
+    tools:context="my.com.itrain.big_car.TourConfirmActivity" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Review Your Purchase"
+        android:textSize="@dimen/largeUniversalText"
+        android:textColor="@color/colorDark" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/pictureSmallPadding">
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="After Dark: Crime History Food Walk"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/universalText"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sat, Jan 6"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/universalText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 experience, 1 guest"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/universalText" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="@dimen/tourAvailabilitySize"
+            android:layout_height="@dimen/tourAvailabilitySize"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/linearLayout"
+            android:scaleType="centerCrop"
+            android:src="@drawable/tour1" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Payment"
+        android:textSize="@dimen/universalText"
+        android:textColor="@color/colorDark"
+        android:padding="@dimen/pictureSmallPadding"/>
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RM198 x 1 guest"
+        android:textColor="@color/colorDark"
+        android:textSize="@dimen/universalText"
+        android:padding="@dimen/pictureSmallPadding"/>
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total (MYR)"
+        android:textSize="@dimen/universalText"
+        android:textColor="@color/colorDark"
+        android:padding="@dimen/universalPadding"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Payment"/>
+
+</LinearLayout>

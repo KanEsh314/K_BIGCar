@@ -24,7 +24,9 @@
             android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".TourDetailActivity"></activity>
+        <activity android:name=".TourDetailActivity" />
+        <activity android:name=".TourDatesActivity" />
+        <activity android:name=".TourConfirmActivity"></activity>
     </application>
 
 </manifest>

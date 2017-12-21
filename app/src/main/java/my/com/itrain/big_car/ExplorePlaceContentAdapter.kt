@@ -1,11 +1,14 @@
 package my.com.itrain.big_car
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 
 /**
@@ -33,6 +36,12 @@ class ExplorePlaceContentAdapter(private val context: ExploreContentFragment, pr
         val place : Place = destination.get(position)
         holder?.placeImg?.setImageResource(place.pimg)
         holder?.placeName?.text = place.pname
+
+        holder?.placeImg?.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(view: View) {
+                //Intent
+            }
+        });
     }
 
     override fun getItemCount(): Int {

@@ -20,4 +20,9 @@
 
     <dimen name="exploreTitle">28sp</dimen>
 
+    <dimen name="tourImage">250dp</dimen>
+    <dimen name="tourTitle">40sp</dimen>
+    <dimen name="tourAvailabilitySize">75dp</dimen>
+    <dimen name="profileImage">80dp</dimen>
+
 </resources>

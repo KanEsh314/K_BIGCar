@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/universalPadding"
+    tools:context="my.com.itrain.big_car.TourDatesActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="When Do You Wanna Go?"
+        android:textColor="@color/colorDark"
+        android:textSize="@dimen/largeUniversalText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check In"
+        android:textSize="@dimen/pictureTextLarge"
+        android:textColor="@color/colorDark"/>
+
+    <DatePicker
+        android:id="@+id/chechIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check Out"
+        android:textSize="@dimen/pictureTextLarge"
+        android:textColor="@color/colorDark"/>
+
+    <DatePicker
+        android:id="@+id/checkOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
