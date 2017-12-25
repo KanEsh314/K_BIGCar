@@ -6,10 +6,13 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.LinearLayout
+import kotlinx.android.synthetic.main.explore_placecontent.*
 import kotlinx.android.synthetic.main.fragment_explore_content.*
 import java.util.ArrayList
 
@@ -22,7 +25,9 @@ class ExploreContentFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_explore_content, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_explore_content, container, false)
+
+        return view
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {

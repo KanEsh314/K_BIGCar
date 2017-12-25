@@ -25,6 +25,7 @@
         android:text="Malaysia"
         android:textAlignment="center"
         android:textSize="@dimen/pictureTextLarge"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/colorWhite"/>
 
 </RelativeLayout>
