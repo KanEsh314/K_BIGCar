@@ -1,6 +1,7 @@
 package my.com.itrain.big_car
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -14,6 +15,7 @@ import android.widget.AdapterView
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.explore_placecontent.*
 import kotlinx.android.synthetic.main.fragment_explore_content.*
+import my.com.itrain.big_car.ExplorePlaceContentAdapter.OnItemClickListener
 import java.util.ArrayList
 
 
@@ -25,7 +27,7 @@ class ExploreContentFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         // Inflate the layout for this fragment
-        val view = inflater!!.inflate(R.layout.fragment_explore_content, container, false)
+        val view = inflater.inflate(R.layout.fragment_explore_content, container, false)
 
         return view
     }
@@ -51,7 +53,11 @@ class ExploreContentFragment : Fragment() {
 
         val destination = ArrayList<Place>()
         prepareDestination(destination)
-        val destinationAdapter = ExplorePlaceContentAdapter(this,destination)
+        val destinationAdapter = ExplorePlaceContentAdapter(this,destination, object: ExplorePlaceContentAdapter.OnItemClickListener{
+            override fun onItemClick(position:Int){
+                startActivity(Intent(context,TourDetailActivity::class.java))
+            }
+        })
         val destinationLayoutManager = LinearLayoutManager(this.activity, LinearLayout.HORIZONTAL,true)
         recycleViewDestination!!.layoutManager = destinationLayoutManager
         recycleViewDestination!!.itemAnimator = DefaultItemAnimator()

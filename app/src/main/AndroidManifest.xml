@@ -27,7 +27,8 @@
         <activity android:name=".TourDetailActivity" />
         <activity android:name=".TourDatesActivity" />
         <activity android:name=".TourConfirmActivity" />
-        <activity android:name=".TourCountActivity"></activity>
+        <activity android:name=".TourCountActivity" />
+        <activity android:name=".StartActivity"></activity>
     </application>
 
 </manifest>
