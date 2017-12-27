@@ -15,7 +15,7 @@ class TourDatesActivity : AppCompatActivity() {
         val chooseDate = findViewById<View>(R.id.chooseDate)
         chooseDate.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                startActivity(Intent(this@TourDatesActivity, TourConfirmActivity::class.java))
+                startActivity(Intent(this@TourDatesActivity, TourCountActivity::class.java))
             }
         })
     }
