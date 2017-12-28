@@ -64,7 +64,7 @@
             android:layout_marginBottom="24dp"
             android:text="I'm Member"
             android:gravity="center"
-            android:textSize="@dimen/smallUniversalText"/>
+            android:textSize="@dimen/mediumUniversalText"/>
 
     </LinearLayout>
 

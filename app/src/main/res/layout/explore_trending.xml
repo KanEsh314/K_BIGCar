@@ -5,13 +5,12 @@
     android:id="@+id/placeContent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:layout_marginRight="@dimen/largeMargin">
 
     <ImageView
         android:id="@+id/popularImg"
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:layout_margin="16dp"
+        android:layout_width="320dp"
+        android:layout_height="240dp"
         android:scaleType="centerCrop"
         android:src="@drawable/photo" />
 
@@ -19,13 +18,12 @@
         android:id="@+id/popularName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/popularImg"
-        android:layout_alignStart="@+id/popularImg"
+        android:layout_below="@id/popularImg"
+        android:layout_alignStart="@id/popularImg"
         android:layout_alignEnd="@id/popularImg"
-        android:text="Malaysia"
-        android:textAlignment="center"
-        android:textSize="@dimen/pictureTextLarge"
-        android:textStyle="bold"
-        android:textColor="@color/colorWhite"/>
+        android:text="Kuala Lumpur International Lounge Service"
+        android:textColor="@color/colorDark"
+        android:textSize="@dimen/mediumUniversalText"
+        android:textStyle="bold" />
 
 </RelativeLayout>

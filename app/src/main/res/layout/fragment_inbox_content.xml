@@ -32,7 +32,7 @@
             android:text="@string/nomessage"
             android:textAlignment="center"
             android:textColor="@color/colorDark"
-            android:textSize="@dimen/universalText" />
+            android:textSize="@dimen/subUniversalText" />
 
         <TextView
             android:layout_width="match_parent"
@@ -41,7 +41,7 @@
             android:text="@string/inboxEmpty"
             android:textAlignment="center"
             android:textColor="@color/colorDark"
-            android:textSize="@dimen/smallUniversalText" />
+            android:textSize="@dimen/mediumUniversalText" />
 
         <Button
             android:layout_width="wrap_content"

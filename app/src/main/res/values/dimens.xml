@@ -5,24 +5,44 @@
     <dimen name="universalPadding">21dp</dimen>
     <dimen name="purposeMargin">80dp</dimen>
 
-    <dimen name="universalPaddingPic">8dp</dimen>
 
-    <dimen name="smallUniversalText">14sp</dimen>
-    <dimen name="universalText">21sp</dimen>
+
+
+
     <dimen name="largeUniversalText">35sp</dimen>
 
-    <dimen name="pictureHeight">180dp</dimen>
-    <dimen name="pictureWidth">120dp</dimen>
+    <dimen name="pictureHeight">210dp</dimen>
+    <dimen name="pictureWidth">150dp</dimen>
 
     <dimen name="pictureTextSmall">14sp</dimen>
     <dimen name="pictureTextLarge">18sp</dimen>
     <dimen name="pictureSmallPadding">8dp</dimen>
 
-    <dimen name="exploreTitle">28sp</dimen>
-
     <dimen name="tourImage">250dp</dimen>
-    <dimen name="tourTitle">40sp</dimen>
+
     <dimen name="tourAvailabilitySize">75dp</dimen>
     <dimen name="profileImage">80dp</dimen>
+
+    <dimen name="smallPadding">8dp</dimen>
+    <dimen name="mediumPadding">16dp</dimen>
+    <dimen name="largePadding">24dp</dimen>
+    <dimen name="picturePadding">4dp</dimen>
+
+    <dimen name="smallMargin">4dp</dimen>
+    <dimen name="mediumMargin">8dp</dimen>
+    <dimen name="largeMargin">12dp</dimen>
+
+    <dimen name="tourTitle">40sp</dimen>
+    <dimen name="universalText">35sp</dimen>
+    <dimen name="subUniversalText">28sp</dimen>
+    <dimen name="mediumUniversalText">21sp</dimen>
+    <dimen name="smallUniversalText">14sp</dimen>
+
+    <color name="colorFABPressed">#455A64</color>
+    <color name="colorFABUnpressed">#CFD8DC</color>
+
+    <dimen name="bannnerTitle">35sp</dimen>
+    <dimen name="bannerDesc">17sp</dimen>
+    <dimen name="typeTitle">28sp</dimen>
 
 </resources>

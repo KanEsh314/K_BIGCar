@@ -4,13 +4,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/cardViewContent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/largeMargin">
 
         <RelativeLayout
             android:id="@+id/commonContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/universalPaddingPic">
+            android:padding="@dimen/picturePadding">
 
             <ImageView
                 android:id="@+id/trendImg"

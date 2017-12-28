@@ -5,13 +5,12 @@
     android:id="@+id/placeContent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:layout_marginRight="@dimen/largeMargin">
 
         <ImageView
             android:id="@+id/placeImg"
             android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_margin="16dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:src="@drawable/photo" />
 
@@ -19,13 +18,12 @@
             android:id="@+id/placeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/placeImg"
-            android:layout_alignStart="@+id/placeImg"
-            android:layout_below="@id/placeImg"
+            android:layout_alignBottom="@+id/placeImg"
+            android:layout_centerHorizontal="true"
             android:text="Malaysia"
-            android:textSize="@dimen/pictureTextLarge"
-            android:textStyle="bold"
             android:textAlignment="center"
-            android:textColor="@color/colorDark"/>
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/mediumUniversalText"
+            android:textStyle="bold" />
 
 </RelativeLayout>

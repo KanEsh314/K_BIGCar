@@ -4,59 +4,128 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="@dimen/universalPadding">
-
-    <TextView
-        android:id="@+id/exploreClick"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Explore"
-        android:textColor="@color/colorDark"
-        android:textSize="@dimen/exploreTitle"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:weightSum="10">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleViewExplore"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingBottom="16dp" />
+        <ImageView
+            android:id="@+id/tourbannerImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="12"
+            android:scaleType="fitXY"
+            android:src="@drawable/tour2" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Popular Tour"
-        android:textColor="@color/colorDark"
-        android:textSize="@dimen/exploreTitle"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:id="@+id/bannerDetailLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-110dp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/largePadding"
+            android:paddingLeft="@dimen/largePadding"
+            android:paddingTop="@dimen/largePadding">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleViewDestination"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingBottom="16dp" />
+            <TextView
+                android:id="@+id/bannerTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="YOURS TO EXPLORE"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/bannnerTitle"
+                android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Feature Destination"
-        android:textColor="@color/colorDark"
-        android:textSize="@dimen/exploreTitle"
-        android:textStyle="bold" />
+            <TextView
+                android:id="@+id/bannerDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Discover and book amazing things-to-do at exclusive prices"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/bannerDesc" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleViewPopular"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingBottom="16dp" />
+        </LinearLayout>
 
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/nearByLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tourbannerImage"
+            android:orientation="vertical"
+            android:padding="@dimen/largePadding">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/smallPadding"
+                android:text="Nearby"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/typeTitle"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycleViewNearBy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/popularDestinationLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nearByLayout"
+            android:orientation="vertical"
+            android:padding="@dimen/largePadding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/smallPadding"
+                android:text="Popular Destinations"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/typeTitle"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycleViewDestination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/popularActivities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/popularDestinationLayout"
+            android:orientation="vertical"
+            android:padding="@dimen/largePadding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/smallPadding"
+                android:text="Popular Activities"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/typeTitle"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycleViewActivities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="16dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </ScrollView>
 

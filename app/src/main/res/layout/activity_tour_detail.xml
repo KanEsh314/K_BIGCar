@@ -32,151 +32,139 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/universalPadding">
+            android:layout_margin="@dimen/mediumMargin">
 
             <TextView
-                android:id="@+id/tourPortition"
+                android:id="@+id/tourDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Entire Place"
-                android:textSize="@dimen/smallUniversalText"
-                android:textStyle="bold"
-                android:textColor="@color/colorDark"/>
+                android:text="The Langkawi itinerary with the most characteristic local flavor. Cruise through a mangrove reserve in a speed boat with Langkawi's sea eagles flying beside you.Explore a bat cave on foot. This super-value outdoor adventure is just waiting for you"
+                android:textSize="@dimen/mediumUniversalText"
+                android:textColor="@color/colorDark"
+                android:padding="@dimen/smallPadding"/>
 
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="@dimen/universalPadding">
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mediumMargin">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="5dp">
+                android:text="Product No"
+                android:textColor="@color/colorSlightDark"
+                android:textSize="@dimen/mediumUniversalText" />
 
-                <ImageView
-                    android:id="@+id/guestIcon"
-                    android:layout_width="@dimen/tourAvailabilitySize"
-                    android:layout_height="@dimen/tourAvailabilitySize"
-                    android:src="@mipmap/guest"
-                    android:scaleType="centerCrop"/>
-
-                <TextView
-                    android:id="@+id/numberOfGuest"
-                    android:layout_width="@dimen/tourAvailabilitySize"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/guestIcon"
-                    android:layout_alignEnd="@+id/guestIcon"
-                    android:text="2 Guest"
-                    android:textColor="@color/colorDark"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/pictureTextSmall"/>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="5dp">
+                android:layout_alignParentRight="true"
+                android:text="8660"
+                android:textColor="@color/colorBlue"
+                android:textStyle="bold"
+                android:textSize="@dimen/mediumUniversalText" />
 
-                <ImageView
-                    android:id="@+id/roomIcon"
-                    android:layout_width="@dimen/tourAvailabilitySize"
-                    android:layout_height="@dimen/tourAvailabilitySize"
-                    android:src="@mipmap/room"
-                    android:scaleType="centerCrop"/>
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/numberOfRoom"
-                    android:layout_width="@dimen/tourAvailabilitySize"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/roomIcon"
-                    android:layout_alignEnd="@+id/roomIcon"
-                    android:text="1 Room"
-                    android:textColor="@color/colorDark"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/pictureTextSmall"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mediumMargin">
 
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="5dp">
+                android:text="Location"
+                android:textColor="@color/colorSlightDark"
+                android:textSize="@dimen/mediumUniversalText" />
 
-                <ImageView
-                    android:id="@+id/bedIcon"
-                    android:layout_width="@dimen/tourAvailabilitySize"
-                    android:layout_height="@dimen/tourAvailabilitySize"
-                    android:src="@mipmap/bed"
-                    android:scaleType="centerCrop"/>
-
-                <TextView
-                    android:id="@+id/numberOfBed"
-                    android:layout_width="@dimen/tourAvailabilitySize"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/bedIcon"
-                    android:layout_alignEnd="@+id/bedIcon"
-                    android:text="1 Bed"
-                    android:textColor="@color/colorDark"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/pictureTextSmall"/>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="5dp">
+                android:layout_alignParentRight="true"
+                android:text="Malaysia, Langkawi"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/mediumUniversalText" />
 
-                <ImageView
-                    android:id="@+id/bathIcon"
-                    android:layout_width="@dimen/tourAvailabilitySize"
-                    android:layout_height="@dimen/tourAvailabilitySize"
-                    android:src="@mipmap/bath"
-                    android:scaleType="centerCrop"/>
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/numberOfBath"
-                    android:layout_width="@dimen/tourAvailabilitySize"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/bathIcon"
-                    android:layout_alignEnd="@+id/bathIcon"
-                    android:text="1 Bath"
-                    android:textColor="@color/colorDark"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/pictureTextSmall"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mediumMargin">
 
-            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duration"
+                android:textColor="@color/colorSlightDark"
+                android:textSize="@dimen/mediumUniversalText" />
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="5 Hour(s)"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/mediumUniversalText"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mediumMargin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Guide Language"
+                android:textColor="@color/colorSlightDark"
+                android:textSize="@dimen/mediumUniversalText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="English, Malay"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/mediumUniversalText"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textSize="@dimen/universalText"
+            android:textStyle="bold"
+            android:textColor="@color/colorDark"
+            android:layout_margin="@dimen/mediumMargin"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_centerVertical="true"
-            android:padding="@dimen/universalPadding">
+            android:padding="@dimen/smallPadding">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="About  this home"
-                android:textSize="@dimen/smallUniversalText"
+                android:text="Highlights"
+                android:textSize="@dimen/mediumUniversalText"
                 android:textStyle="bold"
                 android:textColor="@color/colorDark"/>
 
             <TextView
-                android:id="@+id/aboutHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="la ecotasa"
+                android:layout_alignParentLeft="true"
+                android:text="Langkawi's unique mangrove cruise"
                 android:textSize="@dimen/smallUniversalText" />
 
         </LinearLayout>
@@ -185,125 +173,62 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_centerVertical="true"
-            android:padding="@dimen/universalPadding">
+            android:padding="@dimen/smallPadding">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="The Space"
-                android:textSize="@dimen/smallUniversalText"
+                android:text="Impoertant Info"
+                android:textSize="@dimen/mediumUniversalText"
                 android:textStyle="bold"
                 android:textColor="@color/colorDark"/>
 
             <TextView
-                android:id="@+id/aboutSpace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Son Marimon, this B and B, is located in themunicipality of Selve, at the feet of..."
+                android:layout_alignParentLeft="true"
+                android:text="Meet-up location: Your Hotel"
+                android:textSize="@dimen/smallUniversalText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/smallPadding">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="What You Can Expect"
+                android:textSize="@dimen/mediumUniversalText"
+                android:textStyle="bold"
+                android:textColor="@color/colorDark"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="The Langkawi Mangrove Cruise is not to be missed by thoose with an adventurous spirit"
                 android:textSize="@dimen/smallUniversalText" />
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/nightMin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="4 Night Min"
-            android:textSize="@dimen/smallUniversalText"
-            android:padding="@dimen/universalPadding"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Amenities"
-            android:textSize="@dimen/smallUniversalText"
-            android:paddingTop="@dimen/universalPadding"
-            android:paddingLeft="@dimen/universalPadding"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/universalPadding">
-
-            <ImageView
-                android:layout_width="@dimen/tourAvailabilitySize"
-                android:layout_height="@dimen/tourAvailabilitySize"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/park"/>
-
-            <ImageView
-                android:layout_width="@dimen/tourAvailabilitySize"
-                android:layout_height="@dimen/tourAvailabilitySize"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/food"/>
-
-            <ImageView
-                android:layout_width="@dimen/tourAvailabilitySize"
-                android:layout_height="@dimen/tourAvailabilitySize"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/plug"/>
-
-            <ImageView
-                android:layout_width="@dimen/tourAvailabilitySize"
-                android:layout_height="@dimen/tourAvailabilitySize"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/cooler"/>
-
-        </LinearLayout>
+            android:text="Map"
+            android:textSize="@dimen/universalText"
+            android:textStyle="bold"
+            android:textColor="@color/colorDark"
+            android:layout_margin="@dimen/mediumMargin"/>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/tourImage"
             android:scaleType="fitXY"
             android:src="@mipmap/alternatemap"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/universalPadding">
-
-            <TextView
-                android:layout_width="175dp"
-                android:layout_height="match_parent"
-                android:text="Check-In-Time"
-                android:textSize="@dimen/universalText"
-                android:textColor="@color/colorDark" />
-
-            <TextView
-                android:layout_width="175dp"
-                android:layout_height="match_parent"
-                android:text="After 14:00"
-                android:textSize="@dimen/universalText"
-                android:textColor="@color/colorDark"
-                android:textAlignment="textEnd"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/universalPadding">
-
-            <TextView
-                android:layout_width="175dp"
-                android:layout_height="match_parent"
-                android:text="Check-Out-Time"
-                android:textSize="@dimen/universalText"
-                android:textColor="@color/colorDark" />
-
-            <TextView
-                android:layout_width="175dp"
-                android:layout_height="match_parent"
-                android:text="Before 11:00"
-                android:textSize="@dimen/universalText"
-                android:textColor="@color/colorDark"
-                android:textAlignment="textEnd"/>
-
-        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -339,25 +264,25 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/pictureSmallPadding"
                     android:text="Laura"
-                    android:textSize="@dimen/smallUniversalText" />
+                    android:textSize="@dimen/mediumUniversalText" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/pictureSmallPadding"
                     android:text="Nov 2017"
-                    android:textSize="@dimen/smallUniversalText" />
+                    android:textSize="@dimen/mediumUniversalText" />
 
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="We stayed at Tomeu's cottage for a week in November to celebrate our honeymoon and had a amazing time"
+                android:text="We stayed for a week in November to celebrate our honeymoon and had a amazing time"
                 android:textColor="@color/colorDark"
-                android:textSize="@dimen/smallUniversalText"
+                android:textSize="@dimen/mediumUniversalText"
                 android:layout_below="@+id/userInfo"
-                android:padding="@dimen/smallUniversalText"/>
+                android:padding="@dimen/mediumUniversalText"/>
 
         </RelativeLayout>
 

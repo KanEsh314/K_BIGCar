@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="After Dark: Crime History Food Walk"
                 android:textColor="@color/colorDark"
-                android:textSize="@dimen/universalText"
+                android:textSize="@dimen/subUniversalText"
                 android:textStyle="bold" />
 
             <TextView
@@ -40,14 +40,14 @@
                 android:layout_height="wrap_content"
                 android:text="Sat, Jan 6"
                 android:textColor="@color/colorDark"
-                android:textSize="@dimen/universalText" />
+                android:textSize="@dimen/subUniversalText" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1 experience, 1 guest"
                 android:textColor="@color/colorDark"
-                android:textSize="@dimen/universalText" />
+                android:textSize="@dimen/subUniversalText" />
 
         </LinearLayout>
 
@@ -66,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Payment"
-        android:textSize="@dimen/universalText"
+        android:textSize="@dimen/subUniversalText"
         android:textColor="@color/colorDark"
         android:padding="@dimen/pictureSmallPadding"/>
     
@@ -75,14 +75,14 @@
         android:layout_height="wrap_content"
         android:text="RM198 x 1 guest"
         android:textColor="@color/colorDark"
-        android:textSize="@dimen/universalText"
+        android:textSize="@dimen/subUniversalText"
         android:padding="@dimen/pictureSmallPadding"/>
     
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Total (MYR)"
-        android:textSize="@dimen/universalText"
+        android:textSize="@dimen/subUniversalText"
         android:textColor="@color/colorDark"
         android:padding="@dimen/universalPadding"/>
 

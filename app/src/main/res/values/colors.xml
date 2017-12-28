@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#059E4B</color>
-    <color name="colorPrimaryDark">#047644</color>
+    <color name="colorPrimary">#648E7D</color>
+    <color name="colorPrimaryDark">#2D5E4A</color>
     <color name="colorAccent">#FFFFFF</color>
-    <color name="colorFABPressed">#455A64</color>
-    <color name="colorFABUnpressed">#CFD8DC</color>
-    <color name="ripple">#283891</color>
+
+    
+    <!-- Centralize Color -->
+    <color name="colorApp">#648E7D</color>
+    <color name="colorSlightDark">#575757</color>
     <color name="colorDark">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlue">#326273</color>
+    <color name="colorLight">#EEEEEE</color>
+
+    <color name="start_page_overlay">#90111111</color>
+    <color name="product_name">#111111</color>
+    <color name="card_sub_title">#989FAA</color>
+    <color name="placeholder">#202E313C</color>
+
 </resources>

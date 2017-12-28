@@ -23,18 +23,6 @@
     android:layout_alignRight="@id/start_page_wrapper"
     android:layout_alignBottom="@id/start_page_wrapper">
 
-    <ImageButton
-        android:id="@+id/back_btn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@mipmap/icon_close"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="10dp"
-        android:clickable="true"
-        android:background="#00FFFFFF"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         app:layout_heightPercent="80%"
@@ -51,7 +39,7 @@
                 android:id="@+id/white_logo"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:src="@mipmap/ic_logo_round"
+                android:src="@mipmap/app_logo_dark"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="30dp"/>
 
