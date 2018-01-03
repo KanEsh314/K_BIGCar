@@ -22,6 +22,7 @@
 
     <dimen name="tourAvailabilitySize">75dp</dimen>
     <dimen name="profileImage">80dp</dimen>
+    <dimen name="tourNotify">25dp</dimen>
 
     <dimen name="smallPadding">8dp</dimen>
     <dimen name="mediumPadding">16dp</dimen>
@@ -44,5 +45,8 @@
     <dimen name="bannnerTitle">35sp</dimen>
     <dimen name="bannerDesc">17sp</dimen>
     <dimen name="typeTitle">28sp</dimen>
+
+    <dimen name="ratingStarWidth">40dp</dimen>
+    <dimen name="ratingStarHeight">35dp</dimen>
 
 </resources>

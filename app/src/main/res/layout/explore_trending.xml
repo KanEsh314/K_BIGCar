@@ -14,16 +14,78 @@
         android:scaleType="centerCrop"
         android:src="@drawable/photo" />
 
-    <TextView
-        android:id="@+id/popularName"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_below="@id/popularImg"
         android:layout_alignStart="@id/popularImg"
         android:layout_alignEnd="@id/popularImg"
-        android:text="Kuala Lumpur International Lounge Service"
-        android:textColor="@color/colorDark"
-        android:textSize="@dimen/mediumUniversalText"
-        android:textStyle="bold" />
+        android:paddingTop="@dimen/mediumPadding"
+        android:paddingLeft="@dimen/mediumPadding">
+
+        <TextView
+            android:id="@+id/popularName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kuala Lumpur International Lounge Service"
+            android:textColor="@color/colorDark"
+            android:textSize="@dimen/mediumUniversalText"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/ratingLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RatingBar
+                android:id="@+id/popularStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/popularName"
+                android:numStars="5"
+                android:stepSize="1.0"/>
+
+            <TextView
+                android:id="@+id/popularStarText"
+                android:layout_width="68dp"
+                android:layout_height="match_parent"
+                android:text="4.5"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/mediumUniversalText"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ratingLayout">
+
+            <TextView
+                android:id="@+id/popularPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="RM40"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/mediumUniversalText" />
+
+            <TextView
+                android:id="@+id/popularAvalability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="6dp"
+                android:text="Available"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/mediumUniversalText" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

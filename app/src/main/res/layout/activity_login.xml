@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:lineSpacingExtra="8dp"
-                    android:text="Every Bite is an\nEnvironmental Delight"
+                    android:text="Placeholder Text For Slogan"
                     android:textColor="@color/product_name"
                     fontPath="fonts/SourceSansPro-Regular.ttf"
                     tools:ignore="MissingPrefix"

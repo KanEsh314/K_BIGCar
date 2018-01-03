@@ -11,7 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/start_page_wrapper"
-    android:src="@drawable/start_page_bg"
+    android:src="@drawable/tour2"
     android:scaleType="centerCrop" />
 
 <android.support.percent.PercentRelativeLayout

@@ -23,7 +23,7 @@
             android:id="@+id/tourName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/universalPadding"
+            android:padding="@dimen/mediumPadding"
             android:text="Half Day Kula Lumpur City Tour"
             android:textSize="@dimen/tourTitle"
             android:textColor="@color/colorDark"
@@ -32,203 +32,161 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/mediumMargin">
+            android:paddingLeft="@dimen/mediumPadding"
+            android:paddingRight="@dimen/mediumPadding">
 
             <TextView
                 android:id="@+id/tourDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="The Langkawi itinerary with the most characteristic local flavor. Cruise through a mangrove reserve in a speed boat with Langkawi's sea eagles flying beside you.Explore a bat cave on foot. This super-value outdoor adventure is just waiting for you"
-                android:textSize="@dimen/mediumUniversalText"
+                android:text="Dive into the wonders of the vast oceanarium in the heart of KL city center!"
                 android:textColor="@color/colorDark"
-                android:padding="@dimen/smallPadding"/>
+                android:textSize="@dimen/mediumUniversalText" />
+
+            <TextView
+                android:id="@+id/tourPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tourDesc"
+                android:layout_centerHorizontal="false"
+                android:layout_centerInParent="false"
+                android:paddingBottom="@dimen/mediumPadding"
+                android:paddingTop="@dimen/mediumPadding"
+                android:text="RM38"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/tourTitle"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/tourShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tourGuaran"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="false"
+                android:paddingBottom="@dimen/mediumPadding"
+                android:paddingTop="@dimen/mediumPadding"
+                android:src="@mipmap/share" />
+
+            <TextView
+                android:id="@+id/tourGuaran"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tourPrice"
+                android:paddingBottom="@dimen/mediumPadding"
+                android:paddingTop="@dimen/mediumPadding"
+                android:text="Bigcar Price Guarantee" />
 
         </RelativeLayout>
+
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:background="#90909090"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp" />
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/mediumMargin">
+            android:padding="@dimen/mediumPadding">
+
+            <ImageView
+                android:id="@+id/bookedImg"
+                android:layout_width="@dimen/tourNotify"
+                android:layout_height="@dimen/tourNotify"
+                android:src="@mipmap/booked" />
 
             <TextView
+                android:id="@+id/booked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Product No"
-                android:textColor="@color/colorSlightDark"
-                android:textSize="@dimen/mediumUniversalText" />
+                android:paddingLeft="@dimen/mediumPadding"
+                android:layout_toEndOf="@+id/bookedImg"
+                android:text="10K+ Booked"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/smallUniversalText" />
+
+            <ImageView
+                android:id="@+id/availableImg"
+                android:layout_width="@dimen/tourNotify"
+                android:layout_height="@dimen/tourNotify"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/bookedImg"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/available" />
 
             <TextView
+                android:id="@+id/available"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="8660"
-                android:textColor="@color/colorBlue"
-                android:textStyle="bold"
-                android:textSize="@dimen/mediumUniversalText" />
+                android:layout_alignTop="@+id/availableImg"
+                android:layout_toEndOf="@+id/availableImg"
+                android:paddingLeft="@dimen/mediumPadding"
+                android:text="Available Tomorrow"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/smallUniversalText" />
+
+            <ImageView
+                android:id="@+id/instantImg"
+                android:layout_width="@dimen/tourNotify"
+                android:layout_height="@dimen/tourNotify"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/availableImg"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/instant" />
+
+            <TextView
+                android:id="@+id/instant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/instantImg"
+                android:layout_toEndOf="@+id/instantImg"
+                android:paddingLeft="@dimen/mediumPadding"
+                android:text="Instant Confirmation"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/smallUniversalText" />
 
         </RelativeLayout>
 
-        <RelativeLayout
+        <View
+            android:layout_height="1dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/mediumMargin">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Location"
-                android:textColor="@color/colorSlightDark"
-                android:textSize="@dimen/mediumUniversalText" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="Malaysia, Langkawi"
-                android:textStyle="bold"
-                android:textColor="@color/colorBlue"
-                android:textSize="@dimen/mediumUniversalText" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/mediumMargin">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Duration"
-                android:textColor="@color/colorSlightDark"
-                android:textSize="@dimen/mediumUniversalText" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="5 Hour(s)"
-                android:textColor="@color/colorBlue"
-                android:textSize="@dimen/mediumUniversalText"
-                android:textStyle="bold"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/mediumMargin">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Guide Language"
-                android:textColor="@color/colorSlightDark"
-                android:textSize="@dimen/mediumUniversalText" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="English, Malay"
-                android:textColor="@color/colorBlue"
-                android:textSize="@dimen/mediumUniversalText"
-                android:textStyle="bold"/>
-
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:textSize="@dimen/universalText"
-            android:textStyle="bold"
-            android:textColor="@color/colorDark"
-            android:layout_margin="@dimen/mediumMargin"/>
+            android:layout_below="@+id/instantImg"
+            android:background="#90909090"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/smallPadding">
+            android:orientation="horizontal"
+            android:padding="@dimen/mediumPadding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\u2022"
+                android:textColor="@color/colorDark"
+                android:textSize="@dimen/smallUniversalText" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Highlights"
-                android:textSize="@dimen/mediumUniversalText"
-                android:textStyle="bold"
-                android:textColor="@color/colorDark"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="Langkawi's unique mangrove cruise"
+                android:text="Board the ionic Peak Tram from our special line and enjoy hassel-free accesss to attraction"
+                android:textColor="@color/colorDark"
                 android:textSize="@dimen/smallUniversalText" />
 
         </LinearLayout>
 
-        <LinearLayout
+        <View
+            android:layout_height="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/smallPadding">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Impoertant Info"
-                android:textSize="@dimen/mediumUniversalText"
-                android:textStyle="bold"
-                android:textColor="@color/colorDark"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="Meet-up location: Your Hotel"
-                android:textSize="@dimen/smallUniversalText" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/smallPadding">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="What You Can Expect"
-                android:textSize="@dimen/mediumUniversalText"
-                android:textStyle="bold"
-                android:textColor="@color/colorDark"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="The Langkawi Mangrove Cruise is not to be missed by thoose with an adventurous spirit"
-                android:textSize="@dimen/smallUniversalText" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Map"
-            android:textSize="@dimen/universalText"
-            android:textStyle="bold"
-            android:textColor="@color/colorDark"
-            android:layout_margin="@dimen/mediumMargin"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/tourImage"
-            android:scaleType="fitXY"
-            android:src="@mipmap/alternatemap"/>
+            android:layout_below="@+id/instantImg"
+            android:background="#90909090"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -305,7 +263,7 @@
                 android:text="Check Availability" />
 
         </LinearLayout>
-        
+
     </LinearLayout>
     
 </ScrollView>

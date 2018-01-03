@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RatingBar
 import kotlinx.android.synthetic.main.fragment_explore_content.*
 import java.util.ArrayList
 
@@ -61,10 +62,10 @@ class ExploreContentFragment : Fragment() {
     }
 
     private fun preparePopular(trending: ArrayList<Popular>) {
-        trending.add(Popular(R.drawable.tour1, "Kuala Lumpur International Lounge Service"))
-        trending.add(Popular(R.drawable.tour1, "Kuala Lumpur International Lounge Service"))
-        trending.add(Popular(R.drawable.tour1, "Kuala Lumpur International Lounge Service"))
-        trending.add(Popular(R.drawable.tour1, "Kuala Lumpur International Lounge Service"))
+        trending.add(Popular(R.drawable.tour1, "Kuala Lumpur International Lounge Service",0F, "1.5","RM45","Available"))
+        trending.add(Popular(R.drawable.tour1, "Kuala Lumpur International Lounge Service",1F, "1.5","RM45","Available"))
+        trending.add(Popular(R.drawable.tour1, "Kuala Lumpur International Lounge Service",0F, "1.5","RM45","Available"))
+        trending.add(Popular(R.drawable.tour1, "Kuala Lumpur International Lounge Service",1F, "1.5","RM45","Available"))
     }
 
     private fun prepareDestination(destination: ArrayList<Place>) {
@@ -87,4 +88,4 @@ class Trend(val img : Int, val text : String, val textela : String, val desc : S
 
 class Place(val pimg : Int, val pname : String)
 
-class Popular(val popularimg : Int, val popularname : String)
+class Popular(val popularimg : Int, val popularname : String, val popularrating : Float, val popularratingtext : String, val popularprice : String, val popularavalability : String)
