@@ -11,7 +11,7 @@ class TourDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tour_detail)
 
-        val checkDates = findViewById<View>(R.id.checkDates)
+        val checkDates = findViewById<View>(R.id.add_to_cart_btn)
         checkDates.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 startActivity(Intent(this@TourDetailActivity, TourDatesActivity::class.java))

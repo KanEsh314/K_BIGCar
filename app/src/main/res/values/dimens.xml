@@ -6,9 +6,6 @@
     <dimen name="purposeMargin">80dp</dimen>
 
 
-
-
-
     <dimen name="largeUniversalText">35sp</dimen>
 
     <dimen name="pictureHeight">210dp</dimen>
@@ -48,5 +45,6 @@
 
     <dimen name="ratingStarWidth">40dp</dimen>
     <dimen name="ratingStarHeight">35dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

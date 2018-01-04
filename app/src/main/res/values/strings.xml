@@ -36,6 +36,7 @@
         </string>
     <string name="savedButton">Start Exploring</string>
 
-    <string name="start_page_intro">Discover great food at discounted price while saving the environment and helping the needy at the same time</string>
+    <string name="start_page_intro">Discover great tour at discounted price while enjoying the environment</string>
+    <string name="title_activity_reset_password">ResetPassword</string>
 
 </resources>

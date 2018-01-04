@@ -28,7 +28,12 @@
         <activity android:name=".TourDatesActivity" />
         <activity android:name=".TourConfirmActivity" />
         <activity android:name=".TourCountActivity" />
-        <activity android:name=".StartActivity"></activity>
+        <activity android:name=".StartActivity" />
+        <activity
+            android:name=".ResetPassword"
+            android:label="@string/title_activity_reset_password"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ResetPasswordActivity"></activity>
     </application>
 
 </manifest>
