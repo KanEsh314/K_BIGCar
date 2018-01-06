@@ -34,7 +34,11 @@ class ExploreContentFragment : Fragment() {
 
         val trending = ArrayList<Popular>()
         preparePopular(trending)
-        val trendingAdapter = ExplorePopularContent(this, trending)
+        val trendingAdapter = ExplorePopularContent(this, trending, object: ExplorePopularContent.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                startActivity(Intent(context,TourDetailActivity::class.java))
+            }
+        })
         val trendingLayoutManager = LinearLayoutManager(this.activity, LinearLayout.HORIZONTAL, true)
         recycleViewNearBy!!.layoutManager = trendingLayoutManager
         recycleViewNearBy!!.itemAnimator = DefaultItemAnimator()

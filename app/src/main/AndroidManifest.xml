@@ -33,7 +33,8 @@
             android:name=".ResetPassword"
             android:label="@string/title_activity_reset_password"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ResetPasswordActivity"></activity>
+        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".ReviewContentAdapter"></activity>
     </application>
 
 </manifest>

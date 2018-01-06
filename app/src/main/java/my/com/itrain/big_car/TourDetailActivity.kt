@@ -3,7 +3,11 @@ package my.com.itrain.big_car
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.widget.LinearLayout
+import kotlinx.android.synthetic.main.activity_tour_detail.*
 
 class TourDetailActivity : AppCompatActivity() {
 
@@ -17,5 +21,23 @@ class TourDetailActivity : AppCompatActivity() {
                 startActivity(Intent(this@TourDetailActivity, TourDatesActivity::class.java))
             }
         })
+
+        val userreview = ArrayList<Review>()
+        prepareReview(userreview)
+        val reviewAdapter = ReviewContentAdapter(this, userreview)
+        val reviewLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
+        recycleTourReview!!.layoutManager = reviewLayoutManager
+        recycleTourReview!!.itemAnimator = DefaultItemAnimator()
+        recycleTourReview!!.adapter = reviewAdapter
+
+    }
+
+    private fun prepareReview(userreview: ArrayList<Review>) {
+        userreview.add(Review(R.drawable.tour2, "Kanesh", 1F, "1.0", "This Tour Look Good"))
+        userreview.add(Review(R.drawable.tour1, "Kanesh", 2F, "2.0", "This Tour & Hotel Look Good"))
+        userreview.add(Review(R.drawable.tour2, "Kanesh", 1F, "1.0", "This Tour Look Good"))
+        userreview.add(Review(R.drawable.tour1, "Kanesh", 2F, "2.0", "This Tour & Hotel Look Good"))
     }
 }
+
+class Review(val userPic : Int, val reviewName : String, val ratingBarStar : Float, val ratingBarText : String, val userReview : String)

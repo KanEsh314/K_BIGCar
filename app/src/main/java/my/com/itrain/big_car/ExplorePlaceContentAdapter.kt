@@ -47,11 +47,6 @@ class ExplorePlaceContentAdapter(private val context: ExploreContentFragment, pr
 
         holder?.bind(position,listener)
 
-//        holder?.placeImg?.setOnClickListener{
-//            val activityIntent = Intent(context, TourDetailActivity::class.java)
-//            context.startActivity(activityIntent)
-//            Log.d("Testing","Working")
-//        }
     }
 
     override fun getItemCount(): Int {

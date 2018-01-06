@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/packageCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/mediumPadding">
+
+        <TextView
+            android:id="@+id/packageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Afternoon 4-in-1 Promotion"
+            android:textSize="@dimen/mediumUniversalText"
+            android:textColor="@color/colorDark"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/packagePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/mediumPadding"
+            android:layout_below="@+id/packageTitle"
+            android:text="RM167"
+            android:textColor="@color/colorDark"
+            android:textSize="@dimen/mediumUniversalText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/packagePrice"
+            android:text="View more"
+            android:textSize="@dimen/mediumUniversalText"
+            android:textColor="@color/colorDark"
+            android:id="@+id/textView" />
+
+        <!--<Button-->
+            <!--android:id="@+id/chooseDate"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:background="@color/colorBlue"-->
+            <!--android:text="Select"-->
+            <!--android:textColor="@color/colorWhite"-->
+            <!--android:textSize="@dimen/mediumUniversalText" />-->
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+
+
+

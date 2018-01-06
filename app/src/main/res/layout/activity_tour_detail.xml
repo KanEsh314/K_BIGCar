@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -128,7 +127,6 @@
                         android:text="Dive into the wonders of the vast oceanarium in the heart of KL city center!"
                         android:textColor="@color/colorDark"
                         android:textSize="@dimen/mediumUniversalText" />
-
                     <TextView
                         android:id="@+id/tourPrice"
                         android:layout_width="wrap_content"
@@ -322,7 +320,7 @@
                 </RelativeLayout>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/tourReview"
+                    android:id="@+id/recycleTourReview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="true"
@@ -345,7 +343,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textColor="@color/colorWhite"
-            android:text="ADD TO GRUB CART"
+            android:text="ADD TO CART"
             tools:ignore="MissingPrefix"
             android:layout_centerInParent="true"/>
 

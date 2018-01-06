@@ -13,7 +13,7 @@ import org.w3c.dom.Text
  * Created by iTrain on 20-Dec-17.
  */
 
-class ExplorePopularContent(private val content: ExploreContentFragment, private val trending: List<Popular>) : RecyclerView.Adapter<ExplorePopularContent.ViewHolder>(){
+class ExplorePopularContent(private val content: ExploreContentFragment, private val trending: List<Popular>, private val listener: OnItemClickListener) : RecyclerView.Adapter<ExplorePopularContent.ViewHolder>(){
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var popImg: ImageView
@@ -31,6 +31,14 @@ class ExplorePopularContent(private val content: ExploreContentFragment, private
             popPrice = itemView.findViewById(R.id.popularPrice)
             popAval = itemView.findViewById(R.id.popularAvalability)
         }
+
+        fun bind(position: Int, listener: ExplorePopularContent.OnItemClickListener){
+            itemView.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(v: View?) {
+                    listener.onItemClick(position)
+                }
+            })
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -46,9 +54,16 @@ class ExplorePopularContent(private val content: ExploreContentFragment, private
         holder?.popRatingText?.text = popular.popularratingtext
         holder?.popPrice?.text = popular.popularprice
         holder?.popAval?.text = popular.popularavalability
+
+        holder?.bind(position,listener)
+
     }
 
     override fun getItemCount(): Int {
         return trending.size
+    }
+
+    interface OnItemClickListener{
+        fun onItemClick(position:Int)
     }
 }
