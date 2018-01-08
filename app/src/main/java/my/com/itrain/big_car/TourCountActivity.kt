@@ -11,11 +11,7 @@ class TourCountActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tour_count)
 
-        val tourNext = findViewById<View>(R.id.nextConfirm)
-        tourNext.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                startActivity(Intent(this@TourCountActivity, TourConfirmActivity::class.java))
-            }
-        })
+//
+
     }
 }

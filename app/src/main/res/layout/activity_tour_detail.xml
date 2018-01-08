@@ -97,7 +97,7 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:background="@color/colorWhite">
+            android:background="@color/colorWhite" >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -332,11 +332,11 @@
         </android.support.v4.widget.NestedScrollView>
 
         <RelativeLayout
-        android:id="@+id/add_to_cart_btn"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorPrimary"
-        android:layout_gravity="end|bottom">
+            android:id="@+id/add_to_cart_btn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="end|bottom">
 
         <TextView
             android:layout_width="wrap_content"

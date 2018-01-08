@@ -9,35 +9,47 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/mediumPadding">
+        android:paddingTop="@dimen/mediumPadding"
+        android:paddingLeft="@dimen/mediumPadding"
+        android:paddingRight="@dimen/mediumPadding">
 
         <TextView
             android:id="@+id/packageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/mediumPadding"
+            android:paddingLeft="@dimen/mediumPadding"
             android:text="Afternoon 4-in-1 Promotion"
             android:textSize="@dimen/mediumUniversalText"
             android:textColor="@color/colorDark"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/packagePrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/mediumPadding"
+            android:paddingLeft="@dimen/mediumPadding"
             android:layout_below="@+id/packageTitle"
             android:text="RM167"
             android:textColor="@color/colorDark"
-            android:textSize="@dimen/mediumUniversalText"/>
+            android:textSize="@dimen/mediumUniversalText" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/packagePrice"
-            android:text="View more"
-            android:textSize="@dimen/mediumUniversalText"
-            android:textColor="@color/colorDark"
-            android:id="@+id/textView" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/packagePrice"
+            android:background="#F5F5F5" />
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/packagePrice"-->
+            <!--android:text="View more"-->
+            <!--android:textSize="@dimen/mediumUniversalText"-->
+            <!--android:textColor="@color/colorDark"-->
+            <!--android:id="@+id/textView" />-->
 
         <!--<Button-->
             <!--android:id="@+id/chooseDate"-->
