@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tool="http://schemas.android.com/tools"
@@ -76,30 +77,39 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/mediumPadding">
 
-                <TextView
-                    android:id="@+id/textView"
+                <RelativeLayout
+                    android:id="@+id/selectTimeLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:text="Select Time"
-                    android:textColor="@color/colorDark"
-                    android:textSize="@dimen/mediumUniversalText" />
+                    android:layout_height="wrap_content">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycleTourTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/textView"
-                    android:layout_marginTop="11dp"
-                    android:clipToPadding="true"
-                    android:paddingBottom="16dp" />
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:text="Select Time"
+                        android:textColor="@color/colorDark"
+                        android:textSize="@dimen/mediumUniversalText" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycleTourTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/textView"
+                        android:layout_marginTop="11dp"
+                        android:clipToPadding="true"
+                        android:paddingBottom="16dp" />
+
+                </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/packageLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/recycleTourTime">
+                    android:layout_below="@+id/selectTimeLayout">
 
                     <TextView
                         android:id="@+id/packageOption"
@@ -110,153 +120,101 @@
                         android:textColor="@color/colorDark"
                         android:textSize="@dimen/mediumUniversalText"/>
 
-                    <RelativeLayout
-                        android:id="@+id/parentCount"
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycleTourCount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/packageOption"
-                        android:padding="@dimen/mediumPadding"
-                        android:background="@color/colorWhite">
+                        android:layout_below="@id/packageOption"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:clipToPadding="true"
+                        android:paddingBottom="16dp"/>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical" >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Adult"
-                                android:textColor="@color/colorDark"
-                                android:textSize="@dimen/mediumUniversalText" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="RM 180"
-                                android:textSize="@dimen/mediumUniversalText"
-                                android:textColor="@color/colorDark" />
-
-                        </LinearLayout>
-
-                        <Spinner
-                            android:id="@+id/adultSpinner"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true" />
-
-                            <TextView
-                                android:id="@+id/valurOfAdult"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_toLeftOf="@+id/adultSpinner"
-                                android:text="1"
-                                android:inputType="number"
-                                android:textColor="@color/colorDark"
-                                android:textSize="@dimen/largeUniversalText"/>
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/childCount"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/parentCount"
-                        android:padding="@dimen/mediumPadding"
-                        android:background="@color/colorWhite">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical" >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Children"
-                                android:textColor="@color/colorDark"
-                                android:textSize="@dimen/mediumUniversalText" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="RM 150"
-                                android:textSize="@dimen/mediumUniversalText"
-                                android:textColor="@color/colorDark" />
-
-                        </LinearLayout>
-
-                        <Spinner
-                            android:id="@+id/childSpinner"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true" />
-
-                        <TextView
-                            android:id="@+id/valurOfChild"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@+id/childSpinner"
-                            android:text="1"
-                            android:inputType="number"
-                            android:textColor="@color/colorDark"
-                            android:textSize="@dimen/largeUniversalText"/>
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/seniorCount"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/childCount"
-                        android:padding="@dimen/mediumPadding"
-                        android:background="@color/colorWhite">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical" >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Senior"
-                                android:textColor="@color/colorDark"
-                                android:textSize="@dimen/mediumUniversalText" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="RM 150"
-                                android:textSize="@dimen/mediumUniversalText"
-                                android:textColor="@color/colorDark" />
-
-                        </LinearLayout>
-
-                        <Spinner
-                            android:id="@+id/seniorSpinner"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true" />
-
-                        <TextView
-                            android:id="@+id/valurOfSenior"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@+id/seniorSpinner"
-                            android:text="1"
-                            android:inputType="number"
-                            android:textColor="@color/colorDark"
-                            android:textSize="@dimen/largeUniversalText"/>
-
-                    </RelativeLayout>
                 </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/packageLayout"
+                    android:background="@color/colorWhite">
+
+                    <LinearLayout
+                        android:id="@+id/creditLayout"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="@dimen/smallPadding"
+                            android:text="Get"
+                            android:textSize="@dimen/mediumUniversalText"
+                            android:textColor="@color/colorDark"/>
+
+                        <TextView
+                            android:id="@+id/tourCredit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="@dimen/smallPadding"
+                            android:text="36"
+                            android:textSize="@dimen/mediumUniversalText"
+                            android:textColor="@color/colorDark"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="credit for this booking"
+                            android:textSize="@dimen/mediumUniversalText"
+                            android:textColor="@color/colorDark"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_below="@+id/creditLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Total"
+                                android:textSize="@dimen/mediumUniversalText"
+                                android:textColor="@color/colorDark"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="RM 540"
+                                android:textColor="@color/colorDark"
+                                android:textSize="@dimen/mediumUniversalText" />
+
+                        </LinearLayout>
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:text="Next" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:background="#90909090" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
             </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
