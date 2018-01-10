@@ -82,15 +82,179 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/orderTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/mediumPadding"
                     android:text="Order Details"
                     android:textSize="@dimen/mediumUniversalText"
                     android:textColor="@color/colorDark"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/orderTitle"
+                    android:background="@color/colorWhite">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/mediumPadding">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/mediumPadding"
+                            android:text="Peak Tram Fast-Track Combo"
+                            android:textColor="@color/colorDark"
+                            android:textSize="@dimen/largeUniversalText"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/mediumPadding"
+                            android:text="Package Name"
+                            android:textSize="@dimen/mediumUniversalText"
+                            android:textColor="@color/colorDark"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/mediumPadding"
+                            android:text="Date And Time"
+                            android:textColor="@color/colorDark"
+                            android:textSize="@dimen/mediumUniversalText"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/mediumPadding"
+                            android:text="Tour Count"
+                            android:textColor="@color/colorDark"
+                            android:textSize="@dimen/mediumUniversalText"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/mediumPadding"
+                            android:text="Tour Price"
+                            android:textColor="@color/colorDark"
+                            android:textSize="@dimen/mediumUniversalText"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/PICDetailsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/orderLayout">
+
+                <TextView
+                    android:id="@+id/travellerTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/mediumPadding"
+                    android:paddingBottom="@dimen/mediumPadding"
+                    android:text="Traveller's Information"
+                    android:textSize="@dimen/mediumUniversalText"
+                    android:textColor="@color/colorDark" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@id/travellerTitle" >
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/nameWrapper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:hint="Name"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/phoneWrapper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/phoneNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="phone"
+                            android:hint="Phone Number"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/emailWrapper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textEmailAddress"
+                            android:hint="Email"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/paymentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/PICDetailsLayout">
+
+                <TextView
+                    android:id="@+id/paymentTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/mediumPadding"
+                    android:paddingBottom="@dimen/mediumPadding"
+                    android:text="Payment Summary"
+                    android:textSize="@dimen/mediumUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/paymentTitle">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentStart="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total"
+                            android:textSize="@dimen/mediumUniversalText"
+                            android:textColor="@color/colorDark"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
 
             </RelativeLayout>
 

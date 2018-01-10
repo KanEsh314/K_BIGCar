@@ -78,9 +78,52 @@
                 android:padding="@dimen/mediumPadding">
 
                 <RelativeLayout
+                    android:id="@+id/packageConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/mediumPadding"
+                    android:background="@color/colorWhite">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/linearLayout"
+                        android:layout_marginBottom="@dimen/mediumMargin">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Afternoon 4-in-1 Promotion"
+                            android:textColor="@color/colorDark"
+                            android:textSize="@dimen/mediumUniversalText"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="11 Jan 2018"
+                            android:textSize="@dimen/mediumUniversalText"
+                            android:textColor="@color/colorDark"/>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/mediumMargin"
+                        android:text="EDIT"
+                        android:background="@drawable/button_outline"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/selectTimeLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/packageConfirm">
 
                     <TextView
                         android:id="@+id/textView"
@@ -90,7 +133,9 @@
                         android:layout_alignParentTop="true"
                         android:text="Select Time"
                         android:textColor="@color/colorDark"
-                        android:textSize="@dimen/mediumUniversalText" />
+                        android:textSize="@dimen/mediumUniversalText"
+                        android:paddingTop="@dimen/mediumPadding"
+                        android:paddingBottom="@dimen/mediumPadding"/>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycleTourTime"
@@ -115,10 +160,11 @@
                         android:id="@+id/packageOption"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/mediumPadding"
                         android:text="Package Quantity"
                         android:textColor="@color/colorDark"
-                        android:textSize="@dimen/mediumUniversalText"/>
+                        android:textSize="@dimen/mediumUniversalText"
+                        android:paddingTop="@dimen/mediumPadding"
+                        android:paddingBottom="@dimen/mediumPadding"/>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycleTourCount"
@@ -142,7 +188,8 @@
                         android:id="@+id/creditLayout"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/mediumPadding">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -183,6 +230,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:paddingBottom="@dimen/mediumPadding"
+                                android:paddingTop="@dimen/mediumPadding"
                                 android:text="Total"
                                 android:textSize="@dimen/mediumUniversalText"
                                 android:textColor="@color/colorDark"/>
@@ -192,17 +241,20 @@
                                 android:layout_height="wrap_content"
                                 android:text="RM 540"
                                 android:textColor="@color/colorDark"
-                                android:textSize="@dimen/mediumUniversalText" />
+                                android:textSize="@dimen/mediumUniversalText"
+                                android:textStyle="bold"/>
 
                         </LinearLayout>
 
                         <Button
+                            android:id="@+id/tourConfirm"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:text="Next" />
+                            android:layout_marginEnd="@dimen/mediumMargin"
+                            android:text="Next"
+                            android:background="@drawable/button_outline" />
 
                         <View
                             android:layout_width="match_parent"

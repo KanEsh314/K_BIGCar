@@ -1,15 +1,20 @@
 package my.com.itrain.big_car
 
+import android.annotation.TargetApi
+import android.app.DatePickerDialog
 import android.content.Intent
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_tour_dates.*
 import kotlinx.android.synthetic.main.fragment_explore_content.*
+import java.util.*
 
 class TourDatesActivity : AppCompatActivity() {
 
@@ -23,6 +28,7 @@ class TourDatesActivity : AppCompatActivity() {
 //                startActivity(Intent(this@TourDatesActivity, TourCountActivity::class.java))
 //            }
 //        })
+
 
         val packageOptions = ArrayList<PackageTour>()
         preparePackage(packageOptions)
@@ -42,7 +48,6 @@ class TourDatesActivity : AppCompatActivity() {
         packageOptions.add(PackageTour("Peak Tram + Sky Pass","RM 36"))
         packageOptions.add(PackageTour("Chocolate Museum","RM 51"))
     }
-
 
 }
 
