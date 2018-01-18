@@ -169,7 +169,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_below="@id/travellerTitle" >
+                    android:paddingLeft="@dimen/mediumPadding"
+                    android:layout_below="@id/travellerTitle"
+                    android:background="@color/colorWhite">
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/nameWrapper"
@@ -214,6 +216,15 @@
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/paymentOptionLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/PICDetailsLayout">
+
+                <!--PaymentOption-->
 
             </RelativeLayout>
 
@@ -221,7 +232,7 @@
                 android:id="@+id/paymentLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/PICDetailsLayout">
+                android:layout_below="@id/paymentOptionLayout">
 
                 <TextView
                     android:id="@+id/paymentTitle"
@@ -236,30 +247,81 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/paymentTitle">
+                    android:layout_below="@id/paymentTitle"
+                    android:background="@color/colorWhite">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:paddingLeft="@dimen/mediumPadding"
                         android:layout_alignParentStart="true">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/mediumPadding"
                             android:text="Total"
+                            android:textSize="@dimen/mediumUniversalText"
+                            android:textColor="@color/colorDark"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Promo Code"
+                            android:textSize="@dimen/mediumUniversalText"
+                            android:textColor="@color/colorDark"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingRight="@dimen/mediumPadding"
+                        android:gravity="end"
+                        android:layout_alignParentEnd="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/mediumPadding"
+                            android:text="RM 231"
+                            android:textSize="@dimen/mediumUniversalText"
+                            android:textColor="@color/colorDark" />
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:text="NEWYOUR2018"
                             android:textSize="@dimen/mediumUniversalText"
                             android:textColor="@color/colorDark"/>
 
                     </LinearLayout>
 
                 </RelativeLayout>
-
-
             </RelativeLayout>
 
         </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:id="@+id/add_to_cart_btn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="end|bottom">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"
+            android:text="PAY NOW"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

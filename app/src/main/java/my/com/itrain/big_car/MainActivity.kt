@@ -3,7 +3,6 @@ package my.com.itrain.big_car
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         pagerAdapter = CustomPagerAdapter(supportFragmentManager)
         pagerAdapter!!.addFragments(ExploreContentFragment(), "Explore")
-        pagerAdapter!!.addFragments(SavedContentFragment(), "Saved")
+        pagerAdapter!!.addFragments(BrowseContentFragment(), "Browse")
         pagerAdapter!!.addFragments(TripsContentFragment(), "Trips")
         pagerAdapter!!.addFragments(InboxContentFragment(), "Inbox")
         pagerAdapter!!.addFragments(ProfileContentFragment(),"Profile")

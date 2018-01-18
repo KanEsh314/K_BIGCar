@@ -23,5 +23,13 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(this@LoginActivity,ResetPasswordActivity::class.java))
             }
         })
+
+        back_btn.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                onBackPressed()
+            }
+        })
+
     }
+
 }

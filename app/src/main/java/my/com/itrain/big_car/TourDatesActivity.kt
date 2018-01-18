@@ -18,17 +18,26 @@ import java.util.*
 
 class TourDatesActivity : AppCompatActivity() {
 
+    var cal = Calendar.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tour_dates)
 
-//        val chooseDate = findViewById<View>(R.id.chooseDate)
-//        chooseDate.setOnClickListener(object : View.OnClickListener {
-//            override fun onClick(v: View?) {
-//                startActivity(Intent(this@TourDatesActivity, TourCountActivity::class.java))
-//            }
-//        })
+        //OnDateSetListener
+        val dateSetListener = object : DatePickerDialog.OnDateSetListener {
+            override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+                cal.set(Calendar.YEAR, year)
+                cal.set(Calendar.MONTH, month)
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            }
+        }
 
+        myFAB.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                DatePickerDialog(this@TourDatesActivity, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
+            }
+        })
 
         val packageOptions = ArrayList<PackageTour>()
         preparePackage(packageOptions)
