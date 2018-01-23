@@ -18,8 +18,8 @@
             android:textSize="@dimen/largeUniversalText"
             android:textColor="@color/colorDark"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerCategory"
+        <ListView
+            android:id="@+id/listViewCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="true"
