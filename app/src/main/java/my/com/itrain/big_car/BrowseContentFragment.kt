@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 
 
 /**
@@ -23,4 +25,4 @@ class BrowseContentFragment : Fragment() {
 
 }// Required empty public constructor
 
-class AllTour()
+//class ViewHolder(val categoryImage : ImageView, val categoryTitle : TextView, val categoryTotal: TextView)

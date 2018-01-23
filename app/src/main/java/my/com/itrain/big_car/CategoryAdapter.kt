@@ -12,16 +12,18 @@ import android.widget.TextView
  * Created by iTrain on 18-Jan-18.
  */
 
-class CategoryAdapter(private val context : BrowseContentFragment, private val tourCategory: List<AllTour>, private val listener: OnItemClickListener) : BaseAdapter() {
-
-    val categoryImageView = findViewById<ImageView>(R.id.categoryImage)
-    val categoryTitle = findViewById<TextView>(R.id.categoryTitle)
-    val categoryTotal = findViewById<TextView>(R.id.totalCategory)
-    val ViewHolder(itemView: View)
+class CategoryAdapter(private val context : BrowseContentFragment, private val listener: OnItemClickListener) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val layoutInflater = LayoutInflater.from(parent?.context).inflate(R.layout.category_all_tour, parent, false)
-        return layoutInflater
+        val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.category_all_tour, parent, false)
+
+        val categoryImage = view.findViewById<ImageView>(R.id.categoryImage)
+        val categoryTitle = view.findViewById<TextView>(R.id.categoryTitle)
+        val categoryTotal = view.findViewById<TextView>(R.id.totalCategory)
+
+//        val ViewHolder = ViewHolder(categoryImage, categoryTitle, categoryTotal)
+
+        return view
     }
 
     override fun getItem(position: Int): Any {
