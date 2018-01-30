@@ -51,7 +51,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Booking Option"
+                            android:text="Category"
                             android:textColor="@color/colorDark"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -74,21 +74,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/nearByLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/mediumPadding"
-                android:text="Title"
-                android:textSize="@dimen/mediumUniversalText"
-                android:textColor="@color/colorDark"
-                android:textStyle="bold"/>
+                android:orientation="vertical"
+                android:padding="@dimen/largePadding">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycleViewCategoryAll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="true"
-                android:paddingBottom="16dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/smallPadding"
+                    android:text="Sight Seeing"
+                    android:textColor="@color/colorDark"
+                    android:textSize="@dimen/typeTitle"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleViewCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingBottom="16dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

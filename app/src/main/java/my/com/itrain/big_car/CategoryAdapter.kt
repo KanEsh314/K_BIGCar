@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import kotlinx.android.synthetic.main.fragment_browse_content.*
+import my.com.itrain.big_car.R.id.listViewCategory
 import org.w3c.dom.Text
 
 /**
  * Created by iTrain on 18-Jan-18.
  */
-
+//, private val listener : OnItemClickListener
 class CategoryAdapter(private val context : BrowseContentFragment, private val categoryAll : List<Categories>) : BaseAdapter() {
 
     //@SuppressLint("InflateParams", "ViewHolder")
@@ -28,6 +30,7 @@ class CategoryAdapter(private val context : BrowseContentFragment, private val c
 //        fun bind(position: Int, listener: OnItemClickListener){
 //            view.setOnClickListener(object : View.OnClickListener {
 //                override fun onClick(v: View?) {
+//                    Log.d("Working","Fine")
 //                    listener.onItemClick(position)
 //                }
 //            })

@@ -33,11 +33,11 @@ class TourDatesActivity : AppCompatActivity() {
             }
         }
 
-        myFAB.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                DatePickerDialog(this@TourDatesActivity, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
-            }
-        })
+//        myFAB.setOnClickListener(object : View.OnClickListener {
+//            override fun onClick(v: View?) {
+//                DatePickerDialog(this@TourDatesActivity, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
+//            }
+//        })
 
         val packageOptions = ArrayList<PackageTour>()
         preparePackage(packageOptions)

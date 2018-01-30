@@ -32,18 +32,6 @@ class ExploreContentFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val trending = ArrayList<Popular>()
-        preparePopular(trending)
-        val trendingAdapter = ExplorePopularContent(this, trending, object: ExplorePopularContent.OnItemClickListener{
-            override fun onItemClick(position: Int) {
-                startActivity(Intent(context,TourDetailActivity::class.java))
-            }
-        })
-        val trendingLayoutManager = LinearLayoutManager(this.activity, LinearLayout.HORIZONTAL, true)
-        recycleViewNearBy!!.layoutManager = trendingLayoutManager
-        recycleViewNearBy!!.itemAnimator = DefaultItemAnimator()
-        recycleViewNearBy!!.adapter = trendingAdapter
-
         val list = ArrayList<Trend>()
         prepareList(list)
         val popularAdapter = ExploreContentAdapter(this,list)
@@ -65,13 +53,6 @@ class ExploreContentFragment : Fragment() {
         recycleViewDestination!!.adapter = destinationAdapter
     }
 
-    private fun preparePopular(trending: ArrayList<Popular>) {
-        trending.add(Popular(R.drawable.tour1, "Kuala Lumpur International Lounge Service",0F, "1.5","RM45","Available"))
-        trending.add(Popular(R.drawable.tour1, "Kuala Lumpur International Lounge Service",1F, "1.5","RM45","Available"))
-        trending.add(Popular(R.drawable.tour1, "Kuala Lumpur International Lounge Service",0F, "1.5","RM45","Available"))
-        trending.add(Popular(R.drawable.tour1, "Kuala Lumpur International Lounge Service",1F, "1.5","RM45","Available"))
-    }
-
     private fun prepareDestination(destination: ArrayList<Place>) {
         destination.add(Place(R.drawable.tour1,"Tokyo"))
         destination.add(Place(R.drawable.tour1,"Singapore"))
@@ -91,5 +72,3 @@ class ExploreContentFragment : Fragment() {
 class Trend(val img : Int, val text : String, val textela : String, val desc : String, val price : String)
 
 class Place(val pimg : Int, val pname : String)
-
-class Popular(val popularimg : Int, val popularname : String, val popularrating : Float, val popularratingtext : String, val popularprice : String, val popularavalability : String)

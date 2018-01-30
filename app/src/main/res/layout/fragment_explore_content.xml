@@ -22,11 +22,9 @@
             android:id="@+id/bannerDetailLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-110dp"
+            android:layout_marginTop="-140dp"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/largePadding"
-            android:paddingLeft="@dimen/largePadding"
-            android:paddingTop="@dimen/largePadding">
+            android:padding="@dimen/largePadding">
 
             <TextView
                 android:id="@+id/bannerTitle"
@@ -44,32 +42,6 @@
                 android:text="Discover and book amazing things-to-do at exclusive prices"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/bannerDesc" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/nearByLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tourbannerImage"
-            android:orientation="vertical"
-            android:padding="@dimen/largePadding">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/smallPadding"
-                android:text="Nearby"
-                android:textColor="@color/colorDark"
-                android:textSize="@dimen/typeTitle"
-                android:textStyle="bold" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycleViewNearBy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:paddingBottom="16dp" />
 
         </LinearLayout>
 

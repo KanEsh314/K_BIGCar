@@ -3,6 +3,8 @@
     package="my.com.itrain.big_car">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -18,24 +20,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity android:name=".MainActivity" />
         <activity android:name=".EditProfileActivity" />
-        <activity
-            android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".TourDetailActivity" />
         <activity android:name=".TourDatesActivity" />
         <activity android:name=".TourConfirmActivity" />
         <activity android:name=".TourCountActivity" />
         <activity android:name=".StartActivity" />
-        <activity
-            android:name=".ResetPassword"
-            android:label="@string/title_activity_reset_password"
-            android:theme="@style/AppTheme" />
         <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".ReviewContentAdapter" />
-        <activity android:name=".CategoryActivity"></activity>
+        <activity android:name=".CategoryActivity" />
     </application>
 
 </manifest>

@@ -1,37 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="my.com.itrain.big_car.TripsContentFragment">
+    tools:context="my.com.itrain.big_car.TripsContentFragment" />
 
-    <TextView
-        android:textAlignment="center"
-        android:textColor="@color/colorDark"
-        android:textSize="@dimen/largeUniversalText"
-        android:layout_marginTop="@dimen/purposeMargin"
-        android:id="@+id/tripsTitle"
-        android:text="@string/tripsTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/notrips"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/universalMargin"
-        android:src="@mipmap/no_trips" />
-
-    <Button
-        android:layout_gravity="center"
-        android:id="@+id/tripbutton"
-        android:textColor="@color/colorDark"
-        android:textAlignment="center"
-        android:text="@string/tripsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-
-</LinearLayout>

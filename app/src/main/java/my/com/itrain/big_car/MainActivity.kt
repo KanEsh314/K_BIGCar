@@ -3,6 +3,7 @@ package my.com.itrain.big_car
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import com.google.android.gms.maps.SupportMapFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +26,9 @@ class MainActivity : AppCompatActivity() {
         viewpager.adapter = pagerAdapter
         tabs.setupWithViewPager(viewpager)
         setupTabIcons()
+
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as TripsContentFragment
+        mapFragment.getMapAsync(mapFragment)
     }
 
     private fun setupTabIcons() {

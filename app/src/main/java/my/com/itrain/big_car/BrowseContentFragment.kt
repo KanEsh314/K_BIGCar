@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
@@ -33,16 +34,24 @@ class BrowseContentFragment : Fragment() {
         val category = ArrayList<Categories>()
         prepareCategory(category)
         val categoryAdapter = CategoryAdapter(this, category)
-
-        listViewCategory.setOnClickListener(object : )
-
         listViewCategory!!.adapter = categoryAdapter
+
+        listViewCategory.setOnItemClickListener(object : AdapterView.OnItemClickListener{
+            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                startActivity(Intent(context, CategoryActivity::class.java))
+            }
+
+        })
     }
 
     private fun prepareCategory(category: ArrayList<Categories>) {
-        category.add(Categories(R.drawable.tour1,"Sight Seeing","(20)"))
-        category.add(Categories(R.drawable.tour1,"Sight Seeing","(20)"))
-        category.add(Categories(R.drawable.tour1,"Sight Seeing","(20)"))
+        category.add(Categories(R.drawable.tour1,"Sight Seeing","(14)"))
+        category.add(Categories(R.drawable.tour2,"Museum Tour","(20)"))
+        category.add(Categories(R.drawable.tour1,"Historical Building","(16)"))
+        category.add(Categories(R.drawable.tour2,"Walking Tours","(11)"))
+        category.add(Categories(R.drawable.tour1,"Eat & Drink","(20)"))
+        category.add(Categories(R.drawable.tour2,"Churces","(8)"))
+        category.add(Categories(R.drawable.tour1,"Skyline Tour","(11)"))
     }
 }// Required empty public constructor
 
