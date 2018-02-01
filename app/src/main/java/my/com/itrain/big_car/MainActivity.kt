@@ -26,9 +26,6 @@ class MainActivity : AppCompatActivity() {
         viewpager.adapter = pagerAdapter
         tabs.setupWithViewPager(viewpager)
         setupTabIcons()
-
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as TripsContentFragment
-        mapFragment.getMapAsync(mapFragment)
     }
 
     private fun setupTabIcons() {
