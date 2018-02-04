@@ -3,11 +3,17 @@ package my.com.itrain.big_car
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var mMap:GoogleMap
     var pagerAdapter: CustomPagerAdapter?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +31,9 @@ class MainActivity : AppCompatActivity() {
 
         viewpager.adapter = pagerAdapter
         tabs.setupWithViewPager(viewpager)
+
+        //val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+
         setupTabIcons()
     }
 
