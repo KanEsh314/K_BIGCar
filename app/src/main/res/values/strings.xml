@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">BIGCAR</string>
 
-    <string name="google_maps_key">AIzaSyAaIamx-Sj4-V2zFlCozt9mhSbKsHiIRyM</string>
+    <string name="google_maps_key">AIzaSyC6egLAT18a0Czpbj2TRPQbNAZ7vo71nnU</string>
 
     <!-- Profile Item -->
     <string name="view_edit">View and Edit Profile</string>
