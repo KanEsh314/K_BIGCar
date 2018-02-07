@@ -23,5 +23,11 @@ class StartActivity : AppCompatActivity() {
                 startActivity(Intent(this@StartActivity, SignUpActivity::class.java))
             }
         })
+
+        back_btn.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                onBackPressed()
+            }
+        })
     }
 }

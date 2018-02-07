@@ -57,13 +57,13 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/logout_btn"
+                        android:id="@+id/auth_button"
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="Log Out"
+                        android:text="Log In"
                         android:textSize="17sp"
                         android:textColor="@color/colorWhite"
                         android:clickable="true"
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:lineSpacingExtra="8dp"
-                    android:text="KanEsh"
+                    android:text="Username"
                     android:textColor="@color/product_name"
                     fontPath="fonts/SourceSansPro-Semibold.ttf"
                     tools:ignore="MissingPrefix"
@@ -111,7 +111,7 @@
                     android:layout_below="@id/name_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Malaysia"
+                    android:text="Country"
                     android:textSize="16sp"
                     android:lineSpacingExtra="8dp"
                     android:textColor="@color/card_sub_title"

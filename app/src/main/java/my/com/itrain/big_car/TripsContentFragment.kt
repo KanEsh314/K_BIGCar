@@ -36,12 +36,20 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(map:GoogleMap) {
-        System.err.println("OnMapReady start")
         mMap = map as GoogleMap
 
+        if(ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(activity, arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION),0)
+        }
+
+        mMap.isBuildingsEnabled
+        //mMap.isIndoorEnabled
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL)
+
         val sydney = LatLng(4.210484, 101.97576600000002);
-        mMap.addMarker(MarkerOptions().position(sydney).title("Malaysia"))
-        val cameraPosition = CameraPosition.Builder().target(sydney).zoom(8F).build()
+        mMap.addMarker(MarkerOptions().position(sydney).title("Malaysia").snippet("How are you?"))
+        val cameraPosition = CameraPosition.Builder().target(sydney).zoom(10F).build()
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }

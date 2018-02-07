@@ -4,6 +4,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/map"
-    app:mapType="hybrid"
     tools:context="my.com.itrain.big_car.TripsContentFragment"
     android:name="com.google.android.gms.maps.SupportMapFragment" />

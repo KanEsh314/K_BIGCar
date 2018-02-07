@@ -14,7 +14,7 @@ class SplashActivity : Activity() {
         setContentView(R.layout.activity_splash)
 
         Handler().postDelayed({
-            startActivity(Intent(this@SplashActivity, StartActivity::class.java))
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
         },splash_screen.toLong())
     }
