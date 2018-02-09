@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_trips_content.*
 import javax.xml.transform.Templates
@@ -43,15 +44,35 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
 //            ActivityCompat.requestPermissions(activity, arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION),0)
 //        }
 
-//        mMap.isBuildingsEnabled
-//        mMap.isIndoorEnabled
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL)
 
-        val sydney = LatLng(4.210484, 101.97576600000002);
-        mMap.addMarker(MarkerOptions().position(sydney).title("Malaysia").snippet("How are you?"))
-        val cameraPosition = CameraPosition.Builder().target(sydney).zoom(12F).build()
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+//        val sydney = LatLng(3.1577636,101.71186)
+//        mMap.addMarker(MarkerOptions().position(sydney).title("Malaysia").snippet("How are you?"))
+//        val cameraPosition = CameraPosition.Builder().target(sydney).zoom(15F).build()
+//        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+
+        mMap.setOnMapLoadedCallback(object : GoogleMap.OnMapLoadedCallback{
+            override fun onMapLoaded() {
+                val locations = ArrayList<LatLng>()
+                locations.add(LatLng(3.1577636,101.71186))
+                locations.add(LatLng(3.1614164,101.71887160000006))
+                locations.add(LatLng(3.1537798,101.71322140000007))
+
+                for (latlng in locations){
+                    mMap.addMarker(MarkerOptions().position(latlng).title("Title can be anything"))
+                }
+
+                val builder = LatLngBounds.Builder()
+                builder.include(locations.get(0)) //Taking Point A (First LatLng)
+                builder.include(locations.get(locations.size - 1)) //Taking Point B (Second LatLng)
+                val bounds = builder.build()
+                val cu = CameraUpdateFactory.newLatLngBounds(bounds, 200)
+                mMap.moveCamera(cu)
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15F), 2000, null)
+            }
+        })
     }
 
 }// Required empty public constructor

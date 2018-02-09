@@ -4,75 +4,51 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/cardViewContent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/largeMargin">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:id="@+id/commonContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/picturePadding">
+            android:layout_marginHorizontal="@dimen/mediumPadding">
 
             <ImageView
                 android:id="@+id/trendImg"
                 android:layout_width="@dimen/pictureWidth"
                 android:layout_height="@dimen/pictureHeight"
-                android:layout_margin="16dp"
                 android:src="@drawable/photo" />
 
             <LinearLayout
-                android:id="@+id/trendElment"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/trendImg"
-                android:layout_alignStart="@+id/trendImg"
+                android:layout_height="68dp"
                 android:layout_below="@id/trendImg"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp">
 
                 <TextView
                     android:id="@+id/trendText"
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/trendImg"
-                    android:text="Photo"
-                    android:textSize="@dimen/pictureTextSmall"
-                    android:textStyle="bold" />
+                    android:text="Photo Description"
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/trendTextEla"
-                    android:layout_width="60dp"
+                    android:id="@+id/trendPrice"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/trendImg"
-                    android:text="Photo"
-                    android:textSize="@dimen/pictureTextSmall" />
+                    android:layout_below="@id/trendText"
+                    android:text="Photo Price"
+                    android:textSize="12sp" />
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/trendDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@id/trendImg"
-                android:layout_alignStart="@id/trendImg"
-                android:layout_below="@id/trendElment"
-                android:text="Photo Description"
-                android:textSize="@dimen/pictureTextSmall" />
-
-            <TextView
-                android:id="@+id/trendPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@id/trendImg"
-                android:layout_alignStart="@id/trendImg"
-                android:layout_below="@id/trendDesc"
-                android:text="Photo Price"
-                android:textSize="@dimen/pictureTextSmall" />
 
             <ImageButton
                 android:id="@+id/trendLike"
                 android:layout_width="25dp"
-                android:layout_margin="5dp"
                 android:layout_height="25dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/colorWhite"
                 android:layout_alignEnd="@+id/trendImg"
                 android:layout_alignTop="@+id/trendImg"
                 android:src="@drawable/ic_like" />

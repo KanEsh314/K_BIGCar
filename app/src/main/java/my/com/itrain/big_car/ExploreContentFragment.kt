@@ -2,6 +2,7 @@ package my.com.itrain.big_car
 
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -10,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RatingBar
 import kotlinx.android.synthetic.main.fragment_explore_content.*
@@ -25,6 +27,12 @@ class ExploreContentFragment : Fragment() {
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_explore_content, container, false)
+
+
+        var newHeight = (Resources.getSystem().displayMetrics.heightPixels)/2
+        var bannerImage = view.findViewById<ImageView>(R.id.tourbannerImage)
+        bannerImage.requestLayout()
+        bannerImage.layoutParams.height = newHeight
 
         return view
     }
@@ -61,14 +69,14 @@ class ExploreContentFragment : Fragment() {
     }
 
     private fun prepareList(list: ArrayList<Trend>) {
-        list.add(Trend(R.drawable.tour1,"MYR198","After","Crime Histroy", "19 Reviews"))
-        list.add(Trend(R.drawable.tour2,"MYR198","After","Crime Histroy", "19 Reviews"))
-        list.add(Trend(R.drawable.tour1,"MYR198","After","Crime Histroy", "19 Reviews"))
-        list.add(Trend(R.drawable.tour2,"MYR198","After","Crime Histroy", "19 Reviews"))
+        list.add(Trend(R.drawable.happycutomer,"Crime Histroy","MYR198"))
+        list.add(Trend(R.drawable.happycutomer,"Crime Histroy","MYR98"))
+        list.add(Trend(R.drawable.happycutomer,"Crime Histroy","MYR198"))
+        list.add(Trend(R.drawable.happycutomer,"Crime Histroy","MYR98"))
     }
 
 }// Required empty public constructor
 
-class Trend(val img : Int, val text : String, val textela : String, val desc : String, val price : String)
+class Trend(val img : Int, val text : String, val price : String)
 
 class Place(val pimg : Int, val pname : String)

@@ -1,49 +1,47 @@
-<ScrollView
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="10">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/tourbannerImage"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="12"
-            android:scaleType="fitXY"
-            android:src="@drawable/tour2" />
-
-        <LinearLayout
-            android:id="@+id/bannerDetailLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-140dp"
-            android:orientation="vertical"
-            android:padding="@dimen/largePadding">
-
-            <TextView
-                android:id="@+id/bannerTitle"
+            <RelativeLayout
+                android:id="@+id/bannerDetailLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="YOURS TO EXPLORE"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/bannnerTitle"
-                android:textStyle="bold" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/bannerDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Discover and book amazing things-to-do at exclusive prices"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/bannerDesc" />
+                <ImageView
+                    android:id="@+id/tourbannerImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/tour2" />
 
-        </LinearLayout>
+                <!--<TextView-->
+                    <!--android:id="@+id/bannerTitle"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="YOURS TO EXPLORE"-->
+                    <!--android:textColor="@color/colorWhite"-->
+                    <!--android:textSize="@dimen/bannnerTitle"-->
+                    <!--android:textStyle="bold" />-->
+
+                <TextView
+                    android:id="@+id/bannerDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:padding="@dimen/mediumPadding"
+                    android:text="Discover and book amazing things-to-do at exclusive prices"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/bannerDesc" />
+
+            </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/popularDestinationLayout"
@@ -99,7 +97,7 @@
 
     </LinearLayout>
 
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>
 
 
 

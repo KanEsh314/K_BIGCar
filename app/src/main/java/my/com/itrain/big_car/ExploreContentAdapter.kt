@@ -19,15 +19,11 @@ class ExploreContentAdapter(private val context: ExploreContentFragment, private
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var trendImg: ImageView
         var trendText: TextView
-        var trendTextEla: TextView
-        var trendDesc: TextView
         var trendPrice: TextView
 
         init {
             trendImg = itemView.findViewById(R.id.trendImg)
             trendText = itemView.findViewById(R.id.trendText)
-            trendTextEla = itemView.findViewById(R.id.trendTextEla)
-            trendDesc = itemView.findViewById(R.id.trendDesc)
             trendPrice = itemView.findViewById(R.id.trendPrice)
         }
 
@@ -43,8 +39,6 @@ class ExploreContentAdapter(private val context: ExploreContentFragment, private
         val trend : Trend = list.get(position)
         holder?.trendImg?.setImageResource(trend.img)
         holder?.trendText?.text = trend.text
-        holder?.trendTextEla?.text = trend.textela
-        holder?.trendDesc?.text = trend.desc
         holder?.trendPrice?.text = trend.price
     }
 
