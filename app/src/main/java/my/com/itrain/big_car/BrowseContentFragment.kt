@@ -1,6 +1,7 @@
 package my.com.itrain.big_car
 
 
+import android.app.VoiceInteractor
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -12,7 +13,16 @@ import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_browse_content.*
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 
 
 /**
@@ -20,6 +30,7 @@ import kotlinx.android.synthetic.main.fragment_browse_content.*
  */
 class BrowseContentFragment : Fragment() {
 
+    var categoryURL = "http://gentle-atoll-11837.herokuapp.com/api/categories"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -31,9 +42,7 @@ class BrowseContentFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val category = ArrayList<Categories>()
-        prepareCategory(category)
-        val categoryAdapter = CategoryAdapter(this, category)
+        val categoryAdapter = CategoryAdapter()
         listViewCategory!!.adapter = categoryAdapter
 
         listViewCategory.setOnItemClickListener(object : AdapterView.OnItemClickListener{
@@ -42,17 +51,29 @@ class BrowseContentFragment : Fragment() {
             }
 
         })
+
+        //VOLLEY
+        val requestVolley = Volley.newRequestQueue(this.activity)
+
+        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, categoryURL, null, object : Response.Listener<JSONObject> {
+            override fun onResponse(response: JSONObject) =try{
+
+                val categoryData = response.getJSONArray("data")
+
+                for (i in 0 until categoryData.length()){
+                    categoryAdapter.addJsonObject(categoryData.getJSONObject(i))
+                }
+
+                categoryAdapter.notifyDataSetChanged()
+            }catch (e : JSONException){
+                e.printStackTrace()
+            }
+        }, object : Response.ErrorListener {
+            override fun onErrorResponse(error: VolleyError?) {
+                Log.d("Debug", error.toString())
+            }
+        })
+        requestVolley.add(jsonObjectRequest)
     }
 
-    private fun prepareCategory(category: ArrayList<Categories>) {
-        category.add(Categories(R.drawable.tour1,"Sight Seeing","(14)"))
-        category.add(Categories(R.drawable.tour2,"Museum Tour","(20)"))
-        category.add(Categories(R.drawable.tour1,"Historical Building","(16)"))
-        category.add(Categories(R.drawable.tour2,"Walking Tours","(11)"))
-        category.add(Categories(R.drawable.tour1,"Eat & Drink","(20)"))
-        category.add(Categories(R.drawable.tour2,"Churces","(8)"))
-        category.add(Categories(R.drawable.tour1,"Skyline Tour","(11)"))
-    }
 }// Required empty public constructor
-
-class Categories(val catImg : Int, val catTitle : String, val catTotal: String)

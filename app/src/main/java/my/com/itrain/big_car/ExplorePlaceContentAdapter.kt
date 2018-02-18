@@ -1,5 +1,6 @@
 package my.com.itrain.big_car
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -9,12 +10,17 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
+import com.squareup.picasso.Picasso
+import org.json.JSONArray
+import org.json.JSONObject
 
 /**
  * Created by iTrain on 19-Dec-17.
  */
 
-class ExplorePlaceContentAdapter(private val context: ExploreContentFragment, private val destination: List<Place>, private val listener: OnItemClickListener) : RecyclerView.Adapter<ExplorePlaceContentAdapter.ViewHolder>(){
+class ExplorePlaceContentAdapter(private val context: Context,private val listener: OnItemClickListener) : RecyclerView.Adapter<ExplorePlaceContentAdapter.ViewHolder>(){
+
+    private val destination = ArrayList<JSONObject>()
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
@@ -41,9 +47,10 @@ class ExplorePlaceContentAdapter(private val context: ExploreContentFragment, pr
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val place : Place = destination.get(position)
-        holder?.placeImg?.setImageResource(place.pimg)
-        holder?.placeName?.text = place.pname
+
+        Log.d("Debug",destination.get(position).getString("service_image"))
+        Picasso.with(context).load(destination.get(position).getString("service_image")).into(holder?.placeImg)
+        holder?.placeName?.text = destination.get(position).getString("service_name")
 
         holder?.bind(position,listener)
 
@@ -56,4 +63,10 @@ class ExplorePlaceContentAdapter(private val context: ExploreContentFragment, pr
     interface OnItemClickListener{
         fun onItemClick(position:Int)
     }
+
+    fun addJsonObject(jsonObject:JSONObject) {
+        destination.add(jsonObject)
+
+    }
+
 }

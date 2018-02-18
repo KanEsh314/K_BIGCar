@@ -1,6 +1,7 @@
 package my.com.itrain.big_car
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,13 +12,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_browse_content.*
 import my.com.itrain.big_car.R.id.listViewCategory
+import org.json.JSONObject
 import org.w3c.dom.Text
 
 /**
  * Created by iTrain on 18-Jan-18.
  */
 //, private val listener : OnItemClickListener
-class CategoryAdapter(private val context : BrowseContentFragment, private val categoryAll : List<Categories>) : BaseAdapter() {
+class CategoryAdapter() : BaseAdapter() {
+
+    private val context : Context? = null
+    private val categoryAll = ArrayList<JSONObject>()
 
     //@SuppressLint("InflateParams", "ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -25,7 +30,6 @@ class CategoryAdapter(private val context : BrowseContentFragment, private val c
         val view : View = LayoutInflater.from(parent?.context).inflate(R.layout.category_all_tour, parent, false)
         val categoryImage = view.findViewById<ImageView>(R.id.categoryImage)
         val categoryTitle = view.findViewById<TextView>(R.id.categoryTitle)
-        val categoryTotal = view.findViewById<TextView>(R.id.totalCategory)
 
 //        fun bind(position: Int, listener: OnItemClickListener){
 //            view.setOnClickListener(object : View.OnClickListener {
@@ -36,10 +40,8 @@ class CategoryAdapter(private val context : BrowseContentFragment, private val c
 //            })
 //        }
 
-        val categories : Categories = categoryAll.get(position)
-        categoryImage?.setImageResource(categories.catImg)
-        categoryTitle?.text = categories.catTitle
-        categoryTotal?.text = categories.catTotal
+        categoryImage?.setImageResource(R.drawable.tour1)
+        categoryTitle?.text = categoryAll.get(position).getString("servicecat_name")
         return view
     }
 
@@ -53,6 +55,10 @@ class CategoryAdapter(private val context : BrowseContentFragment, private val c
 
     override fun getCount(): Int {
         return categoryAll.size
+    }
+
+    fun addJsonObject(jsonObject: JSONObject) {
+        categoryAll.add(jsonObject)
     }
 
 //    interface OnItemClickListener{
