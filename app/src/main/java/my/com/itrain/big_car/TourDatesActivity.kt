@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_tour_dates.*
+import kotlinx.android.synthetic.main.choose_package.*
 import kotlinx.android.synthetic.main.fragment_explore_content.*
 import java.util.*
 
@@ -24,20 +25,17 @@ class TourDatesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tour_dates)
 
-        //OnDateSetListener
-        val dateSetListener = object : DatePickerDialog.OnDateSetListener {
-            override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-                cal.set(Calendar.YEAR, year)
-                cal.set(Calendar.MONTH, month)
-                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            }
-        }
+        chooseDate.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                //OnDateSetListener
+                val calender = Calendar.getInstance()
+                val tYear = calender.get(Calendar.YEAR)
+                val tMonth = calender.get(Calendar.MONTH)
+                val tDay = calender.get(Calendar.DAY_OF_MONTH)
 
-//        myFAB.setOnClickListener(object : View.OnClickListener {
-//            override fun onClick(v: View?) {
-//                DatePickerDialog(this@TourDatesActivity, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
-//            }
-//        })
+                //
+            }
+        })
 
         val packageOptions = ArrayList<PackageTour>()
         preparePackage(packageOptions)

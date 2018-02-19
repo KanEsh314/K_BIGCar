@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_tour_detail.*
@@ -14,6 +15,10 @@ class TourDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tour_detail)
+
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val checkDates = findViewById<View>(R.id.add_to_cart_btn)
         checkDates.setOnClickListener(object : View.OnClickListener {
@@ -30,6 +35,17 @@ class TourDetailActivity : AppCompatActivity() {
         recycleTourReview!!.itemAnimator = DefaultItemAnimator()
         recycleTourReview!!.adapter = reviewAdapter
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        val id = item!!.itemId
+
+        if(id == android.R.id.home){
+            finish()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun prepareReview(userreview: ArrayList<Review>) {
