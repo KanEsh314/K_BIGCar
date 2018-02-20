@@ -17,7 +17,7 @@ class TourDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tour_detail)
 
         setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val checkDates = findViewById<View>(R.id.add_to_cart_btn)

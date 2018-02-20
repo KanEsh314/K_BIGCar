@@ -38,6 +38,7 @@ import java.util.ArrayList
 class ExploreContentFragment : Fragment() {
 
     var tourURL = "https://gentle-atoll-11837.herokuapp.com/api/tours"
+    var service_id:String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -64,20 +65,29 @@ class ExploreContentFragment : Fragment() {
         recycleViewActivities!!.itemAnimator = DefaultItemAnimator()
         recycleViewActivities!!.adapter = popularAdapter
 
-        val destinationAdapter = ExplorePlaceContentAdapter(activity ,object: ExplorePlaceContentAdapter.OnItemClickListener{
+        //VOLLEY
+        val requestVolley = Volley.newRequestQueue(this.context)
+
+        val destinationAdapter = ExplorePlaceContentAdapter(context ,object: ExplorePlaceContentAdapter.OnItemClickListener{
             override fun onItemClick(position:Int){
-                startActivity(Intent(context,TourDetailActivity::class.java))
+                val intent = Intent(context,TourDetailActivity::class.java)
+//                try {
+//                    intent.putExtra("service_id",service_id)
+//                    Log.d("Debug",service_id)
+//                }catch (e : JSONException){
+//                    e.printStackTrace()
+//                }
+                startActivity(intent)
             }
         })
-        val destinationLayoutManager = LinearLayoutManager(this.activity, LinearLayout.HORIZONTAL,true)
+        val destinationLayoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL,true)
         recycleViewDestination!!.layoutManager = destinationLayoutManager
         recycleViewDestination!!.itemAnimator = DefaultItemAnimator()
         recycleViewDestination!!.adapter = destinationAdapter
 
         //VOLLEY
-        val requestVolley = Volley.newRequestQueue(this.context)
 
-        var jsonArrayRequest = JsonObjectRequest(Request.Method.GET, tourURL,null, object : Response.Listener<JSONObject>{
+        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, tourURL,null, object: Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) = try {
 
                 val tourData= response.getJSONArray("data")
@@ -85,12 +95,10 @@ class ExploreContentFragment : Fragment() {
                 for (i in 0 until tourData.length()){
                     destinationAdapter.addJsonObject(tourData.getJSONObject(i))
                 }
-
                 destinationAdapter.notifyDataSetChanged()
             } catch (e : JSONException){
                 e.printStackTrace()
             }
-
         },
                 object : Response.ErrorListener {
                     override fun onErrorResponse(error: VolleyError?) {
@@ -98,7 +106,7 @@ class ExploreContentFragment : Fragment() {
                     }
                 })
 
-        requestVolley.add(jsonArrayRequest)
+        requestVolley.add(jsonObjectRequest)
     }
 
     private fun prepareList(list: ArrayList<Trend>) {

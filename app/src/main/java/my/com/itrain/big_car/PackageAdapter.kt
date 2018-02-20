@@ -1,28 +1,36 @@
 package my.com.itrain.big_car
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import org.json.JSONObject
 
 /**
  * Created by iTrain on 05-Jan-18.
  */
 
-class PackageAdapter(private val context: TourDatesActivity, private val packageOption: List<PackageTour>, private val listener: OnItemClickListener) : RecyclerView.Adapter<PackageAdapter.ViewHolder>() {
+class PackageAdapter(private val context: Context, private val listener: OnItemClickListener) : RecyclerView.Adapter<PackageAdapter.ViewHolder>() {
+
+    private val packageOption = ArrayList<JSONObject>()
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var packageName: TextView
         var packagePrice: TextView
+        var packageButton: Button
 
         init {
             packageName = itemView.findViewById(R.id.packageTitle)
             packagePrice = itemView.findViewById(R.id.packagePrice)
+            packageButton = itemView.findViewById(R.id.chooseDate)
         }
 
         fun bind(position: Int, listener: OnItemClickListener){
-            itemView.setOnClickListener(object : View.OnClickListener {
+            packageButton.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(v: View?) {
                     listener.onItemClick(position)
                 }
@@ -36,9 +44,9 @@ class PackageAdapter(private val context: TourDatesActivity, private val package
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val packageOption : PackageTour = packageOption.get(position)
-        holder?.packageName?.text = packageOption.packageName
-        holder?.packagePrice?.text = packageOption.packagePrice
+        Log.d("Debug",packageOption.get(position).getString("package_name"))
+        holder?.packageName?.text = packageOption.get(position).getString("package_name")
+        holder?.packagePrice?.text = packageOption.get(position).getString("package_price")
 
         holder?.bind(position, listener)
     }
@@ -49,5 +57,9 @@ class PackageAdapter(private val context: TourDatesActivity, private val package
 
     interface OnItemClickListener{
         fun onItemClick(position:Int)
+    }
+
+    fun addJsonObject(jsonObject: JSONObject) {
+        packageOption.add(jsonObject)
     }
 }
