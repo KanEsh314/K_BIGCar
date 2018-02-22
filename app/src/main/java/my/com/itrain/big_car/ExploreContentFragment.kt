@@ -1,32 +1,25 @@
 package my.com.itrain.big_car
 
 
-import android.app.VoiceInteractor
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.RatingBar
-import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_explore_content.*
-import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.ArrayList
@@ -37,8 +30,8 @@ import java.util.ArrayList
  */
 class ExploreContentFragment : Fragment() {
 
-    var tourURL = "https://gentle-atoll-11837.herokuapp.com/api/tours"
-    var service_id:String = ""
+    var toursURL = "https://gentle-atoll-11837.herokuapp.com/api/tours"
+    private val toursMaterial = ArrayList<JSONObject>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -71,12 +64,12 @@ class ExploreContentFragment : Fragment() {
         val destinationAdapter = ExplorePlaceContentAdapter(context ,object: ExplorePlaceContentAdapter.OnItemClickListener{
             override fun onItemClick(position:Int){
                 val intent = Intent(context,TourDetailActivity::class.java)
-//                try {
-//                    intent.putExtra("service_id",service_id)
-//                    Log.d("Debug",service_id)
-//                }catch (e : JSONException){
-//                    e.printStackTrace()
-//                }
+                try {
+                    intent.putExtra("serviceid", toursMaterial.get(position).getInt("service_id"))
+                    //Log.d("Debug",toursMaterial.get(position).getInt("service_id").toString())
+                }catch (e : JSONException){
+                    e.printStackTrace()
+                }
                 startActivity(intent)
             }
         })
@@ -87,13 +80,14 @@ class ExploreContentFragment : Fragment() {
 
         //VOLLEY
 
-        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, tourURL,null, object: Response.Listener<JSONObject>{
+        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, toursURL,null, object: Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) = try {
 
-                val tourData= response.getJSONArray("data")
+                val toursData= response.getJSONArray("data")
 
-                for (i in 0 until tourData.length()){
-                    destinationAdapter.addJsonObject(tourData.getJSONObject(i))
+                for (i in 0 until toursData.length()){
+                    destinationAdapter.addJsonObject(toursData.getJSONObject(i))
+                    toursMaterial.add(toursData.getJSONObject(i))
                 }
                 destinationAdapter.notifyDataSetChanged()
             } catch (e : JSONException){
@@ -101,7 +95,7 @@ class ExploreContentFragment : Fragment() {
             }
         },
                 object : Response.ErrorListener {
-                    override fun onErrorResponse(error: VolleyError?) {
+                    override fun onErrorResponse(error: VolleyError) {
                         Log.d("Debug", error.toString())
                     }
                 })

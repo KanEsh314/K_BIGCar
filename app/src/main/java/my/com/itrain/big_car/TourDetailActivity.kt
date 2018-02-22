@@ -1,16 +1,32 @@
 package my.com.itrain.big_car
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_tour_detail.*
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 
 class TourDetailActivity : AppCompatActivity() {
+
+    var tourURL = "https://gentle-atoll-11837.herokuapp.com/api/tour/"
+    private val tourMaterial = java.util.ArrayList<JSONObject>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,21 +36,64 @@ class TourDetailActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        val tourService_id = intent.getIntExtra("serviceid",0)
+
         val checkDates = findViewById<View>(R.id.add_to_cart_btn)
         checkDates.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                startActivity(Intent(this@TourDetailActivity, TourDatesActivity::class.java))
+                val intent = Intent(this@TourDetailActivity, TourDatesActivity::class.java)
+                try {
+                    intent.putExtra("serviceid", tourService_id)
+                }catch (e : JSONException){
+                    e.printStackTrace()
+                }
+                startActivity(intent)
             }
         })
 
-        val userreview = ArrayList<Review>()
-        prepareReview(userreview)
-        val reviewAdapter = ReviewContentAdapter(this, userreview)
+        //VOLLEY
+        val requestVolley = Volley.newRequestQueue(this)
+
+        val reviewAdapter = ReviewContentAdapter(this)
         val reviewLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
         recycleTourReview!!.layoutManager = reviewLayoutManager
         recycleTourReview!!.itemAnimator = DefaultItemAnimator()
         recycleTourReview!!.adapter = reviewAdapter
 
+        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET,tourURL+tourService_id,null, object : Response.Listener<JSONObject>{
+            override fun onResponse(response: JSONObject) {
+                try {
+
+                    val tourData = response.getJSONObject("data")
+                    tourMaterial.add(tourData)
+
+                    val tourGallery = tourData.getJSONArray("tour_gallery")
+                    for (j in 0 until tourGallery.length()){
+                        Picasso.with(applicationContext).load(tourGallery.getJSONObject(j).getString("image")).into(tourImage)
+                    }
+
+                    tourName.text = tourData.getString("product_name")
+                    tourDesc.text = tourData.getString("product_desc")
+                    tourExplanation.text = tourData.getString("highlight")
+
+                    val tourReviewData = tourData.getJSONArray("reviews")
+                    for (i in 0 until tourReviewData.length()){
+                        reviewAdapter.addJsonObject(tourReviewData.getJSONObject(i))
+                    }
+
+                    reviewAdapter.notifyDataSetChanged()
+                }catch (e : JSONException){
+                    e.printStackTrace()
+                }
+            }
+        },
+                object : Response.ErrorListener{
+                    override fun onErrorResponse(error: VolleyError) {
+                        Log.d("Debug", error.toString())
+                    }
+                })
+
+        requestVolley.add(jsonObjectRequest)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -47,13 +106,4 @@ class TourDetailActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
-
-    private fun prepareReview(userreview: ArrayList<Review>) {
-        userreview.add(Review(R.drawable.tour2, "Kanesh", 1F, "1.0", "This Tour Look Good"))
-        userreview.add(Review(R.drawable.tour1, "Kanesh", 2F, "2.0", "This Tour & Hotel Look Good"))
-        userreview.add(Review(R.drawable.tour2, "Kanesh", 1F, "1.0", "This Tour Look Good"))
-        userreview.add(Review(R.drawable.tour1, "Kanesh", 2F, "2.0", "This Tour & Hotel Look Good"))
-    }
 }
-
-class Review(val userPic : Int, val reviewName : String, val ratingBarStar : Float, val ratingBarText : String, val userReview : String)

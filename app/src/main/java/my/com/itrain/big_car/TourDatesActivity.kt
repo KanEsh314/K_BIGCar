@@ -1,8 +1,10 @@
 package my.com.itrain.big_car
 
 import android.annotation.TargetApi
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.VoiceInteractor
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
@@ -30,7 +32,7 @@ import java.util.*
 
 class TourDatesActivity : AppCompatActivity() {
 
-    var packageURL = "https://gentle-atoll-11837.herokuapp.com/api/packages"
+    var packageURL = "https://gentle-atoll-11837.herokuapp.com/api/tour/"
     val calender = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,8 +43,10 @@ class TourDatesActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        val tourService_id = intent.getIntExtra("serviceid", 0)
+
         val dateSetListener = object : DatePickerDialog.OnDateSetListener {
-            override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int,
+            override fun onDateSet(view: DatePicker,year: Int, monthOfYear: Int,
                                    dayOfMonth: Int) {
                 calender.set(Calendar.YEAR, year)
                 calender.set(Calendar.MONTH, monthOfYear)
@@ -50,14 +54,25 @@ class TourDatesActivity : AppCompatActivity() {
             }
         }
 
+        //Volley
+        val requestVolley = Volley.newRequestQueue(this)
+
         val packageOptionAdapter = PackageAdapter(this, object: PackageAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
 
                 //OnDateSetListener
-                DatePickerDialog(this@TourDatesActivity, dateSetListener,
+                val dateOnTour = DatePickerDialog(this@TourDatesActivity,R.style.DialogTheme,dateSetListener,
                         calender.get(Calendar.YEAR),
                         calender.get(Calendar.MONTH),
-                        calender.get(Calendar.DAY_OF_MONTH)).show()
+                        calender.get(Calendar.DAY_OF_MONTH))
+                dateOnTour.show()
+                dateOnTour.setButton(DialogInterface.BUTTON_POSITIVE, "OK", object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        val intent = Intent(this@TourDatesActivity, TourCountActivity::class.java)
+                        startActivity(intent)
+                    }
+
+                })
             }
         })
         val packegeOptionLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
@@ -66,16 +81,17 @@ class TourDatesActivity : AppCompatActivity() {
         packageRecyclerView!!.adapter = packageOptionAdapter
 
         //Volley
-        val requestVolley = Volley.newRequestQueue(this)
 
-        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, packageURL, null, object : Response.Listener<JSONObject>{
+        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, packageURL+tourService_id, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) = try {
 
-                val packageData = response.getJSONArray("data")
+                val packageData = response.getJSONObject("data")
 
-                for (i in 0 until packageData.length()){
-                    packageOptionAdapter.addJsonObject(packageData.getJSONObject(i))
-                    Log.d("Debug",packageData.getJSONObject(i).toString())
+                val tourPackageData = packageData.getJSONArray("tour_packages")
+
+                for (i in 0 until tourPackageData.length()){
+                    packageOptionAdapter.addJsonObject(tourPackageData.getJSONObject(i))
+                    Log.d("Debug",tourPackageData.getJSONObject(i).toString())
                 }
 
                 packageOptionAdapter.notifyDataSetChanged()

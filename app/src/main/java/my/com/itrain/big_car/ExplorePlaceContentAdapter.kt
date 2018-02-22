@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 
 /**

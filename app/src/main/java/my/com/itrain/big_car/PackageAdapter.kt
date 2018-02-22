@@ -44,7 +44,6 @@ class PackageAdapter(private val context: Context, private val listener: OnItemC
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        Log.d("Debug",packageOption.get(position).getString("package_name"))
         holder?.packageName?.text = packageOption.get(position).getString("package_name")
         holder?.packagePrice?.text = packageOption.get(position).getString("package_price")
 
