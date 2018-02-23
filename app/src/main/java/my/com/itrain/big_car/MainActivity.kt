@@ -8,7 +8,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var mMap:GoogleMap
     var pagerAdapter: CustomPagerAdapter?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,15 +17,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar);
 
         pagerAdapter = CustomPagerAdapter(supportFragmentManager)
-        pagerAdapter!!.addFragments(ExploreContentFragment())
-        pagerAdapter!!.addFragments(BrowseContentFragment())
-        pagerAdapter!!.addFragments(TripsContentFragment())
-        pagerAdapter!!.addFragments(InboxContentFragment())
-        pagerAdapter!!.addFragments(ProfileContentFragment())
+        pagerAdapter!!.addFragments(ExploreContentFragment(), "Explore")
+        pagerAdapter!!.addFragments(BrowseContentFragment(), "Browse")
+        pagerAdapter!!.addFragments(TripsContentFragment(), "Trips")
+        pagerAdapter!!.addFragments(InboxContentFragment(), "Inbox")
+        pagerAdapter!!.addFragments(ProfileContentFragment(),"Profile")
 
         viewpager.adapter = pagerAdapter
         tabs.setupWithViewPager(viewpager)
-
         setupTabIcons()
     }
 

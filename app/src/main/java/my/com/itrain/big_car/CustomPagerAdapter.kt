@@ -12,11 +12,11 @@ class CustomPagerAdapter(fm: FragmentManager):FragmentPagerAdapter(fm){
 
     var mFm = fm
     var mFragmentItems: ArrayList<Fragment> = ArrayList()
-    //var mFragmentTitle: ArrayList<String> = ArrayList()
+    var mFragmentTitle: ArrayList<String> = ArrayList()
 
-    fun addFragments(fragment: Fragment){
+    fun addFragments(fragment: Fragment, fragmentTitle: String){
         mFragmentItems.add(fragment)
-        //mFragmentTitle.add(fragmentTitle)
+        mFragmentTitle.add(fragmentTitle)
     }
 
     override fun getItem(position: Int): Fragment {
@@ -27,8 +27,8 @@ class CustomPagerAdapter(fm: FragmentManager):FragmentPagerAdapter(fm){
         return mFragmentItems.count()
     }
 
-//    override fun getPageTitle(position: Int): CharSequence? {
-//        return mFragmentTitle[position]
-//    }
+    override fun getPageTitle(position: Int): CharSequence? {
+        return mFragmentTitle[position]
+    }
 
 }

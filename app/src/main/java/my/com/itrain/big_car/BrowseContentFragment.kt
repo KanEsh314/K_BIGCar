@@ -42,14 +42,13 @@ class BrowseContentFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val categoryAdapter = CategoryAdapter()
+        val categoryAdapter = CategoryAdapter(context)
         listViewCategory!!.adapter = categoryAdapter
 
         listViewCategory.setOnItemClickListener(object : AdapterView.OnItemClickListener{
             override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 startActivity(Intent(context, CategoryActivity::class.java))
             }
-
         })
 
         //VOLLEY

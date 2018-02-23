@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.category_all_tour.view.*
 import kotlinx.android.synthetic.main.fragment_browse_content.*
 import my.com.itrain.big_car.R.id.listViewCategory
 import org.json.JSONObject
@@ -19,9 +21,8 @@ import org.w3c.dom.Text
  * Created by iTrain on 18-Jan-18.
  */
 //, private val listener : OnItemClickListener
-class CategoryAdapter() : BaseAdapter() {
+class CategoryAdapter(private val context: Context) : BaseAdapter() {
 
-    private val context : Context? = null
     private val categoryAll = ArrayList<JSONObject>()
 
     //@SuppressLint("InflateParams", "ViewHolder")
@@ -40,7 +41,8 @@ class CategoryAdapter() : BaseAdapter() {
 //            })
 //        }
 
-        categoryImage?.setImageResource(R.drawable.tour1)
+        Picasso.with(context).load(categoryAll.get(position).getString("servicecat_image")).into(categoryImage)
+        //categoryImage?.setImageResource(R.drawable.tour1)
         categoryTitle?.text = categoryAll.get(position).getString("servicecat_name")
         return view
     }
