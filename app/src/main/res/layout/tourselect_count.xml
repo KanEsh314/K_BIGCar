@@ -1,65 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tourCount"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorWhite">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/mediumPadding">
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
 
         <TextView
             android:id="@+id/countCategories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/mediumPadding"
             android:text="Adult"
             android:textColor="@color/colorDark"
-            android:textSize="@dimen/mediumUniversalText" />
+            android:textSize="@dimen/smallUniversalText"/>
 
         <TextView
             android:id="@+id/countPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/mediumPadding"
-            android:layout_below="@id/countCategories"
-            android:text="RM 167"
-            android:textSize="@dimen/mediumUniversalText"
-            android:textColor="@color/colorDark"/>
+            android:layout_below="@+id/countCategories"
+            android:text="RM200"
+            android:textColor="@color/colorDark"
+            android:textSize="@dimen/smallUniversalText"/>
 
-        <EditText
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/addCount"
-            android:text="1"
-            android:textAlignment="center"/>
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/addCount"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/minusCount"
-            android:background="@drawable/button_outline"
-            android:text="+" />
+    <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        app:backGroundColor="@color/colorWhite"
+        app:textColor="@color/colorPrimary" />
 
-        <Button
-            android:id="@+id/minusCount"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:text="-"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/mediumMargin"
-            android:background="@drawable/button_outline"/>
-
-
-    </RelativeLayout>
-
-
-
-</android.support.v7.widget.CardView>
+</RelativeLayout>

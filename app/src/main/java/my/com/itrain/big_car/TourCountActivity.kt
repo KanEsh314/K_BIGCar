@@ -5,9 +5,15 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
+import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
 import kotlinx.android.synthetic.main.activity_tour_count.*
+import kotlinx.android.synthetic.main.tourselect_count.*
+import kotlinx.android.synthetic.main.tourselect_count.view.*
 import java.io.LineNumberReader
 
 class TourCountActivity : AppCompatActivity() {
@@ -16,7 +22,12 @@ class TourCountActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tour_count)
 
-        tourConfirm.setOnClickListener(object : View.OnClickListener {
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        val checkPay = findViewById<View>(R.id.add_to_cart_btn)
+        checkPay.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 startActivity(Intent(this@TourCountActivity, TourConfirmActivity::class.java))
             }
@@ -39,13 +50,25 @@ class TourCountActivity : AppCompatActivity() {
         recycleTourCount!!.adapter = tourCountAdapter
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id = item!!.itemId
+
+        if(id == android.R.id.home){
+            finish()
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun prepareCount(userCount: ArrayList<SetCount>) {
-        userCount.add(SetCount("Senior","RM 167"))
         userCount.add(SetCount("Adult","RM 147"))
         userCount.add(SetCount("Child","RM 127"))
     }
 
     private fun prepareTime(userTime: ArrayList<SetTime>) {
+        userTime.add(SetTime("12:00"))
+        userTime.add(SetTime("15:00"))
+        userTime.add(SetTime("18:00"))
         userTime.add(SetTime("12:00"))
         userTime.add(SetTime("15:00"))
         userTime.add(SetTime("18:00"))
