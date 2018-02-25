@@ -9,12 +9,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     var pagerAdapter: CustomPagerAdapter?=null
+    private val tabIcons = intArrayOf(R.drawable.ic_explore,
+                                      R.drawable.ic_saved,
+                                      R.drawable.ic_trip,
+                                      R.drawable.ic_inbox,
+                                      R.drawable.ic_profile)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        setSupportActionBar(toolbar);
 
         pagerAdapter = CustomPagerAdapter(supportFragmentManager)
         pagerAdapter!!.addFragments(ExploreContentFragment(), "Explore")
@@ -34,12 +37,5 @@ class MainActivity : AppCompatActivity() {
         tabs.getTabAt(2)!!.setIcon(R.drawable.ic_trip)
         tabs.getTabAt(3)!!.setIcon(R.drawable.ic_inbox)
         tabs.getTabAt(4)!!.setIcon(R.drawable.ic_profile)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu,menu)
-        val item = menu!!.findItem(R.id.action_search)
-        searchView.setMenuItem(item)
-        return true
     }
 }

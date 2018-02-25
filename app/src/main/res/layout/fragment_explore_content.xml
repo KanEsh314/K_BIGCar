@@ -1,103 +1,119 @@
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@android:color/background_light"
+    tools:context="my.com.itrain.big_car.ExploreContentFragment">
+    
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <LinearLayout
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="@color/colorPrimary">
+
+            <ImageView
+                android:id="@+id/tourbannerImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/tour2" />
+
+            <TextView
+                android:id="@+id/tourbannerDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:padding="@dimen/mediumPadding"
+                android:text="Discover and book amazing things-to-do at exclusive prices"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/bannerDesc" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                app:backgroundTint="@color/colorPrimary"
+                android:layout_margin="@dimen/fab_margin"
+                android:src="@android:drawable/ic_menu_search" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@color/colorWhite">
 
-            <RelativeLayout
-                android:id="@+id/bannerDetailLayout"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/popularDestinationLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/tourbannerImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/tour2" />
-
-                <!--<TextView-->
-                    <!--android:id="@+id/bannerTitle"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="YOURS TO EXPLORE"-->
-                    <!--android:textColor="@color/colorWhite"-->
-                    <!--android:textSize="@dimen/bannnerTitle"-->
-                    <!--android:textStyle="bold" />-->
+                android:layout_below="@+id/nearByLayout"
+                android:orientation="vertical"
+                android:padding="@dimen/largePadding">
 
                 <TextView
-                    android:id="@+id/bannerDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/smallPadding"
+                    android:text="Popular Destinations"
+                    android:textColor="@color/colorDark"
+                    android:textSize="@dimen/typeTitle"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleViewDestination"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:padding="@dimen/mediumPadding"
-                    android:text="Discover and book amazing things-to-do at exclusive prices"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/bannerDesc" />
+                    android:clipToPadding="false"
+                    android:paddingBottom="16dp" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/popularDestinationLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/nearByLayout"
-            android:orientation="vertical"
-            android:padding="@dimen/largePadding">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/smallPadding"
-                android:text="Popular Destinations"
-                android:textColor="@color/colorDark"
-                android:textSize="@dimen/typeTitle"
-                android:textStyle="bold" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycleViewDestination"
+            <LinearLayout
+                android:id="@+id/popularActivities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:paddingBottom="16dp" />
+                android:layout_below="@id/popularDestinationLayout"
+                android:orientation="vertical"
+                android:padding="@dimen/largePadding">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/smallPadding"
+                    android:text="Popular Activities"
+                    android:textColor="@color/colorDark"
+                    android:textSize="@dimen/typeTitle"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleViewActivities"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingBottom="16dp" />
+
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/popularActivities"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/popularDestinationLayout"
-            android:orientation="vertical"
-            android:padding="@dimen/largePadding">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/smallPadding"
-                android:text="Popular Activities"
-                android:textColor="@color/colorDark"
-                android:textSize="@dimen/typeTitle"
-                android:textStyle="bold" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycleViewActivities"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:paddingBottom="16dp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
 
 
 

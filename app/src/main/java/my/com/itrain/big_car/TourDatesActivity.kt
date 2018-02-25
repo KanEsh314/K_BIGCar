@@ -1,21 +1,15 @@
 package my.com.itrain.big_car
 
-import android.annotation.TargetApi
-import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.app.VoiceInteractor
+import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.content.Intent
-import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.RequiresApi
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
 import android.widget.DatePicker
 import android.widget.LinearLayout
 import com.android.volley.Request
@@ -24,7 +18,6 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_tour_dates.*
-import kotlinx.android.synthetic.main.choose_package.*
 import kotlinx.android.synthetic.main.fragment_explore_content.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -39,7 +32,7 @@ class TourDatesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tour_dates)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(toolBar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -82,6 +75,11 @@ class TourDatesActivity : AppCompatActivity() {
 
         //Volley
 
+        val progressDialog = ProgressDialog(this, R.style.DialogTheme)
+        progressDialog.setCancelable(false)
+        progressDialog.isIndeterminate=true
+        progressDialog.show()
+
         var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, packageURL+tourService_id, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) = try {
 
@@ -95,6 +93,7 @@ class TourDatesActivity : AppCompatActivity() {
                 }
 
                 packageOptionAdapter.notifyDataSetChanged()
+                progressDialog.dismiss()
             }catch (e : JSONException){
                 e.printStackTrace()
             }

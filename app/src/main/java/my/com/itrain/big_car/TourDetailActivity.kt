@@ -1,5 +1,6 @@
 package my.com.itrain.big_car
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -10,6 +11,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
@@ -54,6 +56,11 @@ class TourDetailActivity : AppCompatActivity() {
         //VOLLEY
         val requestVolley = Volley.newRequestQueue(this)
 
+        val progressDialog = ProgressDialog(this, R.style.DialogTheme)
+        progressDialog.setCancelable(false)
+        progressDialog.isIndeterminate=true
+        progressDialog.show()
+
         val reviewAdapter = ReviewContentAdapter(this)
         val reviewLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
         recycleTourReview!!.layoutManager = reviewLayoutManager
@@ -82,6 +89,7 @@ class TourDetailActivity : AppCompatActivity() {
                     }
 
                     reviewAdapter.notifyDataSetChanged()
+                    progressDialog.dismiss()
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }

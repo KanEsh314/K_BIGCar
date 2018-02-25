@@ -4,66 +4,44 @@
     android:layout_height="match_parent"
     xmlns:tool="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#F5F5F5"
+    android:background="@android:color/background_light"
     android:fitsSystemWindows="true"
     tool:context="my.com.itrain.big_car.TourConfirmActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
                 app:layout_collapseMode="pin">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageButton
-                        android:id="@+id/back_btn"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:background="@null"
-                        android:padding="5dp"
-                        android:src="@mipmap/back_btn"/>
-
                     <RelativeLayout
-                        android:id="@+id/card_badge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_toEndOf="@id/back_btn"
                         android:padding="@dimen/mediumPadding">
 
                         <RelativeLayout
-                            android:id="@+id/btn_wrapper"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="Booking Option"
-                                android:textSize="@dimen/mediumUniversalText"
-                                android:textColor="@color/colorDark"
+                                android:text="Order Confirmation"
+                                android:textSize="18sp"
+                                android:textColor="@color/colorWhite"
                                 android:textStyle="bold"/>
 
                         </RelativeLayout>
                     </RelativeLayout>
-                </RelativeLayout>
 
             </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -71,96 +49,76 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/mediumPadding">
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/orderLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="@dimen/mediumPadding">
 
                 <TextView
-                    android:id="@+id/orderTitle"
+                    android:id="@+id/orderDetailTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/mediumPadding"
+                    android:paddingBottom="@dimen/smallPadding"
                     android:text="Order Details"
                     android:textSize="@dimen/mediumUniversalText"
                     android:textColor="@color/colorDark"/>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/orderTitle"
-                    android:background="@color/colorWhite">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingLeft="@dimen/mediumPadding">
+                    android:layout_below="@id/orderDetailTitle"
+                    android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/mediumPadding"
                             android:text="Peak Tram Fast-Track Combo"
                             android:textColor="@color/colorDark"
-                            android:textSize="@dimen/largeUniversalText"
+                            android:textSize="@dimen/smallUniversalText"
                             android:textStyle="bold"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/mediumPadding"
-                            android:text="Package Name"
-                            android:textSize="@dimen/mediumUniversalText"
-                            android:textColor="@color/colorDark"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/mediumPadding"
                             android:text="Date And Time"
                             android:textColor="@color/colorDark"
-                            android:textSize="@dimen/mediumUniversalText"/>
+                            android:textSize="@dimen/smallUniversalText"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/mediumPadding"
                             android:text="Tour Count"
                             android:textColor="@color/colorDark"
-                            android:textSize="@dimen/mediumUniversalText"/>
+                            android:textSize="@dimen/smallUniversalText"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/mediumPadding"
                             android:text="Tour Price"
                             android:textColor="@color/colorDark"
-                            android:textSize="@dimen/mediumUniversalText"/>
+                            android:textSize="@dimen/smallUniversalText"/>
 
                     </LinearLayout>
-
-                </RelativeLayout>
-
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/PICDetailsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/orderLayout">
+                android:layout_below="@id/orderLayout"
+                android:padding="@dimen/mediumPadding">
 
                 <TextView
                     android:id="@+id/travellerTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/mediumPadding"
-                    android:paddingBottom="@dimen/mediumPadding"
+                    android:paddingBottom="@dimen/smallPadding"
                     android:text="Traveller's Information"
                     android:textSize="@dimen/mediumUniversalText"
                     android:textColor="@color/colorDark" />
@@ -169,141 +127,157 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingLeft="@dimen/mediumPadding"
-                    android:layout_below="@id/travellerTitle"
-                    android:background="@color/colorWhite">
+                    android:layout_below="@id/travellerTitle">
 
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/nameWrapper"
+                        android:id="@+id/titleWrapper"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@color/colorDark">
 
-                        <EditText
-                            android:id="@+id/name"
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
-                            android:hint="Name"/>
+                            android:hint="Title"
+                            android:textColor="@color/colorDark"/>
+                    </android.support.design.widget.TextInputLayout>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/familyNameWrapper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@color/colorDark">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/familyName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:hint="Passport Family Name"
+                        android:textColor="@color/colorDark"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/firstNameWrapper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@color/colorDark">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/firstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:hint="Passport First Name"
+                        android:textColor="@color/colorDark"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/passportInfoWrapper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@color/colorDark">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/passportInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:hint="Passport Information"
+                        android:textColor="@color/colorDark"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/countryCodeWrapper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@color/colorDark">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/countryCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:hint="Country Code"
+                        android:textColor="@color/colorDark"/>
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/phoneWrapper"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@color/colorDark">
 
-                        <EditText
+                        <android.support.design.widget.TextInputEditText
                             android:id="@+id/phoneNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="phone"
-                            android:hint="Phone Number"/>
-
+                            android:hint="Phone Number"
+                            android:textColor="@color/colorDark"/>
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/emailWrapper"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@color/colorDark">
 
-                        <EditText
+                        <android.support.design.widget.TextInputEditText
                             android:id="@+id/email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textEmailAddress"
-                            android:hint="Email"/>
-
+                            android:hint="Email"
+                            android:textColor="@color/colorDark"/>
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/paymentOptionLayout"
+                android:id="@+id/PICPaymentSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/PICDetailsLayout">
-
-                <!--PaymentOption-->
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/paymentLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/paymentOptionLayout">
+                android:layout_below="@+id/PICDetailsLayout"
+                android:padding="@dimen/mediumPadding">
 
                 <TextView
-                    android:id="@+id/paymentTitle"
+                    android:id="@+id/summaryTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/mediumPadding"
-                    android:paddingBottom="@dimen/mediumPadding"
-                    android:text="Payment Summary"
+                    android:paddingBottom="@dimen/smallPadding"
+                    android:text="Traveller's Information"
                     android:textSize="@dimen/mediumUniversalText"
-                    android:textColor="@color/colorDark"/>
+                    android:textColor="@color/colorDark" />
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/paymentTitle"
-                    android:background="@color/colorWhite">
+                    android:orientation="vertical"
+                    android:layout_below="@id/summaryTitle">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingLeft="@dimen/mediumPadding"
-                        android:layout_alignParentStart="true">
+                        android:text="RM 859"
+                        android:textColor="@color/colorDark"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/smallUniversalText"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/mediumPadding"
-                            android:text="Total"
-                            android:textSize="@dimen/mediumUniversalText"
-                            android:textColor="@color/colorDark"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Promo Code"
-                            android:textSize="@dimen/mediumUniversalText"
-                            android:textColor="@color/colorDark"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingRight="@dimen/mediumPadding"
-                        android:gravity="end"
-                        android:layout_alignParentEnd="true">
+                        android:hint="Promo Code"
+                        android:textColorHint="@color/colorDark"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/mediumPadding"
-                            android:text="RM 231"
-                            android:textSize="@dimen/mediumUniversalText"
-                            android:textColor="@color/colorDark" />
+                </LinearLayout>
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="text"
-                            android:text="NEWYOUR2018"
-                            android:textSize="@dimen/mediumUniversalText"
-                            android:textColor="@color/colorDark"/>
-
-                    </LinearLayout>
-
-                </RelativeLayout>
             </RelativeLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
