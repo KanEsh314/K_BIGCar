@@ -70,6 +70,7 @@
                         android:layout_marginBottom="@dimen/mediumMargin">
 
                         <TextView
+                            android:id="@+id/packageConfirmName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Afternoon 4-in-1 Promotion"

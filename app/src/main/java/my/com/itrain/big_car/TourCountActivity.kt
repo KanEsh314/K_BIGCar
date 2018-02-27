@@ -14,9 +14,14 @@ import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
 import kotlinx.android.synthetic.main.activity_tour_count.*
 import kotlinx.android.synthetic.main.tourselect_count.*
 import kotlinx.android.synthetic.main.tourselect_count.view.*
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.LineNumberReader
+import java.util.*
 
 class TourCountActivity : AppCompatActivity() {
+
+    val packageOn = ArrayList<Objects>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +30,17 @@ class TourCountActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        val packageSet = JSONArray(intent.getStringExtra("selectedPackage"))
+        try {
+            for (i in 0 until packageSet.length()){
+                //Log.d("Debug", packageSet.getJSONObject(i).getString("package_name"))
+                packageConfirmName.text = packageSet.getJSONObject(i).getString("package_name")
+            }
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
+
 
         val checkPay = findViewById<View>(R.id.add_to_cart_btn)
         checkPay.setOnClickListener(object : View.OnClickListener {

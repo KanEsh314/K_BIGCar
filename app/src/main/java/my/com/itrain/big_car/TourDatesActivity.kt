@@ -19,13 +19,16 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_tour_dates.*
 import kotlinx.android.synthetic.main.fragment_explore_content.*
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
+import kotlin.collections.ArrayList
 
 class TourDatesActivity : AppCompatActivity() {
 
     var packageURL = "https://gentle-atoll-11837.herokuapp.com/api/tour/"
+    val packageMaterial = ArrayList<JSONObject>()
     val calender = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,14 +57,18 @@ class TourDatesActivity : AppCompatActivity() {
             override fun onItemClick(position: Int) {
 
                 //OnDateSetListener
-                val dateOnTour = DatePickerDialog(this@TourDatesActivity,R.style.DialogTheme,dateSetListener,
-                        calender.get(Calendar.YEAR),
-                        calender.get(Calendar.MONTH),
-                        calender.get(Calendar.DAY_OF_MONTH))
+                val dateOnTour = DatePickerDialog(this@TourDatesActivity, R.style.DialogTheme, dateSetListener, calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH))
                 dateOnTour.show()
+
                 dateOnTour.setButton(DialogInterface.BUTTON_POSITIVE, "OK", object : DialogInterface.OnClickListener{
                     override fun onClick(dialog: DialogInterface?, which: Int) {
                         val intent = Intent(this@TourDatesActivity, TourCountActivity::class.java)
+                        try {
+                            intent.putExtra("selectedPackage", packageMaterial.get(position).getString("tour_packages"))
+                            Log.d("Debug", calender.get(Calendar.DAY_OF_MONTH).toString())
+                        }catch (e : Exception){
+                            e.printStackTrace()
+                        }
                         startActivity(intent)
                     }
 
@@ -84,12 +91,12 @@ class TourDatesActivity : AppCompatActivity() {
             override fun onResponse(response: JSONObject) = try {
 
                 val packageData = response.getJSONObject("data")
-
+                packageMaterial.add(packageData)
                 val tourPackageData = packageData.getJSONArray("tour_packages")
+
 
                 for (i in 0 until tourPackageData.length()){
                     packageOptionAdapter.addJsonObject(tourPackageData.getJSONObject(i))
-                    Log.d("Debug",tourPackageData.getJSONObject(i).toString())
                 }
 
                 packageOptionAdapter.notifyDataSetChanged()
@@ -117,5 +124,4 @@ class TourDatesActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
-
 }
