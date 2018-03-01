@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.text.Html
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -80,8 +81,8 @@ class TourDetailActivity : AppCompatActivity() {
                     }
 
                     tourName.text = tourData.getString("product_name")
-                    tourDesc.text = tourData.getString("product_desc")
-                    tourExplanation.text = tourData.getString("highlight")
+                    tourDesc.text = Html.fromHtml(tourData.getString("product_desc"))
+                    tourExplanation.text = Html.fromHtml(tourData.getString("highlight"))
 
                     val tourReviewData = tourData.getJSONArray("reviews")
                     for (i in 0 until tourReviewData.length()){

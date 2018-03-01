@@ -21,7 +21,6 @@
                 android:id="@+id/packageTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Afternoon 4-in-1 Promotion"
                 android:textSize="@dimen/smallUniversalText"
                 android:textColor="@color/colorDark"
                 android:textStyle="bold" />
@@ -31,7 +30,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/packageTitle"
-                android:text="RM167"
                 android:textColor="@color/colorDark"
                 android:textSize="@dimen/smallUniversalText" />
 

@@ -9,12 +9,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/tourSelectText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tourSelectTime"
+            android:layout_toEndOf="@+id/tourSelectTime"
+            android:text="12:00"
+            android:textColor="@color/colorDark"
+            android:textSize="@dimen/smallUniversalText" />
+
         <RadioButton
             android:id="@+id/tourSelectTime"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1200"
-            android:buttonTint="@color/colorPrimary"/>
+            android:buttonTint="@color/colorPrimary" />
 
     </RelativeLayout>
 

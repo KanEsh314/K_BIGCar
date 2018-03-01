@@ -79,6 +79,7 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/packageConfirmDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="11 Jan 2018"
@@ -88,6 +89,7 @@
                     </LinearLayout>
 
                     <Button
+                        android:id="@+id/editPackage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"

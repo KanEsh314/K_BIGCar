@@ -32,14 +32,26 @@ class TourCountActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val packageSet = JSONArray(intent.getStringExtra("selectedPackage"))
+        val onDateYear = intent.getIntExtra("selectedYear",0)
+        val onDateMonth = intent.getIntExtra("selectedMonth", 0)
+        val onDateDay = intent.getIntExtra("selectedDay", 0)
+
         try {
             for (i in 0 until packageSet.length()){
-                //Log.d("Debug", packageSet.getJSONObject(i).getString("package_name"))
                 packageConfirmName.text = packageSet.getJSONObject(i).getString("package_name")
+                //Log.d("Debug", packageSet.getJSONObject(i).toString())
             }
+            packageConfirmDate.text = onDateDay.toString()+"/"+onDateMonth.toString()+"/"+onDateYear.toString()
         }catch (e : Exception){
             e.printStackTrace()
         }
+
+        editPackage.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                finish()
+            }
+
+        })
 
 
         val checkPay = findViewById<View>(R.id.add_to_cart_btn)

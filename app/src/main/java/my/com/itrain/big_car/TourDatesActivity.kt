@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_explore_content.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.sql.Date
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -41,38 +42,31 @@ class TourDatesActivity : AppCompatActivity() {
 
         val tourService_id = intent.getIntExtra("serviceid", 0)
 
-        val dateSetListener = object : DatePickerDialog.OnDateSetListener {
-            override fun onDateSet(view: DatePicker,year: Int, monthOfYear: Int,
-                                   dayOfMonth: Int) {
-                calender.set(Calendar.YEAR, year)
-                calender.set(Calendar.MONTH, monthOfYear)
-                calender.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            }
-        }
+        val mYear = calender.get(Calendar.YEAR)
+        val mMonth = calender.get(Calendar.MONTH)
+        val mDay = calender.get(Calendar.DAY_OF_MONTH)
 
         //Volley
         val requestVolley = Volley.newRequestQueue(this)
 
         val packageOptionAdapter = PackageAdapter(this, object: PackageAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-
-                //OnDateSetListener
-                val dateOnTour = DatePickerDialog(this@TourDatesActivity, R.style.DialogTheme, dateSetListener, calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH))
-                dateOnTour.show()
-
-                dateOnTour.setButton(DialogInterface.BUTTON_POSITIVE, "OK", object : DialogInterface.OnClickListener{
-                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                //onDate
+                val dateListener = DatePickerDialog(this@TourDatesActivity,R.style.DialogTheme, object : DatePickerDialog.OnDateSetListener{
+                    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
                         val intent = Intent(this@TourDatesActivity, TourCountActivity::class.java)
                         try {
-                            intent.putExtra("selectedPackage", packageMaterial.get(position).getString("tour_packages"))
-                            Log.d("Debug", calender.get(Calendar.DAY_OF_MONTH).toString())
+                            intent.putExtra("selectedYear", year)
+                            intent.putExtra("selectedMonth", month+1)
+                            intent.putExtra("selectedDay", dayOfMonth)
+                            intent.putExtra("selectedPackage", packageMaterial.toString())
                         }catch (e : Exception){
                             e.printStackTrace()
                         }
                         startActivity(intent)
                     }
-
-                })
+                }, mYear, mMonth, mDay)
+                dateListener.show()
             }
         })
         val packegeOptionLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
@@ -91,12 +85,13 @@ class TourDatesActivity : AppCompatActivity() {
             override fun onResponse(response: JSONObject) = try {
 
                 val packageData = response.getJSONObject("data")
-                packageMaterial.add(packageData)
+                //packageMaterial.add(packageData)
                 val tourPackageData = packageData.getJSONArray("tour_packages")
 
 
                 for (i in 0 until tourPackageData.length()){
                     packageOptionAdapter.addJsonObject(tourPackageData.getJSONObject(i))
+                    packageMaterial.add(tourPackageData.getJSONObject(i))
                 }
 
                 packageOptionAdapter.notifyDataSetChanged()

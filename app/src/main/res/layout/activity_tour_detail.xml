@@ -269,10 +269,10 @@
                         android:id="@+id/collectRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        style="?attr/ratingBarStyle"
                         android:layout_toEndOf="@id/collectRatingText"
-                        android:paddingLeft="@dimen/mediumPadding"
                         android:numStars="5"
-                        android:stepSize="1.0"
+                        android:stepSize="0.5"
                         android:backgroundTint="@color/colorPrimary"
                         android:progressTint="@color/colorBlue"/>
 

@@ -1,11 +1,15 @@
 package my.com.itrain.big_car
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.TextView
+import android.widget.Toast
+import my.com.itrain.big_car.R.id.tourTime
+import org.w3c.dom.Text
 
 /**
  * Created by iTrain on 10-Jan-18.
@@ -13,12 +17,14 @@ import android.widget.TextView
 
 class SelectTimeAdapter(private val content: TourCountActivity, private val tourtime: List<SetTime>):RecyclerView.Adapter<SelectTimeAdapter.ViewHolder>(){
 
-    private val mSelectedPosition = -1
+    private var selectedPosition = -1
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+        var tourText: TextView
         var tourTime: RadioButton
 
         init {
+            tourText = itemView.findViewById(R.id.tourSelectText)
             tourTime = itemView.findViewById(R.id.tourSelectTime)
         }
     }
@@ -30,12 +36,20 @@ class SelectTimeAdapter(private val content: TourCountActivity, private val tour
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         val settime : SetTime = tourtime.get(position)
-        holder?.tourTime?.text = settime.selectTourTime
+        holder?.tourText?.text = settime.selectTourTime
+
+        holder?.tourTime?.setChecked(position === selectedPosition)
+        holder?.tourTime?.setTag(position)
         holder?.tourTime?.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                holder?.tourTime?.isChecked = true
+                itemCheckChanged(v)
             }
         })
+    }
+
+    private fun itemCheckChanged(v: View?) {
+        selectedPosition = v?.getTag() as Int
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
