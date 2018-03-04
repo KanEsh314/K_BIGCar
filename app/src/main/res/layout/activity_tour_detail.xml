@@ -73,15 +73,31 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tourName"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/mediumPadding"
-                    android:text="Half Day Kula Lumpur City Tour"
-                    android:textSize="@dimen/tourTitle"
-                    android:textColor="@color/colorDark"
-                    android:textStyle="bold"/>
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tourName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/mediumPadding"
+                        android:text="Half Day Kula Lumpur City Tour"
+                        android:textSize="@dimen/tourTitle"
+                        android:textColor="@color/colorDark"
+                        android:textStyle="bold"/>
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/fabShare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="bottom|end"
+                        app:backgroundTint="@color/colorWhite"
+                        android:layout_margin="@dimen/fab_margin"
+                        android:src="@android:drawable/ic_menu_share" />
+
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -96,111 +112,6 @@
                         android:text="Dive into the wonders of the vast oceanarium in the heart of KL city center!"
                         android:textColor="@color/colorDark"
                         android:textSize="@dimen/mediumUniversalText" />
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/tourPrice"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_below="@+id/tourDesc"-->
-                        <!--android:layout_centerHorizontal="false"-->
-                        <!--android:layout_centerInParent="false"-->
-                        <!--android:paddingBottom="@dimen/mediumPadding"-->
-                        <!--android:paddingTop="@dimen/mediumPadding"-->
-                        <!--android:text="RM38"-->
-                        <!--android:textColor="@color/colorDark"-->
-                        <!--android:textSize="@dimen/tourTitle"-->
-                        <!--android:textStyle="bold" />-->
-
-                    <!--<ImageButton-->
-                        <!--android:id="@+id/tourShare"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_above="@+id/tourGuaran"-->
-                        <!--android:layout_alignParentEnd="true"-->
-                        <!--android:layout_centerInParent="false"-->
-                        <!--android:paddingBottom="@dimen/mediumPadding"-->
-                        <!--android:paddingTop="@dimen/mediumPadding"-->
-                        <!--android:src="@mipmap/share" />-->
-
-                    <TextView
-                        android:id="@+id/tourGuaran"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tourDesc"
-                        android:paddingBottom="@dimen/mediumPadding"
-                        android:paddingTop="@dimen/mediumPadding"
-                        android:text="Bigcar Price Guarantee" />
-
-                </RelativeLayout>
-
-                <View
-                    android:layout_height="1dp"
-                    android:layout_width="match_parent"
-                    android:background="#90909090"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp" />
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/mediumPadding">
-
-                    <ImageView
-                        android:id="@+id/bookedImg"
-                        android:layout_width="@dimen/tourNotify"
-                        android:layout_height="@dimen/tourNotify"
-                        android:src="@mipmap/booked" />
-
-                    <TextView
-                        android:id="@+id/booked"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/mediumPadding"
-                        android:layout_toEndOf="@+id/bookedImg"
-                        android:text="10K+ Booked"
-                        android:textColor="@color/colorDark"
-                        android:textSize="@dimen/smallUniversalText" />
-
-                    <ImageView
-                        android:id="@+id/availableImg"
-                        android:layout_width="@dimen/tourNotify"
-                        android:layout_height="@dimen/tourNotify"
-                        android:layout_alignParentStart="true"
-                        android:layout_below="@+id/bookedImg"
-                        android:layout_marginTop="10dp"
-                        android:src="@mipmap/available" />
-
-                    <TextView
-                        android:id="@+id/available"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/availableImg"
-                        android:layout_toEndOf="@+id/availableImg"
-                        android:paddingLeft="@dimen/mediumPadding"
-                        android:text="Available Tomorrow"
-                        android:textColor="@color/colorDark"
-                        android:textSize="@dimen/smallUniversalText" />
-
-                    <ImageView
-                        android:id="@+id/instantImg"
-                        android:layout_width="@dimen/tourNotify"
-                        android:layout_height="@dimen/tourNotify"
-                        android:layout_alignParentStart="true"
-                        android:layout_below="@+id/availableImg"
-                        android:layout_marginTop="10dp"
-                        android:src="@mipmap/instant" />
-
-                    <TextView
-                        android:id="@+id/instant"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/instantImg"
-                        android:layout_toEndOf="@+id/instantImg"
-                        android:paddingLeft="@dimen/mediumPadding"
-                        android:text="Instant Confirmation"
-                        android:textColor="@color/colorDark"
-                        android:textSize="@dimen/smallUniversalText" />
 
                 </RelativeLayout>
 
@@ -316,7 +227,6 @@
                 </RelativeLayout>
 
             </LinearLayout>
-
         </android.support.v4.widget.NestedScrollView>
 
         <RelativeLayout

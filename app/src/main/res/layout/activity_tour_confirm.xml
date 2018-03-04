@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbarConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
@@ -129,56 +129,28 @@
                     android:orientation="vertical"
                     android:layout_below="@id/travellerTitle">
 
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/titleWrapper"
+                    <Spinner
+                        android:id="@+id/selectTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintTextAppearance="@color/colorDark">
+                        android:entries="@array/titleEntries"
+                        android:prompt="@string/title"/>
 
-                        <android.support.design.widget.TextInputEditText
-                            android:id="@+id/title"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textPersonName"
-                            android:hint="Title"
-                            android:textColor="@color/colorDark"/>
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/familyNameWrapper"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:hintTextAppearance="@color/colorDark">
-
-                    <android.support.design.widget.TextInputEditText
+                    <EditText
                         android:id="@+id/familyName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:hint="Passport Family Name"
                         android:textColor="@color/colorDark"/>
-                    </android.support.design.widget.TextInputLayout>
 
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/firstNameWrapper"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:hintTextAppearance="@color/colorDark">
-
-                    <android.support.design.widget.TextInputEditText
+                    <EditText
                         android:id="@+id/firstName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:hint="Passport First Name"
                         android:textColor="@color/colorDark"/>
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/passportInfoWrapper"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:hintTextAppearance="@color/colorDark">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/passportInfo"
@@ -187,52 +159,30 @@
                         android:inputType="textPersonName"
                         android:hint="Passport Information"
                         android:textColor="@color/colorDark"/>
-                    </android.support.design.widget.TextInputLayout>
 
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/countryCodeWrapper"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:hintTextAppearance="@color/colorDark">
-
-                    <android.support.design.widget.TextInputEditText
+                    <EditText
                         android:id="@+id/countryCode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
+                        android:inputType="number"
                         android:hint="Country Code"
                         android:textColor="@color/colorDark"/>
-                    </android.support.design.widget.TextInputLayout>
 
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/phoneWrapper"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:hintTextAppearance="@color/colorDark">
-
-                        <android.support.design.widget.TextInputEditText
+                        <EditText
                             android:id="@+id/phoneNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="phone"
                             android:hint="Phone Number"
                             android:textColor="@color/colorDark"/>
-                    </android.support.design.widget.TextInputLayout>
 
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/emailWrapper"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:hintTextAppearance="@color/colorDark">
-
-                        <android.support.design.widget.TextInputEditText
+                        <EditText
                             android:id="@+id/email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textEmailAddress"
                             android:hint="Email"
                             android:textColor="@color/colorDark"/>
-                    </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
             </RelativeLayout>
@@ -282,7 +232,7 @@
     </android.support.v4.widget.NestedScrollView>
 
     <RelativeLayout
-        android:id="@+id/add_to_cart_btn"
+        android:id="@+id/add_pay"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/colorPrimary"

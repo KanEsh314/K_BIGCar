@@ -40,4 +40,11 @@
 
     <string name="datespliter">Yes</string>
 
+    <!--Tour Confirm-->
+    <string name="title">Title</string>
+    <string-array name="titleEntries">
+        <item>Mr</item>
+        <item>Mrs</item>
+    </string-array>
+
 </resources>
