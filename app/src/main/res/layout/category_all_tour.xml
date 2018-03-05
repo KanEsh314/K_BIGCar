@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/mediumPadding">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/placeContent"
+    android:layout_width="150dp"
+    android:layout_height="200dp"
+    android:layout_marginRight="@dimen/largeMargin"
+    app:cardCornerRadius="5dp">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/categoryImage"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/photo" />
+
+    <TextView
+        android:id="@+id/categoryText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:paddingBottom="@dimen/mediumPadding"
+        android:layout_gravity="bottom|center"
+        android:text="Category"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/smallUniversalText"
+        android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/categoryImage"
-            android:src="@drawable/happycutomer"
-            android:layout_width="85dp"
-            android:layout_height="85dp" />
-
-        <TextView
-            android:id="@+id/categoryTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/largeMargin"
-            android:text="City Sightseeing"
-            android:textSize="@dimen/mediumUniversalText"
-            android:textColor="@color/colorDark"/>
-
-    </LinearLayout>
-
-</RelativeLayout>
+</android.support.v7.widget.CardView>

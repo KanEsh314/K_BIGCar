@@ -5,6 +5,8 @@ import android.app.VoiceInteractor
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -42,17 +44,21 @@ class BrowseContentFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val categoryAdapter = CategoryAdapter(context)
-        listViewCategory!!.adapter = categoryAdapter
-
-        listViewCategory.setOnItemClickListener(object : AdapterView.OnItemClickListener{
-            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                startActivity(Intent(context, CategoryActivity::class.java))
-            }
-        })
-
         //VOLLEY
         val requestVolley = Volley.newRequestQueue(this.activity)
+
+        val categoryAdapter = CategoryAdapter(context, object : CategoryAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                startActivity(Intent(context, CategoryActivity::class.java))
+            }
+
+        })
+        val categoryLayoutManager = GridLayoutManager(this.activity, 2)
+        recycleViewCategory!!.layoutManager = categoryLayoutManager
+        recycleViewCategory!!.itemAnimator = DefaultItemAnimator()
+        recycleViewCategory!!.adapter = categoryAdapter
+
+        //VOLLEY
 
         var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, categoryURL, null, object : Response.Listener<JSONObject> {
             override fun onResponse(response: JSONObject) =try{
