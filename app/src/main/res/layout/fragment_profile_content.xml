@@ -414,7 +414,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:paddingLeft="20dp"
-                    android:text="Version 1.0.3"
+                    android:text="Version 1.0.4"
                     android:paddingRight="20dp"
                     android:textAlignment="textStart"
                     android:textSize="16sp"
@@ -457,7 +457,7 @@
         android:layout_margin="16dp"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|center"
-        android:src="@mipmap/app_logo_dark"
+        android:src="@mipmap/ic_launcher_round"
         app:civ_border_width="2dp"
         android:translationZ="100000dp"
         app:civ_border_color="@color/colorWhite"/>

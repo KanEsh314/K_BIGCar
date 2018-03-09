@@ -50,7 +50,7 @@
                 android:id="@+id/white_logo"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:src="@mipmap/app_logo_dark"
+                android:src="@mipmap/ic_launcher_round"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="30dp"/>
 

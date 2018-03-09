@@ -2,8 +2,10 @@ package my.com.itrain.big_car
 
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.graphics.Rect
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -23,6 +25,10 @@ import kotlinx.android.synthetic.main.fragment_explore_content.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.ArrayList
+import android.support.v7.widget.RecyclerView
+import android.support.annotation.DimenRes
+import android.support.annotation.NonNull
+import android.widget.ProgressBar
 
 
 /**
@@ -81,8 +87,9 @@ class ExploreContentFragment : Fragment() {
         //VOLLEY
 
         val progressDialog = ProgressDialog(context, R.style.DialogTheme)
-        progressDialog.setCancelable(false)
-        progressDialog.isIndeterminate=true
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setTitle("I'm getting you")
+        progressDialog.setMessage("Loading")
         progressDialog.show()
 
         var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, toursURL,null, object : Response.Listener<JSONObject>{
@@ -98,11 +105,13 @@ class ExploreContentFragment : Fragment() {
                 progressDialog.dismiss()
             } catch (e : JSONException){
                 e.printStackTrace()
+                progressDialog.dismiss()
             }
         },
                 object : Response.ErrorListener {
                     override fun onErrorResponse(error: VolleyError) {
                         Log.d("Debug", error.toString())
+                        progressDialog.dismiss()
                     }
                 })
 

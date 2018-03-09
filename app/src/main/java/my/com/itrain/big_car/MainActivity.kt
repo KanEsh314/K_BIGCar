@@ -9,11 +9,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     var pagerAdapter: CustomPagerAdapter?=null
-    private val tabIcons = intArrayOf(R.drawable.ic_explore,
-                                      R.drawable.ic_saved,
-                                      R.drawable.ic_trip,
-                                      R.drawable.ic_inbox,
-                                      R.drawable.ic_profile)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         viewpager.adapter = pagerAdapter
         tabs.setupWithViewPager(viewpager)
         setupTabIcons()
-    }
+}
 
     private fun setupTabIcons() {
         tabs.getTabAt(0)!!.setIcon(R.drawable.ic_explore)

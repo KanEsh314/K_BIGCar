@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.MenuItem
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_category.*
 import java.util.ArrayList
@@ -15,6 +16,10 @@ class CategoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
+
+        setSupportActionBar(toolbarActivity)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val trending = ArrayList<Popular>()
         preparePopular(trending)
@@ -27,6 +32,16 @@ class CategoryActivity : AppCompatActivity() {
         recycleViewCategory!!.layoutManager = trendingLayoutManager
         recycleViewCategory!!.itemAnimator = DefaultItemAnimator()
         recycleViewCategory!!.adapter = trendingAdapter
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id = item!!.itemId
+
+        if(id == android.R.id.home){
+            finish()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun preparePopular(trending: ArrayList<Popular>) {

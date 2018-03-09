@@ -5,12 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.ShareActionProvider
 import android.text.Html
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -40,6 +43,13 @@ class TourDetailActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val tourService_id = intent.getIntExtra("serviceid",0)
+
+        open_share.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                Toast.makeText(applicationContext,"Item Shared", Toast.LENGTH_LONG).show()
+            }
+
+        })
 
         val checkDates = findViewById<View>(R.id.add_to_cart_btn)
         checkDates.setOnClickListener(object : View.OnClickListener {

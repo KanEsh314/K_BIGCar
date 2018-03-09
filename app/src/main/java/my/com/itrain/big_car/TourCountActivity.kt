@@ -39,7 +39,7 @@ class TourCountActivity : AppCompatActivity() {
         try {
             for (i in 0 until packageSet.length()){
                 packageConfirmName.text = packageSet.getJSONObject(i).getString("package_name")
-                //Log.d("Debug", packageSet.getJSONObject(i).toString())
+                Log.d("Debug", packageSet.getJSONObject(i).toString())
             }
             packageConfirmDate.text = onDateDay.toString()+"/"+onDateMonth.toString()+"/"+onDateYear.toString()
         }catch (e : Exception){

@@ -2,11 +2,16 @@ package my.com.itrain.big_car
 
 
 import android.app.VoiceInteractor
+import android.content.Context
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
+import android.support.annotation.DimenRes
+import android.support.annotation.NonNull
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View

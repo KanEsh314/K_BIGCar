@@ -6,26 +6,33 @@
     android:id="@+id/placeContent"
     android:layout_width="150dp"
     android:layout_height="200dp"
-    android:layout_marginRight="@dimen/largeMargin"
-    app:cardCornerRadius="5dp">
+    android:padding="8dp">
 
     <ImageView
         android:id="@+id/categoryImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="150dp"
         android:scaleType="centerCrop"
         android:src="@drawable/photo" />
 
-    <TextView
-        android:id="@+id/categoryText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/mediumPadding"
-        android:layout_gravity="bottom|center"
-        android:text="Category"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/smallUniversalText"
-        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/categoryImage"
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/categoryText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Category"
+            android:textAlignment="center"
+            android:textColor="@color/colorDark"
+            android:textSize="@dimen/smallUniversalText"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 </android.support.v7.widget.CardView>

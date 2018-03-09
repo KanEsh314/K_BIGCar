@@ -5,68 +5,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@android:color/background_light"
     android:fitsSystemWindows="true"
     tools:context="my.com.itrain.big_car.CategoryActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
-
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarActivity"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 app:layout_collapseMode="pin">
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageButton
-                        android:id="@+id/back_btn"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:background="@null"
-                        android:padding="5dp"
-                        android:src="@mipmap/icon_close" />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/mediumPadding">
 
                     <RelativeLayout
-                        android:id="@+id/card_badge"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@id/back_btn"
-                        android:padding="@dimen/mediumPadding">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="Category"
-                            android:textColor="@color/colorDark"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
 
                     </RelativeLayout>
-                </LinearLayout>
+                </RelativeLayout>
 
             </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/mediumPadding"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout

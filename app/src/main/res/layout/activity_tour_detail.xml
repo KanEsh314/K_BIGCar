@@ -49,13 +49,23 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="10dp">
 
-                            <Button
-                                android:id="@+id/open_cart"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@mipmap/ic_add"/>
+                        <Button
+                            android:id="@+id/open_cart"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@android:drawable/ic_menu_add"/>
 
                     </RelativeLayout>
+
+
+                    <Button
+                        android:id="@+id/open_share"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:layout_toStartOf="@+id/card_badge"
+                        android:background="@android:drawable/ic_menu_share" />
                 </RelativeLayout>
 
             </android.support.v7.widget.Toolbar>
@@ -86,16 +96,6 @@
                         android:textSize="@dimen/tourTitle"
                         android:textColor="@color/colorDark"
                         android:textStyle="bold"/>
-
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/fabShare"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_gravity="bottom|end"
-                        app:backgroundTint="@color/colorWhite"
-                        android:layout_margin="@dimen/fab_margin"
-                        android:src="@android:drawable/ic_menu_share" />
 
                 </RelativeLayout>
 

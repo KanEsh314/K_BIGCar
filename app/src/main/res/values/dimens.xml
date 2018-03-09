@@ -47,4 +47,6 @@
     <dimen name="ratingStarHeight">35dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="item_Offset">32dp</dimen>
+
 </resources>
