@@ -52,6 +52,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="72dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -110,6 +111,33 @@
                     android:paddingBottom="16dp" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/categoryActivities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/popularActivities"
+                android:orientation="vertical"
+                android:padding="@dimen/largePadding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/smallPadding"
+                    android:text="Category Activities"
+                    android:textColor="@color/colorDark"
+                    android:textSize="@dimen/typeTitle"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleViewCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingBottom="16dp" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

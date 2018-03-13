@@ -3,6 +3,9 @@
 
     <string name="google_maps_key">AIzaSyC6egLAT18a0Czpbj2TRPQbNAZ7vo71nnU</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <!-- Profile Item -->
     <string name="view_edit">View and Edit Profile</string>
     <string name="travel">Travel Credit</string>
@@ -42,6 +45,7 @@
 
     <!--Tour Confirm-->
     <string name="title">Title</string>
+
     <string-array name="titleEntries">
         <item>Mr</item>
         <item>Mrs</item>

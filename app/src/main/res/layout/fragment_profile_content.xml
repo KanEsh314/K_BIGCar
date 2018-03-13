@@ -80,6 +80,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="72dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <RelativeLayout
@@ -152,27 +153,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile">
 
-                <TextView
-                    android:id="@+id/acc_details_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ACCOUNT DETAIL"
-                    fontPath="fonts/SourceSansPro-Regular.ttf"
-                    tools:ignore="MissingPrefix"
-                    android:textSize="14sp"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="20dp"
-                    android:textColor="@color/card_sub_title"
-                    android:layout_marginBottom="10dp"/>
-
                 <Button
-                    android:id="@+id/open_address"
+                    android:id="@+id/user_profile"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@id/acc_details_title"
                     android:background="@drawable/list_button"
                     android:drawableEnd="@mipmap/icon_right"
-                    android:text="Add Address"
+                    android:text="User Address"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:paddingLeft="20dp"
@@ -185,13 +172,13 @@
                     tools:ignore="MissingPrefix"/>
 
                 <Button
-                    android:id="@+id/open_name"
+                    android:id="@+id/my_account"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@id/open_address"
+                    android:layout_below="@id/user_profile"
                     android:background="@drawable/list_button"
                     android:drawableEnd="@mipmap/icon_right"
-                    android:text="Edit Profile"
+                    android:text="My Account"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:paddingLeft="20dp"
@@ -204,13 +191,32 @@
                     tools:ignore="MissingPrefix"/>
 
                 <Button
-                    android:id="@+id/change_password"
+                    android:id="@+id/fav_his"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@id/open_name"
+                    android:layout_below="@id/my_account"
                     android:background="@drawable/list_button"
                     android:drawableEnd="@mipmap/icon_right"
-                    android:text="Change Password"
+                    android:text="Favorites &amp; History"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp"
+                    android:textColor="@color/product_name"
+                    fontPath="fonts/SourceSansPro-Regular.ttf"
+                    android:textAllCaps="false"
+                    tools:ignore="MissingPrefix"/>
+
+                <Button
+                    android:id="@+id/booking"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/fav_his"
+                    android:background="@drawable/list_button"
+                    android:drawableEnd="@mipmap/icon_right"
+                    android:text="My Booking"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:paddingLeft="20dp"
@@ -223,13 +229,13 @@
                     tools:ignore="MissingPrefix" />
 
                 <Button
-                    android:id="@+id/user_vouchers"
+                    android:id="@+id/inbox"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@id/change_password"
+                    android:layout_below="@id/booking"
                     android:background="@drawable/list_button"
                     android:drawableEnd="@mipmap/icon_right"
-                    android:text="Vouchers"
+                    android:text="Inbox"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:paddingLeft="20dp"
@@ -242,13 +248,13 @@
                     android:textAllCaps="false"/>
 
                 <Button
-                    android:id="@+id/user_wishlist"
+                    android:id="@+id/saved_card"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@id/user_vouchers"
+                    android:layout_below="@id/inbox"
                     android:background="@drawable/list_button"
                     android:drawableEnd="@mipmap/icon_right"
-                    android:text="Wishlist"
+                    android:text="My Saved Cards"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:paddingLeft="20dp"
@@ -261,13 +267,13 @@
                     android:textAllCaps="false" />
 
                 <Button
-                    android:id="@+id/user_earn_rewards"
+                    android:id="@+id/point"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@id/user_wishlist"
+                    android:layout_below="@id/saved_card"
                     android:background="@drawable/list_button"
                     android:drawableEnd="@mipmap/icon_right"
-                    android:text="Earn Rewards"
+                    android:text="My Points"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:paddingLeft="20dp"
@@ -279,136 +285,12 @@
                     tools:ignore="MissingPrefix"
                     android:textAllCaps="false"
                     android:layout_marginBottom="10dp"/>
-
-                <TextView
-                    android:id="@+id/social_media_title"
-                    android:layout_below="@id/user_earn_rewards"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FOLLOW US"
-                    fontPath="fonts/SourceSansPro-Regular.ttf"
-                    tools:ignore="MissingPrefix"
-                    android:textSize="14sp"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="20dp"
-                    android:textColor="@color/card_sub_title"
-                    android:layout_marginBottom="10dp"/>
-
-                <Button
-                    android:id="@+id/go_to_fb"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_below="@id/social_media_title"
-                    android:background="@drawable/list_button"
-                    android:drawableEnd="@mipmap/icon_right"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:paddingLeft="20dp"
-                    android:text="Facebook"
-                    android:paddingRight="20dp"
-                    android:textAlignment="textStart"
-                    android:textSize="16sp"
-                    android:textColor="@color/product_name"
-                    fontPath="fonts/SourceSansPro-Regular.ttf"
-                    android:textAllCaps="false"
-                    tools:ignore="MissingPrefix"/>
-
-                <Button
-                    android:id="@+id/go_to_ig"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_below="@id/go_to_fb"
-                    android:background="@drawable/list_button"
-                    android:drawableEnd="@mipmap/icon_right"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:paddingLeft="20dp"
-                    android:text="Instagram"
-                    android:paddingRight="20dp"
-                    android:textAlignment="textStart"
-                    android:textSize="16sp"
-                    android:textColor="@color/product_name"
-                    fontPath="fonts/SourceSansPro-Regular.ttf"
-                    android:textAllCaps="false"
-                    tools:ignore="MissingPrefix"/>
-
-                <Button
-                    android:id="@+id/go_to_twitter"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_below="@id/go_to_ig"
-                    android:background="@drawable/list_button"
-                    android:drawableEnd="@mipmap/icon_right"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:paddingLeft="20dp"
-                    android:text="Twitter"
-                    android:paddingRight="20dp"
-                    android:textAlignment="textStart"
-                    android:textSize="16sp"
-                    android:textColor="@color/product_name"
-                    fontPath="fonts/SourceSansPro-Regular.ttf"
-                    android:textAllCaps="false"
-                    tools:ignore="MissingPrefix"/>
-
-                <Button
-                    android:id="@+id/go_to_web"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_below="@id/go_to_twitter"
-                    android:background="@drawable/list_button"
-                    android:drawableEnd="@mipmap/icon_right"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:paddingLeft="20dp"
-                    android:text="Website"
-                    android:paddingRight="20dp"
-                    android:textAlignment="textStart"
-                    android:textSize="16sp"
-                    android:textColor="@color/product_name"
-                    fontPath="fonts/SourceSansPro-Regular.ttf"
-                    android:textAllCaps="false"
-                    tools:ignore="MissingPrefix"
-                    android:layout_marginBottom="10dp"/>
-
-                <TextView
-                    android:id="@+id/others_title"
-                    android:layout_below="@id/go_to_web"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="OTHERS"
-                    fontPath="fonts/SourceSansPro-Regular.ttf"
-                    tools:ignore="MissingPrefix"
-                    android:textSize="14sp"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="20dp"
-                    android:textColor="@color/card_sub_title"
-                    android:layout_marginBottom="10dp"/>
-
-                <Button
-                    android:id="@+id/send_feedback"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_below="@id/others_title"
-                    android:background="@drawable/list_button"
-                    android:drawableEnd="@mipmap/icon_right"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:paddingLeft="20dp"
-                    android:text="Feedback &amp; Suggestion"
-                    android:paddingRight="20dp"
-                    android:textAlignment="textStart"
-                    android:textSize="16sp"
-                    android:textColor="@color/product_name"
-                    fontPath="fonts/SourceSansPro-Regular.ttf"
-                    android:textAllCaps="false"
-                    tools:ignore="MissingPrefix"/>
 
                 <Button
                     android:id="@+id/version_control"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@id/send_feedback"
+                    android:layout_below="@id/point"
                     android:background="@drawable/list_button"
                     android:drawableEnd="@mipmap/icon_right"
                     android:maxLines="1"
@@ -422,26 +304,6 @@
                     fontPath="fonts/SourceSansPro-Regular.ttf"
                     android:textAllCaps="false"
                     tools:ignore="MissingPrefix"/>
-
-                <Button
-                    android:id="@+id/open_walkthrough"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_below="@id/version_control"
-                    android:background="@drawable/list_button"
-                    android:drawableEnd="@mipmap/icon_right"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:text="Walkthrough"
-                    android:textAlignment="textStart"
-                    android:textSize="16sp"
-                    android:textColor="@color/product_name"
-                    fontPath="fonts/SourceSansPro-Regular.ttf"
-                    android:textAllCaps="false"
-                    tools:ignore="MissingPrefix"
-                    android:layout_marginBottom="15dp"/>
 
 
             </RelativeLayout>

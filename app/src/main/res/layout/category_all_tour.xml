@@ -6,7 +6,8 @@
     android:id="@+id/placeContent"
     android:layout_width="150dp"
     android:layout_height="200dp"
-    android:padding="8dp">
+    android:layout_marginRight="@dimen/largeMargin"
+    app:cardCornerRadius="5dp">
 
     <ImageView
         android:id="@+id/categoryImage"

@@ -5,7 +5,6 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
-import android.graphics.Rect
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -25,10 +24,6 @@ import kotlinx.android.synthetic.main.fragment_explore_content.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.ArrayList
-import android.support.v7.widget.RecyclerView
-import android.support.annotation.DimenRes
-import android.support.annotation.NonNull
-import android.widget.ProgressBar
 
 
 /**
@@ -37,8 +32,9 @@ import android.widget.ProgressBar
 class ExploreContentFragment : Fragment() {
 
     var toursURL = "https://gentle-atoll-11837.herokuapp.com/api/tours"
-    private val toursMaterial = ArrayList<JSONObject>()
+    var categoryURL = "http://gentle-atoll-11837.herokuapp.com/api/categories"
     var bannerURl = "https://gentle-atoll-11837.herokuapp.com/api/banners"
+    private val toursMaterial = ArrayList<JSONObject>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -72,7 +68,6 @@ class ExploreContentFragment : Fragment() {
                 val intent = Intent(context,TourDetailActivity::class.java)
                 try {
                     intent.putExtra("serviceid", toursMaterial.get(position).getInt("service_id"))
-                    //Log.d("Debug",toursMaterial.get(position).getInt("service_id").toString())
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }
@@ -84,6 +79,17 @@ class ExploreContentFragment : Fragment() {
         recycleViewDestination!!.itemAnimator = DefaultItemAnimator()
         recycleViewDestination!!.adapter = destinationAdapter
 
+        val categoryAdapter = CategoryAdapter(context, object : CategoryAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                startActivity(Intent(context, CategoryActivity::class.java))
+            }
+
+        })
+        val categoryLayoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
+        recycleViewCategory!!.layoutManager = categoryLayoutManager
+        recycleViewCategory!!.itemAnimator = DefaultItemAnimator()
+        recycleViewCategory!!.adapter = categoryAdapter
+
         //VOLLEY
 
         val progressDialog = ProgressDialog(context, R.style.DialogTheme)
@@ -92,7 +98,7 @@ class ExploreContentFragment : Fragment() {
         progressDialog.setMessage("Loading")
         progressDialog.show()
 
-        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, toursURL,null, object : Response.Listener<JSONObject>{
+        var jsonObjectRequestTour = JsonObjectRequest(Request.Method.GET, toursURL,null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) = try {
 
                 val toursData = response.getJSONArray("data")
@@ -115,7 +121,7 @@ class ExploreContentFragment : Fragment() {
                     }
                 })
 
-        requestVolley.add(jsonObjectRequest)
+        requestVolley.add(jsonObjectRequestTour)
 
         var jsonObjectRequestBanner = JsonObjectRequest(Request.Method.GET, bannerURl, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) = try{
@@ -140,6 +146,26 @@ class ExploreContentFragment : Fragment() {
                 })
 
         requestVolley.add(jsonObjectRequestBanner)
+
+        var jsonObjectRequestCategory = JsonObjectRequest(Request.Method.GET, categoryURL, null, object : Response.Listener<JSONObject> {
+            override fun onResponse(response: JSONObject) =try{
+
+                val categoryData = response.getJSONArray("data")
+
+                for (i in 0 until categoryData.length()){
+                    categoryAdapter.addJsonObject(categoryData.getJSONObject(i))
+                }
+
+                categoryAdapter.notifyDataSetChanged()
+            }catch (e : JSONException){
+                e.printStackTrace()
+            }
+        }, object : Response.ErrorListener {
+            override fun onErrorResponse(error: VolleyError?) {
+                Log.d("Debug", error.toString())
+            }
+        })
+        requestVolley.add(jsonObjectRequestCategory)
     }
 
     private fun prepareList(list: ArrayList<Trend>) {

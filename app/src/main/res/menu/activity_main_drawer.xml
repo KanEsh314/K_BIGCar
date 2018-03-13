@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_action_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/ic_setting"
+            android:title="Log In" />
+        <item
+            android:id="@+id/nav_review"
+            android:icon="@drawable/ic_action_rate_review"
+            android:title="Write Review" />
+        <item
+            android:id="@+id/nav_card"
+            android:icon="@drawable/ic_action_card"
+            android:title="Credit Card" />
+        <item
+            android:id="@+id/nav_currency"
+            android:icon="@drawable/ic_action_currency"
+            android:title="Currency" />
+        <item
+            android:id="@+id/nav_language"
+            android:icon="@drawable/ic_setting"
+            android:title="Language" />
+        <item
+            android:id="@+id/nav_notify"
+            android:icon="@drawable/ic_action_notify"
+            android:title="Notification" />
+        <item
+            android:id="@+id/nav_feedback"
+            android:icon="@drawable/ic_action_feedback"
+            android:title="Feedback" />
+        <item
+            android:id="@+id/nav_contact_us"
+            android:icon="@drawable/ic_action_contact"
+            android:title="Contact Us" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_setting"
+            android:title="Setting" />
+        <item
+            android:id="@+id/nav_privacy"
+            android:icon="@drawable/ic_setting"
+            android:title="Privacy Policy" />
+        <item
+            android:id="@+id/nav_term"
+            android:icon="@drawable/ic_setting"
+            android:title="term of Use" />
+        <item
+            android:id="@+id/nav_careers"
+            android:icon="@drawable/ic_setting"
+            android:title="Careers" />
+    </group>
+</menu>

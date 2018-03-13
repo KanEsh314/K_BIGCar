@@ -37,7 +37,7 @@ import org.json.JSONObject
  */
 class BrowseContentFragment : Fragment() {
 
-    var categoryURL = "http://gentle-atoll-11837.herokuapp.com/api/categories"
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -48,42 +48,6 @@ class BrowseContentFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //VOLLEY
-        val requestVolley = Volley.newRequestQueue(this.activity)
-
-        val categoryAdapter = CategoryAdapter(context, object : CategoryAdapter.OnItemClickListener{
-            override fun onItemClick(position: Int) {
-                startActivity(Intent(context, CategoryActivity::class.java))
-            }
-
-        })
-        val categoryLayoutManager = GridLayoutManager(this.activity, 2)
-        recycleViewCategory!!.layoutManager = categoryLayoutManager
-        recycleViewCategory!!.itemAnimator = DefaultItemAnimator()
-        recycleViewCategory!!.adapter = categoryAdapter
-
-        //VOLLEY
-
-        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, categoryURL, null, object : Response.Listener<JSONObject> {
-            override fun onResponse(response: JSONObject) =try{
-
-                val categoryData = response.getJSONArray("data")
-
-                for (i in 0 until categoryData.length()){
-                    categoryAdapter.addJsonObject(categoryData.getJSONObject(i))
-                }
-
-                categoryAdapter.notifyDataSetChanged()
-            }catch (e : JSONException){
-                e.printStackTrace()
-            }
-        }, object : Response.ErrorListener {
-            override fun onErrorResponse(error: VolleyError?) {
-                Log.d("Debug", error.toString())
-            }
-        })
-        requestVolley.add(jsonObjectRequest)
     }
 
 }// Required empty public constructor
