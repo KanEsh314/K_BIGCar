@@ -51,27 +51,6 @@
                 android:layout_height="?android:attr/actionBarSize"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_collapseMode="pin">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/auth_button"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:text="Log In"
-                        android:textSize="17sp"
-                        android:textColor="@color/colorWhite"
-                        android:clickable="true"
-                        fontPath="fonts/SourceSansPro-Regular.ttf"
-                        tools:ignore="MissingPrefix"/>
-
-                </RelativeLayout>
-
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>

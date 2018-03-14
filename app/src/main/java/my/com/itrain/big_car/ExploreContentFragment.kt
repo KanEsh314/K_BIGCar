@@ -41,12 +41,19 @@ class ExploreContentFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_explore_content, container, false)
 
+        setHasOptionsMenu(true);
+
         var newHeight = (Resources.getSystem().displayMetrics.heightPixels)/2
         var bannerImage = view.findViewById<ImageView>(R.id.tourbannerImage)
         bannerImage.requestLayout()
         bannerImage.layoutParams.height = newHeight
 
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.explore_main_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -74,7 +81,7 @@ class ExploreContentFragment : Fragment() {
                 startActivity(intent)
             }
         })
-        val destinationLayoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL,true)
+        val destinationLayoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL,false)
         recycleViewDestination!!.layoutManager = destinationLayoutManager
         recycleViewDestination!!.itemAnimator = DefaultItemAnimator()
         recycleViewDestination!!.adapter = destinationAdapter
@@ -94,7 +101,7 @@ class ExploreContentFragment : Fragment() {
 
         val progressDialog = ProgressDialog(context, R.style.DialogTheme)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
-        progressDialog.setTitle("I'm getting you")
+        progressDialog.setTitle("Please Wait")
         progressDialog.setMessage("Loading")
         progressDialog.show()
 
@@ -169,10 +176,10 @@ class ExploreContentFragment : Fragment() {
     }
 
     private fun prepareList(list: ArrayList<Trend>) {
-        list.add(Trend(R.drawable.happycutomer,"Crime Histroy","MYR198"))
-        list.add(Trend(R.drawable.happycutomer,"Crime Histroy","MYR98"))
-        list.add(Trend(R.drawable.happycutomer,"Crime Histroy","MYR198"))
-        list.add(Trend(R.drawable.happycutomer,"Crime Histroy","MYR98"))
+        list.add(Trend(R.mipmap.ic_world,"Crime Histroy","MYR198"))
+        list.add(Trend(R.mipmap.ic_world,"Crime Histroy","MYR98"))
+        list.add(Trend(R.mipmap.ic_world,"Crime Histroy","MYR198"))
+        list.add(Trend(R.mipmap.ic_world,"Crime Histroy","MYR98"))
     }
 
 }// Required empty public constructor

@@ -37,15 +37,6 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/bannerDesc" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|end"
-                app:backgroundTint="@color/colorPrimary"
-                android:layout_margin="@dimen/fab_margin"
-                android:src="@android:drawable/ic_menu_search" />
-
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
