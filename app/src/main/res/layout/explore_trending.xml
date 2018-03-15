@@ -42,44 +42,16 @@
             android:text="For short or long tern visitors in Kuala Lumpur this is perfect opportunity to visit landmarks to Kuala Lumpur city. On tour we will take you to some of most important sightseeing attractions."
             android:textColor="@color/colorDark"
             android:textSize="@dimen/smallUniversalText"
-            android:textAlignment="textStart"
-            />
-
-        <LinearLayout
-            android:id="@+id/ratingLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RatingBar
-                android:id="@+id/popularStar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="?android:attr/ratingBarStyleSmall"
-                android:layout_below="@id/popularName"
-                android:numStars="5"
-                android:stepSize="1.0"/>
-
-            <TextView
-                android:id="@+id/popularStarText"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="75"
-                android:textColor="@color/colorDark"
-                android:textSize="@dimen/smallUniversalText"
-                android:gravity="center"
-                android:progressTint="@color/colorBlue"/>
-
-        </LinearLayout>
+            android:textAlignment="textStart"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@+id/ratingLayout">
+            android:layout_below="@+id/popularDesc">
 
             <TextView
-                android:id="@+id/popularPrice"
+                android:id="@+id/popularLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"

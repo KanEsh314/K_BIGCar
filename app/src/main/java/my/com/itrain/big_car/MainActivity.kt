@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
         drawer = findViewById(R.id.drawer_layout)
         toggle = ActionBarDrawerToggle(this,drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        toggle.drawerArrowDrawable.setColor(resources.getColor(R.color.colorAccent))
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 

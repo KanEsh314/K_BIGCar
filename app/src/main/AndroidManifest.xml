@@ -36,6 +36,7 @@
         <activity android:name=".StartActivity" />
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".CategoryActivity" />
+        <activity android:name=".ConditionActivity"></activity>
     </application>
 
 </manifest>

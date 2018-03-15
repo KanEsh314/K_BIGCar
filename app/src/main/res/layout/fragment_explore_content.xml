@@ -8,37 +8,6 @@
     android:fitsSystemWindows="true"
     android:background="@android:color/background_light"
     tools:context="my.com.itrain.big_car.ExploreContentFragment">
-    
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="@color/colorPrimary">
-
-            <ImageView
-                android:id="@+id/tourbannerImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@drawable/tour2" />
-
-            <TextView
-                android:id="@+id/tourbannerDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:padding="@dimen/mediumPadding"
-                android:text="Discover and book amazing things-to-do at exclusive prices"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/bannerDesc" />
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -50,6 +19,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/bannerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/tourbannerImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/tour2" />
+
+                <TextView
+                    android:id="@+id/tourbannerDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:padding="@dimen/mediumPadding"
+                    android:text="Discover and book amazing things-to-do at exclusive prices"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/bannerDesc" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/popularDestinationLayout"

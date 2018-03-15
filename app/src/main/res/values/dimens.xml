@@ -8,8 +8,8 @@
 
     <dimen name="largeUniversalText">35sp</dimen>
 
-    <dimen name="pictureHeight">210dp</dimen>
-    <dimen name="pictureWidth">162dp</dimen>
+    <dimen name="pictureHeight">200dp</dimen>
+    <dimen name="pictureWidth">160dp</dimen>
 
     <dimen name="pictureTextSmall">14sp</dimen>
     <dimen name="pictureTextLarge">18sp</dimen>

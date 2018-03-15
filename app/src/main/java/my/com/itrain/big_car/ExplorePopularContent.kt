@@ -1,35 +1,36 @@
 package my.com.itrain.big_car
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import org.json.JSONObject
 import org.w3c.dom.Text
 
 /**
  * Created by iTrain on 20-Dec-17.
  */
 
-class ExplorePopularContent(private val content: CategoryActivity, private val trending: List<Popular>, private val listener: OnItemClickListener) : RecyclerView.Adapter<ExplorePopularContent.ViewHolder>(){
+class ExplorePopularContent(private val content: Context, private val listener: OnItemClickListener) : RecyclerView.Adapter<ExplorePopularContent.ViewHolder>(){
+
+    private val byCategory = ArrayList<JSONObject>()
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var popImg: ImageView
         var popName: TextView
         var popDesc: TextView
-        var popRating: RatingBar
-        var popRatingText: TextView
-        var popPrice: TextView
+        var popLocation: TextView
 
         init {
             popImg = itemView.findViewById(R.id.popularImg)
             popName = itemView.findViewById(R.id.popularName)
             popDesc = itemView.findViewById(R.id.popularDesc)
-            popRating = itemView.findViewById(R.id.popularStar)
-            popRatingText = itemView.findViewById(R.id.popularStarText)
-            popPrice = itemView.findViewById(R.id.popularPrice)
+            popLocation = itemView.findViewById(R.id.popularLocation)
         }
 
         fun bind(position: Int, listener: ExplorePopularContent.OnItemClickListener){
@@ -47,23 +48,24 @@ class ExplorePopularContent(private val content: CategoryActivity, private val t
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val popular : Popular = trending.get(position)
-        holder?.popImg?.setImageResource(popular.popularimg)
-        holder?.popName?.text = popular.popularname
-        holder?.popDesc?.text = popular.populardesc
-        holder?.popRating?.rating = popular.popularrating
-        holder?.popRatingText?.text = popular.popularratingtext
-        holder?.popPrice?.text = popular.popularprice
+        holder?.popImg?.setImageResource(R.drawable.tour2)
+        holder?.popName?.text = Html.fromHtml(byCategory.get(position).getString("product_name"))
+        holder?.popDesc?.text = Html.fromHtml(byCategory.get(position).getString("product_desc"))
+        holder?.popLocation?.text = Html.fromHtml(byCategory.get(position).getString("location"))
 
         holder?.bind(position,listener)
 
     }
 
     override fun getItemCount(): Int {
-        return trending.size
+        return byCategory.size
     }
 
     interface OnItemClickListener{
         fun onItemClick(position:Int)
+    }
+
+    fun addJsonObject(jsonObject: JSONObject) {
+        byCategory.add(jsonObject)
     }
 }

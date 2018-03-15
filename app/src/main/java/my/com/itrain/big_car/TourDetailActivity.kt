@@ -32,7 +32,7 @@ import org.json.JSONObject
 class TourDetailActivity : AppCompatActivity() {
 
     var tourURL = "https://gentle-atoll-11837.herokuapp.com/api/tour/"
-    private val tourMaterial = java.util.ArrayList<JSONObject>()
+    private val tourMaterial = ArrayList<JSONObject>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

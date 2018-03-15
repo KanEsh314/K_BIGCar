@@ -51,7 +51,7 @@
         <item
             android:id="@+id/nav_term"
             android:icon="@mipmap/ic_action_setting"
-            android:title="term of Use" />
+            android:title="Term of Use" />
         <item
             android:id="@+id/nav_careers"
             android:icon="@mipmap/ic_action_career"

@@ -15,8 +15,7 @@
                 android:id="@+id/trendImg"
                 android:layout_width="@dimen/pictureWidth"
                 android:layout_height="@dimen/pictureHeight"
-                android:src="@mipmap/ic_world"
-                android:scaleType="fitXY"/>
+                android:src="@mipmap/ic_world"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"

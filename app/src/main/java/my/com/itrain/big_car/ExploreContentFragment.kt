@@ -32,15 +32,15 @@ import java.util.ArrayList
 class ExploreContentFragment : Fragment() {
 
     var toursURL = "https://gentle-atoll-11837.herokuapp.com/api/tours"
-    var categoryURL = "http://gentle-atoll-11837.herokuapp.com/api/categories"
+    var categoriesURL = "http://gentle-atoll-11837.herokuapp.com/api/categories"
     var bannerURl = "https://gentle-atoll-11837.herokuapp.com/api/banners"
     private val toursMaterial = ArrayList<JSONObject>()
+    private val categoriesMaterial = ArrayList<JSONObject>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_explore_content, container, false)
-
         setHasOptionsMenu(true);
 
         var newHeight = (Resources.getSystem().displayMetrics.heightPixels)/2
@@ -88,7 +88,14 @@ class ExploreContentFragment : Fragment() {
 
         val categoryAdapter = CategoryAdapter(context, object : CategoryAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
-                startActivity(Intent(context, CategoryActivity::class.java))
+                val intent = Intent(context, CategoryActivity::class.java)
+                try {
+                    intent.putExtra("servicecatid", categoriesMaterial.get(position).getInt("servicecat_id"))
+                    Log.d("Debug", categoriesMaterial.get(position).getInt("servicecat_id").toString())
+                }catch (e : JSONException){
+                    e.printStackTrace()
+                }
+                startActivity(intent)
             }
 
         })
@@ -154,13 +161,14 @@ class ExploreContentFragment : Fragment() {
 
         requestVolley.add(jsonObjectRequestBanner)
 
-        var jsonObjectRequestCategory = JsonObjectRequest(Request.Method.GET, categoryURL, null, object : Response.Listener<JSONObject> {
+        var jsonObjectRequestCategory = JsonObjectRequest(Request.Method.GET, categoriesURL, null, object : Response.Listener<JSONObject> {
             override fun onResponse(response: JSONObject) =try{
 
                 val categoryData = response.getJSONArray("data")
 
                 for (i in 0 until categoryData.length()){
                     categoryAdapter.addJsonObject(categoryData.getJSONObject(i))
+                    categoriesMaterial.add(categoryData.getJSONObject(i))
                 }
 
                 categoryAdapter.notifyDataSetChanged()
