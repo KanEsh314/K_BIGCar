@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:layout_alignParentBottom="true"
-            android:background="?attr/colorAccent"
+            android:background="@color/tabBG"
             android:elevation="5dp"
             android:minHeight="?attr/actionBarSize"
             app:tabIndicatorColor="@color/colorPrimary"

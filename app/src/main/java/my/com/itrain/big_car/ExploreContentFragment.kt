@@ -184,10 +184,10 @@ class ExploreContentFragment : Fragment() {
     }
 
     private fun prepareList(list: ArrayList<Trend>) {
-        list.add(Trend(R.mipmap.ic_world,"Crime Histroy","MYR198"))
-        list.add(Trend(R.mipmap.ic_world,"Crime Histroy","MYR98"))
-        list.add(Trend(R.mipmap.ic_world,"Crime Histroy","MYR198"))
-        list.add(Trend(R.mipmap.ic_world,"Crime Histroy","MYR98"))
+        list.add(Trend(R.drawable.tour2,"Crime History","MYR198"))
+        list.add(Trend(R.drawable.tour1,"Crime History","MYR98"))
+        list.add(Trend(R.drawable.tour2,"Crime History","MYR198"))
+        list.add(Trend(R.drawable.tour2,"Crime History","MYR98"))
     }
 
 }// Required empty public constructor

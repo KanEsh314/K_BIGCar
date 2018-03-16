@@ -147,7 +147,7 @@
                             android:id="@+id/register_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter your name"
+                            android:hint="Enter Your Name"
                             android:textColorHint="@color/placeholder"
                             android:layout_below="@id/label_name"
                             fontPath="fonts/SourceSansPro-Regular.ttf"
@@ -157,7 +157,7 @@
                             android:textColor="@color/colorPrimary"
                             android:layout_marginBottom="20dp"
                             android:background="@drawable/custom_edittext"/>
-                        <!-- -->
+
                         <TextView
                             android:id="@+id/label_email"
                             android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
                             android:id="@+id/register_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter your email"
+                            android:hint="Enter Your Email"
                             android:textColorHint="@color/placeholder"
                             android:layout_below="@id/label_email"
                             fontPath="fonts/SourceSansPro-Regular.ttf"
@@ -186,27 +186,54 @@
                             android:background="@drawable/custom_edittext"/>
 
                         <TextView
-                            android:id="@+id/label_password"
+                            android:id="@+id/label_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Password"
+                            android:text="Address"
                             android:layout_marginBottom="10dp"
                             android:textSize="14sp"
+                            android:layout_below="@id/register_email"
                             fontPath="fonts/SourceSansPro-Regular.ttf"
                             tools:ignore="MissingPrefix"
-                            android:textColor="@color/card_sub_title"
-                            android:layout_below="@id/register_email"/>
+                            android:textColor="@color/card_sub_title"/>
 
                         <EditText
-                            android:id="@+id/register_password"
+                            android:id="@+id/register_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter your password"
+                            android:hint="Enter Your Address"
                             android:textColorHint="@color/placeholder"
-                            android:layout_below="@id/label_password"
+                            android:layout_below="@id/label_address"
                             fontPath="fonts/SourceSansPro-Regular.ttf"
                             tools:ignore="MissingPrefix"
-                            android:inputType="textPassword"
+                            android:textSize="18sp"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_marginBottom="20dp"
+                            android:inputType="textMultiLine"
+                            android:background="@drawable/custom_edittext"/>
+
+                        <TextView
+                            android:id="@+id/label_phonenumber"
+                            fontPath="fonts/SourceSansPro-Regular.ttf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/register_address"
+                            android:layout_marginBottom="10dp"
+                            android:text="Phone Number"
+                            android:textColor="@color/card_sub_title"
+                            android:textSize="14sp"
+                            tools:ignore="MissingPrefix" />
+
+                        <EditText
+                            android:id="@+id/register_phonenumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter Your Phone Number"
+                            android:textColorHint="@color/placeholder"
+                            android:layout_below="@id/label_phonenumber"
+                            fontPath="fonts/SourceSansPro-Regular.ttf"
+                            tools:ignore="MissingPrefix"
+                            android:inputType="phone"
                             android:textSize="18sp"
                             android:textColor="@color/colorPrimary"
                             android:background="@drawable/custom_edittext"
@@ -214,7 +241,7 @@
 
                         <!--CONFIRM PASSWORD-->
                         <TextView
-                            android:id="@+id/label_confirm_password"
+                            android:id="@+id/label_password"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Confirm Password"
@@ -223,15 +250,15 @@
                             fontPath="fonts/SourceSansPro-Regular.ttf"
                             tools:ignore="MissingPrefix"
                             android:textColor="@color/card_sub_title"
-                            android:layout_below="@id/register_password"/>
+                            android:layout_below="@id/register_phonenumber"/>
 
                         <EditText
-                            android:id="@+id/register_confirm_password"
+                            android:id="@+id/register_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Confirm your password"
                             android:textColorHint="@color/placeholder"
-                            android:layout_below="@id/label_confirm_password"
+                            android:layout_below="@id/label_password"
                             fontPath="fonts/SourceSansPro-Regular.ttf"
                             tools:ignore="MissingPrefix"
                             android:inputType="textPassword"
@@ -245,7 +272,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:background="@drawable/rounded_corner_green"
-                            android:layout_below="@id/register_confirm_password">
+                            android:layout_below="@id/register_password">
 
                             <TextView
                                 android:layout_width="wrap_content"

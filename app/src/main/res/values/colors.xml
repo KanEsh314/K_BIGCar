@@ -18,4 +18,6 @@
     <color name="card_sub_title">#989FAA</color>
     <color name="placeholder">#202E313C</color>
 
+    <color name="tabBG">#60FFFFFF</color>
+
 </resources>

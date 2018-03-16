@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <android.support.v7.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/cardViewContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardViewContent"
+    android:layout_width="@dimen/pictureWidth"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="8dp"
+    android:layout_marginBottom="@dimen/largeMargin"
+    android:layout_marginRight="@dimen/largeMargin">
 
         <RelativeLayout
             android:id="@+id/commonContent"
@@ -15,11 +19,12 @@
                 android:id="@+id/trendImg"
                 android:layout_width="@dimen/pictureWidth"
                 android:layout_height="@dimen/pictureHeight"
-                android:src="@mipmap/ic_world"/>
+                android:src="@drawable/tour1"
+                android:scaleType="centerCrop"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/trendImg"
                 android:orientation="vertical"
                 android:paddingRight="@dimen/mediumPadding"
@@ -29,6 +34,8 @@
                     android:id="@+id/trendText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
                     android:text="Photo Description"
                     android:textSize="16sp" />
 
@@ -36,6 +43,8 @@
                     android:id="@+id/trendPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
                     android:layout_below="@id/trendText"
                     android:text="Photo Price"
                     android:textSize="12sp" />

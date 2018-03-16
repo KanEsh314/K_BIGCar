@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
                 onBackPressed()
             }
             R.id.nav_login -> {
-                startActivity(Intent(applicationContext, LoginActivity::class.java))
+                startActivity(Intent(applicationContext, StartActivity::class.java))
             }
             R.id.nav_review -> {
 
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
             }
             R.id.nav_privacy -> {
-
+                startActivity(Intent(applicationContext, ConditionActivity::class.java))
             }
             R.id.nav_term -> {
 

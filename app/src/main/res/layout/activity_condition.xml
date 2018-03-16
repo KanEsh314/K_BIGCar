@@ -16,41 +16,43 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="@dimen/largePadding"
+            android:layout_marginBottom="@dimen/largePadding">
 
             <TextView
                 android:id="@+id/privacytermText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/largePadding"
+                android:paddingBottom="@dimen/largePadding"
                 android:text="To Enhance Tourism Experience For Future Visitor, Location, Data Will Be Periodically Collected For Research Purpose While You Are In Japan"
                 android:textColor="@color/colorDark"
                 android:textSize="@dimen/smallUniversalText" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_below="@id/privacytermText">
 
                 <Button
                     android:id="@+id/privacy"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start"
+                    android:layout_alignParentStart="true"
                     android:background="@drawable/rounded_corner"
-                    android:text="Term of Serice" />
+                    android:text="Term of Serice"
+                    android:textColor="@color/colorWhite"/>
 
                 <Button
                     android:id="@+id/terms"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_below="@+id/privacy"
+                    android:layout_alignParentEnd="true"
                     android:background="@drawable/rounded_corner"
-                    android:text="Privacy Policy" />
+                    android:text="Privacy Policy"
+                    android:textColor="@color/colorWhite"/>
 
-            </LinearLayout>
+            </RelativeLayout>
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
