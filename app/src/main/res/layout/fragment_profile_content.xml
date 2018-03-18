@@ -86,28 +86,13 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="5dp"/>
 
-                <TextView
-                    android:id="@+id/location_user"
-                    android:layout_below="@id/name_user"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Country"
-                    android:textSize="16sp"
-                    android:lineSpacingExtra="8dp"
-                    android:textColor="@color/card_sub_title"
-                    fontPath="fonts/SourceSansPro-Regular.ttf"
-                    tools:ignore="MissingPrefix"
-                    android:textAlignment="center"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"/>
-
                 <!-- SEPERATOR -->
                 <RelativeLayout
                     android:id="@+id/seperator"
                     android:layout_width="50dp"
                     android:layout_height="2dp"
                     android:background="@color/colorPrimary"
-                    android:layout_below="@id/location_user"
+                    android:layout_below="@id/name_user"
                     android:layout_marginBottom="20dp"
                     android:layout_centerHorizontal="true">
 

@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         setSupportActionBar(toolbar)
 
         pagerAdapter = CustomPagerAdapter(supportFragmentManager)
-        pagerAdapter!!.addFragments(BrowseContentFragment(), "PTP")
+        pagerAdapter!!.addFragments(BrowseContentFragment(), "P2P")
         pagerAdapter!!.addFragments(ExploreContentFragment(), "TOUR")
         pagerAdapter!!.addFragments(TripsContentFragment(), "NEARBY")
         pagerAdapter!!.addFragments(ProfileContentFragment(),"ME")

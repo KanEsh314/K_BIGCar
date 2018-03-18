@@ -1,13 +1,25 @@
 package my.com.itrain.big_car
 
 
+import android.app.ProgressDialog
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import com.android.volley.AuthFailureError
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_profile_content.*
+import org.json.JSONObject
+import java.lang.reflect.Method
 
 
 /**
@@ -15,15 +27,59 @@ import kotlinx.android.synthetic.main.fragment_profile_content.*
  */
 class ProfileContentFragment : Fragment() {
 
+    var userURL = "http://gentle-atoll-11837.herokuapp.com/user"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         var rootView = inflater.inflate(R.layout.fragment_profile_content, container, false)
-
         setHasOptionsMenu(true);
         return rootView
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.log_out -> {
+                context.getSharedPreferences("myPref", MODE_PRIVATE).edit().remove("myToken").commit()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val progressDialog = ProgressDialog(context, R.style.DialogTheme)
+        progressDialog.setMessage("Please Wait")
+
+        val sharedPreferences = context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","")
+        var jsonRequest = object  : JsonObjectRequest(Request.Method.GET, userURL, null, object : Response.Listener<JSONObject>{
+            override fun onResponse(response: JSONObject) {
+                name_user.text = response.getJSONObject("data").getString("name")
+                progressDialog.dismiss()
+            }
+
+        }, object : Response.ErrorListener{
+            override fun onErrorResponse(error: VolleyError) {
+                Log.d("Debug", error.toString())
+                progressDialog.dismiss()
+            }
+
+        }){
+            @Throws(AuthFailureError::class)
+            override fun getHeaders():Map<String,String>{
+                val headers = HashMap<String, String>()
+                headers.put("Authorization", "Bearer "+sharedPreferences)
+                return headers
+            }
+        }
+
+        val requestVolley = Volley.newRequestQueue(context)
+        requestVolley.add(jsonRequest)
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
         inflater.inflate(R.menu.profile_main_menu,menu)

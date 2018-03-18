@@ -27,6 +27,7 @@ import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.places.Place
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment
 import com.google.android.gms.location.places.ui.PlaceSelectionListener
+import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -45,14 +46,15 @@ class BrowseContentFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_browse_content, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_browse_content, container, false)
+        return rootView
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val placeAutoComplete = childFragmentManager.findFragmentById(R.id.place_autocomplete) as PlaceAutocompleteFragment
-//        placeAutoComplete.setOnPlaceSelectedListener(object : PlaceSelectionListener{
+//        val placeAutoComplete = childFragmentManager.findFragmentById(R.id.place_autocomplete) as SupportPlaceAutocompleteFragment
+//        placeAutoComplete?.setOnPlaceSelectedListener(object : PlaceSelectionListener{
 //            override fun onPlaceSelected(p0: Place?) {
 //                Toast.makeText(activity, "This Place Selected"+p0, Toast.LENGTH_LONG).show()
 //            }
@@ -61,14 +63,5 @@ class BrowseContentFragment : Fragment() {
 //                Toast.makeText(activity,"Error"+p0, Toast.LENGTH_LONG).show()
 //            }
 //        })
-
-//        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-//        mapFragment.getMapAsync(this)
     }
-
-//    override fun onMapReady(map: GoogleMap) {
-//        mMap = map
-//    }
-
-
 }// Required empty public constructor

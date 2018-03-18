@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginBottom="72dp"
     tools:context="my.com.itrain.big_car.BrowseContentFragment">
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:text="In Progress"
+        android:textColor="@color/colorDark"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed"/>
 
 </LinearLayout>
 

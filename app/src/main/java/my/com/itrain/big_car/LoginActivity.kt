@@ -79,16 +79,16 @@ class LoginActivity : AppCompatActivity() {
 
         val stringRequest = object : StringRequest(Request.Method.POST, loginURL, object : Response.Listener<String>{
             override fun onResponse(response: String?) {
-                    val sharedPreferences = getSharedPreferences("myPref",MODE_PRIVATE)
+                    val sharedPreferences = getSharedPreferences("myPref", MODE_PRIVATE)
                     try{
                         val myToken = JSONObject(response)
                         sharedPreferences.edit().putString("myToken",myToken.getJSONObject("result").getString("token")).commit()
-                        Log.d("Debug", sharedPreferences.toString())
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                     }catch (e : JSONException){
                         e.printStackTrace()
                     }
                     progressDialog.dismiss()
-                    Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
+                    //Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
             }
         }, object : Response.ErrorListener{
             override fun onErrorResponse(error: VolleyError?) {

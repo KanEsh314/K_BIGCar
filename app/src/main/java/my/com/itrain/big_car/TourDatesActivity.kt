@@ -67,6 +67,7 @@ class TourDatesActivity : AppCompatActivity() {
                     }
                 }, mYear, mMonth, mDay)
                 dateListener.show()
+                dateListener.datePicker.minDate = calender.timeInMillis
             }
         })
         val packegeOptionLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
@@ -108,6 +109,8 @@ class TourDatesActivity : AppCompatActivity() {
 
         requestVolley.add(jsonObjectRequest)
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 

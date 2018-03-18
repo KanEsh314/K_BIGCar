@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/log_out"
-        android:title="About"
+        android:title="Log Out"
         android:icon="@mipmap/ic_action_logout"
         app:showAsAction="always">
     </item>

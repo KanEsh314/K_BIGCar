@@ -57,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/smallPadding"
                     android:text="Popular Destinations"
+                    android:fontFamily="sans-serif-light"
                     android:textColor="@color/colorDark"
                     android:textSize="@dimen/typeTitle"
                     android:textStyle="bold" />
@@ -83,6 +84,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/smallPadding"
                     android:text="Popular Activities"
+                    android:fontFamily="sans-serif-light"
                     android:textColor="@color/colorDark"
                     android:textSize="@dimen/typeTitle"
                     android:textStyle="bold" />
@@ -109,6 +111,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/smallPadding"
                     android:text="Category Activities"
+                    android:fontFamily="sans-serif-light"
                     android:textColor="@color/colorDark"
                     android:textSize="@dimen/typeTitle"
                     android:textStyle="bold" />
