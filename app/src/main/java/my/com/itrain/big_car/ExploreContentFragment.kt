@@ -91,7 +91,6 @@ class ExploreContentFragment : Fragment() {
                 val intent = Intent(context, CategoryActivity::class.java)
                 try {
                     intent.putExtra("servicecatid", categoriesMaterial.get(position).getInt("servicecat_id"))
-                    Log.d("Debug", categoriesMaterial.get(position).getInt("servicecat_id").toString())
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }

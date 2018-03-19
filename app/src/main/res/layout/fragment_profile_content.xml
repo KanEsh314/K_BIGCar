@@ -117,29 +117,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile">
 
-                <Button
-                    android:id="@+id/user_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/list_button"
-                    android:drawableEnd="@mipmap/ic_action_arrow"
-                    android:text="User Address"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:textAlignment="textStart"
-                    android:textSize="16sp"
-                    android:textColor="@color/product_name"
-                    fontPath="fonts/SourceSansPro-Regular.ttf"
-                    android:textAllCaps="false"
-                    tools:ignore="MissingPrefix"/>
 
                 <Button
                     android:id="@+id/my_account"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@id/user_profile"
                     android:background="@drawable/list_button"
                     android:drawableEnd="@mipmap/ic_action_arrow"
                     android:text="My Account"
@@ -247,8 +229,7 @@
                     android:textColor="@color/product_name"
                     fontPath="fonts/SourceSansPro-Regular.ttf"
                     tools:ignore="MissingPrefix"
-                    android:textAllCaps="false"
-                    android:layout_marginBottom="10dp"/>
+                    android:textAllCaps="false"/>
 
                 <Button
                     android:id="@+id/version_control"
@@ -260,7 +241,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:paddingLeft="20dp"
-                    android:text="Version 1.0.4"
+                    android:text="Version 1.0.5"
                     android:paddingRight="20dp"
                     android:textAlignment="textStart"
                     android:textSize="16sp"

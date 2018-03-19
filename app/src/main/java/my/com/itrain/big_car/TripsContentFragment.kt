@@ -2,7 +2,9 @@ package my.com.itrain.big_car
 
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
@@ -10,21 +12,31 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.fragment_trips_content.*
+import java.io.File
+import java.nio.file.Files.move
 import javax.xml.transform.Templates
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.LatLng
+import org.json.JSONException
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class TripsContentFragment : Fragment(), OnMapReadyCallback {
+class TripsContentFragment : Fragment(), OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
     private lateinit var mMap: GoogleMap
+    private lateinit var googleApiClient: GoogleApiClient
+    private var longitude: Double = 0.0
+    private var latitude: Double = 0.0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -33,46 +45,74 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+
+        googleApiClient = GoogleApiClient.Builder(context)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build()
+
         return view
     }
 
     override fun onMapReady(map:GoogleMap) {
         mMap = map
-
-//        if(ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-//
-//            ActivityCompat.requestPermissions(activity, arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION),0)
-//        }
-
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL)
-
-
-
-//        val sydney = LatLng(3.1577636,101.71186)
-//        mMap.addMarker(MarkerOptions().position(sydney).title("Malaysia").snippet("How are you?"))
-//        val cameraPosition = CameraPosition.Builder().target(sydney).zoom(15F).build()
-//        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
 
         mMap.setOnMapLoadedCallback(object : GoogleMap.OnMapLoadedCallback{
             override fun onMapLoaded() {
-                val locations = ArrayList<LatLng>()
-                locations.add(LatLng(3.1577636,101.71186))
-                locations.add(LatLng(3.1614164,101.71887160000006))
-                locations.add(LatLng(3.1537798,101.71322140000007))
+                val sydney = LatLng(2.962754, 101.757787)
+                mMap.addMarker(MarkerOptions().position(sydney).draggable(true))
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+                mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener{
+                    override fun onMarkerClick(p0: Marker?): Boolean {
+                        val intent = Intent(context,TourDetailActivity::class.java)
+                        try {
+                            intent.putExtra("serviceid", 1)
+                        }catch (e : JSONException){
+                            e.printStackTrace()
+                        }
+                        startActivity(intent)
+                        return true
+                    }
 
-                for (latlng in locations){
-                    mMap.addMarker(MarkerOptions().position(latlng).title("Title can be anything"))
-                }
-
-                val builder = LatLngBounds.Builder()
-                builder.include(locations.get(0)) //Taking Point A (First LatLng)
-                builder.include(locations.get(locations.size - 1)) //Taking Point B (Second LatLng)
-                val bounds = builder.build()
-                val cu = CameraUpdateFactory.newLatLngBounds(bounds, 200)
-                mMap.moveCamera(cu)
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(15F), 2000, null)
+                })
             }
         })
     }
 
+    private fun getCurrentLocation(){
+        mMap.clear()
+
+        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            return
+        }
+
+        val location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
+        if (location != null){
+            longitude = location.longitude
+            latitude = location.latitude
+            moveMap()
+        }
+    }
+
+    private fun moveMap() {
+        val latLng = LatLng(latitude, longitude)
+        mMap.addMarker(MarkerOptions().position(latLng).draggable(true))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15F))
+        mMap.uiSettings.isZoomControlsEnabled
+    }
+
+    override fun onConnectionSuspended(p0: Int) {
+        googleApiClient.connect()
+    }
+
+    override fun onConnected(p0: Bundle?) {
+        googleApiClient.connect()
+    }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
+        Log.d("Debug", p0.toString())
+    }
 }// Required empty public constructor

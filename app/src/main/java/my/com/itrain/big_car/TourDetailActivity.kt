@@ -69,11 +69,10 @@ class TourDetailActivity : AppCompatActivity() {
 
         val progressDialog = ProgressDialog(this, R.style.DialogTheme)
         progressDialog.setCancelable(false)
-        progressDialog.isIndeterminate=true
         progressDialog.show()
 
         val reviewAdapter = ReviewContentAdapter(this)
-        val reviewLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
+        val reviewLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         recycleTourReview!!.layoutManager = reviewLayoutManager
         recycleTourReview!!.itemAnimator = DefaultItemAnimator()
         recycleTourReview!!.adapter = reviewAdapter
@@ -85,18 +84,19 @@ class TourDetailActivity : AppCompatActivity() {
                     val tourData = response.getJSONObject("data")
                     tourMaterial.add(tourData)
 
+                    tourName.text = tourData.getString("product_name")
+                    tourDesc.text = Html.fromHtml(tourData.getString("product_desc"))
+                    tourExplanation.text = Html.fromHtml(tourData.getString("highlight"))
+
                     val tourGallery = tourData.getJSONArray("tour_gallery")
                     for (j in 0 until tourGallery.length()){
                         Picasso.with(applicationContext).load(tourGallery.getJSONObject(j).getString("image")).into(tourImage)
                     }
 
-                    tourName.text = tourData.getString("product_name")
-                    tourDesc.text = Html.fromHtml(tourData.getString("product_desc"))
-                    tourExplanation.text = Html.fromHtml(tourData.getString("highlight"))
-
                     val tourReviewData = tourData.getJSONArray("reviews")
                     for (i in 0 until tourReviewData.length()){
                         reviewAdapter.addJsonObject(tourReviewData.getJSONObject(i))
+                        Toast.makeText(applicationContext, tourReviewData.getJSONObject(i).getString("user_comment"), Toast.LENGTH_LONG).show()
                     }
 
                     reviewAdapter.notifyDataSetChanged()
