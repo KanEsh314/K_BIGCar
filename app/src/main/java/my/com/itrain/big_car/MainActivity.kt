@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
             }
             R.id.nav_contact_us -> {
-
+                startActivity(Intent(applicationContext, ContactActivity::class.java))
             }
             R.id.nav_setting -> {
 

@@ -18,14 +18,11 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
-import kotlinx.android.synthetic.main.fragment_trips_content.*
-import java.io.File
-import java.nio.file.Files.move
-import javax.xml.transform.Templates
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.LatLng
 import org.json.JSONException
+import java.nio.file.Files.move
 
 
 /**
@@ -58,12 +55,11 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback, GoogleApiClient.OnC
     override fun onMapReady(map:GoogleMap) {
         mMap = map
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL)
-
         mMap.setOnMapLoadedCallback(object : GoogleMap.OnMapLoadedCallback{
             override fun onMapLoaded() {
-                val sydney = LatLng(2.962754, 101.757787)
-                mMap.addMarker(MarkerOptions().position(sydney).draggable(true))
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+                val myLocation = LatLng(3.157764, 101.711860)
+                mMap.addMarker(MarkerOptions().position(myLocation).draggable(true))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation,12F))
                 mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener{
                     override fun onMarkerClick(p0: Marker?): Boolean {
                         val intent = Intent(context,TourDetailActivity::class.java)
@@ -90,8 +86,9 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback, GoogleApiClient.OnC
 
         val location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
         if (location != null){
-            longitude = location.longitude
             latitude = location.latitude
+            longitude = location.longitude
+
             moveMap()
         }
     }
@@ -105,11 +102,11 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback, GoogleApiClient.OnC
     }
 
     override fun onConnectionSuspended(p0: Int) {
-        googleApiClient.connect()
+        getCurrentLocation()
     }
 
     override fun onConnected(p0: Bundle?) {
-        googleApiClient.connect()
+        getCurrentLocation()
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {

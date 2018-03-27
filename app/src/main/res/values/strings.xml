@@ -2,41 +2,8 @@
     <string name="app_name">BIGCAR</string>
 
     <string name="google_maps_key">AIzaSyC6egLAT18a0Czpbj2TRPQbNAZ7vo71nnU</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <!-- Profile Item -->
-    <string name="view_edit">View and Edit Profile</string>
-    <string name="travel">Travel Credit</string>
-    <string name="space">List Your Space</string>
-    <string name="setting">Setting</string>
-    <string name="help">Help</string>
-    <string name="feedback">Give Us Feedback</string>
-
-    <!-- Inbox Item -->
-    <string name="inboxEmpty">
-            When you find a place you love, connect
-            with the host.Tell them a bit about
-            yourself and the purpose of your trip.
-        </string>
-    <string name="inboxTitle">Inbox</string>
-    <string name="nomessage">No Message Yet</string>
-    <string name="inboxButton">Start Exploring</string>
-
-    <!-- Trips Item -->
-    <string name="tripsButton">Start Exploring</string>
-    <string name="tripsTitle">What will be your first adventure?</string>
-
-    <!-- Saved Item -->
-    <string name="savedTitle">Saved</string>
-    <string name="savedEmpty">
-            When you see something you like, tap on
-            the heart to save it.If you are planning a
-            trip with others, invite them so they can
-            save and vote on their favorites
-        </string>
-    <string name="savedButton">Start Exploring</string>
 
     <string name="start_page_intro">Discover great tour at discounted price while enjoying the environment</string>
     <string name="title_activity_reset_password">ResetPassword</string>
@@ -45,10 +12,34 @@
 
     <!--Tour Confirm-->
     <string name="title">Title</string>
-
     <string-array name="titleEntries">
         <item>Mr</item>
         <item>Mrs</item>
+    </string-array>
+
+    <!--Trip Type-->
+    <string name="trip_type_prompt">Trip Type</string>
+    <string-array name="trip_type_arrays">
+        <item>Personal</item>
+        <item>Business</item>
+    </string-array>
+
+    <!--Trip Payment Type-->
+    <string name="trip_payment_prompt">Payment Method</string>
+    <string-array name="trip_payment_arrays">
+        <item>Credit Card</item>
+        <item>Debit Card</item>
+        <item>Cash</item>
+        <item>Alipay</item>
+    </string-array>
+
+    <!--Vehicle Type-->
+    <string-array name="vehicle_type_prompt">
+        <item>4 Seats</item>
+        <item>10 Seats</item>
+        <item>12 Seats</item>
+        <item>16 Seats</item>
+        <item>6 Seats</item>
     </string-array>
 
 </resources>

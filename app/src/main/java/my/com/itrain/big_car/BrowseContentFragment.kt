@@ -5,6 +5,7 @@ import android.app.VoiceInteractor
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.annotation.DimenRes
 import android.support.annotation.NonNull
@@ -35,6 +36,7 @@ import kotlinx.android.synthetic.main.fragment_browse_content.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.time.DayOfWeek
 
 
 /**
@@ -43,25 +45,19 @@ import org.json.JSONObject
 class BrowseContentFragment : Fragment() {
 
     private lateinit var mMap:GoogleMap
+    var VehicleType = arrayOf<String>("4 Seats", "10 Seats", "12 Seats", "16 Seats", "6 Seats")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_browse_content, container, false)
+
+        val vehicle_type_spinner = rootView.findViewById<Spinner>(R.id.vehicle_spinner)
+        var adapter = ArrayAdapter<String>(context, R.layout.vehicle_type, R.id.vehicle_text, VehicleType)
+        vehicle_type_spinner.adapter = adapter
         return rootView
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        val placeAutoComplete = childFragmentManager.findFragmentById(R.id.place_autocomplete) as SupportPlaceAutocompleteFragment
-//        placeAutoComplete?.setOnPlaceSelectedListener(object : PlaceSelectionListener{
-//            override fun onPlaceSelected(p0: Place?) {
-//                Toast.makeText(activity, "This Place Selected"+p0, Toast.LENGTH_LONG).show()
-//            }
-//
-//            override fun onError(p0: Status?) {
-//                Toast.makeText(activity,"Error"+p0, Toast.LENGTH_LONG).show()
-//            }
-//        })
     }
 }// Required empty public constructor

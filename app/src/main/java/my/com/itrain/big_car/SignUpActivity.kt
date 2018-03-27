@@ -1,6 +1,7 @@
 package my.com.itrain.big_car
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -71,14 +72,15 @@ class SignUpActivity : AppCompatActivity() {
         val stringRequest = object : StringRequest(Request.Method.POST, registerURL, object : Response.Listener<String> {
             override fun onResponse(response: String?) {
                 progressDialog.dismiss()
-                Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
+                startActivity(Intent(applicationContext, LoginActivity::class.java))
+                //Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
             }
 
         },
                 object : Response.ErrorListener{
                     override fun onErrorResponse(error: VolleyError?) {
                         progressDialog.dismiss()
-                        Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
+                        //Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
                     }
 
                 }){

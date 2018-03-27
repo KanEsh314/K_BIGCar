@@ -18,6 +18,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_profile_content.*
+import org.json.JSONException
 import org.json.JSONObject
 import java.lang.reflect.Method
 
@@ -28,13 +29,34 @@ import java.lang.reflect.Method
 class ProfileContentFragment : Fragment() {
 
     var userURL = "http://gentle-atoll-11837.herokuapp.com/user"
+    private val userMaterial = ArrayList<JSONObject>()
+    private val userName : String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         var rootView = inflater.inflate(R.layout.fragment_profile_content, container, false)
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true)
+
         return rootView
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        my_account.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(context, AccountActivity::class.java)
+                try {
+                    intent.putExtra("userMaterial", userMaterial.toString())
+                    Log.d("Debug", userMaterial.toString())
+                }catch (e : JSONException){
+                    e.printStackTrace()
+                }
+                startActivity(intent)
+            }
+
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -57,7 +79,9 @@ class ProfileContentFragment : Fragment() {
         val sharedPreferences = context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","")
         var jsonRequest = object  : JsonObjectRequest(Request.Method.GET, userURL, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
-                name_user.text = response.getJSONObject("data").getString("name")
+                val userInfo = response.getJSONObject("data")
+                name_user.text = userInfo.getString("name")
+                userMaterial.add(userInfo)
                 progressDialog.dismiss()
             }
 
