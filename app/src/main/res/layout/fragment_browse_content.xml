@@ -11,6 +11,8 @@
         android:layout_height="match_parent"
         tools:context="my.com.itrain.big_car.BrowseContentFragment" />
 
+    <include layout="@layout/book_content" />
+
 </RelativeLayout>
 
 

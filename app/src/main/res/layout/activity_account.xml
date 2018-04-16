@@ -43,13 +43,11 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:layout_editor_absoluteY="63dp">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profilePicture"
@@ -144,7 +142,7 @@
                 android:layout_below="@id/address_title"
                 android:background="@drawable/list_button"
                 android:hint="Your phone number"
-                android:inputType="number"
+                android:inputType="text"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:textAlignment="textStart"

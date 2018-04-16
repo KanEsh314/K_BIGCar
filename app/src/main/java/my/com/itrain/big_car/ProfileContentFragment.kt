@@ -29,8 +29,6 @@ import java.lang.reflect.Method
 class ProfileContentFragment : Fragment() {
 
     var userURL = "http://gentle-atoll-11837.herokuapp.com/user"
-    private val userMaterial = ArrayList<JSONObject>()
-    private val userName : String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -47,12 +45,6 @@ class ProfileContentFragment : Fragment() {
         my_account.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(context, AccountActivity::class.java)
-                try {
-                    intent.putExtra("userMaterial", userMaterial.toString())
-                    Log.d("Debug", userMaterial.toString())
-                }catch (e : JSONException){
-                    e.printStackTrace()
-                }
                 startActivity(intent)
             }
 
@@ -80,8 +72,8 @@ class ProfileContentFragment : Fragment() {
         var jsonRequest = object  : JsonObjectRequest(Request.Method.GET, userURL, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
                 val userInfo = response.getJSONObject("data")
+                Toast.makeText(context, userInfo.toString(), Toast.LENGTH_LONG).show()
                 name_user.text = userInfo.getString("name")
-                userMaterial.add(userInfo)
                 progressDialog.dismiss()
             }
 
