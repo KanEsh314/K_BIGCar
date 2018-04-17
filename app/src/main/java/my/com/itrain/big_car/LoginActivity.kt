@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
 
         loginBtn.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
+
                 CheckEditTextIsEmptyOrNot()
                 if (CheckEditText){
                     userLogin()

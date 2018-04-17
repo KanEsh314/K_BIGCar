@@ -59,6 +59,7 @@ class TourDatesActivity : AppCompatActivity() {
                             intent.putExtra("selectedYear", year)
                             intent.putExtra("selectedMonth", month+1)
                             intent.putExtra("selectedDay", dayOfMonth)
+                            intent.putExtra("tourService_id", tourService_id)
                             intent.putExtra("selectedPackage", packageMaterial.toString())
                         }catch (e : Exception){
                             e.printStackTrace()

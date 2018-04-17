@@ -12,16 +12,11 @@ import android.widget.Button
 import android.widget.LinearLayout
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
 import kotlinx.android.synthetic.main.activity_tour_count.*
-import kotlinx.android.synthetic.main.tourselect_count.*
-import kotlinx.android.synthetic.main.tourselect_count.view.*
 import org.json.JSONArray
-import org.json.JSONObject
-import java.io.LineNumberReader
+import org.json.JSONException
 import java.util.*
 
 class TourCountActivity : AppCompatActivity() {
-
-    val packageOn = ArrayList<Objects>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +27,7 @@ class TourCountActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val packageSet = JSONArray(intent.getStringExtra("selectedPackage"))
+        val tourService_id = intent.getIntExtra("tourService_id",0)
         val onDateYear = intent.getIntExtra("selectedYear",0)
         val onDateMonth = intent.getIntExtra("selectedMonth", 0)
         val onDateDay = intent.getIntExtra("selectedDay", 0)
@@ -53,11 +49,19 @@ class TourCountActivity : AppCompatActivity() {
 
         })
 
-
         val checkPay = findViewById<View>(R.id.add_to_cart_btn)
         checkPay.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                startActivity(Intent(this@TourCountActivity, TourConfirmActivity::class.java))
+                val intent = Intent(this@TourCountActivity, TourConfirmActivity::class.java)
+                try{
+                    intent.putExtra("service_id", tourService_id)
+                    intent.putExtra("travel_date", onDateDay.toString()+"/"+onDateMonth.toString()+"/"+onDateYear.toString())
+                    //travel_day
+                    //travel_time
+                }catch (e : JSONException){
+                    e.printStackTrace()
+                }
+                startActivity(intent)
             }
         })
 
@@ -68,14 +72,6 @@ class TourCountActivity : AppCompatActivity() {
         recycleTourTime!!.layoutManager = tourTimeLayoutManager
         recycleTourTime!!.itemAnimator = DefaultItemAnimator()
         recycleTourTime!!.adapter = tourTimeAdapter
-
-        val userCount = ArrayList<SetCount>()
-        prepareCount(userCount)
-        val tourCountAdapter = SelectCountAdapter(this, userCount)
-        val tourCountLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
-        recycleTourCount!!.layoutManager = tourCountLayoutManager
-        recycleTourCount!!.itemAnimator = DefaultItemAnimator()
-        recycleTourCount!!.adapter = tourCountAdapter
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -86,11 +82,6 @@ class TourCountActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun prepareCount(userCount: ArrayList<SetCount>) {
-        userCount.add(SetCount("Adult","RM 147"))
-        userCount.add(SetCount("Child","RM 127"))
     }
 
     private fun prepareTime(userTime: ArrayList<SetTime>) {
@@ -104,5 +95,3 @@ class TourCountActivity : AppCompatActivity() {
 }
 
 class SetTime(val selectTourTime: String)
-
-class SetCount(val selectTourCat: String, val selectTourCatPrice: String)

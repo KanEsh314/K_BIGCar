@@ -82,11 +82,7 @@ class AccountActivity : AppCompatActivity() {
                 CheckEditTextIsEmptyOrNot()
                 if (CheckEditText){
                     userUpadate()
-                    try{
 
-                    }catch (e : JSONException){
-
-                    }
                 }else{
                     Toast.makeText(applicationContext, "Please fill all form fields.", Toast.LENGTH_LONG).show()
                 }
@@ -107,7 +103,7 @@ class AccountActivity : AppCompatActivity() {
                 try{
                     val myToken = JSONObject(response)
                     sharedPreferences.edit().putString("myToken",myToken.getJSONObject("result").getString("token")).commit()
-                    startActivity(Intent(applicationContext, MainActivity::class.java))
+                    onBackPressed()
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }

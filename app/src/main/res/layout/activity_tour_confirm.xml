@@ -47,6 +47,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -76,6 +77,7 @@
                     android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/name_service"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Peak Tram Fast-Track Combo"
@@ -84,23 +86,18 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/travel_day_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Date And Time"
+                            android:text="Monday, 17 April 2018"
                             android:textColor="@color/colorDark"
                             android:textSize="@dimen/smallUniversalText"/>
 
                         <TextView
+                            android:id="@+id/package_service"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Tour Count"
-                            android:textColor="@color/colorDark"
-                            android:textSize="@dimen/smallUniversalText"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Tour Price"
+                            android:text="4 Pax"
                             android:textColor="@color/colorDark"
                             android:textSize="@dimen/smallUniversalText"/>
 
@@ -119,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/smallPadding"
-                    android:text="Traveller's Information"
+                    android:text="Booking Information"
                     android:textSize="@dimen/mediumUniversalText"
                     android:textColor="@color/colorDark" />
 
@@ -129,60 +126,40 @@
                     android:orientation="vertical"
                     android:layout_below="@id/travellerTitle">
 
+                    <EditText
+                        android:id="@+id/booking_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dip"
+                        android:inputType="textPersonName"
+                        android:hint="Booking Name"
+                        android:textSize="@dimen/smallUniversalText"
+                        android:textColor="@color/colorDark"/>
+
+                    <EditText
+                        android:id="@+id/phoneNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dip"
+                        android:inputType="phone"
+                        android:hint="Phone Number"
+                        android:textSize="@dimen/smallUniversalText"
+                        android:textColor="@color/colorDark"/>
+
                     <Spinner
-                        android:id="@+id/selectTitle"
+                        android:id="@+id/selectOrigin"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/titleEntries"
-                        android:prompt="@string/title"/>
+                        android:layout_height="50dip"
+                        android:textSize="@dimen/smallUniversalText"
+                        android:entries="@array/countryEntries"
+                        android:prompt="@string/country_prompt"/>
 
                     <EditText
-                        android:id="@+id/familyName"
+                        android:id="@+id/email"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:hint="Passport Family Name"
+                        android:layout_height="50dip"
+                        android:inputType="textEmailAddress"
+                        android:hint="Email"
+                        android:textSize="@dimen/smallUniversalText"
                         android:textColor="@color/colorDark"/>
-
-                    <EditText
-                        android:id="@+id/firstName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:hint="Passport First Name"
-                        android:textColor="@color/colorDark"/>
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/passportInfo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:hint="Passport Information"
-                        android:textColor="@color/colorDark"/>
-
-                    <EditText
-                        android:id="@+id/countryCode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="Country Code"
-                        android:textColor="@color/colorDark"/>
-
-                        <EditText
-                            android:id="@+id/phoneNumber"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="phone"
-                            android:hint="Phone Number"
-                            android:textColor="@color/colorDark"/>
-
-                        <EditText
-                            android:id="@+id/email"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textEmailAddress"
-                            android:hint="Email"
-                            android:textColor="@color/colorDark"/>
 
                 </LinearLayout>
             </RelativeLayout>
@@ -209,30 +186,38 @@
                     android:orientation="vertical"
                     android:layout_below="@id/summaryTitle">
 
-                    <TextView
+                    <Spinner
+                        android:id="@+id/selectTitle"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="RM 859"
-                        android:textColor="@color/colorDark"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/smallUniversalText"/>
+                        android:layout_height="50dip"
+                        android:entries="@array/titleEntries"
+                        android:prompt="@string/title"/>
 
                     <EditText
+                        android:id="@+id/name_passenger"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Promo Code"
-                        android:textColorHint="@color/colorDark"/>
+                        android:layout_height="50dip"
+                        android:inputType="textPersonName"
+                        android:hint="Name"
+                        android:textSize="@dimen/smallUniversalText"
+                        android:textColor="@color/colorDark"/>
+
+                    <EditText
+                        android:id="@+id/ic_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dip"
+                        android:inputType="textPersonName"
+                        android:hint="IC Number"
+                        android:textSize="@dimen/smallUniversalText"
+                        android:textColor="@color/colorDark"/>
 
                 </LinearLayout>
-
             </RelativeLayout>
-
         </LinearLayout>
-
     </android.support.v4.widget.NestedScrollView>
 
     <RelativeLayout
-        android:id="@+id/add_pay"
+        android:id="@+id/to_summary"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/colorPrimary"
@@ -247,5 +232,4 @@
             android:layout_centerInParent="true"/>
 
     </RelativeLayout>
-
 </android.support.design.widget.CoordinatorLayout>

@@ -17,6 +17,13 @@
         <item>Mrs</item>
     </string-array>
 
+    <string name="country_prompt">Title</string>
+    <string-array name="countryEntries">
+        <item>Malaysia</item>
+        <item>Singapore</item>
+        <item>Thailand</item>
+    </string-array>
+
     <!--Trip Type-->
     <string name="trip_type_prompt">Trip Type</string>
     <string-array name="trip_type_arrays">

@@ -96,7 +96,6 @@ class TourDetailActivity : AppCompatActivity() {
                     val tourReviewData = tourData.getJSONArray("reviews")
                     for (i in 0 until tourReviewData.length()){
                         reviewAdapter.addJsonObject(tourReviewData.getJSONObject(i))
-                        Toast.makeText(applicationContext, tourReviewData.getJSONObject(i).getString("user_comment"), Toast.LENGTH_LONG).show()
                     }
 
                     reviewAdapter.notifyDataSetChanged()
