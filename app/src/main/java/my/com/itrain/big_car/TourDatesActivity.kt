@@ -6,12 +6,14 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.MenuItem
 import android.widget.DatePicker
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
@@ -23,6 +25,7 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.sql.Date
+import java.time.DayOfWeek
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -40,11 +43,10 @@ class TourDatesActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val tourService_id = intent.getIntExtra("serviceid", 0)
-
+        val service_id = intent.getIntExtra("service_id", 0)
         val mYear = calender.get(Calendar.YEAR)
         val mMonth = calender.get(Calendar.MONTH)
-        val mDay = calender.get(Calendar.DAY_OF_MONTH)
+        val mDate = calender.get(Calendar.DAY_OF_MONTH)
 
         //Volley
         val requestVolley = Volley.newRequestQueue(this)
@@ -56,17 +58,17 @@ class TourDatesActivity : AppCompatActivity() {
                     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
                         val intent = Intent(this@TourDatesActivity, TourCountActivity::class.java)
                         try {
+                            intent.putExtra("service_id", service_id)
+                            intent.putExtra("selected_package", packageMaterial.toString())
                             intent.putExtra("selectedYear", year)
                             intent.putExtra("selectedMonth", month+1)
                             intent.putExtra("selectedDay", dayOfMonth)
-                            intent.putExtra("tourService_id", tourService_id)
-                            intent.putExtra("selectedPackage", packageMaterial.toString())
                         }catch (e : Exception){
                             e.printStackTrace()
                         }
                         startActivity(intent)
                     }
-                }, mYear, mMonth, mDay)
+                }, mYear, mMonth, mDate)
                 dateListener.show()
                 dateListener.datePicker.minDate = calender.timeInMillis
             }
@@ -83,11 +85,10 @@ class TourDatesActivity : AppCompatActivity() {
         progressDialog.isIndeterminate=true
         progressDialog.show()
 
-        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, packageURL+tourService_id, null, object : Response.Listener<JSONObject>{
+        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, packageURL+service_id, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) = try {
 
                 val packageData = response.getJSONObject("data")
-                //packageMaterial.add(packageData)
                 val tourPackageData = packageData.getJSONArray("tour_packages")
 
 

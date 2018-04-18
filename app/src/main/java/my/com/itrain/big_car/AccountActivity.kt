@@ -30,8 +30,8 @@ import org.json.JSONObject
 class AccountActivity : AppCompatActivity() {
 
     var CheckEditText:Boolean = false
-    var userURL = "http://gentle-atoll-11837.herokuapp.com/user"
-    var updateURL = "http://gentle-atoll-11837.herokuapp.com/api/updateuser/"
+    var userURL = "https://gentle-atoll-11837.herokuapp.com/api/user"
+    var updateURL = "https://gentle-atoll-11837.herokuapp.com/api/updateuser"
 
     var nameHolder:String = ""
     var numberHolder:String = ""
@@ -82,7 +82,7 @@ class AccountActivity : AppCompatActivity() {
                 CheckEditTextIsEmptyOrNot()
                 if (CheckEditText){
                     userUpadate()
-
+                    finish()
                 }else{
                     Toast.makeText(applicationContext, "Please fill all form fields.", Toast.LENGTH_LONG).show()
                 }
@@ -93,37 +93,29 @@ class AccountActivity : AppCompatActivity() {
     }
 
     private fun userUpadate() {
-        val progressDialog = ProgressDialog(this, R.style.DialogTheme)
-        progressDialog.setMessage("Please Wait, We are Inserting Your Data on Server")
-        progressDialog.show()
 
-        val stringRequest = object : StringRequest(Request.Method.POST, updateURL+"111", object : Response.Listener<String>{
+        val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
+        val stringRequest = object : StringRequest(Request.Method.POST, updateURL, object : Response.Listener<String>{
             override fun onResponse(response: String?) {
-                val sharedPreferences = getSharedPreferences("myPref", MODE_PRIVATE)
-                try{
-                    val myToken = JSONObject(response)
-                    sharedPreferences.edit().putString("myToken",myToken.getJSONObject("result").getString("token")).commit()
-                    onBackPressed()
-                }catch (e : JSONException){
-                    e.printStackTrace()
-                }
-                progressDialog.dismiss()
-                //Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
+                Log.d("Debug", response)
             }
         }, object : Response.ErrorListener{
             override fun onErrorResponse(error: VolleyError?) {
-                progressDialog.dismiss()
-                Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
+                Log.d("Debug", error.toString())
             }
         }){
             @Throws(AuthFailureError::class)
+            override fun getHeaders():Map<String,String>{
+                val headers = HashMap<String, String>()
+                headers.put("Authorization", "Bearer "+sharedPreferences)
+                return headers
+            }
             override fun getParams():Map<String, String> {
                 val params = HashMap<String, String>()
                 params.put("name", nameHolder)
-                params.put("ic","")
                 params.put("phonenumber", numberHolder)
-                params.put("email", "")
                 params.put("address", addressHolder)
+                Log.d("Update", params.toString())
                 return params
             }
         }

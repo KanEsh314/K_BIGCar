@@ -56,7 +56,7 @@ class TourDetailActivity : AppCompatActivity() {
             override fun onClick(v: View?) {
                 val intent = Intent(this@TourDetailActivity, TourDatesActivity::class.java)
                 try {
-                    intent.putExtra("serviceid", tourService_id)
+                    intent.putExtra("service_id", tourService_id)
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }
@@ -66,10 +66,6 @@ class TourDetailActivity : AppCompatActivity() {
 
         //VOLLEY
         val requestVolley = Volley.newRequestQueue(this)
-
-        val progressDialog = ProgressDialog(this, R.style.DialogTheme)
-        progressDialog.setCancelable(false)
-        progressDialog.show()
 
         val reviewAdapter = ReviewContentAdapter(this)
         val reviewLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
@@ -99,7 +95,6 @@ class TourDetailActivity : AppCompatActivity() {
                     }
 
                     reviewAdapter.notifyDataSetChanged()
-                    progressDialog.dismiss()
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }

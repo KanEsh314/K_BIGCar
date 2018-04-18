@@ -1,5 +1,6 @@
 package my.com.itrain.big_car
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,14 +10,16 @@ import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import my.com.itrain.big_car.R.id.tourTime
+import org.json.JSONObject
 import org.w3c.dom.Text
 
 /**
  * Created by iTrain on 10-Jan-18.
  */
 
-class SelectTimeAdapter(private val content: TourCountActivity, private val tourtime: List<SetTime>):RecyclerView.Adapter<SelectTimeAdapter.ViewHolder>(){
+class SelectTimeAdapter(private val context: Context):RecyclerView.Adapter<SelectTimeAdapter.ViewHolder>(){
 
+    private val tourTime = ArrayList<JSONObject>()
     private var selectedPosition = -1
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -35,8 +38,7 @@ class SelectTimeAdapter(private val content: TourCountActivity, private val tour
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val settime : SetTime = tourtime.get(position)
-        holder?.tourText?.text = settime.selectTourTime
+        holder?.tourText?.text = tourTime.get(position).getString("time")
 
         holder?.tourTime?.setChecked(position === selectedPosition)
         holder?.tourTime?.setTag(position)
@@ -53,6 +55,10 @@ class SelectTimeAdapter(private val content: TourCountActivity, private val tour
     }
 
     override fun getItemCount(): Int {
-        return tourtime.size
+        return tourTime.size
+    }
+
+    fun addJsonObject(jsonObject: JSONObject) {
+        tourTime.add(jsonObject)
     }
 }

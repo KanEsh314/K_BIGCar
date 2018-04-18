@@ -138,7 +138,7 @@
                 android:id="@+id/address"
                 fontPath="fonts/SourceSansPro-Regular.ttf"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_below="@id/address_title"
                 android:background="@drawable/list_button"
                 android:hint="Your phone number"

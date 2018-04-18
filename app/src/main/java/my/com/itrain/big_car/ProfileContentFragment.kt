@@ -72,7 +72,6 @@ class ProfileContentFragment : Fragment() {
         var jsonRequest = object  : JsonObjectRequest(Request.Method.GET, userURL, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
                 val userInfo = response.getJSONObject("data")
-                Toast.makeText(context, userInfo.toString(), Toast.LENGTH_LONG).show()
                 name_user.text = userInfo.getString("name")
                 progressDialog.dismiss()
             }

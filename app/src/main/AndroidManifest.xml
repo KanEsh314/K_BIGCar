@@ -38,7 +38,8 @@
         <activity android:name=".CategoryActivity" />
         <activity android:name=".ConditionActivity" />
         <activity android:name=".AccountActivity" />
-        <activity android:name=".ContactActivity"></activity>
+        <activity android:name=".ContactActivity" />
+        <activity android:name=".TourSummaryActivity"></activity>
     </application>
 
 </manifest>

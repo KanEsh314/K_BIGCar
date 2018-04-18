@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@android:color/background_light"
+    tools:context=".TourSummaryActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarSummary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+            app:layout_collapseMode="pin">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/mediumPadding">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Order Summary"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:padding="@dimen/mediumPadding"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Order Details"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/mediumUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/tour_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/package_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/travell_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/traveller_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+            </LinearLayout>
+            <View
+                android:layout_height="1dp"
+                android:layout_width="match_parent"
+                android:background="#90909090"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Booking Information"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/mediumUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/booking_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/booking_mobile_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/booking_nationality"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/booking_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+            </LinearLayout>
+            <View
+                android:layout_height="1dp"
+                android:layout_width="match_parent"
+                android:background="#90909090"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp" />
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Traveller Information"
+                android:textStyle="bold"
+                android:textSize="@dimen/mediumUniversalText"
+                android:textColor="@color/colorDark"/>
+
+            <TextView
+                android:id="@+id/passenger_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:textSize="@dimen/smallUniversalText"
+                android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/passenger_ic_passport"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+        </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:id="@+id/to_PAY"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="end|bottom">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"
+            android:text="PAY NOW"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

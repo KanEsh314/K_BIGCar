@@ -77,19 +77,24 @@
                     android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/name_service"
+                            android:id="@+id/name_tour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Peak Tram Fast-Track Combo"
                             android:textColor="@color/colorDark"
                             android:textSize="@dimen/smallUniversalText"
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/name_package"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorDark"
+                            android:textSize="@dimen/smallUniversalText"/>
+
+                        <TextView
                             android:id="@+id/travel_day_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Monday, 17 April 2018"
                             android:textColor="@color/colorDark"
                             android:textSize="@dimen/smallUniversalText"/>
 
@@ -97,7 +102,6 @@
                             android:id="@+id/package_service"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="4 Pax"
                             android:textColor="@color/colorDark"
                             android:textSize="@dimen/smallUniversalText"/>
 
@@ -186,13 +190,6 @@
                     android:orientation="vertical"
                     android:layout_below="@id/summaryTitle">
 
-                    <Spinner
-                        android:id="@+id/selectTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dip"
-                        android:entries="@array/titleEntries"
-                        android:prompt="@string/title"/>
-
                     <EditText
                         android:id="@+id/name_passenger"
                         android:layout_width="match_parent"
@@ -228,7 +225,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textColor="@color/colorWhite"
-            android:text="PAY NOW"
+            android:text="VIEW SUMMARY"
             android:layout_centerInParent="true"/>
 
     </RelativeLayout>
