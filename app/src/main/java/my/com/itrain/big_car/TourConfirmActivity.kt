@@ -56,6 +56,7 @@ class TourConfirmActivity : AppCompatActivity() {
         package_service?.text = package_pax
         val travel_date = intent.getStringExtra("travel_date")
         travel_day_date?.text = travel_date
+        val travel_timetext = intent.getStringExtra("travel_time")
 
         to_summary.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {

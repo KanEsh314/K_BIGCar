@@ -37,18 +37,19 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         pagerAdapter!!.addFragments(TripsContentFragment(), "NEARBY")
         pagerAdapter!!.addFragments(ProfileContentFragment(),"ME")
 
+
         viewPager.adapter = pagerAdapter
         tabs.setupWithViewPager(viewPager)
         tabs.addOnTabSelectedListener(object : TabLayout.ViewPagerOnTabSelectedListener(viewPager){
             override fun onTabSelected(tab : TabLayout.Tab){
                 super.onTabSelected(tab)
-                val tabIconColor = ContextCompat.getColor(this@MainActivity, R.color.colorPrimary)
+                val tabIconColor = ContextCompat.getColor(applicationContext, R.color.colorPrimary)
                 tab!!.icon!!.setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 super.onTabUnselected(tab)
-                val tabIconColor = ContextCompat.getColor(this@MainActivity, R.color.colorDark)
+                val tabIconColor = ContextCompat.getColor(applicationContext, R.color.colorDark)
                 tab!!.icon!!.setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN)
             }
 

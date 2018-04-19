@@ -20,6 +20,7 @@ import org.w3c.dom.Text
 class SelectTimeAdapter(private val context: Context):RecyclerView.Adapter<SelectTimeAdapter.ViewHolder>(){
 
     private val tourTime = ArrayList<JSONObject>()
+    private val tourTimeFormat = tourTime.toString()
     private var selectedPosition = -1
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -61,14 +62,13 @@ class SelectTimeAdapter(private val context: Context):RecyclerView.Adapter<Selec
         return tourTime.size
     }
 
-//    fun getSelectedItem():String {
-//        if (selectedPosition !== -1)
-//        {
-//            Toast.makeText(context, "Selected Item : " + tourTime.get(selectedPosition), Toast.LENGTH_SHORT).show()
-//            return tourTime.get(selectedPosition)
-//        }
-//        return ""
-//    }
+    fun getSelectedItem():String {
+        if (selectedPosition !== -1)
+        {
+          return tourTime.get(selectedPosition).getString("time")
+        }
+        return ""
+    }
 
     fun addJsonObject(jsonObject: JSONObject) {
         tourTime.add(jsonObject)

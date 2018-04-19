@@ -25,6 +25,7 @@ class CategoryActivity : AppCompatActivity() {
 
     var categoryURL = "https://gentle-atoll-11837.herokuapp.com/api/category/"
     private val categoryMaterial = ArrayList<JSONObject>()
+    private var service_id:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +35,7 @@ class CategoryActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val categoryServicecat_id = intent.getIntExtra("servicecatid",0)
+        val catservice_id = intent.getIntExtra("servicecatid",0)
 
         //VOLLEY
         val requestVolley = Volley.newRequestQueue(this)
@@ -46,7 +47,13 @@ class CategoryActivity : AppCompatActivity() {
 
         val trendingAdapter = ExplorePopularContent(this, object: ExplorePopularContent.OnItemClickListener{
             override fun onItemClick(position: Int) {
-                Log.d("Next Page","Will Have Soon")
+                val intent = Intent(applicationContext, TourDetailActivity::class.java)
+                try{
+                    intent.putExtra("service_id", service_id)
+                }catch (e :JSONException){
+                    e.printStackTrace()
+                }
+                startActivity(intent)
             }
         })
         val trendingLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
@@ -54,7 +61,7 @@ class CategoryActivity : AppCompatActivity() {
         recycleViewCategory!!.itemAnimator = DefaultItemAnimator()
         recycleViewCategory!!.adapter = trendingAdapter
 
-        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, categoryURL+categoryServicecat_id, null, object : Response.Listener<JSONObject>{
+        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, categoryURL+catservice_id, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
                 try {
 
@@ -62,8 +69,8 @@ class CategoryActivity : AppCompatActivity() {
 
                     for (i in 0 until categoryData.length()){
                         trendingAdapter.addJsonObject(categoryData.getJSONObject(i))
+                        service_id = categoryData.getJSONObject(i).getInt("service_id")
                         categoryMaterial.add(categoryData.getJSONObject(i))
-                        Log.d("Debug", categoryData.getJSONObject(i).toString())
                     }
                     trendingAdapter.notifyDataSetChanged()
                     progressDialog.dismiss()

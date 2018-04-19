@@ -53,6 +53,18 @@ class ProfileContentFragment : Fragment() {
             }
 
         })
+
+        fav_his.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(context, FavoriteActivity::class.java)
+                if (context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
+                    Toast.makeText(context, "Please Login", Toast.LENGTH_LONG).show()
+                }else {
+                    startActivity(intent)
+                }
+            }
+
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

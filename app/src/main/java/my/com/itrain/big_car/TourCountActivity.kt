@@ -81,6 +81,15 @@ class TourCountActivity : AppCompatActivity() {
 //            }
 //        })
 
+        //VOLLEY
+        val requestVolley = Volley.newRequestQueue(this)
+
+        val tourTimeAdapter = SelectTimeAdapter(this)
+        val tourTimeLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
+        recycleTourTime!!.layoutManager = tourTimeLayoutManager
+        recycleTourTime!!.itemAnimator = DefaultItemAnimator()
+        recycleTourTime!!.adapter = tourTimeAdapter
+
         val checkPay = findViewById<View>(R.id.add_to_cart_btn)
         checkPay.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
@@ -93,7 +102,7 @@ class TourCountActivity : AppCompatActivity() {
                     intent.putExtra("package_pax", package_pax)
                     intent.putExtra("travel_date", onDateYear.toString()+"-"+onDateMonth.toString()+"-"+onDateDay.toString())
                     //travel_day
-                    //travel_time
+                    intent.putExtra("travel_time", tourTimeAdapter.getSelectedItem())
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }
@@ -101,14 +110,6 @@ class TourCountActivity : AppCompatActivity() {
             }
         })
 
-        //VOLLEY
-        val requestVolley = Volley.newRequestQueue(this)
-
-        val tourTimeAdapter = SelectTimeAdapter(this)
-        val tourTimeLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
-        recycleTourTime!!.layoutManager = tourTimeLayoutManager
-        recycleTourTime!!.itemAnimator = DefaultItemAnimator()
-        recycleTourTime!!.adapter = tourTimeAdapter
 
         var jsonObjectRequest = JsonObjectRequest(Request.Method.GET,tourURL+service_id,null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
