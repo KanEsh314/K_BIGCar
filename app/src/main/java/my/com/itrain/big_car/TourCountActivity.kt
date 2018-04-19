@@ -10,8 +10,10 @@ import android.text.Html
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.AdapterView
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
@@ -21,6 +23,7 @@ import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_tour_count.*
 import kotlinx.android.synthetic.main.activity_tour_detail.*
+import kotlinx.android.synthetic.main.tourselect_time.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -67,6 +70,16 @@ class TourCountActivity : AppCompatActivity() {
             }
 
         })
+
+
+//        tourTime.setOnItemSelectedListener(object: AdapterView.OnItemSelectedListener() {
+//            fun onItemSelected(parent:AdapterView<*>, view:View, pos:Int, id:Long) {
+//                val item = (view.findViewById(R.id.offer_type_txt) as TextView).getText().toString()
+//                selectedOffer.setText(item)
+//            }
+//            fun onNothingSelected(parent:AdapterView<*>) {
+//            }
+//        })
 
         val checkPay = findViewById<View>(R.id.add_to_cart_btn)
         checkPay.setOnClickListener(object : View.OnClickListener {

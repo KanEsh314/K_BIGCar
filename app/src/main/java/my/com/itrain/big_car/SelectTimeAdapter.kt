@@ -24,12 +24,14 @@ class SelectTimeAdapter(private val context: Context):RecyclerView.Adapter<Selec
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var tourText: TextView
-        var tourTime: RadioButton
+            var tourTime: RadioButton
 
         init {
             tourText = itemView.findViewById(R.id.tourSelectText)
             tourTime = itemView.findViewById(R.id.tourSelectTime)
         }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -47,6 +49,7 @@ class SelectTimeAdapter(private val context: Context):RecyclerView.Adapter<Selec
                 itemCheckChanged(v)
             }
         })
+
     }
 
     private fun itemCheckChanged(v: View?) {
@@ -57,6 +60,15 @@ class SelectTimeAdapter(private val context: Context):RecyclerView.Adapter<Selec
     override fun getItemCount(): Int {
         return tourTime.size
     }
+
+//    fun getSelectedItem():String {
+//        if (selectedPosition !== -1)
+//        {
+//            Toast.makeText(context, "Selected Item : " + tourTime.get(selectedPosition), Toast.LENGTH_SHORT).show()
+//            return tourTime.get(selectedPosition)
+//        }
+//        return ""
+//    }
 
     fun addJsonObject(jsonObject: JSONObject) {
         tourTime.add(jsonObject)

@@ -93,7 +93,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/mediumPadding"
-                        android:text="Half Day Kula Lumpur City Tour"
                         android:textSize="@dimen/tourTitle"
                         android:textColor="@color/colorDark"
                         android:textStyle="bold"/>
@@ -110,7 +109,6 @@
                         android:id="@+id/tourDesc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Dive into the wonders of the vast oceanarium in the heart of KL city center!"
                         android:textColor="@color/colorDark"
                         android:textSize="@dimen/mediumUniversalText" />
 
@@ -133,7 +131,6 @@
                         android:id="@+id/tourExplanation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Board the ionic Peak Tram from our special line and enjoy hassel-free accesss to attraction...Board the ionic Peak Tram from our special line and enjoy hassel-free accesss to attraction...Board the ionic Peak Tram from our special line and enjoy hassel-free accesss to attraction...Board the ionic Peak Tram from our special line and enjoy hassel-free accesss to attraction..."
                         android:textColor="@color/colorDark"
                         android:textSize="@dimen/smallUniversalText" />
 

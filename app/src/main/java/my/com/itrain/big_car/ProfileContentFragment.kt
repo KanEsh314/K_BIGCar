@@ -45,7 +45,11 @@ class ProfileContentFragment : Fragment() {
         my_account.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(context, AccountActivity::class.java)
-                startActivity(intent)
+                if (context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
+                    Toast.makeText(context, "Please Login", Toast.LENGTH_LONG).show()
+                }else {
+                    startActivity(intent)
+                }
             }
 
         })

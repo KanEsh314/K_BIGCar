@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:lineSpacingExtra="8dp"
-                    android:text="Username"
+                    android:text="Please Log In"
                     android:textColor="@color/product_name"
                     fontPath="fonts/SourceSansPro-Semibold.ttf"
                     tools:ignore="MissingPrefix"

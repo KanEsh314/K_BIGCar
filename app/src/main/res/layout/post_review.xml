@@ -3,23 +3,42 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="@dimen/mediumPadding">
 
-    <EditText
-        android:id="@+id/comment"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dip"
-        android:inputType="text"
-        android:layout_alignParentLeft="true"
-        android:hint="Enter Your Review"
-        android:layout_marginEnd="90dip"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/comment"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:inputType="text"
+            android:layout_alignParentLeft="true"
+            android:hint="Enter Your Review"
+            android:layout_marginEnd="90dip"/>
+
+        <RatingBar
+            android:id="@+id/ratingcomment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?attr/ratingBarStyle"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:backgroundTint="@color/colorPrimary"
+            android:progressTint="@color/colorBlue"/>
+
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/postcomment"
         android:layout_width="80dip"
         android:layout_height="50dip"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:text="Submit"
         android:background="@drawable/button_outline"/>
 

@@ -5,26 +5,30 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.view.MenuItemCompat
+import android.app.AlertDialog
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.ShareActionProvider
 import android.text.Html
+import android.text.TextUtils
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
+import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_tour_detail.*
+import kotlinx.android.synthetic.main.post_review.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -32,7 +36,12 @@ import org.json.JSONObject
 class TourDetailActivity : AppCompatActivity() {
 
     var tourURL = "https://gentle-atoll-11837.herokuapp.com/api/tour/"
+    var commentURL = "http://gentle-atoll-11837.herokuapp.com/api/review/"
     private val tourMaterial = ArrayList<JSONObject>()
+    var CheckEditText:Boolean = false
+    var service_id:Int = 0
+    var commentHolder:String = ""
+    var ratingHolder: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +51,7 @@ class TourDetailActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val tourService_id = intent.getIntExtra("serviceid",0)
+        service_id = intent.getIntExtra("service_id",0)
 
         open_share.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
@@ -51,18 +60,36 @@ class TourDetailActivity : AppCompatActivity() {
 
         })
 
+        postcomment.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                CheckEditTextIsEmptyOrNot()
+                if (CheckEditText){
+                    commentPost()
+                    Toast.makeText(applicationContext, "Thank You For Your Review", Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(applicationContext, "Please fill all form fields.", Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+
         val checkDates = findViewById<View>(R.id.add_to_cart_btn)
         checkDates.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 val intent = Intent(this@TourDetailActivity, TourDatesActivity::class.java)
                 try {
-                    intent.putExtra("service_id", tourService_id)
+                    intent.putExtra("service_id", service_id)
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }
                 startActivity(intent)
             }
         })
+
+        val progressDialog = ProgressDialog(this, R.style.DialogTheme)
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setTitle("Please Wait")
+        progressDialog.setMessage("Loading")
+        progressDialog.show()
 
         //VOLLEY
         val requestVolley = Volley.newRequestQueue(this)
@@ -73,7 +100,7 @@ class TourDetailActivity : AppCompatActivity() {
         recycleTourReview!!.itemAnimator = DefaultItemAnimator()
         recycleTourReview!!.adapter = reviewAdapter
 
-        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET,tourURL+tourService_id,null, object : Response.Listener<JSONObject>{
+        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET,tourURL+service_id,null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
                 try {
 
@@ -95,6 +122,7 @@ class TourDetailActivity : AppCompatActivity() {
                     }
 
                     reviewAdapter.notifyDataSetChanged()
+                    progressDialog.dismiss()
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }
@@ -107,6 +135,54 @@ class TourDetailActivity : AppCompatActivity() {
                 })
 
         requestVolley.add(jsonObjectRequest)
+    }
+
+    private fun CheckEditTextIsEmptyOrNot() {
+        commentHolder = comment.text.toString()
+        ratingHolder = ratingcomment.rating.toString()
+
+        if (TextUtils.isEmpty(commentHolder)){
+            CheckEditText = false
+        }else {
+            CheckEditText = true
+        }
+    }
+
+    private fun commentPost() {
+        val progressDialog = ProgressDialog(this, R.style.DialogTheme)
+        progressDialog.setMessage("Please Wait, We are Inserting Your Data on Server")
+        progressDialog.show()
+
+        val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
+        val stringRequest = object : StringRequest(Request.Method.POST, commentURL+service_id, object : Response.Listener<String>{
+            override fun onResponse(response: String?) {
+                Log.d("Debug", response)
+                progressDialog.dismiss()
+                //Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
+            }
+        }, object : Response.ErrorListener{
+            override fun onErrorResponse(error: VolleyError?) {
+                progressDialog.dismiss()
+                Log.d("Debug", error.toString())
+            }
+        }){
+            @Throws(AuthFailureError::class)
+            override fun getHeaders():Map<String,String>{
+                val headers = HashMap<String, String>()
+                headers.put("Authorization", "Bearer "+sharedPreferences)
+                return headers
+            }
+            override fun getParams():Map<String, String> {
+                val params = HashMap<String, String>()
+                params.put("user_comment", commentHolder)
+                params.put("rating_id", ratingHolder)
+                params.put("service_id", service_id.toString())
+                return params
+            }
+        }
+
+        val requestVolley = Volley.newRequestQueue(this)
+        requestVolley.add(stringRequest)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

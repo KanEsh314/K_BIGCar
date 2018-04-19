@@ -14,6 +14,17 @@ class TourSummaryActivity : AppCompatActivity() {
         setSupportActionBar(toolbarSummary)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        tour_name?.text = intent.getStringExtra("tour_name")
+        package_name?.text = intent.getStringExtra("package_name")
+        travel_date?.text = intent.getStringExtra("travel_date")
+        traveller_count?.text = intent.getStringExtra("traveller_count")
+        booking_name?.text = intent.getStringExtra("booking_name")
+        booking_mobile_number?.text = intent.getStringExtra("mobile_number")
+        booking_nationality?.text = intent.getStringExtra("nationality")
+        booking_email?.text = intent.getStringExtra("user_email")
+        passenger_name?.text = intent.getStringExtra("passenger_name")
+        passenger_ic_passport?.text = intent.getStringExtra("ic_passport")
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

@@ -84,7 +84,7 @@
                     android:textColor="@color/colorDark"/>
 
                 <TextView
-                    android:id="@+id/travell_date"
+                    android:id="@+id/travel_date"
                     android:layout_width="match_parent"
                     android:layout_height="50dip"
                     android:textSize="@dimen/smallUniversalText"

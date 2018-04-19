@@ -87,6 +87,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                     }catch (e : JSONException){
                         e.printStackTrace()
+                        Toast.makeText(applicationContext, "Please Check Your Username and Password", Toast.LENGTH_LONG).show()
                     }
                     progressDialog.dismiss()
                     //Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()

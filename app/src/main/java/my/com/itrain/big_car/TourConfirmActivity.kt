@@ -64,18 +64,23 @@ class TourConfirmActivity : AppCompatActivity() {
                 CheckEditTextIsEmptyOrNot()
                 if (CheckEditText){
                     sendBooking()
-//                    val intent = Intent(this@TourConfirmActivity, TourSummaryActivity::class.java)
-//                    try {
-//
-//                    }catch (e: JSONException){
-//                        e.printStackTrace()
-//                    }
-                    startActivity(intent)
-                    try{
-
-                    }catch (e : JSONException){
-
+                    Toast.makeText(applicationContext, "Success", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this@TourConfirmActivity, TourSummaryActivity::class.java)
+                    try {
+                        intent.putExtra("tour_name", tour_name)
+                        intent.putExtra("package_name", package_name)
+                        intent.putExtra("package_pax", package_pax)
+                        intent.putExtra("travel_date", travel_date)
+                        intent.putExtra("booking_name", name_booking)
+                        intent.putExtra("mobile_number", mobile_number)
+                        intent.putExtra("nationality", nationality)
+                        intent.putExtra("user_email", user_email)
+                        intent.putExtra("passenger_name", passenger_name)
+                        intent.putExtra("ic_passport", ic_passport)
+                    }catch (e: JSONException){
+                        e.printStackTrace()
                     }
+                    startActivity(intent)
                 }else{
                     Toast.makeText(applicationContext, "Please fill all form fields.", Toast.LENGTH_LONG).show()
                 }
@@ -121,6 +126,12 @@ class TourConfirmActivity : AppCompatActivity() {
                 val package_id = intent.getStringExtra("package_id")
                 val travel_date = intent.getStringExtra("travel_date")
 
+                var userArray = JSONArray()
+                val newObj = JSONObject()
+                newObj.put("passenger_name", passenger_name)
+                newObj.put("ic_passport",ic_passport)
+                userArray.put(newObj)
+
                 params.put("service_name", service_id.toString())
                 params.put("service_package", package_id.toString())
                 params.put("travel_day", "22")
@@ -130,11 +141,6 @@ class TourConfirmActivity : AppCompatActivity() {
                 params.put("mobile_number", mobile_number)
                 params.put("nationality", "11")
                 params.put("email", user_email)
-                var userArray = JSONArray()
-                val newObj = JSONObject()
-                newObj.put("passenger_name", passenger_name)
-                newObj.put("ic_passport",ic_passport)
-                userArray.put(newObj)
                 params.put("passengers", userArray.toString())
                 Log.d("Booking", params.toString())
                 return params
@@ -151,7 +157,7 @@ class TourConfirmActivity : AppCompatActivity() {
         mobile_number = phoneNumber.text.toString()
         nationality = selectOrigin.toString()
         user_email = email.text.toString()
-
+        nationality = selectOrigin.getSelectedItem().toString();
         passenger_name = name_passenger.text.toString()
         ic_passport = ic_number.text.toString()
 

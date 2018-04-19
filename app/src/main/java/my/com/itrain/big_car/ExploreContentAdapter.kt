@@ -1,5 +1,6 @@
 package my.com.itrain.big_car
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
@@ -10,11 +11,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import org.json.JSONObject
 
 /**
  * Created by iTrain on 13-Dec-17.
  */
-class ExploreContentAdapter(private val context: ExploreContentFragment, private val list: List<Trend>) : RecyclerView.Adapter<ExploreContentAdapter.ViewHolder>() {
+class ExploreContentAdapter(private val context: Context, private val listener: OnItemClickListener) : RecyclerView.Adapter<ExploreContentAdapter.ViewHolder>() {
+
+    private val popular = ArrayList<JSONObject>()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var trendImg: ImageView
@@ -27,6 +31,13 @@ class ExploreContentAdapter(private val context: ExploreContentFragment, private
             trendPrice = itemView.findViewById(R.id.trendPrice)
         }
 
+        fun bind(position: Int, listener: ExploreContentAdapter.OnItemClickListener){
+            itemView.setOnClickListener(object: View.OnClickListener {
+                override fun onClick(v: View?) {
+                    listener.onItemClick(position)
+                }
+            })
+        }
 
     }
 
@@ -36,13 +47,22 @@ class ExploreContentAdapter(private val context: ExploreContentFragment, private
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val trend : Trend = list.get(position)
-        holder?.trendImg?.setImageResource(trend.img)
-        holder?.trendText?.text = trend.text
-        holder?.trendPrice?.text = trend.price
+        holder?.trendImg?.setImageResource(R.drawable.tour1)
+        holder?.trendText?.text = popular.get(position).getString("product_name")
+        holder?.trendPrice?.text = popular.get(position).getString("short_prod_code")
+
+        holder?.bind(position,listener)
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return popular.size
+    }
+
+    fun addJsonObject(jsonObject: JSONObject) {
+        popular.add(jsonObject)
+    }
+
+    interface OnItemClickListener{
+        fun onItemClick(position:Int)
     }
 }

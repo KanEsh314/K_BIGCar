@@ -32,6 +32,7 @@ import java.util.ArrayList
 class ExploreContentFragment : Fragment() {
 
     var toursURL = "https://gentle-atoll-11837.herokuapp.com/api/tours"
+    var popularssURL = "https://gentle-atoll-11837.herokuapp.com/api/populartour"
     var categoriesURL = "http://gentle-atoll-11837.herokuapp.com/api/categories"
     var bannerURl = "https://gentle-atoll-11837.herokuapp.com/api/banners"
     private val toursMaterial = ArrayList<JSONObject>()
@@ -59,22 +60,33 @@ class ExploreContentFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val list = ArrayList<Trend>()
-        prepareList(list)
-        val popularAdapter = ExploreContentAdapter(this,list)
+        //VOLLEY
+        val requestVolley = Volley.newRequestQueue(this.context)
+
+        val popularAdapter = ExploreContentAdapter(context, object: ExploreContentAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                val intent = Intent(context,TourDetailActivity::class.java)
+                try {
+                    intent.putExtra("service_id", toursMaterial.get(position).getInt("service_id"))
+                }catch (e : JSONException){
+                    e.printStackTrace()
+                }
+                startActivity(intent)
+            }
+
+        })
         val popularLayoutManager = GridLayoutManager(this.activity,2)
         recycleViewActivities!!.layoutManager = popularLayoutManager
         recycleViewActivities!!.itemAnimator = DefaultItemAnimator()
         recycleViewActivities!!.adapter = popularAdapter
 
-        //VOLLEY
-        val requestVolley = Volley.newRequestQueue(this.context)
+
 
         val destinationAdapter = ExplorePlaceContentAdapter(context ,object: ExplorePlaceContentAdapter.OnItemClickListener{
             override fun onItemClick(position:Int){
                 val intent = Intent(context,TourDetailActivity::class.java)
                 try {
-                    intent.putExtra("serviceid", toursMaterial.get(position).getInt("service_id"))
+                    intent.putExtra("service_id", toursMaterial.get(position).getInt("service_id"))
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }
@@ -135,6 +147,31 @@ class ExploreContentFragment : Fragment() {
                 })
 
         requestVolley.add(jsonObjectRequestTour)
+
+        var jsonObjectRequestPopular = JsonObjectRequest(Request.Method.GET, popularssURL,null, object : Response.Listener<JSONObject>{
+            override fun onResponse(response: JSONObject) = try {
+
+                val toursData = response.getJSONArray("data")
+
+                for (i in 0 until toursData.length()){
+                    popularAdapter.addJsonObject(toursData.getJSONObject(i))
+                    toursMaterial.add(toursData.getJSONObject(i))
+                }
+                popularAdapter.notifyDataSetChanged()
+                progressDialog.dismiss()
+            } catch (e : JSONException){
+                e.printStackTrace()
+                progressDialog.dismiss()
+            }
+        },
+                object : Response.ErrorListener {
+                    override fun onErrorResponse(error: VolleyError) {
+                        Log.d("Debug", error.toString())
+                        progressDialog.dismiss()
+                    }
+                })
+
+        requestVolley.add(jsonObjectRequestPopular)
 
         var jsonObjectRequestBanner = JsonObjectRequest(Request.Method.GET, bannerURl, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) = try{
