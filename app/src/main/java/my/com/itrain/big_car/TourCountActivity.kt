@@ -46,23 +46,14 @@ class TourCountActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val service_id = intent.getIntExtra("service_id",0)
-        val selected_package = JSONArray(intent.getStringExtra("selected_package"))
+        val package_id = intent.getStringExtra("package_id")
+        val package_name = intent.getStringExtra("package_name")
+        val package_pax = intent.getStringExtra("package_pax")
         val onDateYear = intent.getIntExtra("selectedYear",0)
         val onDateMonth = intent.getIntExtra("selectedMonth", 0)
         val onDateDay = intent.getIntExtra("selectedDay", 0)
-
-        try {
-            for (i in 0 until selected_package.length()){
-                packageConfirmName.text = selected_package.getJSONObject(i).getString("package_name")
-                package_id = selected_package.getJSONObject(i).getString("package_id")
-                package_name = selected_package.getJSONObject(i).getString("package_name")
-                package_pax = selected_package.getJSONObject(i).getString("package_pax")
-                Log.d("Debug", selected_package.getJSONObject(i).toString())
-            }
-            packageConfirmDate.text = onDateYear.toString()+"-"+onDateMonth.toString()+"-"+onDateDay.toString()
-        }catch (e : Exception){
-            e.printStackTrace()
-        }
+        packageConfirmName?.text = package_name
+        packageConfirmDate?.text = onDateYear.toString()+"-"+onDateMonth.toString()+"-"+onDateDay.toString()
 
         editPackage.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
@@ -70,16 +61,6 @@ class TourCountActivity : AppCompatActivity() {
             }
 
         })
-
-
-//        tourTime.setOnItemSelectedListener(object: AdapterView.OnItemSelectedListener() {
-//            fun onItemSelected(parent:AdapterView<*>, view:View, pos:Int, id:Long) {
-//                val item = (view.findViewById(R.id.offer_type_txt) as TextView).getText().toString()
-//                selectedOffer.setText(item)
-//            }
-//            fun onNothingSelected(parent:AdapterView<*>) {
-//            }
-//        })
 
         //VOLLEY
         val requestVolley = Volley.newRequestQueue(this)
@@ -101,14 +82,20 @@ class TourCountActivity : AppCompatActivity() {
                     intent.putExtra("package_name", package_name)
                     intent.putExtra("package_pax", package_pax)
                     intent.putExtra("travel_date", onDateYear.toString()+"-"+onDateMonth.toString()+"-"+onDateDay.toString())
-                    //travel_day
-                    intent.putExtra("travel_time", tourTimeAdapter.getSelectedItem())
+                    intent.putExtra("travel_time", tourTimeAdapter.getSelectedItem().getString("time"))
+                    intent.putExtra("travel_day_id", tourTimeAdapter.getSelectedItem().getString("day_id"))
+                    intent.putExtra("travel_time_id", tourTimeAdapter.getSelectedItem().getString("time_id"))
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }
                 startActivity(intent)
             }
         })
+
+        val progressDialog = ProgressDialog(this, R.style.DialogTheme)
+        progressDialog.setCancelable(false)
+        progressDialog.isIndeterminate=true
+        progressDialog.show()
 
 
         var jsonObjectRequest = JsonObjectRequest(Request.Method.GET,tourURL+service_id,null, object : Response.Listener<JSONObject>{
@@ -124,6 +111,7 @@ class TourCountActivity : AppCompatActivity() {
                     }
 
                     tourTimeAdapter.notifyDataSetChanged()
+                    progressDialog.dismiss()
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }

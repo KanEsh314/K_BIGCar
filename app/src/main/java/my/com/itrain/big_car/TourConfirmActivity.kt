@@ -55,8 +55,9 @@ class TourConfirmActivity : AppCompatActivity() {
         val package_pax = intent.getStringExtra("package_pax")
         package_service?.text = package_pax
         val travel_date = intent.getStringExtra("travel_date")
-        travel_day_date?.text = travel_date
-        val travel_timetext = intent.getStringExtra("travel_time")
+        date_travel?.text = travel_date
+        val travel_time = intent.getStringExtra("travel_time")
+        time_travel?.text = travel_time
 
         to_summary.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
@@ -72,6 +73,7 @@ class TourConfirmActivity : AppCompatActivity() {
                         intent.putExtra("package_name", package_name)
                         intent.putExtra("package_pax", package_pax)
                         intent.putExtra("travel_date", travel_date)
+                        intent.putExtra("travel_time", travel_time)
                         intent.putExtra("booking_name", name_booking)
                         intent.putExtra("mobile_number", mobile_number)
                         intent.putExtra("nationality", nationality)
@@ -126,6 +128,8 @@ class TourConfirmActivity : AppCompatActivity() {
                 val service_id = intent.getIntExtra("service_id", 0)
                 val package_id = intent.getStringExtra("package_id")
                 val travel_date = intent.getStringExtra("travel_date")
+                val travel_time_id = intent.getStringExtra("travel_time_id")
+                val travel_day_id = intent.getStringExtra("travel_day_id")
 
                 var userArray = JSONArray()
                 val newObj = JSONObject()
@@ -135,8 +139,8 @@ class TourConfirmActivity : AppCompatActivity() {
 
                 params.put("service_name", service_id.toString())
                 params.put("service_package", package_id.toString())
-                params.put("travel_day", "22")
-                params.put("travel_time", "22")
+                params.put("travel_day", travel_day_id)
+                params.put("travel_time", travel_time_id)
                 params.put("travel_date", travel_date)
                 params.put("booking_name", name_booking)
                 params.put("mobile_number", mobile_number)

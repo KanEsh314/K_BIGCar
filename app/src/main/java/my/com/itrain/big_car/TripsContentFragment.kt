@@ -160,7 +160,7 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
         mMap.setOnMapLoadedCallback(object : GoogleMap.OnMapLoadedCallback{
             override fun onMapLoaded() {
                 val myLocation = LatLng(latitude, longitude)
-                mMap.addMarker(MarkerOptions().position(myLocation).draggable(true))
+                mMap.addMarker(MarkerOptions().position(myLocation).draggable(true).title("Location"))
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation,12F))
                 mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener{
                     override fun onMarkerClick(p0: Marker?): Boolean {

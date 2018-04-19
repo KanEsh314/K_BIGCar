@@ -17,10 +17,9 @@ import org.w3c.dom.Text
  * Created by iTrain on 10-Jan-18.
  */
 
-class SelectTimeAdapter(private val context: Context):RecyclerView.Adapter<SelectTimeAdapter.ViewHolder>(){
+class SelectTimeAdapter(private val context: Context): RecyclerView.Adapter<SelectTimeAdapter.ViewHolder>(){
 
     private val tourTime = ArrayList<JSONObject>()
-    private val tourTimeFormat = tourTime.toString()
     private var selectedPosition = -1
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -31,12 +30,10 @@ class SelectTimeAdapter(private val context: Context):RecyclerView.Adapter<Selec
             tourText = itemView.findViewById(R.id.tourSelectText)
             tourTime = itemView.findViewById(R.id.tourSelectTime)
         }
-
-
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val view : View = LayoutInflater.from(parent?.context).inflate(R.layout.tourselect_time, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view : View = LayoutInflater.from(parent.context).inflate(R.layout.tourselect_time, parent, false)
         return ViewHolder(view)
     }
 
@@ -50,7 +47,6 @@ class SelectTimeAdapter(private val context: Context):RecyclerView.Adapter<Selec
                 itemCheckChanged(v)
             }
         })
-
     }
 
     private fun itemCheckChanged(v: View?) {
@@ -62,12 +58,12 @@ class SelectTimeAdapter(private val context: Context):RecyclerView.Adapter<Selec
         return tourTime.size
     }
 
-    fun getSelectedItem():String {
+    fun getSelectedItem():JSONObject {
         if (selectedPosition !== -1)
         {
-          return tourTime.get(selectedPosition).getString("time")
+          return tourTime.get(selectedPosition)
         }
-        return ""
+        return JSONObject()
     }
 
     fun addJsonObject(jsonObject: JSONObject) {

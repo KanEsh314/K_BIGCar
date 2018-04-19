@@ -26,5 +26,4 @@
             android:buttonTint="@color/colorPrimary" />
 
     </RelativeLayout>
-
 </android.support.v7.widget.CardView>
