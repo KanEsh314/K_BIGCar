@@ -38,6 +38,11 @@ class TourConfirmActivity : AppCompatActivity() {
     var user_email : String = ""
     var passenger_name : String = ""
     var ic_passport : String = ""
+    var tour_name: String = ""
+    var package_name: String = ""
+    var package_pax: String = ""
+    var travel_time: String = ""
+    var travel_date: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,15 +53,15 @@ class TourConfirmActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
 
-        val tour_name = intent.getStringExtra("tour_name")
+        tour_name = intent.getStringExtra("tour_name")
         name_tour?.text = tour_name
-        val package_name = intent.getStringExtra("package_name")
+        package_name = intent.getStringExtra("package_name")
         name_package?.text = package_name
-        val package_pax = intent.getStringExtra("package_pax")
+        package_pax = intent.getStringExtra("package_pax")
         package_service?.text = package_pax
-        val travel_date = intent.getStringExtra("travel_date")
+        travel_date = intent.getStringExtra("travel_date")
         date_travel?.text = travel_date
-        val travel_time = intent.getStringExtra("travel_time")
+        travel_time = intent.getStringExtra("travel_time")
         time_travel?.text = travel_time
 
         to_summary.setOnClickListener(object : View.OnClickListener{
@@ -66,40 +71,11 @@ class TourConfirmActivity : AppCompatActivity() {
                 CheckEditTextIsEmptyOrNot()
                 if (CheckEditText){
                     sendBooking()
-                    Toast.makeText(applicationContext, "Success", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this@TourConfirmActivity, TourSummaryActivity::class.java)
-                    try {
-                        intent.putExtra("tour_name", tour_name)
-                        intent.putExtra("package_name", package_name)
-                        intent.putExtra("package_pax", package_pax)
-                        intent.putExtra("travel_date", travel_date)
-                        intent.putExtra("travel_time", travel_time)
-                        intent.putExtra("booking_name", name_booking)
-                        intent.putExtra("mobile_number", mobile_number)
-                        intent.putExtra("nationality", nationality)
-                        intent.putExtra("user_email", user_email)
-                        intent.putExtra("passenger_name", passenger_name)
-                        intent.putExtra("ic_passport", ic_passport)
-                    }catch (e: JSONException){
-                        e.printStackTrace()
-                    }
-                    startActivity(intent)
                 }else{
                     Toast.makeText(applicationContext, "Please fill all form fields.", Toast.LENGTH_LONG).show()
                 }
             }
         })
-
-        //Title
-//        selectTitle.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-//            override fun onNothingSelected(parent: AdapterView<*>?) {
-//
-//            }
-//
-//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//
-//            }
-//        })
     }
 
     private fun sendBooking() {
@@ -108,11 +84,30 @@ class TourConfirmActivity : AppCompatActivity() {
         val stringRequest = object : StringRequest(Request.Method.POST, bookingURL, object : Response.Listener<String> {
             override fun onResponse(response: String?) {
                 Log.d("Debug", response)
+                Toast.makeText(applicationContext, "Success", Toast.LENGTH_LONG).show()
+                val intent = Intent(this@TourConfirmActivity, TourSummaryActivity::class.java)
+                try {
+                    intent.putExtra("tour_name", tour_name)
+                    intent.putExtra("package_name", package_name)
+                    intent.putExtra("package_pax", package_pax)
+                    intent.putExtra("travel_date", travel_date)
+                    intent.putExtra("travel_time", travel_time)
+                    intent.putExtra("booking_name", name_booking)
+                    intent.putExtra("mobile_number", mobile_number)
+                    intent.putExtra("nationality", nationality)
+                    intent.putExtra("user_email", user_email)
+                    intent.putExtra("passenger_name", passenger_name)
+                    intent.putExtra("ic_passport", ic_passport)
+                }catch (e: JSONException){
+                    e.printStackTrace()
+                }
+                startActivity(intent)
             }
         },
                 object : Response.ErrorListener {
                     override fun onErrorResponse(error: VolleyError?) {
                         Log.d("Error", error.toString())
+                        Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
                     }
 
                 }){
@@ -133,10 +128,14 @@ class TourConfirmActivity : AppCompatActivity() {
 
                 var userArray = JSONArray()
                 val newObj = JSONObject()
-                newObj.put("passenger_name", passenger_name)
-                newObj.put("ic_passport",ic_passport)
+                try{
+                    newObj.put("passenger_name", passenger_name)
+                    newObj.put("ic_passport",ic_passport)
+                }catch (e : JSONException){
+                    e.printStackTrace()
+                }
                 userArray.put(newObj)
-
+                Log.d("Array", userArray.toString())
                 params.put("service_name", service_id.toString())
                 params.put("service_package", package_id.toString())
                 params.put("travel_day", travel_day_id)

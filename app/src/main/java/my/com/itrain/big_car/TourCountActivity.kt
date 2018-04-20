@@ -10,10 +10,7 @@ import android.text.Html
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
@@ -74,21 +71,25 @@ class TourCountActivity : AppCompatActivity() {
         val checkPay = findViewById<View>(R.id.add_to_cart_btn)
         checkPay.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                val intent = Intent(this@TourCountActivity, TourConfirmActivity::class.java)
-                try{
-                    intent.putExtra("service_id", service_id)
-                    intent.putExtra("tour_name", tour_name)
-                    intent.putExtra("package_id", package_id)
-                    intent.putExtra("package_name", package_name)
-                    intent.putExtra("package_pax", package_pax)
-                    intent.putExtra("travel_date", onDateYear.toString()+"-"+onDateMonth.toString()+"-"+onDateDay.toString())
-                    intent.putExtra("travel_time", tourTimeAdapter.getSelectedItem().getString("time"))
-                    intent.putExtra("travel_day_id", tourTimeAdapter.getSelectedItem().getString("day_id"))
-                    intent.putExtra("travel_time_id", tourTimeAdapter.getSelectedItem().getString("time_id"))
-                }catch (e : JSONException){
-                    e.printStackTrace()
+                if (tourTimeAdapter.getSelectedItem().length() == 0) {
+                    Toast.makeText(applicationContext, "Please Select The Tour Time", Toast.LENGTH_LONG).show()
+                } else {
+                    val intent = Intent(this@TourCountActivity, TourConfirmActivity::class.java)
+                    try {
+                        intent.putExtra("service_id", service_id)
+                        intent.putExtra("tour_name", tour_name)
+                        intent.putExtra("package_id", package_id)
+                        intent.putExtra("package_name", package_name)
+                        intent.putExtra("package_pax", package_pax)
+                        intent.putExtra("travel_date", onDateYear.toString() + "-" + onDateMonth.toString() + "-" + onDateDay.toString())
+                        intent.putExtra("travel_time", tourTimeAdapter.getSelectedItem().getString("time"))
+                        intent.putExtra("travel_day_id", tourTimeAdapter.getSelectedItem().getString("day_id"))
+                        intent.putExtra("travel_time_id", tourTimeAdapter.getSelectedItem().getString("time_id"))
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                    startActivity(intent)
                 }
-                startActivity(intent)
             }
         })
 

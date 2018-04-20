@@ -19,12 +19,8 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_account.*
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_tour_count.*
-import kotlinx.android.synthetic.main.fragment_profile_content.*
-import my.com.itrain.big_car.R.drawable.user
-import org.json.JSONException
 import org.json.JSONObject
 
 class AccountActivity : AppCompatActivity() {
@@ -50,6 +46,7 @@ class AccountActivity : AppCompatActivity() {
         var jsonRequest = object  : JsonObjectRequest(Request.Method.GET, userURL, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
                 val userInfo = response.getJSONObject("data")
+                Picasso.with(applicationContext).load(userInfo.getString("profilepic")).into(profilePicture)
                 name.text = Editable.Factory.getInstance().newEditable(userInfo.getString("name"))
                 hp_nbr.text = Editable.Factory.getInstance().newEditable(userInfo.getString("phonenumber"))
                 address.text = Editable.Factory.getInstance().newEditable(userInfo.getString("address"))

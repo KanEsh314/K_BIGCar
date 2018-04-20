@@ -3,13 +3,16 @@ package my.com.itrain.big_car
 
 import android.app.ProgressDialog
 import android.content.Context.MODE_PRIVATE
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
+import android.widget.Button
 import android.widget.Toast
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -17,9 +20,12 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.dialog_login.*
 import kotlinx.android.synthetic.main.fragment_profile_content.*
 import org.json.JSONException
 import org.json.JSONObject
+import org.jetbrains.anko.*
 import java.lang.reflect.Method
 
 
@@ -35,6 +41,20 @@ class ProfileContentFragment : Fragment() {
         // Inflate the layout for this fragment
         var rootView = inflater.inflate(R.layout.fragment_profile_content, container, false)
         setHasOptionsMenu(true)
+
+        if (context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
+            val loginRegister = rootView.findViewById<Button>(R.id.login_register)
+            if (loginRegister.getText() == null)
+            {
+                loginRegister.setVisibility(View.GONE)
+            }
+            else
+            {
+                loginRegister.setVisibility(View.VISIBLE)
+            }
+        }else {
+
+        }
 
         return rootView
     }
@@ -71,7 +91,7 @@ class ProfileContentFragment : Fragment() {
 
         when(item.itemId){
             R.id.log_out -> {
-                context.getSharedPreferences("myPref", MODE_PRIVATE).edit().remove("myToken").commit()
+                
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
@@ -89,6 +109,7 @@ class ProfileContentFragment : Fragment() {
             override fun onResponse(response: JSONObject) {
                 val userInfo = response.getJSONObject("data")
                 name_user.text = userInfo.getString("name")
+                //Picasso.with(context).load(userInfo.getString("profilepic")).into(user_dp)
                 progressDialog.dismiss()
             }
 
