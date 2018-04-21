@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:lineSpacingExtra="8dp"
-                    android:text="Placeholder Text For Slogan"
+                    android:text="WE SERVE YOU OUR BEST AT ANY SERVICES"
                     android:textColor="@color/product_name"
                     tools:ignore="MissingPrefix"
                     android:textAlignment="center"

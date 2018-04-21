@@ -62,6 +62,12 @@ class ProfileContentFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        login_register.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                startActivity(Intent(context, StartActivity::class.java))
+            }
+        })
+
         my_account.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(context, AccountActivity::class.java)
@@ -91,7 +97,26 @@ class ProfileContentFragment : Fragment() {
 
         when(item.itemId){
             R.id.log_out -> {
-                
+                if (context.getSharedPreferences("myPref", MODE_PRIVATE).contains("myToken")){
+                    val dialog = AlertDialog.Builder(activity, R.style.DialogTheme)
+                            .setCancelable(false)
+                            .setTitle("Logout")
+                            .setMessage("Are Sure you Want To Logout")
+                            .setPositiveButton("Yes", object : DialogInterface.OnClickListener{
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    context.getSharedPreferences("myPref", MODE_PRIVATE).edit().remove("myToken").commit()
+                                }
+                            })
+                            .setNegativeButton("No", object : DialogInterface.OnClickListener{
+                                override fun onClick(dialog: DialogInterface, which: Int) {
+                                    dialog.dismiss()
+                                }
+                            })
+                            .create()
+                            .show()
+                }else{
+                    Toast.makeText(context, "User HAven't Login", Toast.LENGTH_LONG).show()
+                }
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

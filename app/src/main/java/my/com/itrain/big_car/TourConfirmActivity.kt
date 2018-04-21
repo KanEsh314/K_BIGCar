@@ -9,14 +9,12 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.RelativeLayout
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.RequestFuture
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -29,7 +27,9 @@ import org.json.JSONObject
 
 class TourConfirmActivity : AppCompatActivity() {
 
+    var countryURL = "https://gentle-atoll-11837.herokuapp.com/api/countries"
     var bookingURL = "http://gentle-atoll-11837.herokuapp.com/api/booking"
+    val countryMaterial = ArrayList<JSONObject>()
     var CheckEditText:Boolean = false
 
     var name_booking : String = ""
@@ -64,6 +64,23 @@ class TourConfirmActivity : AppCompatActivity() {
         travel_time = intent.getStringExtra("travel_time")
         time_travel?.text = travel_time
 
+        for (i in 0 until countryMaterial.size){
+            val array_adapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, countryMaterial.get(i).getString("name"))
+            array_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            selectOrigin.setAdapter(array_adapter)
+            selectOrigin.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    nationality = selectOrigin.selectedItemPosition.toString()
+                    Log.d("Debug", nationality)
+                }
+            })
+        }
+
+
         to_summary.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 Log.d("here","here")
@@ -76,6 +93,37 @@ class TourConfirmActivity : AppCompatActivity() {
                 }
             }
         })
+
+        val requestVolley = Volley.newRequestQueue(this)
+
+        val progressDialog = ProgressDialog(this, R.style.DialogTheme)
+        progressDialog.setCancelable(false)
+        progressDialog.isIndeterminate=true
+        progressDialog.show()
+
+
+        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET,countryURL,null, object : Response.Listener<JSONObject>{
+            override fun onResponse(response: JSONObject) {
+                try {
+
+                    val countryData = response.getJSONArray("data")
+
+                    for (i in 0 until countryData.length()){
+                        countryMaterial.add(countryData.getJSONObject(i))
+                    }
+                    progressDialog.dismiss()
+                }catch (e : JSONException){
+                    e.printStackTrace()
+                }
+            }
+        },
+                object : Response.ErrorListener{
+                    override fun onErrorResponse(error: VolleyError) {
+                        Log.d("Debug", error.toString())
+                    }
+                })
+
+        requestVolley.add(jsonObjectRequest)
     }
 
     private fun sendBooking() {

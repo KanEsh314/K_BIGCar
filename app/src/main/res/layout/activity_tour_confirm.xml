@@ -189,8 +189,6 @@
                         android:id="@+id/selectOrigin"
                         android:layout_width="match_parent"
                         android:layout_height="50dip"
-                        android:textSize="@dimen/smallUniversalText"
-                        android:entries="@array/countryEntries"
                         android:prompt="@string/country_prompt"/>
 
                     <EditText
