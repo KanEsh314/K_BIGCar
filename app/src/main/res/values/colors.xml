@@ -8,7 +8,7 @@
     <!-- Centralize Color -->
     <color name="colorApp">#075E54</color>
     <color name="colorSlight">#128C7E</color>
-    <color name="colorDark">#000000</color>
+        <color name="colorDark">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlue">#326273</color>
     <color name="colorLight">#EEEEEE</color>

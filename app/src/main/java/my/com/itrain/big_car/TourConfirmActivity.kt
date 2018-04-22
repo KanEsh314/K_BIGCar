@@ -3,12 +3,15 @@ package my.com.itrain.big_car
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -64,24 +67,24 @@ class TourConfirmActivity : AppCompatActivity() {
         travel_time = intent.getStringExtra("travel_time")
         time_travel?.text = travel_time
 
-        val array_adapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, countryMaterial)
-        array_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        selectOrigin.setAdapter(array_adapter)
-        selectOrigin.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
+        val customSpinnerAdapter = CustomSpinnerAdapter(this)
+        selectOrigin.setAdapter(customSpinnerAdapter)
+        selectOrigin.setOnItemSelectedListener(object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                nationality = selectOrigin.selectedItemPosition.toString()
-                Log.d("Debug", nationality)
+                val item = parent?.getItemAtPosition(position).toString()
+                Log.d("Debug", item)
+                Log.d("Find", selectOrigin.selectedItem.toString())
+                Toast.makeText(parent?.getContext(), "Android Custom Spinner Example Output..." + item, Toast.LENGTH_LONG).show()
             }
         })
 
         to_summary.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 Log.d("here","here")
-
                 CheckEditTextIsEmptyOrNot()
                 if (CheckEditText){
                     sendBooking()
@@ -107,7 +110,9 @@ class TourConfirmActivity : AppCompatActivity() {
 
                     for (i in 0 until countryData.length()){
                         countryMaterial.add(countryData.getJSONObject(i))
+                        customSpinnerAdapter.addJsonObject(countryData.getJSONObject(i))
                     }
+                    customSpinnerAdapter.notifyDataSetChanged()
                     progressDialog.dismiss()
                 }catch (e : JSONException){
                     e.printStackTrace()
@@ -206,7 +211,6 @@ class TourConfirmActivity : AppCompatActivity() {
         mobile_number = phoneNumber.text.toString()
         nationality = selectOrigin.toString()
         user_email = email.text.toString()
-        nationality = selectOrigin.getSelectedItem().toString();
         passenger_name = name_passenger.text.toString()
         ic_passport = ic_number.text.toString()
 
@@ -228,4 +232,46 @@ class TourConfirmActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+}
+
+class CustomSpinnerAdapter(private val context: Context):BaseAdapter() {
+
+    private val nationality = ArrayList<JSONObject>()
+
+//    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
+//        return super.getDropDownView(position, convertView, parent)
+//        val textView = TextView(context)
+//        textView.gravity = Gravity.CENTER_VERTICAL
+//        textView.setPadding(16, 16, 16, 16)
+//        textView.textSize = 14F
+//        textView.text = nationality.get(position).getString("name")
+//        textView.setTextColor(Color.parseColor("#000000"))
+//    }
+
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val textView = TextView(context)
+        textView.gravity = Gravity.LEFT
+        textView.setPadding(16, 16, 16, 16)
+        textView.textSize = 14F
+        textView.text = nationality.get(position).getString("name")
+        textView.setTextColor(Color.parseColor("#000000"))
+        return textView
+    }
+
+    override fun getItem(position: Int): Any {
+        return position
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getCount(): Int {
+        return nationality.size
+    }
+
+    fun addJsonObject(jsonObject: JSONObject) {
+        nationality.add(jsonObject)
+    }
+
 }

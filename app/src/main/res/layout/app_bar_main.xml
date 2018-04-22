@@ -14,8 +14,8 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:layout_height="?android:actionBarSize"
+            android:background="@color/colorPrimary"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark">
 
             <RelativeLayout
@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:layout_marginTop="?android:actionBarSize">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
@@ -61,7 +61,7 @@
             android:layout_alignParentBottom="true"
             android:background="@color/tabBG"
             android:elevation="5dp"
-            android:minHeight="?attr/actionBarSize"
+            android:minHeight="?android:actionBarSize"
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/colorPrimary"

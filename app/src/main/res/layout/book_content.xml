@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:padding="@dimen/mediumPadding"
-    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
+        android:id="@+id/layout_pick_up"
         android:layout_width="match_parent"
         android:layout_height="50dip"
         android:background="@color/colorWhite"
@@ -28,8 +28,10 @@
 
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/layout_drop_off"
         android:layout_width="match_parent"
         android:layout_height="50dip"
+        android:layout_below="@+id/layout_pick_up"
         android:background="@color/colorWhite"
         android:orientation="horizontal">
 
@@ -48,10 +50,11 @@
             android:hint="Drop Off Point" />
 
     </LinearLayout>
-
     <LinearLayout
+        android:id="@+id/layout_type_payment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/layout_drop_off"
         android:orientation="horizontal"
         android:background="@color/colorWhite">
 
@@ -83,27 +86,30 @@
             android:entries="@array/trip_type_arrays"/>
 
     </LinearLayout>
-
     <LinearLayout
+        android:id="@+id/layout_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_type_payment"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/trip_promo_code"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/smallUniversalText"
             android:background="@color/colorWhite"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:padding="@dimen/smallPadding"
             android:hint="Promo Code"/>
 
         <EditText
             android:id="@+id/trip_driver_notes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/smallUniversalText"
             android:background="@color/colorWhite"
+            android:layout_weight="5"
             android:hint="Notes To Driver"
             android:padding="@dimen/smallPadding" />
 
@@ -114,17 +120,21 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_alignParentBottom="true"
-    android:layout_marginBottom="80dp"
-    android:paddingRight="@dimen/mediumPadding"
-    android:paddingLeft="@dimen/mediumPadding">
+    android:layout_marginBottom="70dp">
 
     <Spinner
         android:id="@+id/vehicle_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/mediumPadding"
-        android:background="@color/colorWhite"
+        android:layout_height="50dip"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/spinner_design"
         android:entries="@array/trip_type_arrays"
         android:spinnerMode="dialog"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_outline"
+            android:text="CHOOSE YOUR DROP-OOF"/>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
