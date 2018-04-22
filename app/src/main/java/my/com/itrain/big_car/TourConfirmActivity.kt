@@ -64,22 +64,19 @@ class TourConfirmActivity : AppCompatActivity() {
         travel_time = intent.getStringExtra("travel_time")
         time_travel?.text = travel_time
 
-        for (i in 0 until countryMaterial.size){
-            val array_adapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, countryMaterial.get(i).getString("name"))
-            array_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            selectOrigin.setAdapter(array_adapter)
-            selectOrigin.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
-                override fun onNothingSelected(parent: AdapterView<*>?) {
+        val array_adapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, countryMaterial)
+        array_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        selectOrigin.setAdapter(array_adapter)
+        selectOrigin.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
 
-                }
+            }
 
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    nationality = selectOrigin.selectedItemPosition.toString()
-                    Log.d("Debug", nationality)
-                }
-            })
-        }
-
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                nationality = selectOrigin.selectedItemPosition.toString()
+                Log.d("Debug", nationality)
+            }
+        })
 
         to_summary.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
