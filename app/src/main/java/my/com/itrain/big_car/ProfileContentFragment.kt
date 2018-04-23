@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
 import android.widget.Button
+import android.widget.RelativeLayout
 import android.widget.Toast
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -23,6 +24,7 @@ import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.dialog_login.*
 import kotlinx.android.synthetic.main.fragment_profile_content.*
+import my.com.itrain.big_car.R.id.*
 import org.json.JSONException
 import org.json.JSONObject
 import org.jetbrains.anko.*
@@ -42,18 +44,11 @@ class ProfileContentFragment : Fragment() {
         var rootView = inflater.inflate(R.layout.fragment_profile_content, container, false)
         setHasOptionsMenu(true)
 
+        val seperator_layout = rootView.findViewById<View>(R.id.seperator)
         if (context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
-            val loginRegister = rootView.findViewById<Button>(R.id.login_register)
-            if (loginRegister.getText() == null)
-            {
-                loginRegister.setVisibility(View.GONE)
-            }
-            else
-            {
-                loginRegister.setVisibility(View.VISIBLE)
-            }
+            seperator_layout.visibility = View.GONE
         }else {
-
+            seperator_layout.visibility = View.VISIBLE
         }
 
         return rootView
@@ -62,17 +57,11 @@ class ProfileContentFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        login_register.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v: View?) {
-                startActivity(Intent(context, StartActivity::class.java))
-            }
-        })
-
         my_account.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(context, AccountActivity::class.java)
                 if (context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
-                    Toast.makeText(context, "Please Login", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(context, StartActivity::class.java))
                 }else {
                     startActivity(intent)
                 }
@@ -84,7 +73,7 @@ class ProfileContentFragment : Fragment() {
             override fun onClick(v: View?) {
                 val intent = Intent(context, FavoriteActivity::class.java)
                 if (context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
-                    Toast.makeText(context, "Please Login", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(context, StartActivity::class.java))
                 }else {
                     startActivity(intent)
                 }
@@ -95,32 +84,40 @@ class ProfileContentFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when(item.itemId){
-            R.id.log_out -> {
-                if (context.getSharedPreferences("myPref", MODE_PRIVATE).contains("myToken")){
-                    val dialog = AlertDialog.Builder(activity, R.style.DialogTheme)
+        if(context.getSharedPreferences("myPref", MODE_PRIVATE).contains("myToken")) {
+            when (item.itemId) {
+                R.id.log_out -> {
+                    AlertDialog.Builder(activity, R.style.DialogTheme)
                             .setCancelable(false)
                             .setTitle("Logout")
                             .setMessage("Are Sure you Want To Logout")
-                            .setPositiveButton("Yes", object : DialogInterface.OnClickListener{
+                            .setPositiveButton("Yes", object : DialogInterface.OnClickListener {
                                 override fun onClick(dialog: DialogInterface?, which: Int) {
                                     context.getSharedPreferences("myPref", MODE_PRIVATE).edit().remove("myToken").commit()
                                 }
                             })
-                            .setNegativeButton("No", object : DialogInterface.OnClickListener{
+                            .setNegativeButton("No", object : DialogInterface.OnClickListener {
                                 override fun onClick(dialog: DialogInterface, which: Int) {
                                     dialog.dismiss()
                                 }
                             })
                             .create()
                             .show()
-                }else{
-                    Toast.makeText(context, "User HAven't Login", Toast.LENGTH_LONG).show()
+
+                    return true
                 }
-                return true
+                else -> return super.onOptionsItemSelected(item)
             }
-            else -> return super.onOptionsItemSelected(item)
+        }else{
+            when (item.itemId) {
+                R.id.log_in -> {
+                    startActivity(Intent(context, StartActivity::class.java))
+                    return true
+                }
+                else -> return super.onOptionsItemSelected(item)
+            }
         }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -134,7 +131,7 @@ class ProfileContentFragment : Fragment() {
             override fun onResponse(response: JSONObject) {
                 val userInfo = response.getJSONObject("data")
                 name_user.text = userInfo.getString("name")
-                //Picasso.with(context).load(userInfo.getString("profilepic")).into(user_dp)
+                Picasso.with(context).load(userInfo.getString("profilepic")).into(user_dp)
                 progressDialog.dismiss()
             }
 

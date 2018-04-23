@@ -9,5 +9,12 @@
         android:icon="@mipmap/ic_action_logout"
         app:showAsAction="always">
     </item>
+    <item
+        android:id="@+id/log_in"
+        android:title="Log In"
+        android:icon="@mipmap/ic_action_login"
+        app:showAsAction="always">
+
+    </item>
 
 </menu>

@@ -3,6 +3,7 @@ package my.com.itrain.big_car
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
@@ -26,8 +27,14 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.LatLng
 import org.json.JSONException
 import android.support.design.widget.Snackbar.LENGTH_INDEFINITE
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_trips_content.*
 import my.com.itrain.big_car.BuildConfig.APPLICATION_ID
+import org.json.JSONObject
 
 
 /**
@@ -36,9 +43,11 @@ import my.com.itrain.big_car.BuildConfig.APPLICATION_ID
 class TripsContentFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private var longitude: Double = 0.0
-    private var latitude: Double = 0.0
 
+    private var nearbyURL = "https://gentle-atoll-11837.herokuapp.com/api/tripnearby/"
+    private val nearByMaterial = ArrayList<JSONObject>()
+    private lateinit var myLocation: LatLng
+    private var service_id: String = ""
     private val TAG = "MainActivity"
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 34
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -82,24 +91,8 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
         Log.i(TAG, "onRequestPermissionResult")
         if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
             when {
-            // If user interaction was interrupted, the permission request is cancelled and you
-            // receive empty arrays.
                 grantResults.isEmpty() -> Log.i(TAG, "User interaction was cancelled.")
-
-            // Permission granted.
                 (grantResults[0] == PackageManager.PERMISSION_GRANTED) -> getLastLocation()
-
-            // Permission denied.
-
-            // Notify the user via a SnackBar that they have rejected a core permission for the
-            // app, which makes the Activity useless. In a real app, core permissions would
-            // typically be best requested during a welcome-screen flow.
-
-            // Additionally, it is important to remember that a permission might have been
-            // rejected without asking the user for permission (device policy or "Never ask
-            // again" prompts). Therefore, a user interface affordance is typically implemented
-            // when permissions are denied. Otherwise, your app could appear unresponsive to
-            // touches or interactions which have required permissions.
                 else -> {
                     showSnackbar(R.string.permission_denied_explanation, R.string.settings,
                             View.OnClickListener {
@@ -126,10 +119,36 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
         fusedLocationClient.lastLocation.addOnCompleteListener{
             task ->
                 if (task.isSuccessful && task.result != null){
-                    Log.d("Latitude", task.result.latitude.toString())
-                    latitude = task.result.latitude
-                    Log.d("Longitude", task.result.longitude.toString())
-                    longitude = task.result.longitude
+
+                    val requestVolley = Volley.newRequestQueue(this.context)
+
+                    val progressDialog = ProgressDialog(context, R.style.DialogTheme)
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+                    progressDialog.setTitle("Please Wait")
+                    progressDialog.setMessage("Loading")
+                    progressDialog.show()
+
+                    myLocation = LatLng(task.result.latitude, task.result.longitude)
+
+                    val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, nearbyURL+task.result.latitude+","+task.result.longitude, null, object : Response.Listener<JSONObject>{
+                        override fun onResponse(response: JSONObject) {
+                            val nearbyData = response.getJSONArray("data")
+
+                            for (i in 0 until nearbyData.length()){
+                                Log.d("Debug", nearbyData.toString())
+                                nearByMaterial.add(nearbyData.getJSONObject(i))
+                            }
+                            progressDialog.dismiss()
+                        }
+                    },
+                            object : Response.ErrorListener{
+                                override fun onErrorResponse(error: VolleyError) {
+                                    error.printStackTrace()
+                                    progressDialog.dismiss()
+                                }
+                            })
+                    requestVolley.add(jsonObjectRequest)
+
                 }else{
                     Log.d("Debug","getLastLocation:exception"+task.exception)
                     showSnackbar(R.string.no_location_detected)
@@ -153,30 +172,29 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
     private fun checkPermissions() =
             ActivityCompat.checkSelfPermission(context, ACCESS_COARSE_LOCATION) == PERMISSION_GRANTED
 
-
     override fun onMapReady(map:GoogleMap) {
         mMap = map
+        map.isMyLocationEnabled
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL)
         mMap.setOnMapLoadedCallback(object : GoogleMap.OnMapLoadedCallback{
             override fun onMapLoaded() {
-                val myLocation = LatLng(latitude, longitude)
-                mMap.addMarker(MarkerOptions().position(myLocation).draggable(true).title("Location"))
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation,12F))
-                mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener{
-                    override fun onMarkerClick(p0: Marker?): Boolean {
-                        val intent = Intent(context,TourDetailActivity::class.java)
-                        try {
-                            intent.putExtra("service_id", 11)
-                        }catch (e : JSONException){
-                            e.printStackTrace()
+                for (i in 0 until nearByMaterial.size){
+                    mMap.addMarker(MarkerOptions().position(LatLng(nearByMaterial.get(i).getDouble("latitude"), nearByMaterial.get(i).getDouble("longitude"))).title(nearByMaterial.get(i).getString("attraction")))
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation,18F))
+                    mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener{
+                        override fun onMarkerClick(p0: Marker?): Boolean {
+                            val intent = Intent(context,TourDetailActivity::class.java)
+                            try {
+                                intent.putExtra("service_id", nearByMaterial.get(i).getString("service_id"))
+                            }catch (e : JSONException){
+                                e.printStackTrace()
+                            }
+                            startActivity(intent)
+                            return true
                         }
-                        startActivity(intent)
-                        return true
-                    }
-
-                })
+                    })
+                }
             }
         })
     }
-
 }// Required empty public constructor

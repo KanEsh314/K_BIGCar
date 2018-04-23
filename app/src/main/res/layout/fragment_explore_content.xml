@@ -25,22 +25,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/tourbannerImage"
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/bannerViewPager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/tour2" />
-
-                <TextView
-                    android:id="@+id/tourbannerDesc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:padding="@dimen/mediumPadding"
-                    android:text="Discover and book amazing things-to-do at exclusive prices"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/bannerDesc" />
+                    android:layout_alignParentTop="true"/>
 
             </RelativeLayout>
 

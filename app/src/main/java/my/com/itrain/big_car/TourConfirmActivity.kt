@@ -75,10 +75,7 @@ class TourConfirmActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val item = parent?.getItemAtPosition(position).toString()
-                Log.d("Debug", item)
-                Log.d("Find", selectOrigin.selectedItem.toString())
-                Toast.makeText(parent?.getContext(), "Android Custom Spinner Example Output..." + item, Toast.LENGTH_LONG).show()
+                nationality = countryMaterial.get(position).getString("id")
             }
         })
 
@@ -237,16 +234,6 @@ class TourConfirmActivity : AppCompatActivity() {
 class CustomSpinnerAdapter(private val context: Context):BaseAdapter() {
 
     private val nationality = ArrayList<JSONObject>()
-
-//    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
-//        return super.getDropDownView(position, convertView, parent)
-//        val textView = TextView(context)
-//        textView.gravity = Gravity.CENTER_VERTICAL
-//        textView.setPadding(16, 16, 16, 16)
-//        textView.textSize = 14F
-//        textView.text = nationality.get(position).getString("name")
-//        textView.setTextColor(Color.parseColor("#000000"))
-//    }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val textView = TextView(context)
