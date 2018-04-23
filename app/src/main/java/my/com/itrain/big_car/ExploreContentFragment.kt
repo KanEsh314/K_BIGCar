@@ -66,7 +66,7 @@ class ExploreContentFragment : Fragment() {
 //                {
 //                    current_Banner = 0
 //                }
-//                bannerViewPager..setCurrentItem(current_Banner++, true)
+//                bannerViewPager.setCurrentItem(current_Banner++, true)
 //            }
 //        }
 //        val swipeTimer = Timer()
