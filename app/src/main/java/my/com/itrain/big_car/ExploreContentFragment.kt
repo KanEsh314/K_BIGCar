@@ -250,10 +250,6 @@ class ExploreContentFragment : Fragment() {
 
 class BannerAdapter(private val context: Context, private val banner: ArrayList<JSONObject>) : PagerAdapter() {
 
-    override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
-        container?.removeAllViews()
-    }
-
     var inflater:LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun instantiateItem(container: ViewGroup, position: Int): View? {

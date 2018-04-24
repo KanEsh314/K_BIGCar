@@ -195,7 +195,7 @@
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="50dip"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textEmailAddress|textAutoComplete"
                         android:hint="Email"
                         android:textSize="@dimen/smallUniversalText"
                         android:textColor="@color/colorDark"/>

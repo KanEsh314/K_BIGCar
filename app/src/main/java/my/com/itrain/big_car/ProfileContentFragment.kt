@@ -84,7 +84,6 @@ class ProfileContentFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        if(context.getSharedPreferences("myPref", MODE_PRIVATE).contains("myToken")) {
             when (item.itemId) {
                 R.id.log_out -> {
                     AlertDialog.Builder(activity, R.style.DialogTheme)
@@ -103,21 +102,14 @@ class ProfileContentFragment : Fragment() {
                             })
                             .create()
                             .show()
-
                     return true
                 }
-                else -> return super.onOptionsItemSelected(item)
-            }
-        }else{
-            when (item.itemId) {
                 R.id.log_in -> {
                     startActivity(Intent(context, StartActivity::class.java))
                     return true
                 }
                 else -> return super.onOptionsItemSelected(item)
             }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -155,9 +147,30 @@ class ProfileContentFragment : Fragment() {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.profile_main_menu,menu)
+
+        val log_in = menu.findItem(R.id.log_in)
+        log_in.setVisible(false)
+        val log_out = menu.findItem(R.id.log_in)
+        log_out.setVisible(false)
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+
+        val log_out = menu.findItem(R.id.log_out)
+        val log_in = menu.findItem(R.id.log_in)
+
+        if(context.getSharedPreferences("myPref", MODE_PRIVATE).contains("myToken")) {
+            log_in.setVisible(false)
+            log_out.setVisible(true)
+        }else {
+            log_in.setVisible(true)
+            log_out.setVisible(false)
+        }
+
+    }
 }// Required empty public constructor

@@ -51,7 +51,7 @@ class TourDetailActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        service_id = intent.getIntExtra("service_id",0)
+        service_id = intent.getIntExtra("service_id", 0)
 
         open_share.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {

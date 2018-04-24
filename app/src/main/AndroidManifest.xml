@@ -42,7 +42,7 @@
         <activity android:name=".AccountActivity" />
         <activity android:name=".ContactActivity" />
         <activity android:name=".TourSummaryActivity" />
-        <activity android:name=".FavoriteActivity"></activity>
+        <activity android:name=".FavoriteActivity"/>
     </application>
 
 </manifest>

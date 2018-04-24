@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:src="@drawable/tour2" />
+        android:src="@drawable/tour2"/>
 
     <TextView
         android:id="@+id/tourbannerDesc"
@@ -20,6 +20,7 @@
         android:padding="@dimen/mediumPadding"
         android:text="Discover and book amazing things-to-do at exclusive prices"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/bannerDesc" />
+        android:textSize="@dimen/bannerDesc"
+        android:textStyle="bold"/>
 
 </RelativeLayout>

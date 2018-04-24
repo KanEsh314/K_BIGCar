@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_account.*
 import kotlinx.android.synthetic.main.activity_tour_confirm.*
 import kotlinx.android.synthetic.main.activity_tour_count.*
+import my.com.itrain.big_car.R.id.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -162,6 +163,7 @@ class TourConfirmActivity : AppCompatActivity() {
             override fun getHeaders():Map<String,String>{
                 val headers = HashMap<String, String>()
                 headers.put("Authorization", "Bearer "+sharedPreferences)
+//                headers.put("Content-Type", "application/json")
                 return headers
             }
             override fun getParams():Map<String, String> {

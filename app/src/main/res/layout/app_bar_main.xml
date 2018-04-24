@@ -68,7 +68,4 @@
             app:tabTextColor="#000000" />
 
     </RelativeLayout>
-
-
-
 </android.support.design.widget.CoordinatorLayout>
