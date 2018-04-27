@@ -36,6 +36,7 @@ class CategoryActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val catservice_id = intent.getIntExtra("servicecatid",0)
+        titleCat?.text = intent.getStringExtra("categoryTitle")
 
         //VOLLEY
         val requestVolley = Volley.newRequestQueue(this)

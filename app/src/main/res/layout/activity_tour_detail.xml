@@ -50,10 +50,10 @@
                         android:layout_marginRight="10dp">
 
                         <Button
-                            android:id="@+id/open_cart"
+                            android:id="@+id/favourite"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:background="@android:drawable/ic_menu_add"/>
+                            android:background="@mipmap/ic_action_favourite"/>
 
                     </RelativeLayout>
 

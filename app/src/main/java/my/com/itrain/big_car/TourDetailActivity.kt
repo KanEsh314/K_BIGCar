@@ -37,6 +37,7 @@ class TourDetailActivity : AppCompatActivity() {
 
     var tourURL = "https://gentle-atoll-11837.herokuapp.com/api/tour/"
     var commentURL = "http://gentle-atoll-11837.herokuapp.com/api/review/"
+    var favoriteURL = "http://gentle-atoll-11837.herokuapp.com/api/favoritetour"
     private val tourMaterial = ArrayList<JSONObject>()
     var CheckEditText:Boolean = false
     var service_id:Int = 0
@@ -53,9 +54,58 @@ class TourDetailActivity : AppCompatActivity() {
 
         service_id = intent.getIntExtra("service_id", 0)
 
+        favourite.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val progressDialog = ProgressDialog(applicationContext, R.style.DialogTheme)
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+                progressDialog.setTitle("Please Wait")
+                progressDialog.setMessage("Loading")
+                progressDialog.show()
+
+                val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
+                val stringRequest = object : StringRequest(Request.Method.POST, favoriteURL, object : Response.Listener<String>{
+                    override fun onResponse(response: String?) {
+                        Log.d("Debug", response)
+                        progressDialog.dismiss()
+                    }
+                }, object : Response.ErrorListener{
+                    override fun onErrorResponse(error: VolleyError?) {
+                        progressDialog.dismiss()
+                        Log.d("Debug", error.toString())
+                    }
+                }){
+                    @Throws(AuthFailureError::class)
+                    override fun getHeaders():Map<String,String>{
+                        val headers = HashMap<String, String>()
+                        headers.put("Authorization", "Bearer "+sharedPreferences)
+                        return headers
+                    }
+                    override fun getParams():Map<String, String> {
+                        val params = HashMap<String, String>()
+                        params.put("service_id", service_id.toString())
+                        return params
+                    }
+                }
+
+                val requestVolley = Volley.newRequestQueue(applicationContext)
+                requestVolley.add(stringRequest)
+
+
+            }
+
+        })
+
         open_share.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                Toast.makeText(applicationContext,"Item Shared", Toast.LENGTH_LONG).show()
+                val intent = Intent()
+                try {
+                    intent.setAction(Intent.ACTION_SEND)
+                    intent.putExtra(Intent.EXTRA_TEXT, "http://www.bigtreetours.com/")
+                    intent.setType("text/plain")
+                }catch (e : Exception){
+                    e.printStackTrace()
+                }
+                startActivity(intent)
             }
 
         })

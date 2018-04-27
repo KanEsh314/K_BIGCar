@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import com.squareup.picasso.Picasso
 import org.json.JSONObject
 import org.w3c.dom.Text
 
@@ -16,7 +17,7 @@ import org.w3c.dom.Text
  * Created by iTrain on 20-Dec-17.
  */
 
-class ExplorePopularContent(private val content: Context, private val listener: OnItemClickListener) : RecyclerView.Adapter<ExplorePopularContent.ViewHolder>(){
+class ExplorePopularContent(private val context: Context, private val listener: OnItemClickListener) : RecyclerView.Adapter<ExplorePopularContent.ViewHolder>(){
 
     private val byCategory = ArrayList<JSONObject>()
 
@@ -48,7 +49,8 @@ class ExplorePopularContent(private val content: Context, private val listener: 
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.popImg?.setImageResource(R.drawable.tour2)
+        //holder?.popImg?.setImageResource(R.drawable.tour2)
+        Picasso.with(context).load(byCategory.get(position).getString("service_image")).into(holder?.popImg)
         holder?.popName?.text = Html.fromHtml(byCategory.get(position).getString("product_name"))
         holder?.popDesc?.text = Html.fromHtml(byCategory.get(position).getString("product_desc"))
         holder?.popLocation?.text = Html.fromHtml(byCategory.get(position).getString("location"))

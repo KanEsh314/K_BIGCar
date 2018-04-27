@@ -58,24 +58,6 @@ class ExploreContentFragment : Fragment() {
         bannerViewPager.requestLayout()
         bannerViewPager.layoutParams.height = newHeight
 
-//        num_Banner = bannerMaterial.size
-//        val handler = Handler()
-//        val Update = object:Runnable {
-//            override fun run() {
-//                if (current_Banner === num_Banner)
-//                {
-//                    current_Banner = 0
-//                }
-//                bannerViewPager.setCurrentItem(current_Banner++, true)
-//            }
-//        }
-//        val swipeTimer = Timer()
-//        swipeTimer.schedule(object:TimerTask() {
-//            override fun run() {
-//                handler.post(Update)
-//            }
-//        }, 3000, 3000)
-
         return view
     }
 
@@ -133,6 +115,7 @@ class ExploreContentFragment : Fragment() {
                 val intent = Intent(context, CategoryActivity::class.java)
                 try {
                     intent.putExtra("servicecatid", categoriesMaterial.get(position).getInt("servicecat_id"))
+                    intent.putExtra("categoryTitle", categoriesMaterial.get(position).getString("service_name"))
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }

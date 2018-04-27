@@ -13,10 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.android.volley.AuthFailureError
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.VolleyError
+import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.RequestFuture
 import com.android.volley.toolbox.StringRequest
@@ -38,6 +35,7 @@ class TourConfirmActivity : AppCompatActivity() {
 
     var name_booking : String = ""
     var mobile_number : String = ""
+    var nationality_id : String = ""
     var nationality : String = ""
     var user_email : String = ""
     var passenger_name : String = ""
@@ -76,7 +74,8 @@ class TourConfirmActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                nationality = countryMaterial.get(position).getString("id")
+                nationality_id = countryMaterial.get(position).getString("id")
+                nationality = countryMaterial.get(position).getString("name")
             }
         })
 
@@ -126,77 +125,39 @@ class TourConfirmActivity : AppCompatActivity() {
         requestVolley.add(jsonObjectRequest)
     }
 
-    private fun sendBooking() {
-
-        val postBooking = JSONObject()
-        try {
-            val service_id = intent.getIntExtra("service_id", 0)
-            val package_id = intent.getStringExtra("package_id")
-            val travel_date = intent.getStringExtra("travel_date")
-            val travel_time_id = intent.getStringExtra("travel_time_id")
-            val travel_day_id = intent.getStringExtra("travel_day_id")
-
-            var userArray = JSONArray()
-            val newObj = JSONObject()
-            try{
-                newObj.put("passenger_name", passenger_name)
-                newObj.putOpt("ic_passport",ic_passport)
-            }catch (e : JSONException){
-                e.printStackTrace()
-            }
-            userArray.put(newObj)
-            Log.d("Array", userArray.toString())
-
-            val bookingObj = JSONObject()
-            bookingObj.put("service_name", service_id.toString())
-            bookingObj.put("service_package", package_id.toString())
-            bookingObj.put("travel_day", travel_day_id)
-            bookingObj.put("travel_time", travel_time_id)
-            bookingObj.put("travel_date", travel_date)
-            bookingObj.put("booking_name", name_booking)
-            bookingObj.put("mobile_number", mobile_number)
-            bookingObj.put("nationality", "11")
-            bookingObj.put("email", user_email)
-            bookingObj.put("passengers", userArray.toString())
-            Log.d("Booking", bookingObj.toString())
-
-            postBooking.put("booking", bookingObj.toString())
-            Log.d("Debug",postBooking.toString())
-
-        }catch (e : JSONException){
-            e.printStackTrace()
-            Log.d("Error", e.toString())
-        }
+        private fun sendBooking() {
 
         val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
-        val jsonRequest = object :JsonObjectRequest(Request.Method.POST, bookingURL, postBooking, object : Response.Listener<JSONObject>{
-            override fun onResponse(response: JSONObject?) {
-                Log.d("Debug", response.toString())
+        val stringRequest = object : StringRequest(Request.Method.POST, bookingURL, object : Response.Listener<String> {
+            override fun onResponse(response: String) {
+                Log.i("Debug", response)
                 Toast.makeText(applicationContext, "Success", Toast.LENGTH_LONG).show()
-            val intent = Intent(this@TourConfirmActivity, TourSummaryActivity::class.java)
-            try {
-                intent.putExtra("tour_name", tour_name)
-                intent.putExtra("package_name", package_name)
-                intent.putExtra("package_pax", package_pax)
-                intent.putExtra("travel_date", travel_date)
-                intent.putExtra("travel_time", travel_time)
-                intent.putExtra("booking_name", name_booking)
-                intent.putExtra("mobile_number", mobile_number)
-                intent.putExtra("nationality", nationality)
-                intent.putExtra("user_email", user_email)
-                intent.putExtra("passenger_name", passenger_name)
-                intent.putExtra("ic_passport", ic_passport)
-            }catch (e: JSONException){
-                e.printStackTrace()
-            }
-            startActivity(intent)
+                val intent = Intent(applicationContext, TourSummaryActivity::class.java)
+                try {
+                    intent.putExtra("tour_name", tour_name)
+                    intent.putExtra("package_name", package_name)
+                    intent.putExtra("package_pax", package_pax)
+                    intent.putExtra("travel_date", travel_date)
+                    intent.putExtra("travel_time", travel_time)
+                    intent.putExtra("booking_name", name_booking)
+                    intent.putExtra("mobile_number", mobile_number)
+                    intent.putExtra("nationality", nationality)
+                    intent.putExtra("user_email", user_email)
+                    intent.putExtra("passenger_name", passenger_name)
+                    intent.putExtra("ic_passport", ic_passport)
+                }catch (e: JSONException){
+                    e.printStackTrace()
+                }
+                startActivity(intent)
             }
         },
-                object : Response.ErrorListener{
-                    override fun onErrorResponse(error: VolleyError) {
-                        error.printStackTrace()
+                object : Response.ErrorListener {
+                    override fun onErrorResponse(error: VolleyError?) {
+                        VolleyLog.d("Error",error)
                         Log.d("Error", error.toString())
+                        Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
                     }
+
                 }){
             @Throws(AuthFailureError::class)
             override fun getHeaders():Map<String,String>{
@@ -205,9 +166,47 @@ class TourConfirmActivity : AppCompatActivity() {
                 headers.put("Content-Type", "application/json; charset=utf-8")
                 return headers
             }
+            override fun getParams():Map<String, String> {
+                val params = HashMap<String, String>()
+
+                val service_id = intent.getIntExtra("service_id", 0)
+                val package_id = intent.getStringExtra("package_id")
+                val travel_date = intent.getStringExtra("travel_date")
+                val travel_time_id = intent.getStringExtra("travel_time_id")
+                val travel_day_id = intent.getStringExtra("travel_day_id")
+
+                var userArray = JSONArray()
+                val newObj = JSONObject()
+                try{
+                    newObj.put("passenger_name", passenger_name)
+                    newObj.putOpt("ic_passport",ic_passport)
+                }catch (e : JSONException){
+                    e.printStackTrace()
+                }
+                userArray.put(newObj)
+                Log.d("Array", userArray.toString())
+
+                val bookingObj = JSONObject()
+                bookingObj.put("service_name", service_id.toString())
+                bookingObj.put("service_package", package_id.toString())
+                bookingObj.put("travel_day", travel_day_id)
+                bookingObj.put("travel_time", travel_time_id)
+                bookingObj.put("travel_date", travel_date)
+                bookingObj.put("booking_name", name_booking)
+                bookingObj.put("mobile_number", mobile_number)
+                bookingObj.put("nationality",  nationality_id)
+                bookingObj.put("email", user_email)
+                Log.d("Booking", bookingObj.toString())
+
+                params.put("booking", bookingObj.toString())
+                Log.d("Debug",params.toString())
+
+                return params
+            }
         }
-        val requestVolleyBooking = Volley.newRequestQueue(applicationContext)
-        requestVolleyBooking.add(jsonRequest)
+
+        val requestVolley = Volley.newRequestQueue(applicationContext)
+        requestVolley.add(stringRequest)
     }
 
     private fun CheckEditTextIsEmptyOrNot() {
