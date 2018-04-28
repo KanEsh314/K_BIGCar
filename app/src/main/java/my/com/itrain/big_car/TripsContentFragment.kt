@@ -4,6 +4,8 @@ package my.com.itrain.big_car
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
@@ -27,6 +29,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.LatLng
 import org.json.JSONException
 import android.support.design.widget.Snackbar.LENGTH_INDEFINITE
+import android.support.v7.app.AlertDialog
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
@@ -46,7 +50,7 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
 
     private var nearbyURL = "https://gentle-atoll-11837.herokuapp.com/api/tripnearby/"
     private val nearByMaterial = ArrayList<JSONObject>()
-    private lateinit var myLocation: LatLng
+    private var myLocation: LatLng = LatLng(0.0,0.0)
     private var service_id: Int = 0
     private val TAG = "MainActivity"
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 34
@@ -178,27 +182,44 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL)
         mMap.setOnMapLoadedCallback(object : GoogleMap.OnMapLoadedCallback{
             override fun onMapLoaded() {
-                for (i in 0 until nearByMaterial.size){
-                    val nerByMap = mMap.addMarker(MarkerOptions()
-                                    .position(LatLng(nearByMaterial.get(i).getDouble("latitude"), nearByMaterial.get(i).getDouble("longitude")))
-                                    .title(nearByMaterial.get(i).getString("attraction")))
-                    nerByMap.tag = nearByMaterial.get(i).getInt("service_id")
-                }
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation,18F))
-                mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener{
-                    override fun onMarkerClick(p0: Marker): Boolean {
-                        service_id = p0.tag as Int
-                        val intent = Intent(context,TourDetailActivity::class.java)
-                        try {
-                            intent.putExtra("service_id", service_id)
-                        }catch (e : JSONException){
-                            e.printStackTrace()
-                        }
-                        startActivity(intent)
-                        return true
+                if (nearByMaterial.size == 0){
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 18F))
+                    AlertDialog.Builder(activity, R.style.DialogTheme)
+                            .setCancelable(false)
+                            .setTitle("Nearby Tour")
+                            .setMessage("No Nearby Tour Around You")
+                            .setPositiveButton("Okay", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface, which: Int) {
+                                    dialog.dismiss()
+                                }
+                            })
+                            .create()
+                            .show()
+                }else {
+
+                    for (i in 0 until nearByMaterial.size) {
+                        val nerByMap = mMap.addMarker(MarkerOptions()
+                                .position(LatLng(nearByMaterial.get(i).getDouble("latitude"), nearByMaterial.get(i).getDouble("longitude")))
+                                .title(nearByMaterial.get(i).getString("attraction")))
+                        nerByMap.tag = nearByMaterial.get(i).getInt("service_id")
                     }
-                })
+
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 18F))
+                    mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
+                        override fun onMarkerClick(p0: Marker): Boolean {
+                            service_id = p0.tag as Int
+                            val intent = Intent(context, TourDetailActivity::class.java)
+                            try {
+                                intent.putExtra("service_id", service_id)
+                            } catch (e: JSONException) {
+                                e.printStackTrace()
+                            }
+                            startActivity(intent)
+                            return true
+                        }
+                    })
+                }
             }
         })
     }

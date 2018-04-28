@@ -53,44 +53,50 @@ class TourDetailActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         service_id = intent.getIntExtra("service_id", 0)
+        Log.d("Debug",service_id.toString())
 
         favourite.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
+
+                val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
+                if(applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).contains("myToken")){
+
                 val progressDialog = ProgressDialog(applicationContext, R.style.DialogTheme)
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
                 progressDialog.setTitle("Please Wait")
                 progressDialog.setMessage("Loading")
                 progressDialog.show()
 
-                val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
-                val stringRequest = object : StringRequest(Request.Method.POST, favoriteURL, object : Response.Listener<String>{
-                    override fun onResponse(response: String?) {
-                        Log.d("Debug", response)
-                        progressDialog.dismiss()
+                    val stringRequest = object : StringRequest(Request.Method.POST, favoriteURL, object : Response.Listener<String>{
+                        override fun onResponse(response: String?) {
+                            Log.d("Debug", response)
+                            progressDialog.dismiss()
+                        }
+                    }, object : Response.ErrorListener{
+                        override fun onErrorResponse(error: VolleyError?) {
+                            progressDialog.dismiss()
+                            Log.d("Debug", error.toString())
+                        }
+                    }){
+                        @Throws(AuthFailureError::class)
+                        override fun getHeaders():Map<String,String>{
+                            val headers = HashMap<String, String>()
+                            headers.put("Authorization", "Bearer "+sharedPreferences)
+                            return headers
+                        }
+                        override fun getParams():Map<String, String> {
+                            val params = HashMap<String, String>()
+                            params.put("service_id", service_id.toString())
+                            return params
+                        }
                     }
-                }, object : Response.ErrorListener{
-                    override fun onErrorResponse(error: VolleyError?) {
-                        progressDialog.dismiss()
-                        Log.d("Debug", error.toString())
-                    }
-                }){
-                    @Throws(AuthFailureError::class)
-                    override fun getHeaders():Map<String,String>{
-                        val headers = HashMap<String, String>()
-                        headers.put("Authorization", "Bearer "+sharedPreferences)
-                        return headers
-                    }
-                    override fun getParams():Map<String, String> {
-                        val params = HashMap<String, String>()
-                        params.put("service_id", service_id.toString())
-                        return params
-                    }
+
+                    val requestVolley = Volley.newRequestQueue(applicationContext)
+                    requestVolley.add(stringRequest)
+
+                }else{
+                    startActivity(Intent(applicationContext, StartActivity::class.java))
                 }
-
-                val requestVolley = Volley.newRequestQueue(applicationContext)
-                requestVolley.add(stringRequest)
-
-
             }
 
         })
@@ -112,13 +118,20 @@ class TourDetailActivity : AppCompatActivity() {
 
         postcomment.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                CheckEditTextIsEmptyOrNot()
-                if (CheckEditText){
-                    commentPost()
-                    Toast.makeText(applicationContext, "Thank You For Your Review", Toast.LENGTH_LONG).show()
+
+                if(applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).contains("myToken")){
+                    CheckEditTextIsEmptyOrNot()
+                    if (CheckEditText){
+                        commentPost()
+                        Toast.makeText(applicationContext, "Thank You For Your Review", Toast.LENGTH_LONG).show()
+                    }else{
+                        Toast.makeText(applicationContext, "Please fill all form fields.", Toast.LENGTH_LONG).show()
+                    }
                 }else{
-                    Toast.makeText(applicationContext, "Please fill all form fields.", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(applicationContext, StartActivity::class.java))
                 }
+
+
             }
         })
 

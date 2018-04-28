@@ -2,12 +2,15 @@ package my.com.itrain.big_car
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,8 +24,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.book_content.*
 import kotlinx.android.synthetic.main.fragment_browse_content.*
 import kotlinx.android.synthetic.main.fragment_trips_content.*
+import kotlin.math.max
 
 /**
  * A simple [Fragment] subclass.
@@ -30,8 +35,6 @@ import kotlinx.android.synthetic.main.fragment_trips_content.*
 class BrowseContentFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var mMap:GoogleMap
-    var VehicleType = arrayOf<String>("4 Seats", "10 Seats", "12 Seats", "16 Seats", "6 Seats")
-
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 34
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var latitude:Double = 0.0
@@ -41,15 +44,28 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_browse_content, container, false)
 
-        val vehicle_type_spinner = rootView.findViewById<Spinner>(R.id.vehicle_spinner)
-        var adapter = ArrayAdapter<String>(context, R.layout.vehicle_type, R.id.vehicle_text, VehicleType)
-        vehicle_type_spinner.adapter = adapter
-
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapGoogle) as SupportMapFragment
         mapFragment.getMapAsync(this)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
         return rootView
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        selectTrip.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val alertDialog = AlertDialog.Builder(context,R.style.DialogTheme)
+                val inflater = layoutInflater
+                val dialog =inflater.inflate(R.layout.trip_type, null)
+                dialog.minimumHeight = resources.displayMetrics.heightPixels/2
+                dialog.minimumWidth = resources.displayMetrics.widthPixels
+                alertDialog.setView(dialog)
+                        .create()
+                        .show()
+            }
+        })
     }
 
     private fun requestPermission() {
