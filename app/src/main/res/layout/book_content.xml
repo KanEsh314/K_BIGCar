@@ -17,14 +17,15 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_action_pick_up"/>
 
-        <EditText
+        <TextView
             android:id="@+id/pickup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="@dimen/smallPadding"
             android:textSize="@dimen/smallUniversalText"
-            android:hint="Pick Up Point" />
+            android:hint="Where you are from?"
+            android:textStyle="italic"/>
 
     </LinearLayout>
     <LinearLayout
@@ -40,14 +41,15 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_action_drop_off"/>
 
-        <EditText
+        <TextView
             android:id="@+id/dropoff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="@dimen/smallPadding"
             android:textSize="@dimen/smallUniversalText"
-            android:hint="Drop Off Point" />
+            android:hint="Where are you going?"
+            android:textStyle="italic"/>
 
     </LinearLayout>
     <LinearLayout
@@ -63,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style=""
-            android:padding="@dimen/smallPadding"
+            android:padding="@dimen/mediumPadding"
             android:layout_weight="3"
             android:entries="@array/trip_type_arrays"
             android:prompt="@string/trip_type_prompt"/>
@@ -72,7 +74,7 @@
             android:id="@+id/trip_payment_method"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/smallPadding"
+            android:padding="@dimen/mediumPadding"
             android:layout_weight="3"
             android:entries="@array/trip_payment_arrays"
             android:prompt="@string/trip_payment_prompt"/>
@@ -81,7 +83,7 @@
             android:id="@+id/trip_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/smallPadding"
+            android:padding="@dimen/mediumPadding"
             android:layout_weight="3"
             android:entries="@array/trip_type_arrays"/>
 

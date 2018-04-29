@@ -17,11 +17,11 @@
         <item>Mrs</item>
     </string-array>
 
-    <string name="country_prompt">Title</string>
-    <string-array name="countryEntries">
-        <item>Malaysia</item>
-        <item>Singapore</item>
-        <item>Thailand</item>
+    <string-array name="vehicle_seat">
+        <item>4 Seats</item>
+        <item>10 Seats</item>
+        <item>12 Seats</item>
+        <item>16 Seats</item>
     </string-array>
 
     <!--Trip Type-->
