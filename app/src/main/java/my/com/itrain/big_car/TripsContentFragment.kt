@@ -202,13 +202,14 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
                         val nerByMap = mMap.addMarker(MarkerOptions()
                                 .position(LatLng(nearByMaterial.get(i).getDouble("latitude"), nearByMaterial.get(i).getDouble("longitude")))
                                 .title(nearByMaterial.get(i).getString("attraction")))
-                        nerByMap.tag = nearByMaterial.get(i).getInt("service_id")
+                        //nerByMap.tag = nearByMaterial.get(i).getInt("service_id")
                     }
 
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 18F))
                     mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
                         override fun onMarkerClick(p0: Marker): Boolean {
-                            service_id = p0.tag as Int
+                            //service_id = p0.tag as Int
+                            service_id = 2
                             val intent = Intent(context, TourDetailActivity::class.java)
                             try {
                                 intent.putExtra("service_id", service_id)

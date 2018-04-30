@@ -61,20 +61,21 @@ class TourDetailActivity : AppCompatActivity() {
                 val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
                 if(applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).contains("myToken")){
 
-                val progressDialog = ProgressDialog(applicationContext, R.style.DialogTheme)
-                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
-                progressDialog.setTitle("Please Wait")
-                progressDialog.setMessage("Loading")
-                progressDialog.show()
+//                val progressDialog = ProgressDialog(applicationContext, R.style.DialogTheme)
+//                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+//                progressDialog.setTitle("Please Wait")
+//                progressDialog.setMessage("Loading")
+//                progressDialog.show()
 
                     val stringRequest = object : StringRequest(Request.Method.POST, favoriteURL, object : Response.Listener<String>{
                         override fun onResponse(response: String?) {
                             Log.d("Debug", response)
-                            progressDialog.dismiss()
+                            Toast.makeText(applicationContext, "Successfully Added", Toast.LENGTH_LONG).show()
+//                            progressDialog.dismiss()
                         }
                     }, object : Response.ErrorListener{
                         override fun onErrorResponse(error: VolleyError?) {
-                            progressDialog.dismiss()
+//                            progressDialog.dismiss()
                             Log.d("Debug", error.toString())
                         }
                     }){

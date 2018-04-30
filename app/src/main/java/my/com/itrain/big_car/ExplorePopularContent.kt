@@ -50,7 +50,7 @@ class ExplorePopularContent(private val context: Context, private val listener: 
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         //holder?.popImg?.setImageResource(R.drawable.tour2)
-        Picasso.with(context).load(byCategory.get(position).getString("service_image")).into(holder?.popImg)
+        Picasso.with(context).load(byCategory.get(position).getString("image")).into(holder?.popImg)
         holder?.popName?.text = Html.fromHtml(byCategory.get(position).getString("product_name"))
         holder?.popDesc?.text = Html.fromHtml(byCategory.get(position).getString("product_desc"))
         holder?.popLocation?.text = Html.fromHtml(byCategory.get(position).getString("location"))

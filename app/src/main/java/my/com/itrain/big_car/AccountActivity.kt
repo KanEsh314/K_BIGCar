@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.Toast
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -28,6 +29,8 @@ class AccountActivity : AppCompatActivity() {
     var CheckEditText:Boolean = false
     var userURL = "https://gentle-atoll-11837.herokuapp.com/api/user"
     var updateURL = "https://gentle-atoll-11837.herokuapp.com/api/updateuser"
+
+    //var profile_picture = findViewById<ImageView>(R.id.profilePicture)
 
     var nameHolder:String = ""
     var numberHolder:String = ""
