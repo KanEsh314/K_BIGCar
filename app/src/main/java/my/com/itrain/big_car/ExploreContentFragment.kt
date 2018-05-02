@@ -194,6 +194,7 @@ class ExploreContentFragment : Fragment() {
                     bannerMaterial.add(bannerData.getJSONObject(i))
                 }
                 bannerAdapter.notifyDataSetChanged()
+                progressDialog.dismiss()
             }catch (e :JSONException){
                 e.printStackTrace()
             }
@@ -219,6 +220,7 @@ class ExploreContentFragment : Fragment() {
                 }
 
                 categoryAdapter.notifyDataSetChanged()
+                progressDialog.dismiss()
             }catch (e : JSONException){
                 e.printStackTrace()
             }

@@ -24,7 +24,7 @@ class SignUpActivity : AppCompatActivity() {
     var CheckEditText:Boolean = false
     var registerURL = "http://gentle-atoll-11837.herokuapp.com/api/registeruser"
 
-    var profileHolder: String = ""
+    //var profileHolder: String = ""
     var icpassportHolder: String = ""
     var nameHolder: String = ""
     var emailHolder: String = ""
@@ -54,27 +54,27 @@ class SignUpActivity : AppCompatActivity() {
             }
         })
 
-        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-            super.onActivityResult(requestCode, resultCode, data)
-
-            if (requestCode === PICK_IMAGE_REQUEST && resultCode === RESULT_OK && data != null && data.getData() != null)
-            {
-                val filePath = data.data
-                try
-                {
-                    //getting image from gallery
-                    bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-                    //Setting image to ImageView
-                    register_image.setImageBitmap(bitmap)
-                    //
-                    Log.d("Image", bitmap.toString())
-                }
-                catch (e:Exception) {
-                    Log.d("Debug", e.toString())
-                    e.printStackTrace()
-                }
-            }
-        }
+//        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+//            super.onActivityResult(requestCode, resultCode, data)
+//
+//            if (requestCode === PICK_IMAGE_REQUEST && resultCode === RESULT_OK && data != null && data.getData() != null)
+//            {
+//                val filePath = data.data
+//                try
+//                {
+//                    //getting image from gallery
+//                    bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
+//                    //Setting image to ImageView
+//                    register_image.setImageBitmap(bitmap)
+//                    //
+//                    Log.d("Image", bitmap.toString())
+//                }
+//                catch (e:Exception) {
+//                    Log.d("Debug", e.toString())
+//                    e.printStackTrace()
+//                }
+//            }
+//        }
 
 
         registerBtn.setOnClickListener(object : View.OnClickListener{
@@ -82,7 +82,7 @@ class SignUpActivity : AppCompatActivity() {
 
                 CheckEditTextIsEmptyOrNot()
                 if (CheckEditText){
-                    userImage()
+//                    userImage()
                     userRegistration()
                     try{
 
@@ -96,12 +96,12 @@ class SignUpActivity : AppCompatActivity() {
         })
     }
 
-    private fun userImage() {
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos)
-        var imageBytes = baos.toByteArray()
-        profileHolder = Base64.encodeToString(imageBytes, Base64.DEFAULT)
-    }
+//    private fun userImage() {
+//        val baos = ByteArrayOutputStream()
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos)
+//        var imageBytes = baos.toByteArray()
+//        profileHolder = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+//    }
 
     private fun CheckEditTextIsEmptyOrNot() {
 
@@ -145,7 +145,7 @@ class SignUpActivity : AppCompatActivity() {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = HashMap<String, String>()
-                params.put("profilepic", profileHolder)
+//                params.put("profilepic", profileHolder)
                 params.put("name", nameHolder)
                 params.put("ic", icpassportHolder)
                 params.put("email", emailHolder)

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.text.TextUtils
 import android.util.Log
 import android.view.Gravity
@@ -29,7 +30,8 @@ import org.json.JSONObject
 class TourConfirmActivity : AppCompatActivity() {
 
     var countryURL = "https://gentle-atoll-11837.herokuapp.com/api/countries"
-    var bookingURL = "http://gentle-atoll-11837.herokuapp.com/api/booking"
+    var bookingURL = "https://gentle-atoll-11837.herokuapp.com/api/booking"
+    //var bookingURL = "http://192.168.0.115/gentle-atoll-11837/public/api/booking"
     val countryMaterial = ArrayList<JSONObject>()
     var CheckEditText:Boolean = false
 
@@ -53,7 +55,6 @@ class TourConfirmActivity : AppCompatActivity() {
         setSupportActionBar(toolbarConfirm)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
 
         tour_name = intent.getStringExtra("tour_name")
         name_tour?.text = tour_name
@@ -127,98 +128,114 @@ class TourConfirmActivity : AppCompatActivity() {
 
         private fun sendBooking() {
 
+            val progressDialog = ProgressDialog(this, R.style.DialogTheme)
+            progressDialog.setCancelable(false)
+            progressDialog.isIndeterminate=true
+            progressDialog.show()
+
         val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
-        val stringRequest = object : StringRequest(Request.Method.POST, bookingURL, object : Response.Listener<String> {
-            override fun onResponse(response: String) {
-                Log.i("Debug", response)
-                Toast.makeText(applicationContext, "Success", Toast.LENGTH_LONG).show()
-                val intent = Intent(applicationContext, TourSummaryActivity::class.java)
-                try {
-                    intent.putExtra("tour_name", tour_name)
-                    intent.putExtra("package_name", package_name)
-                    intent.putExtra("package_pax", package_pax)
-                    intent.putExtra("travel_date", travel_date)
-                    intent.putExtra("travel_time", travel_time)
-                    intent.putExtra("booking_name", name_booking)
-                    intent.putExtra("mobile_number", mobile_number)
-                    intent.putExtra("nationality", nationality)
-                    intent.putExtra("user_email", user_email)
-                    intent.putExtra("passenger_name", passenger_name)
-                    intent.putExtra("ic_passport", ic_passport)
-                }catch (e: JSONException){
-                    e.printStackTrace()
-                }
-                startActivity(intent)
-            }
-        },
-                object : Response.ErrorListener {
-                    override fun onErrorResponse(error: VolleyError?) {
-                        VolleyLog.d("Error",error)
-                        Log.d("Error", error.toString())
-                        Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
+            val stringRequest = object : StringRequest(Request.Method.POST, bookingURL, object : Response.Listener<String> {
+                override fun onResponse(response: String) {
+                    Log.d("Debug", response)
+                    progressDialog.dismiss()
+                    //Toast.makeText(applicationContext, nationality, Toast.LENGTH_LONG).show()
+                    val intent = Intent(applicationContext, TourSummaryActivity::class.java)
+                    try {
+                        intent.putExtra("tour_name", tour_name)
+                        intent.putExtra("package_name", package_name)
+                        intent.putExtra("package_pax", package_pax)
+                        intent.putExtra("travel_date", travel_date)
+                        intent.putExtra("travel_time", travel_time)
+                        intent.putExtra("booking_name", name_booking)
+                        intent.putExtra("mobile_number", mobile_number)
+                        intent.putExtra("nationality", nationality)
+                        intent.putExtra("user_email", user_email)
+                        intent.putExtra("passenger_name", passenger_name)
+                        intent.putExtra("ic_passport", ic_passport)
+                    }catch (e: JSONException){
+                        e.printStackTrace()
                     }
-
-                }){
-            @Throws(AuthFailureError::class)
-            override fun getHeaders():Map<String,String>{
-                val headers = HashMap<String, String>()
-                headers.put("Authorization", "Bearer "+sharedPreferences)
-                headers.put("Content-Type", "application/json; charset=utf-8")
-                return headers
-            }
-            override fun getParams():Map<String, String> {
-                val params = HashMap<String, String>()
-
-                val service_id = intent.getIntExtra("service_id", 0)
-                val package_id = intent.getStringExtra("package_id")
-                val travel_date = intent.getStringExtra("travel_date")
-                val travel_time_id = intent.getStringExtra("travel_time_id")
-                val travel_day_id = intent.getStringExtra("travel_day_id")
-
-                var userArray = JSONArray()
-                val newObj = JSONObject()
-                try{
-                    newObj.put("passenger_name", passenger_name)
-                    newObj.putOpt("ic_passport",ic_passport)
-                }catch (e : JSONException){
-                    e.printStackTrace()
+                    startActivity(intent)
                 }
-                userArray.put(newObj)
-                Log.d("Array", userArray.toString())
+            },
+                    object : Response.ErrorListener {
+                        override fun onErrorResponse(error: VolleyError?) {
+                            VolleyLog.d("Error",error)
+                            Log.d("Error", error.toString())
+                            progressDialog.dismiss()
+                            Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
+                        }
 
-                val bookingObj = JSONObject()
-                bookingObj.put("service_name", service_id.toString())
-                bookingObj.put("service_package", package_id.toString())
-                bookingObj.put("travel_day", travel_day_id)
-                bookingObj.put("travel_time", travel_time_id)
-                bookingObj.put("travel_date", travel_date)
-                bookingObj.put("booking_name", name_booking)
-                bookingObj.put("mobile_number", mobile_number)
-                bookingObj.put("nationality",  nationality_id)
-                bookingObj.put("email", user_email)
-                Log.d("Booking", bookingObj.toString())
+                    }){
+                @Throws(AuthFailureError::class)
+                override fun getHeaders():Map<String,String>{
+                    val headers = HashMap<String, String>()
+                    headers.put("Authorization", "Bearer "+sharedPreferences)
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded")
+                    headers.put("Content-Type", "application/json; charset=utf-8")
+                    return headers
+                }
+                override fun getBody(): ByteArray {
+                    val params = HashMap<String, String>()
 
-                params.put("booking", bookingObj.toString())
-                Log.d("Debug",params.toString())
+                    val service_id = intent.getIntExtra("service_id", 0).toString()
+                    val package_id = intent.getStringExtra("package_id")
+                    val travel_date = intent.getStringExtra("travel_date")
+                    val travel_time_id = intent.getStringExtra("travel_time_id")
+                    val travel_day_id = intent.getStringExtra("travel_day_id")
 
-                return params
+                    val bookingObj = JSONObject()
+
+                    bookingObj.put("service_name", service_id)
+                    bookingObj.put("service_package", package_id)
+                    bookingObj.put("travel_date", travel_date)
+                    bookingObj.put("travel_day", travel_day_id)
+                    bookingObj.put("travel_time", travel_time_id)
+                    bookingObj.put("remark", "Just Try")
+                    bookingObj.put("booking_name", name_booking)
+                    bookingObj.put("mobile_number", mobile_number)
+                    bookingObj.put("email", user_email)
+                    bookingObj.put("nationality",  nationality_id)
+
+                    var userArray = JSONArray()
+                    val newObj = JSONObject()
+                    try{
+                        newObj.put("passenger_name", passenger_name)
+                        newObj.putOpt("ic_passport",ic_passport)
+                    }catch (e : JSONException){
+                        e.printStackTrace()
+                    }
+                    userArray.put(newObj)
+                    Log.d("Array", userArray.toString())
+
+                    bookingObj.put("passengers", userArray)
+
+                    Log.d("Booking", bookingObj.toString())
+
+                    params.put("booking", bookingObj.toString())
+                    Log.d("Debug",params.toString())
+
+                    return JSONObject(params).toString().toByteArray()
+                }
+
+                override fun getBodyContentType(): String {
+                    return "application/json; charset=utf-8"
+                }
             }
-        }
 
-        val requestVolley = Volley.newRequestQueue(applicationContext)
-        requestVolley.add(stringRequest)
+            val requestVolley = Volley.newRequestQueue(applicationContext)
+            requestVolley.add(stringRequest)
     }
 
     private fun CheckEditTextIsEmptyOrNot() {
 
         name_booking = booking_name.text.toString()
         mobile_number = phoneNumber.text.toString()
-        nationality = selectOrigin.toString()
         user_email = email.text.toString()
         passenger_name = name_passenger.text.toString()
         ic_passport = ic_number.text.toString()
 
-        if (TextUtils.isEmpty(name_booking) || TextUtils.isEmpty(mobile_number) || TextUtils.isEmpty(nationality) || TextUtils.isEmpty(user_email) || TextUtils.isEmpty(passenger_name) || TextUtils.isEmpty(ic_passport)){
+        if (TextUtils.isEmpty(name_booking) || TextUtils.isEmpty(mobile_number) || TextUtils.isEmpty(user_email) || TextUtils.isEmpty(passenger_name) || TextUtils.isEmpty(ic_passport)){
             CheckEditText = false
         }else{
             CheckEditText = true

@@ -229,7 +229,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textColor="@color/colorWhite"
-            android:text="PAY NOW"
+            android:text="MORE TOURS"
             android:layout_centerInParent="true"/>
 
     </RelativeLayout>

@@ -174,6 +174,7 @@ class TourDetailActivity : AppCompatActivity() {
                     tourName.text = tourData.getString("product_name")
                     tourDesc.text = Html.fromHtml(tourData.getString("product_desc"))
                     tourExplanation.text = Html.fromHtml(tourData.getString("highlight"))
+                    totalReviews.text = tourData.getString("total_review")
 
                     val tourGallery = tourData.getJSONArray("tour_gallery")
                     for (j in 0 until tourGallery.length()){

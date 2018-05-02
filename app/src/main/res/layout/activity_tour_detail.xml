@@ -23,9 +23,8 @@
             <ImageView
                 android:id="@+id/tourImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:src="@drawable/tour1"
                 android:scaleType="centerCrop"
                 app:layout_collapseParallaxMultiplier="0.7"
                 app:layout_collapseMode="parallax"/>
@@ -154,43 +153,64 @@
                     android:textSize="@dimen/tourTitle"
                     android:textStyle="bold" />
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:padding="@dimen/mediumPadding">
 
                     <TextView
                         android:id="@+id/collectRatingText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4.5"
+                        android:text="4.8"
                         android:textSize="72sp"
                         android:textColor="@color/colorDark"
                         android:textStyle="bold"/>
 
-                    <RatingBar
-                        android:id="@+id/collectRating"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="?attr/ratingBarStyle"
-                        android:layout_toEndOf="@id/collectRatingText"
-                        android:numStars="5"
-                        android:stepSize="0.5"
-                        android:backgroundTint="@color/colorPrimary"
-                        android:progressTint="@color/colorBlue"/>
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/collectRating"
-                        android:paddingLeft="@dimen/mediumPadding"
-                        android:text="1998 Views"
-                        android:textColor="@color/colorDark"
-                        android:textSize="@dimen/mediumUniversalText"
-                        android:layout_alignStart="@id/collectRating"
-                        android:layout_alignEnd="@id/collectRating"/>
+                        <RatingBar
+                            android:id="@+id/collectRating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="?attr/ratingBarStyleSmall"
+                            android:numStars="5"
+                            android:stepSize="0.5"
+                            android:backgroundTint="@color/colorPrimary"
+                            android:progressTint="@color/colorBlue"/>
 
-                </RelativeLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/totalReviews"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorDark"
+                                android:textSize="@dimen/smallUniversalText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" Reviews"
+                                android:textColor="@color/colorDark"
+                                android:textSize="@dimen/smallUniversalText" />
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycleTourReview"

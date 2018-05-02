@@ -29,10 +29,7 @@ import java.util.*
 class TourCountActivity : AppCompatActivity() {
 
     var tourURL = "https://gentle-atoll-11837.herokuapp.com/api/tour/"
-    private var package_name: String = ""
-    private var package_pax: String = ""
     private var tour_name: String = ""
-    private var package_id: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,8 +106,8 @@ class TourCountActivity : AppCompatActivity() {
                     val tourTimeData = tourData.getJSONArray("times")
                     for (i in 0 until tourTimeData.length()){
                         tourTimeAdapter.addJsonObject(tourTimeData.getJSONObject(i))
+                        Log.d("Debug", tourTimeData.getJSONObject(i).toString())
                     }
-
                     tourTimeAdapter.notifyDataSetChanged()
                     progressDialog.dismiss()
                 }catch (e : JSONException){
