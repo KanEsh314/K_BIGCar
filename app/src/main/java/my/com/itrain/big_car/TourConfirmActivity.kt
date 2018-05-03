@@ -67,6 +67,13 @@ class TourConfirmActivity : AppCompatActivity() {
         travel_time = intent.getStringExtra("travel_time")
         time_travel?.text = travel_time
 
+        val layoutInflater = applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val multipleTraveller = findViewById(R.id.multiplePassenger) as LinearLayout
+
+//        for (i in 0..4){
+//            multipleTraveller.addView()
+//        }
+
         val customSpinnerAdapter = CustomSpinnerAdapter(this)
         selectOrigin.setAdapter(customSpinnerAdapter)
         selectOrigin.setOnItemSelectedListener(object: AdapterView.OnItemSelectedListener {
@@ -138,24 +145,24 @@ class TourConfirmActivity : AppCompatActivity() {
                 override fun onResponse(response: String) {
                     Log.d("Debug", response)
                     progressDialog.dismiss()
-                    //Toast.makeText(applicationContext, nationality, Toast.LENGTH_LONG).show()
-                    val intent = Intent(applicationContext, TourSummaryActivity::class.java)
-                    try {
-                        intent.putExtra("tour_name", tour_name)
-                        intent.putExtra("package_name", package_name)
-                        intent.putExtra("package_pax", package_pax)
-                        intent.putExtra("travel_date", travel_date)
-                        intent.putExtra("travel_time", travel_time)
-                        intent.putExtra("booking_name", name_booking)
-                        intent.putExtra("mobile_number", mobile_number)
-                        intent.putExtra("nationality", nationality)
-                        intent.putExtra("user_email", user_email)
-                        intent.putExtra("passenger_name", passenger_name)
-                        intent.putExtra("ic_passport", ic_passport)
-                    }catch (e: JSONException){
-                        e.printStackTrace()
-                    }
-                    startActivity(intent)
+                    Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
+//                    val intent = Intent(applicationContext, TourSummaryActivity::class.java)
+//                    try {
+//                        intent.putExtra("tour_name", tour_name)
+//                        intent.putExtra("package_name", package_name)
+//                        intent.putExtra("package_pax", package_pax)
+//                        intent.putExtra("travel_date", travel_date)
+//                        intent.putExtra("travel_time", travel_time)
+//                        intent.putExtra("booking_name", name_booking)
+//                        intent.putExtra("mobile_number", mobile_number)
+//                        intent.putExtra("nationality", nationality)
+//                        intent.putExtra("user_email", user_email)
+//                        intent.putExtra("passenger_name", passenger_name)
+//                        intent.putExtra("ic_passport", ic_passport)
+//                    }catch (e: JSONException){
+//                        e.printStackTrace()
+//                    }
+//                    startActivity(intent)
                 }
             },
                     object : Response.ErrorListener {
@@ -171,7 +178,6 @@ class TourConfirmActivity : AppCompatActivity() {
                 override fun getHeaders():Map<String,String>{
                     val headers = HashMap<String, String>()
                     headers.put("Authorization", "Bearer "+sharedPreferences)
-                    //headers.put("Content-Type", "application/x-www-form-urlencoded")
                     headers.put("Content-Type", "application/json; charset=utf-8")
                     return headers
                 }

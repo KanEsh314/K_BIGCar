@@ -218,7 +218,7 @@
     </android.support.v4.widget.NestedScrollView>
 
     <RelativeLayout
-        android:id="@+id/to_PAY"
+        android:id="@+id/more_trips"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/colorPrimary"

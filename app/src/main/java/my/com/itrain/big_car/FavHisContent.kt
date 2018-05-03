@@ -8,22 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import com.squareup.picasso.Picasso
+import my.com.itrain.big_car.R.id.favImageView
 import org.json.JSONObject;
 
-public class FavHisContent(private val context: Context, private val listener: OnItemClickListener) : RecyclerView.Adapter<FavHisContent.ViewHolder>(){
+class FavHisContent(private val context: Context, private val listener: OnItemClickListener) : RecyclerView.Adapter<FavHisContent.ViewHolder>(){
 
     private val byCategory = ArrayList<JSONObject>()
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        var favImageView:ImageView
-        var favName:TextView
-        var favPrice: TextView
+        var favHisImageView:ImageView
+        var favHisName:TextView
+        var favHisPrice: TextView
 
         init {
-            favImageView = itemView.findViewById(R.id.favImageView)
-            favName = itemView.findViewById(R.id.favName)
-            favPrice = itemView.findViewById(R.id.favPrice)
+            favHisImageView = itemView.findViewById(R.id.favImageView)
+            favHisName = itemView.findViewById(R.id.favName)
+            favHisPrice = itemView.findViewById(R.id.favPrice)
         }
 
         fun bind(position: Int, listener: FavHisContent.OnItemClickListener){
@@ -41,12 +42,11 @@ public class FavHisContent(private val context: Context, private val listener: O
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.favImageView?.setImageResource(R.drawable.tour2)
-        holder?.favName?.text = Html.fromHtml(byCategory.get(position).getString("product_name"))
-        holder?.favPrice?.text = Html.fromHtml(byCategory.get(position).getString("product_desc"))
+        Picasso.with(context).load(byCategory.get(position).getString("image")).into(holder?.favHisImageView)
+        holder?.favHisName?.text = Html.fromHtml(byCategory.get(position).getString("product_name"))
+        holder?.favHisPrice?.text = Html.fromHtml(byCategory.get(position).getString("short_prod_code"))
 
         holder?.bind(position,listener)
-
     }
 
     override fun getItemCount(): Int {

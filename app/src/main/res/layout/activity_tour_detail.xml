@@ -65,7 +65,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="16dp"
                         android:layout_toStartOf="@+id/card_badge"
-                        android:background="@android:drawable/ic_menu_share" />
+                        android:background="@mipmap/ic_action_share" />
                 </RelativeLayout>
 
             </android.support.v7.widget.Toolbar>
@@ -93,7 +93,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/mediumPadding"
-                        android:textSize="@dimen/tourTitle"
+                        android:textSize="28sp"
                         android:textColor="@color/colorDark"
                         android:textStyle="bold"/>
 
@@ -110,7 +110,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorDark"
-                        android:textSize="@dimen/mediumUniversalText" />
+                        android:textSize="@dimen/smallUniversalText" />
 
                 </RelativeLayout>
 
@@ -204,12 +204,7 @@
                                 android:textSize="@dimen/smallUniversalText" />
 
                         </LinearLayout>
-
-
-
                     </LinearLayout>
-
-
                 </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView

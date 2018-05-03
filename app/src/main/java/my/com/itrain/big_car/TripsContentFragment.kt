@@ -38,6 +38,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_trips_content.*
 import my.com.itrain.big_car.BuildConfig.APPLICATION_ID
+import my.com.itrain.big_car.R.id.coordinateLayout
 import org.json.JSONObject
 
 
@@ -199,10 +200,11 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
                 }else {
 
                     for (i in 0 until nearByMaterial.size) {
-                        val nerByMap = mMap.addMarker(MarkerOptions()
+                        val nearByMap = mMap.addMarker(MarkerOptions()
                                 .position(LatLng(nearByMaterial.get(i).getDouble("latitude"), nearByMaterial.get(i).getDouble("longitude")))
                                 .title(nearByMaterial.get(i).getString("attraction")))
-                        //nerByMap.tag = nearByMaterial.get(i).getInt("service_id")
+                        nearByMap.showInfoWindow()
+                        //nearByMap.tag = nearByMaterial.get(i).getInt("service_id")
                     }
 
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 18F))

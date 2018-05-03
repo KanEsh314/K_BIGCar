@@ -41,25 +41,19 @@ class AccountActivity : AppCompatActivity() {
         setContentView(R.layout.activity_account)
 
         setSupportActionBar(account_toolbar)
-
-        val progressDialog = ProgressDialog(applicationContext, R.style.DialogTheme)
-        progressDialog.setMessage("Please Wait")
-
         val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
         var jsonRequest = object  : JsonObjectRequest(Request.Method.GET, userURL, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
                 val userInfo = response.getJSONObject("data")
-                Picasso.with(applicationContext).load(userInfo.getString("profilepic")).into(profilePicture)
+                //Picasso.with(applicationContext).load(userInfo.getString("profilepic")).into(profilePicture)
                 name.text = Editable.Factory.getInstance().newEditable(userInfo.getString("name"))
                 hp_nbr.text = Editable.Factory.getInstance().newEditable(userInfo.getString("phonenumber"))
                 address.text = Editable.Factory.getInstance().newEditable(userInfo.getString("address"))
-                progressDialog.dismiss()
             }
 
         }, object : Response.ErrorListener{
             override fun onErrorResponse(error: VolleyError) {
                 Log.d("Debug", error.toString())
-                progressDialog.dismiss()
             }
 
         }){

@@ -80,6 +80,17 @@ class ProfileContentFragment : Fragment() {
             }
 
         })
+
+        my_booking.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(context, BookingActivity::class.java)
+                if (context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
+                    startActivity(Intent(context, StartActivity::class.java))
+                }else {
+                    startActivity(intent)
+                }
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

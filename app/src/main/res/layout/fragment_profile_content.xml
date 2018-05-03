@@ -162,7 +162,7 @@
                     tools:ignore="MissingPrefix"/>
 
                 <Button
-                    android:id="@+id/booking"
+                    android:id="@+id/my_booking"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_below="@id/fav_his"
@@ -184,7 +184,7 @@
                     android:id="@+id/inbox"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@id/booking"
+                    android:layout_below="@id/my_booking"
                     android:background="@drawable/list_button"
                     android:drawableEnd="@mipmap/ic_action_arrow"
                     android:text="Inbox"
@@ -247,7 +247,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:paddingLeft="20dp"
-                    android:text="Version 1.0.8"
+                    android:text="Version 1.0.9"
                     android:paddingRight="20dp"
                     android:textAlignment="textStart"
                     android:textSize="16sp"
