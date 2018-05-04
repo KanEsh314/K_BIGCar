@@ -7,12 +7,10 @@ import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.text.Layout
 import android.text.TextUtils
 import android.util.Log
-import android.view.Gravity
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
@@ -22,6 +20,7 @@ import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_account.*
 import kotlinx.android.synthetic.main.activity_tour_confirm.*
 import kotlinx.android.synthetic.main.activity_tour_count.*
+import kotlinx.android.synthetic.main.passenger_details.*
 import my.com.itrain.big_car.R.id.*
 import org.json.JSONArray
 import org.json.JSONException
@@ -31,7 +30,7 @@ class TourConfirmActivity : AppCompatActivity() {
 
     var countryURL = "https://gentle-atoll-11837.herokuapp.com/api/countries"
     var bookingURL = "https://gentle-atoll-11837.herokuapp.com/api/booking"
-    //var bookingURL = "http://192.168.0.115/gentle-atoll-11837/public/api/booking"
+    val bookingMaterial = ArrayList<JSONArray>()
     val countryMaterial = ArrayList<JSONObject>()
     var CheckEditText:Boolean = false
 
@@ -56,6 +55,13 @@ class TourConfirmActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        var layoutInflater = applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        var parent = findViewById(R.id.multiplePassenger) as LinearLayout
+        for (i in 0..1){
+            val view = layoutInflater.inflate(R.layout.passenger_details, null)
+            parent.addView(view)
+        }
+
         tour_name = intent.getStringExtra("tour_name")
         name_tour?.text = tour_name
         package_name = intent.getStringExtra("package_name")
@@ -66,13 +72,6 @@ class TourConfirmActivity : AppCompatActivity() {
         date_travel?.text = travel_date
         travel_time = intent.getStringExtra("travel_time")
         time_travel?.text = travel_time
-
-        val layoutInflater = applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
-        val multipleTraveller = findViewById(R.id.multiplePassenger) as LinearLayout
-
-//        for (i in 0..4){
-//            multipleTraveller.addView()
-//        }
 
         val customSpinnerAdapter = CustomSpinnerAdapter(this)
         selectOrigin.setAdapter(customSpinnerAdapter)
@@ -146,23 +145,22 @@ class TourConfirmActivity : AppCompatActivity() {
                     Log.d("Debug", response)
                     progressDialog.dismiss()
                     Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
-//                    val intent = Intent(applicationContext, TourSummaryActivity::class.java)
-//                    try {
-//                        intent.putExtra("tour_name", tour_name)
-//                        intent.putExtra("package_name", package_name)
-//                        intent.putExtra("package_pax", package_pax)
-//                        intent.putExtra("travel_date", travel_date)
-//                        intent.putExtra("travel_time", travel_time)
-//                        intent.putExtra("booking_name", name_booking)
-//                        intent.putExtra("mobile_number", mobile_number)
-//                        intent.putExtra("nationality", nationality)
-//                        intent.putExtra("user_email", user_email)
-//                        intent.putExtra("passenger_name", passenger_name)
-//                        intent.putExtra("ic_passport", ic_passport)
-//                    }catch (e: JSONException){
-//                        e.printStackTrace()
-//                    }
-//                    startActivity(intent)
+                    val intent = Intent(applicationContext, TourSummaryActivity::class.java)
+                    try {
+                        intent.putExtra("tour_name", tour_name)
+                        intent.putExtra("package_name", package_name)
+                        intent.putExtra("package_pax", package_pax)
+                        intent.putExtra("travel_date", travel_date)
+                        intent.putExtra("travel_time", travel_time)
+                        intent.putExtra("booking_name", name_booking)
+                        intent.putExtra("mobile_number", mobile_number)
+                        intent.putExtra("nationality", nationality)
+                        intent.putExtra("user_email", user_email)
+                        intent.putExtra("passenger_detail", bookingMaterial)
+                    }catch (e: JSONException){
+                        e.printStackTrace()
+                    }
+                    startActivity(intent)
                 }
             },
                     object : Response.ErrorListener {
@@ -204,22 +202,24 @@ class TourConfirmActivity : AppCompatActivity() {
                     bookingObj.put("nationality",  nationality_id)
 
                     var userArray = JSONArray()
-                    val newObj = JSONObject()
-                    try{
-                        newObj.put("passenger_name", passenger_name)
-                        newObj.putOpt("ic_passport",ic_passport)
-                    }catch (e : JSONException){
-                        e.printStackTrace()
+                    for (i in 0..1){
+
+                        val newObj = JSONObject()
+                        try{
+                            newObj.put("passenger_name", passenger_name.get(i))
+                            newObj.putOpt("ic_passport",ic_passport.get(i))
+                        }catch (e : JSONException){
+                            e.printStackTrace()
+                        }
+                        userArray.put(newObj)
                     }
-                    userArray.put(newObj)
+
                     Log.d("Array", userArray.toString())
-
                     bookingObj.put("passengers", userArray)
-
                     Log.d("Booking", bookingObj.toString())
-
                     params.put("booking", bookingObj.toString())
                     Log.d("Debug",params.toString())
+                    bookingMaterial.add(userArray)
 
                     return JSONObject(params).toString().toByteArray()
                 }

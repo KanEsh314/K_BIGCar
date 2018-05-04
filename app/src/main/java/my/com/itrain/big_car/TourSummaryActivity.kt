@@ -25,8 +25,8 @@ class TourSummaryActivity : AppCompatActivity() {
         booking_mobile_number?.text = intent.getStringExtra("mobile_number")
         booking_nationality?.text = intent.getStringExtra("nationality")
         booking_email?.text = intent.getStringExtra("user_email")
-        passenger_name?.text = intent.getStringExtra("passenger_name")
-        passenger_ic_passport?.text = intent.getStringExtra("ic_passport")
+//        passenger_name?.text = intent.getStringExtra("passenger_name")
+//        passenger_ic_passport?.text = intent.getStringExtra("ic_passport")
 
         more_trips.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
