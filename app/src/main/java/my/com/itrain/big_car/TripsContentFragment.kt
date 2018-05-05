@@ -125,9 +125,9 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
             task ->
                 if (task.isSuccessful && task.result != null){
 
-                    val requestVolley = Volley.newRequestQueue(this.context)
+                    val requestVolley = Volley.newRequestQueue(context)
 
-                    val progressDialog = ProgressDialog(context, R.style.DialogTheme)
+                    val progressDialog = ProgressDialog(activity, R.style.DialogTheme)
                     progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
                     progressDialog.setTitle("Please Wait")
                     progressDialog.setMessage("Loading")

@@ -129,7 +129,7 @@ class ExploreContentFragment : Fragment() {
         recycleViewCategory!!.adapter = categoryAdapter
 
         //VOLLEY
-        val progressDialog = ProgressDialog(context, R.style.DialogTheme)
+        val progressDialog = ProgressDialog(activity, R.style.DialogTheme)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
         progressDialog.setTitle("Please Wait")
         progressDialog.setMessage("Loading")

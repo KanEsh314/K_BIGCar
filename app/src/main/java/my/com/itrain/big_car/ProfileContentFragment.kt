@@ -126,7 +126,7 @@ class ProfileContentFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val progressDialog = ProgressDialog(context, R.style.DialogTheme)
+        val progressDialog = ProgressDialog(activity, R.style.DialogTheme)
         progressDialog.setMessage("Please Wait")
 
         val sharedPreferences = context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","")
