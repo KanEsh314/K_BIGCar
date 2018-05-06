@@ -3,12 +3,14 @@ package my.com.itrain.big_car
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_tour_detail.*
 import kotlinx.android.synthetic.main.activity_tour_summary.*
+import my.com.itrain.big_car.R.id.*
 
 class TourSummaryActivity : AppCompatActivity() {
 
@@ -25,13 +27,21 @@ class TourSummaryActivity : AppCompatActivity() {
         booking_mobile_number?.text = intent.getStringExtra("mobile_number")
         booking_nationality?.text = intent.getStringExtra("nationality")
         booking_email?.text = intent.getStringExtra("user_email")
-//        passenger_name?.text = intent.getStringExtra("passenger_name")
-//        passenger_ic_passport?.text = intent.getStringExtra("ic_passport")
+        val bundle:Bundle = intent.extras
+        val booked_passenger = bundle.getString("passenger_detail")
+        Log.d("Debug", booked_passenger)
+        Toast.makeText(applicationContext, booked_passenger.toString(), Toast.LENGTH_LONG).show()
 
         more_trips.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 startActivity(Intent(applicationContext, MainActivity::class.java))
             }
         })
+
+        val summaryAdapter = SummaryAdapter(applicationContext)
+        val packegeOptionLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
+        passengerDetailsRecyclerView!!.layoutManager = packegeOptionLayoutManager
+        passengerDetailsRecyclerView!!.itemAnimator = DefaultItemAnimator()
+        passengerDetailsRecyclerView!!.adapter = summaryAdapter
     }
 }

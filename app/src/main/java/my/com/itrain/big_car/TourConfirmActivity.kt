@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.text.Layout
 import android.text.TextUtils
@@ -156,7 +157,9 @@ class TourConfirmActivity : AppCompatActivity() {
                         intent.putExtra("mobile_number", mobile_number)
                         intent.putExtra("nationality", nationality)
                         intent.putExtra("user_email", user_email)
-                        intent.putExtra("passenger_detail", bookingMaterial)
+                        val bundle = Bundle()
+                        bundle.putString("passenger_detail", bookingMaterial.toString())
+                        intent.putExtras(bundle)
                     }catch (e: JSONException){
                         e.printStackTrace()
                     }

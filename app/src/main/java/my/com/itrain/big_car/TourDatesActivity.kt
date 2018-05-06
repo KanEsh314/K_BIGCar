@@ -25,6 +25,7 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.sql.Date
+import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.util.*
 import kotlin.collections.ArrayList
@@ -56,6 +57,12 @@ class TourDatesActivity : AppCompatActivity() {
                 //onDate
                 val dateListener = DatePickerDialog(this@TourDatesActivity,R.style.DialogTheme, object : DatePickerDialog.OnDateSetListener{
                     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+
+                        val simpledateformat = SimpleDateFormat("EEEE")
+                        val date = Date(year, month, dayOfMonth-1)
+                        val dayOfWeek = simpledateformat.format(date)
+                        Log.d("Debug", dayOfWeek.toString())
+
                         val intent = Intent(this@TourDatesActivity, TourCountActivity::class.java)
                         try {
                             intent.putExtra("service_id", service_id)

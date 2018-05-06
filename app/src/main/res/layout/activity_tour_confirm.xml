@@ -223,7 +223,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_below="@id/summaryTitle"/>
+                    android:layout_below="@id/summaryTitle">
+                </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
