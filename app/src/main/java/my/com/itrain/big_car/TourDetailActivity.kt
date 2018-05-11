@@ -183,7 +183,6 @@ class TourDetailActivity : AppCompatActivity() {
                     val tourGallery = tourData.getJSONArray("tour_gallery")
                     for (i in 0 until tourGallery.length()){
                         tourGalleryMaterial.add(tourGallery.getJSONObject(i))
-                        Log.d("Debug", tourGallery.getJSONObject(i).toString())
                     }
 
                     val tourReviewData = tourData.getJSONArray("reviews")
@@ -273,16 +272,22 @@ class TourGalleryAdapter(private val context: Context, private val tourGallery: 
 
     var inflater: LayoutInflater = context.getSystemService(android.content.Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-    override fun instantiateItem(container: ViewGroup?, position: Int): Any {
+    override fun instantiateItem(container: ViewGroup, position: Int): View {
 
         val view = inflater.inflate(R.layout.tour_gallery, container, false)
         val tourBannerImage = view.findViewById<ImageView>(R.id.tourImage)
         Picasso.with(context).load(tourGallery.get(position).getString("image")).into(tourBannerImage)
+        container.addView(view)
         return view
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view.equals(`object`)
+    }
+
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        container.removeView(`object` as View)
+        //super.destroyItem(container, position, `object`)
     }
 
     override fun getCount(): Int {

@@ -19,8 +19,7 @@
             android:id="@+id/popularImg"
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/photo" />
+            android:scaleType="centerCrop"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
