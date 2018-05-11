@@ -33,7 +33,7 @@ tools:context=".FavoriteActivity">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Favourite &amp; History"
+                    android:text="Favourite"
                     android:textSize="18sp"
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold"/>

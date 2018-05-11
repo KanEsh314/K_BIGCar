@@ -30,7 +30,7 @@ class TourSummaryActivity : AppCompatActivity() {
         val bundle:Bundle = intent.extras
         val booked_passenger = bundle.getString("passenger_detail")
         Log.d("Debug", booked_passenger)
-        Toast.makeText(applicationContext, booked_passenger.toString(), Toast.LENGTH_LONG).show()
+        //Toast.makeText(applicationContext, booked_passenger.toString(), Toast.LENGTH_LONG).show()
 
         more_trips.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {

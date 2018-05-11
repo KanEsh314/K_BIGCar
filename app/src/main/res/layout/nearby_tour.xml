@@ -16,7 +16,7 @@
         android:paddingBottom="@dimen/mediumPadding">
 
         <ImageView
-            android:id="@+id/popularImg"
+            android:id="@+id/nearByImg"
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:scaleType="centerCrop"
@@ -26,14 +26,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@id/popularImg"
-            android:layout_alignStart="@id/popularImg"
-            android:layout_alignEnd="@id/popularImg"
+            android:layout_below="@id/nearByImg"
+            android:layout_alignStart="@id/nearByImg"
+            android:layout_alignEnd="@id/nearByImg"
             android:paddingTop="@dimen/mediumPadding"
             android:paddingLeft="@dimen/mediumPadding">
 
             <TextView
-                android:id="@+id/popularName"
+                android:id="@+id/nearByName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HALF DAY KUALA LUMPUR CITY TOUR TOUR"
@@ -43,7 +43,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/popularDesc"
+                android:id="@+id/nearByDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="For short or long tern visitors in Kuala Lumpur this is perfect opportunity to visit landmarks to Kuala Lumpur city. On tour we will take you to some of most important sightseeing attractions."
@@ -55,10 +55,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@+id/popularDesc">
+                android:layout_below="@+id/nearByDesc">
 
                 <TextView
-                    android:id="@+id/popularLocation"
+                    android:id="@+id/nearByLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"

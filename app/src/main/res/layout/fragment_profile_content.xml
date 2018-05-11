@@ -149,7 +149,7 @@
                     android:layout_below="@id/my_account"
                     android:background="@drawable/list_button"
                     android:drawableEnd="@mipmap/ic_action_arrow"
-                    android:text="Favourite &amp; History"
+                    android:text="My Favourite"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:paddingLeft="20dp"

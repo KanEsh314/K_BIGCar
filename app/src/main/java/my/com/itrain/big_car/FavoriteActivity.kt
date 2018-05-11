@@ -2,6 +2,7 @@ package my.com.itrain.big_car
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
@@ -44,7 +45,13 @@ class FavoriteActivity : AppCompatActivity() {
 
         val favhisAdapter = FavHisContent(this, object: FavHisContent.OnItemClickListener{
             override fun onItemClick(position: Int) {
-                Log.d("Next Page","Will Have Soon")
+                val intent = Intent(applicationContext, TourDetailActivity::class.java)
+                try {
+                    intent.putExtra("service_id", favhisMaterial.get(position).getInt("service_id"))
+                }catch (e : JSONException){
+                    e.printStackTrace()
+                }
+                startActivity(intent)
             }
         })
         val favhisLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)

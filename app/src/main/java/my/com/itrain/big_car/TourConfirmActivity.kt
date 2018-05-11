@@ -26,6 +26,10 @@ import my.com.itrain.big_car.R.id.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import android.widget.LinearLayout
+import my.com.itrain.big_car.R.id.linearLayout
+
+
 
 class TourConfirmActivity : AppCompatActivity() {
 
@@ -56,10 +60,31 @@ class TourConfirmActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        //
         var layoutInflater = applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         var parent = findViewById(R.id.multiplePassenger) as LinearLayout
-        for (i in 0..1){
-            val view = layoutInflater.inflate(R.layout.passenger_details, null)
+        for (i in 1..2){
+            val view = layoutInflater.inflate(R.layout.passenger_details, null, false)
+//            val passenger_detail_name = view.findViewById(R.id.name_passenger) as EditText
+//            val passenger_detail_ic_passport = view.findViewById(R.id.ic_number) as EditText
+
+//            val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+//            linearLayout.setOrientation(LinearLayout.VERTICAL)
+//
+//            //TextView
+//            val passenger_detail_name = EditText(this)
+//            passenger_detail_name.setHint("Please Enter Your Name")
+//            passenger_detail_name.setLayoutParams(params)
+//
+//            val passenger_detail_ic_passport = EditText(this)
+//            passenger_detail_ic_passport.setHint("Please Enter Your Passport Number")
+//            passenger_detail_ic_passport.setLayoutParams(params)
+
+            val passenger_name = view.findViewById(R.id.name_text) as TextView
+            passenger_name.setText("Passenger "+i+" Name")
+            val passenger_passport = view.findViewById(R.id.passport_text) as TextView
+            passenger_passport.setText("Passenger " +i+" Passport")
+
             parent.addView(view)
         }
 
@@ -145,7 +170,7 @@ class TourConfirmActivity : AppCompatActivity() {
                 override fun onResponse(response: String) {
                     Log.d("Debug", response)
                     progressDialog.dismiss()
-                    Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
+                    //Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
                     val intent = Intent(applicationContext, TourSummaryActivity::class.java)
                     try {
                         intent.putExtra("tour_name", tour_name)
@@ -205,12 +230,12 @@ class TourConfirmActivity : AppCompatActivity() {
                     bookingObj.put("nationality",  nationality_id)
 
                     var userArray = JSONArray()
-                    for (i in 0..1){
+                    for (i in 1..2){
 
                         val newObj = JSONObject()
                         try{
-                            newObj.put("passenger_name", passenger_name.get(i))
-                            newObj.putOpt("ic_passport",ic_passport.get(i))
+                            newObj.put("passenger_name", passenger_name)
+                            newObj.putOpt("ic_passport",ic_passport)
                         }catch (e : JSONException){
                             e.printStackTrace()
                         }
@@ -241,10 +266,8 @@ class TourConfirmActivity : AppCompatActivity() {
         name_booking = booking_name.text.toString()
         mobile_number = phoneNumber.text.toString()
         user_email = email.text.toString()
-        passenger_name = name_passenger.text.toString()
-        ic_passport = ic_number.text.toString()
 
-        if (TextUtils.isEmpty(name_booking) || TextUtils.isEmpty(mobile_number) || TextUtils.isEmpty(user_email) || TextUtils.isEmpty(passenger_name) || TextUtils.isEmpty(ic_passport)){
+        if (TextUtils.isEmpty(name_booking) || TextUtils.isEmpty(mobile_number) || TextUtils.isEmpty(user_email)){
             CheckEditText = false
         }else{
             CheckEditText = true

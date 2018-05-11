@@ -52,8 +52,8 @@ class ExplorePopularContent(private val context: Context, private val listener: 
         //holder?.popImg?.setImageResource(R.drawable.tour2)
         Picasso.with(context).load(byCategory.get(position).getString("image")).into(holder?.popImg)
         holder?.popName?.text = Html.fromHtml(byCategory.get(position).getString("product_name"))
-        holder?.popDesc?.text = Html.fromHtml(byCategory.get(position).getString("product_desc"))
-        holder?.popLocation?.text = Html.fromHtml(byCategory.get(position).getString("location"))
+        holder?.popDesc?.text = Html.fromHtml(byCategory.get(position).getString("short_desc"))
+        holder?.popLocation?.text = Html.fromHtml(byCategory.get(position).getString("short_prod_code"))
 
         holder?.bind(position,listener)
 

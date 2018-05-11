@@ -52,7 +52,7 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
     private var nearbyURL = "https://gentle-atoll-11837.herokuapp.com/api/tripnearby/"
     private val nearByMaterial = ArrayList<JSONObject>()
     private var myLocation: LatLng = LatLng(0.0,0.0)
-    private var service_id: Int = 0
+    private var attraction_id: Int = 0
     private val TAG = "MainActivity"
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 34
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -204,17 +204,16 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
                                 .position(LatLng(nearByMaterial.get(i).getDouble("latitude"), nearByMaterial.get(i).getDouble("longitude")))
                                 .title(nearByMaterial.get(i).getString("attraction")))
                         nearByMap.showInfoWindow()
-                        //nearByMap.tag = nearByMaterial.get(i).getInt("service_id")
+                        nearByMap.tag = nearByMaterial.get(i).getInt("attraction_id")
                     }
 
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 18F))
                     mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
                         override fun onMarkerClick(p0: Marker): Boolean {
-                            //service_id = p0.tag as Int
-                            service_id = 2
-                            val intent = Intent(context, TourDetailActivity::class.java)
+                            attraction_id = p0.tag as Int
+                            val intent = Intent(context, NearByActivity::class.java)
                             try {
-                                intent.putExtra("service_id", service_id)
+                                intent.putExtra("attraction_id", attraction_id)
                             } catch (e: JSONException) {
                                 e.printStackTrace()
                             }
