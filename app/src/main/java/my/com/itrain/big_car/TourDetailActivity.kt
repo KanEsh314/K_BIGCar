@@ -178,12 +178,8 @@ class TourDetailActivity : AppCompatActivity() {
                     totalReviews.text = tourData.getString("total_review")
                     collectRating.rating = tourData.getString("total_rating").toFloat()
                     collectRatingText.text = tourData.getString("total_rating")
-                    //}
 
-                    val tourGallery = tourData.getJSONArray("tour_gallery")
-                    for (j in 0 until tourGallery.length()){
-                        Picasso.with(applicationContext).load(tourGallery.getJSONObject(j).getString("image")).into(tourImage)
-                    }
+                    Picasso.with(applicationContext).load(tourData.getString("image")).into(tourImage)
 
                     val tourReviewData = tourData.getJSONArray("reviews")
                     for (i in 0 until tourReviewData.length()){
