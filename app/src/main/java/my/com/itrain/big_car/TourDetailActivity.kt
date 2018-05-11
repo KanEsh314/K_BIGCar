@@ -8,14 +8,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.view.MenuItemCompat
 import android.app.AlertDialog
+import android.support.v4.view.PagerAdapter
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.ShareActionProvider
 import android.text.Html
 import android.text.TextUtils
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -39,6 +42,7 @@ class TourDetailActivity : AppCompatActivity() {
     var commentURL = "http://gentle-atoll-11837.herokuapp.com/api/review/"
     var favoriteURL = "http://gentle-atoll-11837.herokuapp.com/api/favoritetour"
     private val tourMaterial = ArrayList<JSONObject>()
+    private val tourGalleryMaterial = ArrayList<JSONObject>()
     var CheckEditText:Boolean = false
     var service_id:Int = 0
     var commentHolder:String = ""
@@ -52,6 +56,9 @@ class TourDetailActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        val tourGallerAdapter = TourGalleryAdapter(applicationContext, tourGalleryMaterial)
+        tourGalleryViewPager.setAdapter(tourGallerAdapter)
+
         service_id = intent.getIntExtra("service_id", 0)
         Log.d("Debug",service_id.toString())
 
@@ -60,12 +67,6 @@ class TourDetailActivity : AppCompatActivity() {
 
                 val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
                 if(applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).contains("myToken")){
-
-//                val progressDialog = ProgressDialog(applicationContext, R.style.DialogTheme)
-//                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
-//                progressDialog.setTitle("Please Wait")
-//                progressDialog.setMessage("Loading")
-//                progressDialog.show()
 
                     val stringRequest = object : StringRequest(Request.Method.POST, favoriteURL, object : Response.Listener<String>{
                         override fun onResponse(response: String?) {
@@ -179,13 +180,19 @@ class TourDetailActivity : AppCompatActivity() {
                     collectRating.rating = tourData.getString("total_rating").toFloat()
                     collectRatingText.text = tourData.getString("total_rating")
 
-                    Picasso.with(applicationContext).load(tourData.getString("image")).into(tourImage)
+                    val tourGallery = tourData.getJSONArray("tour_gallery")
+                    for (i in 0 until tourGallery.length()){
+                        tourGalleryMaterial.add(tourGallery.getJSONObject(i))
+                        Log.d("Debug", tourGallery.getJSONObject(i).toString())
+                    }
 
                     val tourReviewData = tourData.getJSONArray("reviews")
                     for (i in 0 until tourReviewData.length()){
                         reviewAdapter.addJsonObject(tourReviewData.getJSONObject(i))
+                        Log.d("Debug", tourReviewData.getJSONObject(i).toString())
                     }
 
+                    tourGallerAdapter.notifyDataSetChanged()
                     reviewAdapter.notifyDataSetChanged()
                     progressDialog.dismiss()
                 }catch (e : JSONException){
@@ -259,5 +266,26 @@ class TourDetailActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+}
+
+class TourGalleryAdapter(private val context: Context, private val tourGallery: ArrayList<JSONObject>):PagerAdapter() {
+
+    var inflater: LayoutInflater = context.getSystemService(android.content.Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+    override fun instantiateItem(container: ViewGroup?, position: Int): Any {
+
+        val view = inflater.inflate(R.layout.tour_gallery, container, false)
+        val tourBannerImage = view.findViewById<ImageView>(R.id.tourImage)
+        Picasso.with(context).load(tourGallery.get(position).getString("image")).into(tourBannerImage)
+        return view
+    }
+
+    override fun isViewFromObject(view: View, `object`: Any): Boolean {
+        return view.equals(`object`)
+    }
+
+    override fun getCount(): Int {
+        return tourGallery.size
     }
 }

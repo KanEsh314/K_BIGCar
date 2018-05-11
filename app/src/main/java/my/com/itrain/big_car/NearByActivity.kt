@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.MenuItem
 import android.widget.LinearLayout
 import com.android.volley.Request
 import com.android.volley.Response
@@ -81,6 +82,17 @@ class NearByActivity : AppCompatActivity() {
                 })
 
         requestVolley.add(jsonObjectRequest)
-
     }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        val id = item!!.itemId
+
+        if (id == android.R.id.home){
+            finish()
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
 }
