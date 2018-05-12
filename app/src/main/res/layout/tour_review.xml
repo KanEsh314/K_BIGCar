@@ -15,7 +15,7 @@
             android:layout_width="@dimen/profileImage"
             android:layout_height="@dimen/profileImage"
             android:scaleType="centerCrop"
-            android:src="@mipmap/ic_world"
+            android:src="@mipmap/ic_app_user"
             android:layout_margin="@dimen/mediumMargin"/>
 
         <LinearLayout

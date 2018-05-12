@@ -6,30 +6,19 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
-import android.text.Html
-import android.text.Layout
 import android.text.TextUtils
 import android.util.Log
 import android.view.*
 import android.widget.*
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.RequestFuture
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_account.*
 import kotlinx.android.synthetic.main.activity_tour_confirm.*
-import kotlinx.android.synthetic.main.activity_tour_count.*
-import kotlinx.android.synthetic.main.passenger_details.*
-import my.com.itrain.big_car.R.id.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import android.widget.LinearLayout
-import my.com.itrain.big_car.R.id.linearLayout
-
-
 
 class TourConfirmActivity : AppCompatActivity() {
 

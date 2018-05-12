@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tourCount"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/countCategories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adult"
+            android:textColor="@color/colorDark"
+            android:textSize="@dimen/smallUniversalText"/>
+
+        <TextView
+            android:id="@+id/countPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/countCategories"
+            android:text="RM200"
+            android:textColor="@color/colorDark"
+            android:textSize="@dimen/smallUniversalText"/>
+
+    </LinearLayout>
+
+    <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        app:backGroundColor="@color/colorWhite"
+        app:textColor="@color/colorPrimary" />
+
+</RelativeLayout>

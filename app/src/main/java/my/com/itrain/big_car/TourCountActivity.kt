@@ -21,6 +21,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_tour_count.*
 import kotlinx.android.synthetic.main.activity_tour_detail.*
 import kotlinx.android.synthetic.main.tourselect_time.*
+import my.com.itrain.big_car.R.id.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -64,6 +65,12 @@ class TourCountActivity : AppCompatActivity() {
         recycleTourTime!!.layoutManager = tourTimeLayoutManager
         recycleTourTime!!.itemAnimator = DefaultItemAnimator()
         recycleTourTime!!.adapter = tourTimeAdapter
+
+        val tourCountAdapter = SelectCountAdapter(this)
+        val tourCountLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
+        recycleTourCount!!.layoutManager = tourCountLayoutManager
+        recycleTourCount!!.itemAnimator = DefaultItemAnimator()
+        recycleTourCount!!.adapter = tourCountAdapter
 
         val checkPay = findViewById<View>(R.id.add_to_cart_btn)
         checkPay.setOnClickListener(object : View.OnClickListener {

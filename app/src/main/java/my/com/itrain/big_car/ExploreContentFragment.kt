@@ -41,8 +41,6 @@ class ExploreContentFragment : Fragment() {
     var popularssURL = "https://gentle-atoll-11837.herokuapp.com/api/populartour"
     var categoriesURL = "http://gentle-atoll-11837.herokuapp.com/api/categories"
     var bannerURl = "https://gentle-atoll-11837.herokuapp.com/api/banners"
-    private var current_Banner = 0
-    private var num_Banner = 0
     private val toursMaterial = ArrayList<JSONObject>()
     private val bannerMaterial = ArrayList<JSONObject>()
     private val categoriesMaterial = ArrayList<JSONObject>()

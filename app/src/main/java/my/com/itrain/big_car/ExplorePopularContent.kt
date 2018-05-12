@@ -49,11 +49,11 @@ class ExplorePopularContent(private val context: Context, private val listener: 
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        //holder?.popImg?.setImageResource(R.drawable.tour2)
-        if (byCategory.get(position).getString("image") == ""){
-            holder?.popImg?.setImageResource(R.drawable.tour2)
+
+        if (byCategory.get(position).getString("grid_image") == ""){
+            holder?.popImg?.setImageResource(R.drawable.no_available)
         }else {
-            Picasso.with(context).load(byCategory.get(position).getString("image")).into(holder?.popImg)
+            Picasso.with(context).load(byCategory.get(position).getString("grid_image")).into(holder?.popImg)
         }
         holder?.popName?.text = Html.fromHtml(byCategory.get(position).getString("product_name"))
         holder?.popDesc?.text = Html.fromHtml(byCategory.get(position).getString("short_desc"))

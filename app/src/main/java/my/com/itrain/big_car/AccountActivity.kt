@@ -45,7 +45,11 @@ class AccountActivity : AppCompatActivity() {
         var jsonRequest = object  : JsonObjectRequest(Request.Method.GET, userURL, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
                 val userInfo = response.getJSONObject("data")
-                //Picasso.with(applicationContext).load(userInfo.getString("profilepic")).into(profilePicture)
+                if (userInfo.getString("profilepic") == ""){
+                    profilePicture.setImageResource(R.mipmap.ic_app_user)
+                }else{
+                    Picasso.with(applicationContext).load(userInfo.getString("profilepic")).into(profilePicture)
+                }
                 name.text = Editable.Factory.getInstance().newEditable(userInfo.getString("name"))
                 hp_nbr.text = Editable.Factory.getInstance().newEditable(userInfo.getString("phonenumber"))
                 address.text = Editable.Factory.getInstance().newEditable(userInfo.getString("address"))

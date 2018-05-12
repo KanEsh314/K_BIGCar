@@ -48,7 +48,12 @@ class ExploreContentAdapter(private val context: Context, private val listener: 
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        Picasso.with(context).load(popular.get(position).getString("image")).into(holder?.trendImg)
+
+        if (popular.get(position).getString("grid_image") == ""){
+            holder?.trendImg?.setImageResource(R.drawable.no_available)
+        }else{
+            Picasso.with(context).load(popular.get(position).getString("grid_image")).into(holder?.trendImg)
+        }
         holder?.trendText?.text = popular.get(position).getString("product_name")
         holder?.trendPrice?.text = popular.get(position).getString("short_prod_code")
 

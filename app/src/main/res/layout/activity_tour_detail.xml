@@ -111,7 +111,7 @@
                 </RelativeLayout>
 
                 <View
-                    android:layout_height="1dp"
+                    android:layout_height="10dp"
                     android:layout_width="match_parent"
                     android:layout_below="@+id/instantImg"
                     android:background="#90909090"
@@ -123,13 +123,27 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/mediumPadding">
 
-                    <TextView
-                        android:id="@+id/tourExplanation"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorDark"
-                        android:textSize="@dimen/smallUniversalText" />
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/mediumPadding"
+                            android:textSize="28sp"
+                            android:textColor="@color/colorDark"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/tourExplanation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorDark"
+                            android:textSize="@dimen/smallUniversalText" />
+
+                    </LinearLayout>
                 </RelativeLayout>
 
                 <View
@@ -159,7 +173,6 @@
                         android:id="@+id/collectRatingText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4.8"
                         android:textSize="72sp"
                         android:textColor="@color/colorDark"
                         android:textStyle="bold"/>

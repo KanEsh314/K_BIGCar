@@ -19,8 +19,7 @@
             android:id="@+id/nearByImg"
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/photo" />
+            android:scaleType="centerCrop"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -36,7 +35,6 @@
                 android:id="@+id/nearByName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="HALF DAY KUALA LUMPUR CITY TOUR TOUR"
                 android:textColor="@color/colorDark"
                 android:textSize="@dimen/mediumUniversalText"
                 android:textAlignment="textStart"
@@ -46,7 +44,6 @@
                 android:id="@+id/nearByDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="For short or long tern visitors in Kuala Lumpur this is perfect opportunity to visit landmarks to Kuala Lumpur city. On tour we will take you to some of most important sightseeing attractions."
                 android:textColor="@color/colorDark"
                 android:textSize="@dimen/smallUniversalText"
                 android:textAlignment="textStart"/>
@@ -63,9 +60,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:text="RM40"
                     android:textColor="@color/colorDark"
-                    android:textSize="@dimen/mediumUniversalText" />
+                    android:textSize="@dimen/mediumUniversalText"/>
 
             </LinearLayout>
         </LinearLayout>

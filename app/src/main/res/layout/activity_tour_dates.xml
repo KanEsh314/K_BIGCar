@@ -34,7 +34,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="Booking Option"
+                                android:text="Package Option"
                                 android:textSize="18sp"
                                 android:textColor="@color/colorWhite"
                                 android:textStyle="bold"/>
@@ -55,25 +55,13 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/mediumPadding">
 
-            <TextView
-                android:id="@+id/titlePackageOption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/mediumPadding"
-                android:text="Package Option"
-                android:textColor="@color/colorDark"
-                android:textSize="@dimen/mediumUniversalText"/>
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/packageRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/titlePackageOption"
                 android:clipToPadding="true"
                 android:paddingBottom="16dp" />
 
         </RelativeLayout>
-
     </android.support.v4.widget.NestedScrollView>
-
 </android.support.design.widget.CoordinatorLayout>

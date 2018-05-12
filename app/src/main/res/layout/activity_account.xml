@@ -49,16 +49,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/profilePicture"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="72dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:src="@drawable/tour1"
-                android:translationZ="100000dp"
-                app:fabSize="normal" />
+                android:src="@drawable/circular_radius"
+                android:translationZ="100000dp"/>
 
             <TextView
                 android:id="@+id/name_title"

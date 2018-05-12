@@ -20,7 +20,7 @@ import org.w3c.dom.Text
 /**
  * Created by iTrain on 18-Jan-18.
  */
-//, private val listener : OnItemClickListener
+
 class CategoryAdapter(private val context: Context, private val listener: CategoryAdapter.OnItemClickListener) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
     private val categoryAll = ArrayList<JSONObject>()
@@ -53,7 +53,12 @@ class CategoryAdapter(private val context: Context, private val listener: Catego
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        Picasso.with(context).load(categoryAll.get(position).getString("servicecat_image")).into(holder?.categoryImage)
+
+        if (categoryAll.get(position).getString("servicecat_image") == ""){
+            holder?.categoryImage?.setImageResource(R.drawable.no_available)
+        }else{
+            Picasso.with(context).load(categoryAll.get(position).getString("servicecat_image")).into(holder?.categoryImage)
+        }
         holder?.categoryTitle?.text = categoryAll.get(position).getString("servicecat_name")
 
         holder?.bind(position,listener)

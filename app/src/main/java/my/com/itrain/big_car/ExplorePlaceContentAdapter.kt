@@ -48,8 +48,12 @@ class ExplorePlaceContentAdapter(private val context: Context,private val listen
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        //holder?.placeImg?.setImageResource(R.drawable.tour1)
-        Picasso.with(context).load(destination.get(position).getString("image")).into(holder?.placeImg)
+
+        if (destination.get(position).getString("grid_image") == ""){
+            holder?.placeImg?.setImageResource(R.drawable.no_available  )
+        }else{
+            Picasso.with(context).load(destination.get(position).getString("grid_image")).into(holder?.placeImg)
+        }
         holder?.placeName?.text = destination.get(position).getString("product_name")
 
         holder?.bind(position,listener)

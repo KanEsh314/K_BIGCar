@@ -88,7 +88,6 @@ class TourDatesActivity : AppCompatActivity() {
         packageRecyclerView!!.adapter = packageOptionAdapter
 
         //Volley
-
         val progressDialog = ProgressDialog(this, R.style.DialogTheme)
         progressDialog.setCancelable(false)
         progressDialog.isIndeterminate=true
@@ -99,7 +98,6 @@ class TourDatesActivity : AppCompatActivity() {
 
                 val packageData = response.getJSONObject("data")
                 val tourPackageData = packageData.getJSONArray("tour_packages")
-
 
                 for (i in 0 until tourPackageData.length()){
                     packageOptionAdapter.addJsonObject(tourPackageData.getJSONObject(i))
