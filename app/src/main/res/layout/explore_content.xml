@@ -19,7 +19,6 @@
                 android:id="@+id/trendImg"
                 android:layout_width="@dimen/pictureWidth"
                 android:layout_height="@dimen/pictureHeight"
-                android:src="@drawable/tour1"
                 android:scaleType="centerCrop"/>
 
             <LinearLayout
@@ -27,8 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/trendImg"
                 android:orientation="vertical"
-                android:paddingRight="@dimen/mediumPadding"
-                android:paddingLeft="@dimen/mediumPadding">
+                android:padding="@dimen/mediumPadding">
 
                 <TextView
                     android:id="@+id/trendText"

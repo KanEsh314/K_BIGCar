@@ -263,6 +263,11 @@ class BannerAdapter(private val context: Context, private val banner: ArrayList<
         return view.equals(`object`)
     }
 
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        container.removeView(`object` as View)
+        //super.destroyItem(container, position, `object`)
+    }
+
     override fun getCount(): Int {
         return banner.size
     }

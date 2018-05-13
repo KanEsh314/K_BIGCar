@@ -31,6 +31,7 @@ import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_tour_detail.*
+import kotlinx.android.synthetic.main.activity_tour_detail.view.*
 import kotlinx.android.synthetic.main.post_review.*
 import org.json.JSONArray
 import org.json.JSONException
@@ -118,24 +119,24 @@ class TourDetailActivity : AppCompatActivity() {
 
         })
 
-        postcomment.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v: View?) {
-
-                if(applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).contains("myToken")){
-                    CheckEditTextIsEmptyOrNot()
-                    if (CheckEditText){
-                        commentPost()
-                        Toast.makeText(applicationContext, "Thank You For Your Review", Toast.LENGTH_LONG).show()
-                    }else{
-                        Toast.makeText(applicationContext, "Please fill all form fields.", Toast.LENGTH_LONG).show()
-                    }
-                }else{
-                    startActivity(Intent(applicationContext, StartActivity::class.java))
-                }
-
-
-            }
-        })
+//        postcomment.setOnClickListener(object : View.OnClickListener{
+//            override fun onClick(v: View?) {
+//
+//                if(applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).contains("myToken")){
+//                    CheckEditTextIsEmptyOrNot()
+//                    if (CheckEditText){
+//                        commentPost()
+//                        Toast.makeText(applicationContext, "Thank You For Your Review", Toast.LENGTH_LONG).show()
+//                    }else{
+//                        Toast.makeText(applicationContext, "Please fill all form fields.", Toast.LENGTH_LONG).show()
+//                    }
+//                }else{
+//                    startActivity(Intent(applicationContext, StartActivity::class.java))
+//                }
+//
+//
+//            }
+//        })
 
         val checkDates = findViewById<View>(R.id.add_to_cart_btn)
         checkDates.setOnClickListener(object : View.OnClickListener {
@@ -159,6 +160,12 @@ class TourDetailActivity : AppCompatActivity() {
         //VOLLEY
         val requestVolley = Volley.newRequestQueue(this)
 
+        val activityAdapter = ActivityInfoAdapter(this)
+        val activityLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        recycleViewActivityInfo!!.layoutManager = activityLayoutManager
+        recycleViewActivityInfo!!.itemAnimator = DefaultItemAnimator()
+        recycleViewActivityInfo!!.adapter = activityAdapter
+
         val reviewAdapter = ReviewContentAdapter(this)
         val reviewLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         recycleTourReview!!.layoutManager = reviewLayoutManager
@@ -172,18 +179,31 @@ class TourDetailActivity : AppCompatActivity() {
                     val tourData = response.getJSONObject("data")
                     tourMaterial.add(tourData)
 
-                    tourName.text = tourData.getString("product_name")
-                    tourDesc.text = Html.fromHtml(tourData.getString("product_desc"))
-                    tourExplanation.text = Html.fromHtml(tourData.getString("highlight"))
+                    tourName?.text = tourData.getString("product_name")
+                    tourDesc?.text = Html.fromHtml(tourData.getString("product_desc"))
+                    tourOverview?.text = Html.fromHtml(tourData.getString("highlight"))
+                    tourHighlight?.text = Html.fromHtml(tourData.getString("highlight"))
+                    tourExpect?.text = Html.fromHtml(tourData.getString("expect"))
+                    tourAdditional?.text = Html.fromHtml(tourData.getString("add_info"))
+                    tourCancelation?.text = Html.fromHtml(tourData.getString("cancel_policy"))
+                    tourNote?.text = Html.fromHtml(tourData.getString("important_note"))
 
                     totalReviews.text = tourData.getString("total_review")
                     collectRating.rating = tourData.getString("total_rating").toFloat()
                     collectRatingText.text = tourData.getString("total_rating")
 
+                    val tourActivity = tourData.getJSONArray("activity_information")
+                    for (i in 0 until tourActivity.length()){
+                        activityAdapter.addJsonObject(tourActivity.getJSONObject(i))
+                        Log.d("Debug", tourActivity.getJSONObject(i).toString())
+                    }
+                    activityAdapter.notifyDataSetChanged()
+
                     val tourGallery = tourData.getJSONArray("tour_gallery")
                     for (i in 0 until tourGallery.length()){
                         tourGalleryMaterial.add(tourGallery.getJSONObject(i))
                     }
+                    tourGallerAdapter.notifyDataSetChanged()
 
                     val tourReviewData = tourData.getJSONArray("reviews")
                     for (i in 0 until tourReviewData.length()){
@@ -191,11 +211,11 @@ class TourDetailActivity : AppCompatActivity() {
                         Log.d("Debug", tourReviewData.getJSONObject(i).toString())
                     }
 
-                    tourGallerAdapter.notifyDataSetChanged()
                     reviewAdapter.notifyDataSetChanged()
                     progressDialog.dismiss()
                 }catch (e : JSONException){
                     e.printStackTrace()
+                    progressDialog.dismiss()
                 }
             }
         },
@@ -276,6 +296,7 @@ class TourGalleryAdapter(private val context: Context, private val tourGallery: 
 
         val view = inflater.inflate(R.layout.tour_gallery, container, false)
         val tourBannerImage = view.findViewById<ImageView>(R.id.tourImage)
+        tourBannerImage.setImageResource(R.drawable.no_available)
         Picasso.with(context).load(tourGallery.get(position).getString("image")).into(tourBannerImage)
         container.addView(view)
         return view
