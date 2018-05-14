@@ -61,14 +61,13 @@ class TourDatesActivity : AppCompatActivity() {
                         val simpledateformat = SimpleDateFormat("EEEE")
                         val date = Date(year, month, dayOfMonth-1)
                         val dayOfWeek = simpledateformat.format(date)
-                        Log.d("Debug", dayOfWeek.toString())
 
                         val intent = Intent(this@TourDatesActivity, TourCountActivity::class.java)
                         try {
                             intent.putExtra("service_id", service_id)
-                            intent.putExtra("package_id", packageMaterial.get(position).get("package_id").toString())
-                            intent.putExtra("package_name", packageMaterial.get(position).get("package_name").toString())
-                            intent.putExtra("package_pax", packageMaterial.get(position).get("package_pax").toString())
+                            intent.putExtra("package_id", packageMaterial.get(position).getString("package_id"))
+                            intent.putExtra("package_name", packageMaterial.get(position).getString("package_name"))
+                            //intent.putExtra("packageMaterial", packageMaterial.toString())
                             intent.putExtra("selectedYear", year)
                             intent.putExtra("selectedMonth", month+1)
                             intent.putExtra("selectedDay", dayOfMonth)

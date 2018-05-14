@@ -23,8 +23,9 @@ import android.widget.LinearLayout
 class TourConfirmActivity : AppCompatActivity() {
 
     var countryURL = "https://gentle-atoll-11837.herokuapp.com/api/countries"
-    var bookingURL = "https://gentle-atoll-11837.herokuapp.com/api/booking"
-    val bookingMaterial = ArrayList<JSONArray>()
+    //var bookingURL = "https://gentle-atoll-11837.herokuapp.com/api/booking"
+    var bookingURL = "http://192.168.0.115/gentle-atoll-11837/public/api/booking"
+    //val bookingMaterial = ArrayList<JSONArray>()
     val countryMaterial = ArrayList<JSONObject>()
     var CheckEditText:Boolean = false
 
@@ -37,7 +38,6 @@ class TourConfirmActivity : AppCompatActivity() {
     var ic_passport : String = ""
     var tour_name: String = ""
     var package_name: String = ""
-    var package_pax: String = ""
     var travel_time: String = ""
     var travel_date: String = ""
 
@@ -49,14 +49,13 @@ class TourConfirmActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        //
-        var layoutInflater = applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        var parent = findViewById(R.id.multiplePassenger) as LinearLayout
-        for (i in 1..2){
-            val view = layoutInflater.inflate(R.layout.passenger_details, null, false)
+//        var layoutInflater = applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//        var parent = findViewById(R.id.multiplePassenger) as LinearLayout
+//        for (i in 1..2){
+//            val view = layoutInflater.inflate(R.layout.passenger_details, null, false)
 //            val passenger_detail_name = view.findViewById(R.id.name_passenger) as EditText
 //            val passenger_detail_ic_passport = view.findViewById(R.id.ic_number) as EditText
-
+//
 //            val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
 //            linearLayout.setOrientation(LinearLayout.VERTICAL)
 //
@@ -68,21 +67,19 @@ class TourConfirmActivity : AppCompatActivity() {
 //            val passenger_detail_ic_passport = EditText(this)
 //            passenger_detail_ic_passport.setHint("Please Enter Your Passport Number")
 //            passenger_detail_ic_passport.setLayoutParams(params)
-
-            val passenger_name = view.findViewById(R.id.name_text) as TextView
-            passenger_name.setText("Passenger "+i+" Name")
-            val passenger_passport = view.findViewById(R.id.passport_text) as TextView
-            passenger_passport.setText("Passenger " +i+" Passport")
-
-            parent.addView(view)
-        }
+//
+//            val passenger_name = view.findViewById(R.id.name_text) as TextView
+//            passenger_name.setText("Passenger "+i+" Name")
+//            val passenger_passport = view.findViewById(R.id.passport_text) as TextView
+//            passenger_passport.setText("Passenger " +i+" Passport")
+//
+//            parent.addView(view)
+//        }
 
         tour_name = intent.getStringExtra("tour_name")
         name_tour?.text = tour_name
         package_name = intent.getStringExtra("package_name")
         name_package?.text = package_name
-        package_pax = intent.getStringExtra("package_pax")
-        package_service?.text = package_pax
         travel_date = intent.getStringExtra("travel_date")
         date_travel?.text = travel_date
         travel_time = intent.getStringExtra("travel_time")
@@ -159,21 +156,20 @@ class TourConfirmActivity : AppCompatActivity() {
                 override fun onResponse(response: String) {
                     Log.d("Debug", response)
                     progressDialog.dismiss()
-                    //Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
                     val intent = Intent(applicationContext, TourSummaryActivity::class.java)
                     try {
                         intent.putExtra("tour_name", tour_name)
                         intent.putExtra("package_name", package_name)
-                        intent.putExtra("package_pax", package_pax)
                         intent.putExtra("travel_date", travel_date)
                         intent.putExtra("travel_time", travel_time)
                         intent.putExtra("booking_name", name_booking)
                         intent.putExtra("mobile_number", mobile_number)
                         intent.putExtra("nationality", nationality)
                         intent.putExtra("user_email", user_email)
-                        val bundle = Bundle()
-                        bundle.putString("passenger_detail", bookingMaterial.toString())
-                        intent.putExtras(bundle)
+//                        val bundle = Bundle()
+//                        bundle.putString("passenger_detail", bookingMaterial.toString())
+//                        intent.putExtras(bundle)
                     }catch (e: JSONException){
                         e.printStackTrace()
                     }
@@ -218,25 +214,25 @@ class TourConfirmActivity : AppCompatActivity() {
                     bookingObj.put("email", user_email)
                     bookingObj.put("nationality",  nationality_id)
 
-                    var userArray = JSONArray()
-                    for (i in 1..2){
+//                    var userArray = JSONArray()
+//                    for (i in 1..2){
+//
+//                        val newObj = JSONObject()
+//                        try{
+//                            newObj.put("passenger_name", passenger_name)
+//                            newObj.putOpt("ic_passport",ic_passport)
+//                        }catch (e : JSONException){
+//                            e.printStackTrace()
+//                        }
+//                        userArray.put(newObj)
+//                    }
 
-                        val newObj = JSONObject()
-                        try{
-                            newObj.put("passenger_name", passenger_name)
-                            newObj.putOpt("ic_passport",ic_passport)
-                        }catch (e : JSONException){
-                            e.printStackTrace()
-                        }
-                        userArray.put(newObj)
-                    }
-
-                    Log.d("Array", userArray.toString())
-                    bookingObj.put("passengers", userArray)
+//                    Log.d("Array", userArray.toString())
+//                    bookingObj.put("passengers", userArray)
                     Log.d("Booking", bookingObj.toString())
                     params.put("booking", bookingObj.toString())
                     Log.d("Debug",params.toString())
-                    bookingMaterial.add(userArray)
+//                    bookingMaterial.add(userArray)
 
                     return JSONObject(params).toString().toByteArray()
                 }

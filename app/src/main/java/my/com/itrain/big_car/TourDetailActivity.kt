@@ -195,7 +195,7 @@ class TourDetailActivity : AppCompatActivity() {
                     val tourActivity = tourData.getJSONArray("activity_information")
                     for (i in 0 until tourActivity.length()){
                         activityAdapter.addJsonObject(tourActivity.getJSONObject(i))
-                        Log.d("Debug", tourActivity.getJSONObject(i).toString())
+                        //Log.d("Debug", tourActivity.getJSONObject(i).toString())
                     }
                     activityAdapter.notifyDataSetChanged()
 
@@ -208,7 +208,7 @@ class TourDetailActivity : AppCompatActivity() {
                     val tourReviewData = tourData.getJSONArray("reviews")
                     for (i in 0 until tourReviewData.length()){
                         reviewAdapter.addJsonObject(tourReviewData.getJSONObject(i))
-                        Log.d("Debug", tourReviewData.getJSONObject(i).toString())
+                        //Log.d("Debug", tourReviewData.getJSONObject(i).toString())
                     }
 
                     reviewAdapter.notifyDataSetChanged()
@@ -296,7 +296,11 @@ class TourGalleryAdapter(private val context: Context, private val tourGallery: 
 
         val view = inflater.inflate(R.layout.tour_gallery, container, false)
         val tourBannerImage = view.findViewById<ImageView>(R.id.tourImage)
-        tourBannerImage.setImageResource(R.drawable.no_available)
+        if (tourGallery.get(position).getString("image") == ""){
+            tourBannerImage.setImageResource(R.drawable.no_available)
+        }else {
+            tourBannerImage.setImageResource(R.drawable.no_available)
+        }
         Picasso.with(context).load(tourGallery.get(position).getString("image")).into(tourBannerImage)
         container.addView(view)
         return view

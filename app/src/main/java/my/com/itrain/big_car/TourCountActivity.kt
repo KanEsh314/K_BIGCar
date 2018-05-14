@@ -43,18 +43,17 @@ class TourCountActivity : AppCompatActivity() {
         val service_id = intent.getIntExtra("service_id",0)
         val package_id = intent.getStringExtra("package_id")
         val package_name = intent.getStringExtra("package_name")
-        val package_pax = intent.getStringExtra("package_pax")
+        //val packageMaterial = JSONObject(intent.getStringExtra("packageMaterial"))
         val onDateYear = intent.getIntExtra("selectedYear",0)
         val onDateMonth = intent.getIntExtra("selectedMonth", 0)
         val onDateDay = intent.getIntExtra("selectedDay", 0)
         packageConfirmName?.text = package_name
-        packageConfirmDate?.text = onDateYear.toString()+"-"+onDateMonth.toString()+"-"+onDateDay.toString()
+        packageConfirmDate?.text = onDateYear.toString() + "-" + onDateMonth.toString() + "-" + onDateDay.toString()
 
         editPackage.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 finish()
             }
-
         })
 
         //VOLLEY
@@ -84,7 +83,6 @@ class TourCountActivity : AppCompatActivity() {
                         intent.putExtra("tour_name", tour_name)
                         intent.putExtra("package_id", package_id)
                         intent.putExtra("package_name", package_name)
-                        intent.putExtra("package_pax", package_pax)
                         intent.putExtra("travel_date", onDateYear.toString() + "-" + onDateMonth.toString() + "-" + onDateDay.toString())
                         intent.putExtra("travel_time", tourTimeAdapter.getSelectedItem().getString("time"))
                         intent.putExtra("travel_day_id", tourTimeAdapter.getSelectedItem().getString("day_id"))
@@ -113,12 +111,16 @@ class TourCountActivity : AppCompatActivity() {
                     val tourTimeData = tourData.getJSONArray("times")
                     for (i in 0 until tourTimeData.length()){
                         tourTimeAdapter.addJsonObject(tourTimeData.getJSONObject(i))
-                        Log.d("Debug", tourTimeData.getJSONObject(i).toString())
                     }
                     tourTimeAdapter.notifyDataSetChanged()
+
+                    //tourCountAdapter.addJsonObject(packageMaterial)
+                    //tourCountAdapter.notifyDataSetChanged()
+
                     progressDialog.dismiss()
                 }catch (e : JSONException){
                     e.printStackTrace()
+                    progressDialog.dismiss()
                 }
             }
         },

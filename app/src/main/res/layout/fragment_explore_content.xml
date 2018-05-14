@@ -45,14 +45,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/smallPadding"
-                    android:text="Popular Destinations"
+                    android:text="Explore BiGCar Tours by Theme"
                     android:fontFamily="sans-serif-light"
                     android:textColor="@color/colorDark"
                     android:textSize="@dimen/typeTitle"
                     android:textStyle="bold" />
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycleViewDestination"
+                    android:id="@+id/recycleViewCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
@@ -99,14 +99,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/smallPadding"
-                    android:text="Category Activities"
+                    android:text="Popular Destination"
                     android:fontFamily="sans-serif-light"
                     android:textColor="@color/colorDark"
                     android:textSize="@dimen/typeTitle"
                     android:textStyle="bold" />
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycleViewCategory"
+                    android:id="@+id/recycleViewDestination"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"

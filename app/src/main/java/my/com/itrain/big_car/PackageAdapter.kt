@@ -21,13 +21,13 @@ class PackageAdapter(private val context: Context, private val listener: OnItemC
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var packageName: TextView
         var packagePrice: TextView
-        var packagePax: TextView
+        //var packagePax: TextView
         var packageButton: Button
 
         init {
             packageName = itemView.findViewById(R.id.packageTitle)
             packagePrice = itemView.findViewById(R.id.packagePrice)
-            packagePax = itemView.findViewById(R.id.packagePax)
+            //packagePax = itemView.findViewById(R.id.packagePax)
             packageButton = itemView.findViewById(R.id.chooseDate)
         }
 
@@ -47,7 +47,7 @@ class PackageAdapter(private val context: Context, private val listener: OnItemC
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.packageName?.text = packageOption.get(position).getString("package_name")
-        holder?.packagePax?.text = packageOption.get(position).getString("package_pax")
+        //holder?.packagePax?.text = packageOption.get(position).getString("package_pax")
         holder?.packagePrice?.text = packageOption.get(position).getString("package_price")
 
         holder?.bind(position, listener)

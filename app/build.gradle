@@ -10,8 +10,8 @@ android {
         applicationId "my.com.itrain.big_car"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 4
-        versionName "1.0.9"
+        versionCode 5
+        versionName "1.0.10"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

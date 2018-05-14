@@ -42,7 +42,7 @@ class FavHisContent(private val context: Context, private val listener: OnItemCl
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        Picasso.with(context).load(byCategory.get(position).getString("image")).into(holder?.favHisImageView)
+        Picasso.with(context).load(byCategory.get(position).getString("grid_image")).into(holder?.favHisImageView)
         holder?.favHisName?.text = Html.fromHtml(byCategory.get(position).getString("product_name"))
         holder?.favHisPrice?.text = Html.fromHtml(byCategory.get(position).getString("short_prod_code"))
 

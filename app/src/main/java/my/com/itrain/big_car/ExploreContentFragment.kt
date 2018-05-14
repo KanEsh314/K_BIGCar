@@ -201,7 +201,7 @@ class ExploreContentFragment : Fragment() {
 
                 for (i in 0 until bannerData.length()){
                     bannerMaterial.add(bannerData.getJSONObject(i))
-                    Log.d("Debug", bannerData.getJSONObject(i).toString())
+                    //Log.d("Debug", bannerData.getJSONObject(i).toString())
                 }
                 bannerAdapter.notifyDataSetChanged()
                 progressDialog.dismiss()

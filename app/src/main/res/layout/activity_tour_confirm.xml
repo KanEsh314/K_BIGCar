@@ -202,31 +202,31 @@
                 </LinearLayout>
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/PICPaymentSummary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/PICDetailsLayout"
-                android:padding="@dimen/mediumPadding">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/PICPaymentSummary"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/PICDetailsLayout"-->
+                <!--android:padding="@dimen/mediumPadding">-->
 
-                <TextView
-                    android:id="@+id/summaryTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/smallPadding"
-                    android:text="Traveller's Information"
-                    android:textSize="@dimen/mediumUniversalText"
-                    android:textColor="@color/colorDark" />
+                <!--<TextView-->
+                    <!--android:id="@+id/summaryTitle"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:paddingBottom="@dimen/smallPadding"-->
+                    <!--android:text="Traveller's Information"-->
+                    <!--android:textSize="@dimen/mediumUniversalText"-->
+                    <!--android:textColor="@color/colorDark" />-->
 
-                <LinearLayout
-                    android:id="@+id/multiplePassenger"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:animateLayoutChanges="true"
-                    android:layout_below="@id/summaryTitle">
-                </LinearLayout>
-            </RelativeLayout>
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/multiplePassenger"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:animateLayoutChanges="true"-->
+                    <!--android:layout_below="@id/summaryTitle">-->
+                <!--</LinearLayout>-->
+            <!--</RelativeLayout>-->
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
