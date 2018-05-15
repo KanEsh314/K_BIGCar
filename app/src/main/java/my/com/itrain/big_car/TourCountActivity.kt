@@ -25,6 +25,7 @@ import my.com.itrain.big_car.R.id.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.text.DateFormatSymbols
 import java.util.*
 
 class TourCountActivity : AppCompatActivity() {
@@ -42,13 +43,13 @@ class TourCountActivity : AppCompatActivity() {
 
         val service_id = intent.getIntExtra("service_id",0)
         val package_id = intent.getStringExtra("package_id")
-        val package_name = intent.getStringExtra("package_name")
-        //val packageMaterial = JSONObject(intent.getStringExtra("packageMaterial"))
+        val package_title = intent.getStringExtra("package_title")
+        val package_pax = intent.getStringExtra("package_pax")
         val onDateYear = intent.getIntExtra("selectedYear",0)
         val onDateMonth = intent.getIntExtra("selectedMonth", 0)
         val onDateDay = intent.getIntExtra("selectedDay", 0)
-        packageConfirmName?.text = package_name
-        packageConfirmDate?.text = onDateYear.toString() + "-" + onDateMonth.toString() + "-" + onDateDay.toString()
+        packageConfirmName?.text = package_title
+        packageConfirmDate?.text = onDateDay.toString() + " " + DateFormatSymbols().getMonths()[onDateMonth - 1] + " " + onDateYear.toString()
 
         editPackage.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
@@ -65,11 +66,11 @@ class TourCountActivity : AppCompatActivity() {
         recycleTourTime!!.itemAnimator = DefaultItemAnimator()
         recycleTourTime!!.adapter = tourTimeAdapter
 
-        val tourCountAdapter = SelectCountAdapter(this)
-        val tourCountLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
-        recycleTourCount!!.layoutManager = tourCountLayoutManager
-        recycleTourCount!!.itemAnimator = DefaultItemAnimator()
-        recycleTourCount!!.adapter = tourCountAdapter
+//        val tourCountAdapter = SelectCountAdapter(this)
+//        val tourCountLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
+//        recycleTourCount!!.layoutManager = tourCountLayoutManager
+//        recycleTourCount!!.itemAnimator = DefaultItemAnimator()
+//        recycleTourCount!!.adapter = tourCountAdapter
 
         val checkPay = findViewById<View>(R.id.add_to_cart_btn)
         checkPay.setOnClickListener(object : View.OnClickListener {
@@ -82,8 +83,12 @@ class TourCountActivity : AppCompatActivity() {
                         intent.putExtra("service_id", service_id)
                         intent.putExtra("tour_name", tour_name)
                         intent.putExtra("package_id", package_id)
-                        intent.putExtra("package_name", package_name)
+                        intent.putExtra("package_title", package_title)
+                        intent.putExtra("package_pax" , package_pax)
                         intent.putExtra("travel_date", onDateYear.toString() + "-" + onDateMonth.toString() + "-" + onDateDay.toString())
+                        intent.putExtra("selectedYear", onDateYear)
+                        intent.putExtra("selectedMonth", onDateMonth)
+                        intent.putExtra("selectedDay", onDateDay)
                         intent.putExtra("travel_time", tourTimeAdapter.getSelectedItem().getString("time"))
                         intent.putExtra("travel_day_id", tourTimeAdapter.getSelectedItem().getString("day_id"))
                         intent.putExtra("travel_time_id", tourTimeAdapter.getSelectedItem().getString("time_id"))

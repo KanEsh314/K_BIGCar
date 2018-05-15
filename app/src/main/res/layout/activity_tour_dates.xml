@@ -32,9 +32,9 @@
                             android:layout_height="wrap_content">
 
                             <TextView
+                                android:id="@+id/product_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="Package Option"
                                 android:textSize="18sp"
                                 android:textColor="@color/colorWhite"
                                 android:textStyle="bold"/>

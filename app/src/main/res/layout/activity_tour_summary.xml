@@ -63,7 +63,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dip"
                     android:text="Order Details"
                     android:textStyle="bold"
                     android:textSize="@dimen/mediumUniversalText"
@@ -98,7 +98,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" - "
+                        android:text=" "
                         android:textColor="@color/colorDark"
                         android:textSize="@dimen/smallUniversalText"/>
 
@@ -126,7 +126,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" Person"
+                        android:text=" Pax"
                         android:textColor="@color/colorDark"
                         android:textSize="@dimen/smallUniversalText"/>
 
@@ -147,8 +147,8 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Booking Information"
+                    android:layout_height="50dip"
+                    android:text="Traveler's Information"
                     android:textStyle="bold"
                     android:textSize="@dimen/mediumUniversalText"
                     android:textColor="@color/colorDark"/>
@@ -181,35 +181,6 @@
                     android:textSize="@dimen/smallUniversalText"
                     android:textColor="@color/colorDark"/>
             </LinearLayout>
-
-            <View
-                android:layout_height="1dp"
-                android:layout_width="match_parent"
-                android:background="#90909090"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp" />
-
-            <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Traveller Information"
-                android:textStyle="bold"
-                android:textSize="@dimen/mediumUniversalText"
-                android:textColor="@color/colorDark"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/passengerDetailsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="true"
-                android:paddingBottom="16dp"/>
-
-        </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

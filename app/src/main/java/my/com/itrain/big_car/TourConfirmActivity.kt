@@ -19,12 +19,13 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import android.widget.LinearLayout
+import java.text.DateFormatSymbols
 
 class TourConfirmActivity : AppCompatActivity() {
 
     var countryURL = "https://gentle-atoll-11837.herokuapp.com/api/countries"
-    //var bookingURL = "https://gentle-atoll-11837.herokuapp.com/api/booking"
-    var bookingURL = "http://192.168.0.115/gentle-atoll-11837/public/api/booking"
+    var bookingURL = "https://gentle-atoll-11837.herokuapp.com/api/booking"
+    //var bookingURL = "http://192.168.0.115/gentle-atoll-11837/public/api/booking"
     //val bookingMaterial = ArrayList<JSONArray>()
     val countryMaterial = ArrayList<JSONObject>()
     var CheckEditText:Boolean = false
@@ -34,10 +35,9 @@ class TourConfirmActivity : AppCompatActivity() {
     var nationality_id : String = ""
     var nationality : String = ""
     var user_email : String = ""
-    var passenger_name : String = ""
-    var ic_passport : String = ""
     var tour_name: String = ""
-    var package_name: String = ""
+    var package_pax: String = ""
+    var package_title: String = ""
     var travel_time: String = ""
     var travel_date: String = ""
 
@@ -49,41 +49,21 @@ class TourConfirmActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-//        var layoutInflater = applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-//        var parent = findViewById(R.id.multiplePassenger) as LinearLayout
-//        for (i in 1..2){
-//            val view = layoutInflater.inflate(R.layout.passenger_details, null, false)
-//            val passenger_detail_name = view.findViewById(R.id.name_passenger) as EditText
-//            val passenger_detail_ic_passport = view.findViewById(R.id.ic_number) as EditText
-//
-//            val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-//            linearLayout.setOrientation(LinearLayout.VERTICAL)
-//
-//            //TextView
-//            val passenger_detail_name = EditText(this)
-//            passenger_detail_name.setHint("Please Enter Your Name")
-//            passenger_detail_name.setLayoutParams(params)
-//
-//            val passenger_detail_ic_passport = EditText(this)
-//            passenger_detail_ic_passport.setHint("Please Enter Your Passport Number")
-//            passenger_detail_ic_passport.setLayoutParams(params)
-//
-//            val passenger_name = view.findViewById(R.id.name_text) as TextView
-//            passenger_name.setText("Passenger "+i+" Name")
-//            val passenger_passport = view.findViewById(R.id.passport_text) as TextView
-//            passenger_passport.setText("Passenger " +i+" Passport")
-//
-//            parent.addView(view)
-//        }
-
         tour_name = intent.getStringExtra("tour_name")
         name_tour?.text = tour_name
-        package_name = intent.getStringExtra("package_name")
-        name_package?.text = package_name
-        travel_date = intent.getStringExtra("travel_date")
-        date_travel?.text = travel_date
+        package_title = intent.getStringExtra("package_title")
+        name_package?.text = package_title
+
+        val onDateYear = intent.getIntExtra("selectedYear",0)
+        val onDateMonth = intent.getIntExtra("selectedMonth", 0)
+        val onDateDay = intent.getIntExtra("selectedDay", 0)
+        travel_date = onDateDay.toString() + " " + DateFormatSymbols().getMonths()[onDateMonth - 1] + " " + onDateYear.toString()
+        date_travel?.text = onDateDay.toString() + " " + DateFormatSymbols().getMonths()[onDateMonth - 1] + " " + onDateYear.toString()
+
         travel_time = intent.getStringExtra("travel_time")
         time_travel?.text = travel_time
+        package_pax = intent.getStringExtra("package_pax")
+        package_service?.text = package_pax
 
         val customSpinnerAdapter = CustomSpinnerAdapter(this)
         selectOrigin.setAdapter(customSpinnerAdapter)
@@ -160,16 +140,14 @@ class TourConfirmActivity : AppCompatActivity() {
                     val intent = Intent(applicationContext, TourSummaryActivity::class.java)
                     try {
                         intent.putExtra("tour_name", tour_name)
-                        intent.putExtra("package_name", package_name)
+                        intent.putExtra("package_title", package_title)
+                        intent.putExtra("package_pax", package_pax)
                         intent.putExtra("travel_date", travel_date)
                         intent.putExtra("travel_time", travel_time)
                         intent.putExtra("booking_name", name_booking)
                         intent.putExtra("mobile_number", mobile_number)
                         intent.putExtra("nationality", nationality)
                         intent.putExtra("user_email", user_email)
-//                        val bundle = Bundle()
-//                        bundle.putString("passenger_detail", bookingMaterial.toString())
-//                        intent.putExtras(bundle)
                     }catch (e: JSONException){
                         e.printStackTrace()
                     }
@@ -189,10 +167,10 @@ class TourConfirmActivity : AppCompatActivity() {
                 override fun getHeaders():Map<String,String>{
                     val headers = HashMap<String, String>()
                     headers.put("Authorization", "Bearer "+sharedPreferences)
-                    headers.put("Content-Type", "application/json; charset=utf-8")
+                    headers.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
                     return headers
                 }
-                override fun getBody(): ByteArray {
+                override fun getParams():Map<String, String> {
                     val params = HashMap<String, String>()
 
                     val service_id = intent.getIntExtra("service_id", 0).toString()
@@ -201,44 +179,19 @@ class TourConfirmActivity : AppCompatActivity() {
                     val travel_time_id = intent.getStringExtra("travel_time_id")
                     val travel_day_id = intent.getStringExtra("travel_day_id")
 
-                    val bookingObj = JSONObject()
+                    params.put("service_name", service_id)
+                    params.put("service_package", package_id)
+                    params.put("travel_date", travel_date)
+                    params.put("travel_day", travel_day_id)
+                    params.put("travel_time", travel_time_id)
+                    params.put("remark", "Just Try")
+                    params.put("booking_name", name_booking)
+                    params.put("mobile_number", mobile_number)
+                    params.put("email", user_email)
+                    params.put("nationality",  nationality_id)
 
-                    bookingObj.put("service_name", service_id)
-                    bookingObj.put("service_package", package_id)
-                    bookingObj.put("travel_date", travel_date)
-                    bookingObj.put("travel_day", travel_day_id)
-                    bookingObj.put("travel_time", travel_time_id)
-                    bookingObj.put("remark", "Just Try")
-                    bookingObj.put("booking_name", name_booking)
-                    bookingObj.put("mobile_number", mobile_number)
-                    bookingObj.put("email", user_email)
-                    bookingObj.put("nationality",  nationality_id)
-
-//                    var userArray = JSONArray()
-//                    for (i in 1..2){
-//
-//                        val newObj = JSONObject()
-//                        try{
-//                            newObj.put("passenger_name", passenger_name)
-//                            newObj.putOpt("ic_passport",ic_passport)
-//                        }catch (e : JSONException){
-//                            e.printStackTrace()
-//                        }
-//                        userArray.put(newObj)
-//                    }
-
-//                    Log.d("Array", userArray.toString())
-//                    bookingObj.put("passengers", userArray)
-                    Log.d("Booking", bookingObj.toString())
-                    params.put("booking", bookingObj.toString())
                     Log.d("Debug",params.toString())
-//                    bookingMaterial.add(userArray)
-
-                    return JSONObject(params).toString().toByteArray()
-                }
-
-                override fun getBodyContentType(): String {
-                    return "application/json; charset=utf-8"
+                    return params
                 }
             }
 

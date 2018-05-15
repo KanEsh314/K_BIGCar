@@ -33,6 +33,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_tour_detail.*
 import kotlinx.android.synthetic.main.activity_tour_detail.view.*
 import kotlinx.android.synthetic.main.post_review.*
+import my.com.itrain.big_car.R.id.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -46,6 +47,7 @@ class TourDetailActivity : AppCompatActivity() {
     private val tourGalleryMaterial = ArrayList<JSONObject>()
     var CheckEditText:Boolean = false
     var service_id:Int = 0
+    var product_name:String = ""
     var commentHolder:String = ""
     var ratingHolder: String = ""
 
@@ -144,6 +146,7 @@ class TourDetailActivity : AppCompatActivity() {
                 val intent = Intent(this@TourDetailActivity, TourDatesActivity::class.java)
                 try {
                     intent.putExtra("service_id", service_id)
+                    intent.putExtra("product_name", product_name)
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }
@@ -179,9 +182,11 @@ class TourDetailActivity : AppCompatActivity() {
                     val tourData = response.getJSONObject("data")
                     tourMaterial.add(tourData)
 
+                    product_name = tourData.getString("product_name")
+
                     tourName?.text = tourData.getString("product_name")
                     tourDesc?.text = Html.fromHtml(tourData.getString("product_desc"))
-                    tourOverview?.text = Html.fromHtml(tourData.getString("highlight"))
+                    tourOverview?.text = Html.fromHtml(tourData.getString("overview"))
                     tourHighlight?.text = Html.fromHtml(tourData.getString("highlight"))
                     tourExpect?.text = Html.fromHtml(tourData.getString("expect"))
                     tourAdditional?.text = Html.fromHtml(tourData.getString("add_info"))

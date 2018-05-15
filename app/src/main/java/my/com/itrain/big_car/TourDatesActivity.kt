@@ -45,6 +45,7 @@ class TourDatesActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val service_id = intent.getIntExtra("service_id", 0)
+        product_name?.text = intent.getStringExtra("product_name")
         val mYear = calender.get(Calendar.YEAR)
         val mMonth = calender.get(Calendar.MONTH)
         val mDate = calender.get(Calendar.DAY_OF_MONTH)
@@ -66,8 +67,8 @@ class TourDatesActivity : AppCompatActivity() {
                         try {
                             intent.putExtra("service_id", service_id)
                             intent.putExtra("package_id", packageMaterial.get(position).getString("package_id"))
-                            intent.putExtra("package_name", packageMaterial.get(position).getString("package_name"))
-                            //intent.putExtra("packageMaterial", packageMaterial.toString())
+                            intent.putExtra("package_title", packageMaterial.get(position).getString("package_title"))
+                            intent.putExtra("package_pax", packageMaterial.get(position).getString("package_pax"))
                             intent.putExtra("selectedYear", year)
                             intent.putExtra("selectedMonth", month+1)
                             intent.putExtra("selectedDay", dayOfMonth)
@@ -81,7 +82,7 @@ class TourDatesActivity : AppCompatActivity() {
                 dateListener.datePicker.minDate = calender.timeInMillis
             }
         })
-        val packegeOptionLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
+        val packegeOptionLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         packageRecyclerView!!.layoutManager = packegeOptionLayoutManager
         packageRecyclerView!!.itemAnimator = DefaultItemAnimator()
         packageRecyclerView!!.adapter = packageOptionAdapter

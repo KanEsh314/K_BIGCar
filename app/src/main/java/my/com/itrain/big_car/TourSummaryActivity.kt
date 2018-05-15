@@ -19,7 +19,7 @@ class TourSummaryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tour_summary)
 
         tour_name?.text = intent.getStringExtra("tour_name")
-        package_name?.text = intent.getStringExtra("package_name")
+        package_name?.text = intent.getStringExtra("package_title")
         travel_date?.text = intent.getStringExtra("travel_date")
         travel_time?.text = intent.getStringExtra("travel_time")
         traveller_count?.text = intent.getStringExtra("package_pax")
@@ -27,9 +27,6 @@ class TourSummaryActivity : AppCompatActivity() {
         booking_mobile_number?.text = intent.getStringExtra("mobile_number")
         booking_nationality?.text = intent.getStringExtra("nationality")
         booking_email?.text = intent.getStringExtra("user_email")
-        val bundle:Bundle = intent.extras
-        val booked_passenger = bundle.getString("passenger_detail")
-        Log.d("Debug", booked_passenger)
         //Toast.makeText(applicationContext, booked_passenger.toString(), Toast.LENGTH_LONG).show()
 
         more_trips.setOnClickListener(object : View.OnClickListener{
@@ -38,10 +35,10 @@ class TourSummaryActivity : AppCompatActivity() {
             }
         })
 
-        val summaryAdapter = SummaryAdapter(applicationContext)
-        val packegeOptionLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
-        passengerDetailsRecyclerView!!.layoutManager = packegeOptionLayoutManager
-        passengerDetailsRecyclerView!!.itemAnimator = DefaultItemAnimator()
-        passengerDetailsRecyclerView!!.adapter = summaryAdapter
+//        val summaryAdapter = SummaryAdapter(applicationContext)
+//        val packegeOptionLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
+//        passengerDetailsRecyclerView!!.layoutManager = packegeOptionLayoutManager
+//        passengerDetailsRecyclerView!!.itemAnimator = DefaultItemAnimator()
+//        passengerDetailsRecyclerView!!.adapter = summaryAdapter
     }
 }
