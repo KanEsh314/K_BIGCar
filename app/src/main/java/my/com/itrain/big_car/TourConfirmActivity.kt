@@ -134,9 +134,9 @@ class TourConfirmActivity : AppCompatActivity() {
         val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
             val stringRequest = object : StringRequest(Request.Method.POST, bookingURL, object : Response.Listener<String> {
                 override fun onResponse(response: String) {
-                    Log.d("Debug", response)
+                    //Log.d("Debug", response)
                     progressDialog.dismiss()
-                    Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
+                    //Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
                     val intent = Intent(applicationContext, TourSummaryActivity::class.java)
                     try {
                         intent.putExtra("tour_name", tour_name)
@@ -156,10 +156,9 @@ class TourConfirmActivity : AppCompatActivity() {
             },
                     object : Response.ErrorListener {
                         override fun onErrorResponse(error: VolleyError?) {
-                            VolleyLog.d("Error",error)
-                            Log.d("Error", error.toString())
+                            //Log.d("Error", error.toString())
                             progressDialog.dismiss()
-                            Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
+                            //Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
                         }
 
                     }){

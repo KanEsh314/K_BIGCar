@@ -47,7 +47,8 @@
         <activity android:name=".FavoriteActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".BookingActivity" />
-        <activity android:name=".NearByActivity"></activity>
+        <activity android:name=".NearByActivity" />
+        <activity android:name=".PlaceActivity"></activity>
     </application>
 
 </manifest>
