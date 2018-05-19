@@ -134,7 +134,12 @@ class ProfileContentFragment : Fragment() {
             override fun onResponse(response: JSONObject) {
                 val userInfo = response.getJSONObject("data")
                 name_user.text = userInfo.getString("name")
-                Picasso.with(context).load(userInfo.getString("profilepic")).into(user_dp)
+
+                if (userInfo.getString("profilepic") == ""){
+                    user_dp.setImageResource(R.mipmap.ic_app_user)
+                } else {
+                    Picasso.with(context).load(userInfo.getString("profilepic")).into(user_dp)
+                }
                 progressDialog.dismiss()
             }
 

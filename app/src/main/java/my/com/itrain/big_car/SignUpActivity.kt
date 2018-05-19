@@ -1,22 +1,23 @@
 package my.com.itrain.big_car
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.TextUtils
-import android.util.Base64
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.android.volley.*
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import java.io.ByteArrayOutputStream
 import android.graphics.Bitmap;
+import android.provider.MediaStore
+import android.util.Base64
+import android.util.Log
 import org.json.JSONException
+import java.io.ByteArrayOutputStream
 import java.util.HashMap
 
 class SignUpActivity : AppCompatActivity() {
@@ -24,16 +25,16 @@ class SignUpActivity : AppCompatActivity() {
     var CheckEditText:Boolean = false
     var registerURL = "http://gentle-atoll-11837.herokuapp.com/api/registeruser"
 
-    //var profileHolder: String = ""
+    var profileHolder: String = ""
     var icpassportHolder: String = ""
     var nameHolder: String = ""
     var emailHolder: String = ""
     var addressHolder: String = ""
     var phoneHolder: String = ""
     var passwordHolder: String = ""
+    lateinit var bitmap:Bitmap
 
     val PICK_IMAGE_REQUEST = 15
-    lateinit var bitmap:Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,27 +55,27 @@ class SignUpActivity : AppCompatActivity() {
             }
         })
 
-//        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-//            super.onActivityResult(requestCode, resultCode, data)
-//
-//            if (requestCode === PICK_IMAGE_REQUEST && resultCode === RESULT_OK && data != null && data.getData() != null)
-//            {
-//                val filePath = data.data
-//                try
-//                {
-//                    //getting image from gallery
-//                    bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-//                    //Setting image to ImageView
-//                    register_image.setImageBitmap(bitmap)
-//                    //
-//                    Log.d("Image", bitmap.toString())
-//                }
-//                catch (e:Exception) {
-//                    Log.d("Debug", e.toString())
-//                    e.printStackTrace()
-//                }
-//            }
-//        }
+        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+            super.onActivityResult(requestCode, resultCode, data)
+
+            if (requestCode === PICK_IMAGE_REQUEST && resultCode === RESULT_OK && data != null && data.getData() != null)
+            {
+                val filePath = data.data
+                try
+                {
+                    //getting image from gallery
+                    bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
+                    //Setting image to ImageView
+                    register_image.setImageBitmap(bitmap)
+                    //
+                    Log.d("Image", bitmap.toString())
+                }
+                catch (e:Exception) {
+                    Log.d("Debug", e.toString())
+                    e.printStackTrace()
+                }
+            }
+        }
 
 
         registerBtn.setOnClickListener(object : View.OnClickListener{
@@ -82,7 +83,7 @@ class SignUpActivity : AppCompatActivity() {
 
                 CheckEditTextIsEmptyOrNot()
                 if (CheckEditText){
-//                    userImage()
+                    userImage()
                     userRegistration()
                     try{
 
@@ -96,12 +97,9 @@ class SignUpActivity : AppCompatActivity() {
         })
     }
 
-//    private fun userImage() {
-//        val baos = ByteArrayOutputStream()
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos)
-//        var imageBytes = baos.toByteArray()
-//        profileHolder = Base64.encodeToString(imageBytes, Base64.DEFAULT)
-//    }
+    private fun userImage() {
+
+    }
 
     private fun CheckEditTextIsEmptyOrNot() {
 
@@ -120,8 +118,6 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun userRegistration() {
-
-        Log.d("Debug","Working")
 
         val progressDialog = ProgressDialog(this, R.style.DialogTheme)
         progressDialog.setMessage("Please Wait, We are Inserting Your Data on Server")
@@ -145,7 +141,13 @@ class SignUpActivity : AppCompatActivity() {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = HashMap<String, String>()
-//                params.put("profilepic", profileHolder)
+
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                var imageBytes = baos.toByteArray()
+                //profileHolder =
+
+                params.put("profilepic", Base64.encodeToString(imageBytes, Base64.DEFAULT))
                 params.put("name", nameHolder)
                 params.put("ic", icpassportHolder)
                 params.put("email", emailHolder)

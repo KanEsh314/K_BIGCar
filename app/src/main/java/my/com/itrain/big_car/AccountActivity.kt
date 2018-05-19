@@ -30,8 +30,6 @@ class AccountActivity : AppCompatActivity() {
     var userURL = "https://gentle-atoll-11837.herokuapp.com/api/user"
     var updateURL = "https://gentle-atoll-11837.herokuapp.com/api/updateuser"
 
-    //var profile_picture = findViewById<ImageView>(R.id.profilePicture)
-
     var nameHolder:String = ""
     var numberHolder:String = ""
     var addressHolder:String = ""

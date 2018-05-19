@@ -61,6 +61,7 @@
         android:background="@color/colorWhite">
 
         <LinearLayout
+            android:id="@+id/tripType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -72,7 +73,6 @@
                 android:src="@mipmap/ic_action_personal"/>
 
             <TextView
-                android:id="@+id/tripType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -84,6 +84,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/tripPayment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -95,7 +96,6 @@
                 android:src="@mipmap/ic_action_pay"/>
 
             <TextView
-                android:id="@+id/tripPayment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -107,6 +107,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/tripTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -118,7 +119,6 @@
                 android:src="@mipmap/ic_action_time"/>
 
             <TextView
-                android:id="@+id/tripTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

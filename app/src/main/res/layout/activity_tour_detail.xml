@@ -95,7 +95,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingBottom="@dimen/mediumPadding"
-                            android:textSize="28sp"
+                            android:textSize="24sp"
                             android:textColor="@color/colorDark"
                             android:textStyle="bold"/>
 
@@ -405,7 +405,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingBottom="@dimen/mediumPadding"
-                            android:text="Cancelation Policy"
+                            android:text="Cancellation Policy"
                             android:textColor="@color/colorDark"
                             android:textSize="28sp"
                             android:textStyle="bold" />

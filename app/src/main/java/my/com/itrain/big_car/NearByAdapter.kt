@@ -43,7 +43,7 @@ class NearByAdapter(private val context: Context, private val listener: NearByAd
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        Picasso.with(context).load(nearBy.get(position).getString("grid_imagef")).into(holder?.nearImg)
+        Picasso.with(context).load(nearBy.get(position).getString("grid_image")).into(holder?.nearImg)
         holder?.nearTitle?.text = nearBy.get(position).getString("product_name")
         holder?.nearDesc?.text = nearBy.get(position).getString("short_desc")
         holder?.nearLocation?.text = nearBy.get(position).getString("short_prod_code")
