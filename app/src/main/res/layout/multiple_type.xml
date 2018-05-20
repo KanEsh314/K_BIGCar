@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/types"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/mediumPadding"
+    android:orientation="horizontal">
 
-</ListView>
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/typeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:paddingLeft="@dimen/mediumPadding"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/smallUniversalText"
+        android:textColor="@color/colorDark"/>
+
+</LinearLayout>

@@ -3,6 +3,8 @@ package my.com.itrain.big_car
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,6 +18,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.DatePicker
+import android.widget.TimePicker
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -27,6 +31,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.book_content.*
 import kotlinx.android.synthetic.main.fragment_browse_content.*
 import org.json.JSONObject
+import java.util.*
+import kotlin.math.min
 
 /**
  * A simple [Fragment] subclass.
@@ -68,13 +74,39 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
             }
         })
 
+        tripTime.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val calender = Calendar.getInstance()
+                val mYear = calender.get(Calendar.YEAR)
+                val mMonth = calender.get(Calendar.MONTH)
+                val mDay = calender.get(Calendar.DAY_OF_MONTH)
+                val mHour = calender.get(Calendar.HOUR_OF_DAY)
+                val mMinute = calender.get(Calendar.MINUTE)
+
+                val datePickerDialog = DatePickerDialog(context, R.style.DialogTheme, object: DatePickerDialog.OnDateSetListener {
+                    override fun onDateSet(view:DatePicker, year:Int, monthOfYear:Int, dayOfMonth:Int) {
+                        Log.d("Debug", dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year)
+                        val timePickerDialog = TimePickerDialog(context, R.style.DialogTheme, object: TimePickerDialog.OnTimeSetListener{
+                            override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
+                                Log.d("Debug", hourOfDay.toString()+ ":" + minute)
+                            }
+                        }, mHour, mMinute, true)
+                        timePickerDialog.show()
+                    }
+                }, mYear, mMonth, mDay)
+                datePickerDialog.show()
+
+
+            }
+        })
+
         tripType.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(activity, TypeActivity::class.java)
                 try {
                     typeMaterial.add("Personal")
                     typeMaterial.add("Business")
-                    intent.putExtra("typeMaterial", typeMaterial.toString())
+                    intent.putExtra("typeMaterial", typeMaterial)
                 } catch (e: Exception){
 
                 }
