@@ -50,7 +50,7 @@
         <activity android:name=".BookingActivity" />
         <activity android:name=".NearByActivity" />
         <activity android:name=".PlaceActivity" />
-        <activity android:name=".TypeActivity"></activity>
+        <activity android:name=".TypeActivity" />
     </application>
 
 </manifest>

@@ -64,7 +64,7 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
 
         return view
     }
@@ -125,7 +125,7 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
             task ->
                 if (task.isSuccessful && task.result != null){
 
-                    val requestVolley = Volley.newRequestQueue(context)
+                    val requestVolley = Volley.newRequestQueue(activity)
 
                     val progressDialog = ProgressDialog(activity, R.style.DialogTheme)
                     progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
@@ -175,7 +175,7 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun checkPermissions() =
-            ActivityCompat.checkSelfPermission(context, ACCESS_COARSE_LOCATION) == PERMISSION_GRANTED
+            ActivityCompat.checkSelfPermission(activity, ACCESS_COARSE_LOCATION) == PERMISSION_GRANTED
 
     override fun onMapReady(map:GoogleMap) {
         mMap = map
@@ -211,7 +211,7 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
                     mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
                         override fun onMarkerClick(p0: Marker): Boolean {
                             attraction_id = p0.tag as Int
-                            val intent = Intent(context, NearByActivity::class.java)
+                            val intent = Intent(activity, NearByActivity::class.java)
                             try {
                                 intent.putExtra("attraction_id", attraction_id)
                             } catch (e: JSONException) {

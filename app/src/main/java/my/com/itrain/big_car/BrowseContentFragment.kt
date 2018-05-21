@@ -2,6 +2,8 @@ package my.com.itrain.big_car
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -19,9 +21,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.DatePicker
+import android.widget.TextView
 import android.widget.TimePicker
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.places.ui.PlaceAutocomplete
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -40,12 +46,15 @@ import kotlin.math.min
 class BrowseContentFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var mMap:GoogleMap
+    private val PLACE_AUTO_COMPLETE_PICK_CODE = 0
+    private var pickLatLng: LatLng = LatLng(0.0,0.0)
+    private val PLACE_AUTO_COMPLETE_DROP_CODE = 1
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 34
     private val SECOND_ACTIVITY_REQUEST_CODE = 0
     private val typeMaterial = ArrayList<String>()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var latitude:Double = 0.0
-    private var longitude:Double = 0.0
+    private var latitude:Double = 4.2105
+    private var longitude:Double = 101.9758
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -89,6 +98,7 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
                         val timePickerDialog = TimePickerDialog(context, R.style.DialogTheme, object: TimePickerDialog.OnTimeSetListener{
                             override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
                                 Log.d("Debug", hourOfDay.toString()+ ":" + minute)
+                                tripTime?.text = year.toString()+" "+(monthOfYear+1)+" "+dayOfMonth.toString()+" "+hourOfDay+" "+minute
                             }
                         }, mHour, mMinute, true)
                         timePickerDialog.show()
@@ -103,17 +113,19 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
         tripType.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(activity, TypeActivity::class.java)
-                try {
-                    typeMaterial.add("Personal")
-                    typeMaterial.add("Business")
-                    intent.putExtra("typeMaterial", typeMaterial)
-                } catch (e: Exception){
-
-                }
-                startActivity(intent)
-                //startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE)
+                startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE)
             }
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        //super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == SECOND_ACTIVITY_REQUEST_CODE){
+            if (resultCode == RESULT_OK){
+                val returnString = data?.getStringExtra("keyName")
+                tripType.text = "Debug"
+            }
+        }
     }
 
     private fun requestPermission() {
@@ -135,8 +147,8 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
         fusedLocationClient.lastLocation
                 .addOnCompleteListener{ task ->
                     if (task.isSuccessful && task.result != null) {
-                        latitude = task.result.latitude
-                        longitude = task.result.longitude
+                        //latitude = task.result.latitude
+                        //longitude = task.result.longitude
                     } else {
                         Log.d("Debug","getLastLocation:exception"+task.exception)
                         showSnackbar(R.string.no_location_detected)

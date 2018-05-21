@@ -78,15 +78,15 @@ class ExploreContentFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bannerAdapter = BannerAdapter(context, bannerMaterial)
+        val bannerAdapter = BannerAdapter(activity, bannerMaterial)
         bannerViewPager.setAdapter(bannerAdapter)
 
         //VOLLEY
-        val requestVolley = Volley.newRequestQueue(this.context)
+        val requestVolley = Volley.newRequestQueue(activity)
 
-        val popularAdapter = ExploreContentAdapter(context, object: ExploreContentAdapter.OnItemClickListener{
+        val popularAdapter = ExploreContentAdapter(activity, object: ExploreContentAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
-                val intent = Intent(context,TourDetailActivity::class.java)
+                val intent = Intent(activity, TourDetailActivity::class.java)
                 try {
                     intent.putExtra("service_id", toursMaterial.get(position).getInt("service_id"))
                 }catch (e : JSONException){
@@ -103,9 +103,9 @@ class ExploreContentFragment : Fragment() {
 
 
 
-        val destinationAdapter = ExplorePlaceContentAdapter(context ,object: ExplorePlaceContentAdapter.OnItemClickListener{
+        val destinationAdapter = ExplorePlaceContentAdapter(activity ,object: ExplorePlaceContentAdapter.OnItemClickListener{
             override fun onItemClick(position:Int){
-                val intent = Intent(context,TourDetailActivity::class.java)
+                val intent = Intent(activity, TourDetailActivity::class.java)
                 try {
                     intent.putExtra("service_id", toursMaterial.get(position).getInt("service_id"))
                 }catch (e : JSONException){
@@ -119,9 +119,9 @@ class ExploreContentFragment : Fragment() {
         recycleViewDestination!!.itemAnimator = DefaultItemAnimator()
         recycleViewDestination!!.adapter = destinationAdapter
 
-        val categoryAdapter = CategoryAdapter(context, object : CategoryAdapter.OnItemClickListener{
+        val categoryAdapter = CategoryAdapter(activity, object : CategoryAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
-                val intent = Intent(context, CategoryActivity::class.java)
+                val intent = Intent(activity, CategoryActivity::class.java)
                 try {
                     intent.putExtra("servicecatid", categoriesMaterial.get(position).getInt("servicecat_id"))
                     intent.putExtra("categoryTitle", categoriesMaterial.get(position).getString("servicecat_name"))
