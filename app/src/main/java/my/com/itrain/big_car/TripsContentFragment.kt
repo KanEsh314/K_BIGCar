@@ -177,26 +177,27 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
     private fun checkPermissions() =
             ActivityCompat.checkSelfPermission(activity, ACCESS_COARSE_LOCATION) == PERMISSION_GRANTED
 
+    @SuppressLint("MissingPermission")
     override fun onMapReady(map:GoogleMap) {
         mMap = map
-        mMap.isMyLocationEnabled
+        mMap.isMyLocationEnabled = true
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL)
         mMap.setOnMapLoadedCallback(object : GoogleMap.OnMapLoadedCallback{
             override fun onMapLoaded() {
 
                 if (nearByMaterial.size == 0){
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 18F))
-                    AlertDialog.Builder(activity, R.style.DialogTheme)
-                            .setCancelable(false)
-                            .setTitle("Nearby Tour")
-                            .setMessage("No Nearby Tour Around You")
-                            .setPositiveButton("Okay", object : DialogInterface.OnClickListener {
-                                override fun onClick(dialog: DialogInterface, which: Int) {
-                                    dialog.dismiss()
-                                }
-                            })
-                            .create()
-                            .show()
+//                    AlertDialog.Builder(activity, R.style.DialogTheme)
+//                            .setCancelable(false)
+//                            .setTitle("Nearby Tour")
+//                            .setMessage("No Nearby Tour Around You")
+//                            .setPositiveButton("Okay", object : DialogInterface.OnClickListener {
+//                                override fun onClick(dialog: DialogInterface, which: Int) {
+//                                    dialog.dismiss()
+//                                }
+//                            })
+//                            .create()
+//                            .show()
                 }else {
 
                     for (i in 0 until nearByMaterial.size) {

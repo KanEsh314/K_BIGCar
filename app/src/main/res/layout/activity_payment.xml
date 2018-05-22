@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/background_light"
     android:fitsSystemWindows="true"
-    tools:context=".TypeActivity">
+    tools:context=".PaymentActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolBarType"
+            android:id="@+id/toolBarPayment"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
@@ -34,7 +34,7 @@
                         android:id="@+id/product_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Tag this trip"
+                        android:text="Choose a payment"
                         android:textSize="18sp"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"/>
@@ -51,7 +51,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycleViewType"
+            android:id="@+id/recycleViewPayment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="true"

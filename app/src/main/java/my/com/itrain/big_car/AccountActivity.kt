@@ -39,6 +39,7 @@ class AccountActivity : AppCompatActivity() {
         setContentView(R.layout.activity_account)
 
         setSupportActionBar(account_toolbar)
+
         val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
         var jsonRequest = object  : JsonObjectRequest(Request.Method.GET, userURL, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {

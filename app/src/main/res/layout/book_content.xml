@@ -15,7 +15,8 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="35dp"
-            android:src="@mipmap/ic_action_pick_up"/>
+            android:src="@mipmap/ic_action_pick_up"
+            android:layout_gravity="center_vertical"/>
 
         <TextView
             android:id="@+id/pickup"
@@ -84,7 +85,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/tripPayment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -96,6 +96,7 @@
                 android:src="@mipmap/ic_action_pay"/>
 
             <TextView
+                android:id="@+id/tripPayment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -138,22 +139,11 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/trip_promo_code"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="@dimen/smallUniversalText"
-            android:background="@color/colorWhite"
-            android:layout_weight="1"
-            android:padding="@dimen/smallPadding"
-            android:hint="Promo Code"/>
-
-        <EditText
             android:id="@+id/trip_driver_notes"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="@dimen/smallUniversalText"
             android:background="@color/colorWhite"
-            android:layout_weight="5"
             android:hint="Notes To Driver"
             android:padding="@dimen/smallPadding" />
 
@@ -167,35 +157,27 @@
     android:layout_marginBottom="70dp">
 
         <LinearLayout
-            android:id="@+id/selectTrip"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="10dp"
             android:background="@color/colorWhite">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="@dimen/mediumMargin"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/ic_action_seats"/>
-
-            <TextView
+            <Spinner
+                android:id="@+id/vehicleType"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="4 Seats"
-                android:textSize="@dimen/smallUniversalText"
-                android:layout_gravity="center_vertical"/>
+                android:layout_height="50dip" />
 
         </LinearLayout>
 
         <Button
+            android:id="@+id/selectTrip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:textColor="@color/colorWhite"
-            android:text="CHOOSE YOUR DROP-OOF"/>
+            android:text="CHOOSE YOUR DROP-OFF"/>
 
     </LinearLayout>
 </RelativeLayout>

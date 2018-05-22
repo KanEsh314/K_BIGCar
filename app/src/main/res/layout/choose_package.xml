@@ -4,7 +4,7 @@
     android:id="@+id/packageCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/largeMargin">
+    android:layout_margin="@dimen/smallMargin">
 
     <RelativeLayout
         android:layout_width="match_parent"
