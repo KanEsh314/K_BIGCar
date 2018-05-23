@@ -51,7 +51,8 @@
         <activity android:name=".NearByActivity" />
         <activity android:name=".PlaceActivity" />
         <activity android:name=".TypeActivity" />
-        <activity android:name=".PaymentActivity"></activity>
+        <activity android:name=".PaymentActivity" />
+        <activity android:name=".DriverActivity"></activity>
     </application>
 
 </manifest>

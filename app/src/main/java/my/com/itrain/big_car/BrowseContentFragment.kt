@@ -70,6 +70,7 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
     var trip_type_id:String = ""
     var trip_pay_id:String = ""
     var drop_off_id:String = ""
+    var trip_time:String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -120,7 +121,8 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
                         val timePickerDialog = TimePickerDialog(context, R.style.DialogTheme, object: TimePickerDialog.OnTimeSetListener{
                             override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
                                 Log.d("Debug", hourOfDay.toString()+ ":" + minute)
-                                tripTime?.text = year.toString()+"-"+(monthOfYear+1)+"-"+dayOfMonth.toString()+" "+hourOfDay+":"+minute
+                                trip_time = year.toString()+"-"+(monthOfYear+1)+"-"+dayOfMonth.toString()+" "+hourOfDay+":"+minute
+                                tripTime?.text = trip_time
                             }
                         }, mHour, mMinute, true)
                         timePickerDialog.show()
@@ -220,7 +222,7 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
                         params.put("trip_type", trip_type_id.toString())
                         params.put("payment_method", trip_pay_id.toString())
                         params.put("remarks", trip_driver_notes.text.toString())
-                        params.put("datetime", "2018-04-01 23:28:00")
+                        params.put("datetime", trip_time)
                         params.put("vehicle_type", vehicle_type_id.toString())
 
                         Log.d("Debug",params.toString())

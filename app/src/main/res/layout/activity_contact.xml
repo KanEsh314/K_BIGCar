@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarContact"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
@@ -47,11 +48,56 @@
         android:padding="@dimen/mediumPadding"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <fragment
-            android:id="@+id/map_contact_us"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/mapsContact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <fragment
+                    android:id="@+id/map_contact_us"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/smallPadding"
+                    android:text="BiGTree Adventure Holidays Sdn Bhd"
+                    android:textSize="@dimen/mediumUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="(Co.Reg : 907234-M) Tourism Malaysia (KPL : 6275)"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No.48, Jalan Durian 4, Jalan Durian 4, Taman Cheras 56100 Kuala Lumpur"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
 
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
