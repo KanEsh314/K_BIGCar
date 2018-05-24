@@ -194,9 +194,8 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
                 val sharedPreferences = activity.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
                 val stringRequest = object : StringRequest(Request.Method.POST, tripURL, object : Response.Listener<String> {
                     override fun onResponse(response: String) {
-                        Log.d("Debug", response)
                         progressDialog.dismiss()
-                        Toast.makeText(activity, "Successfully Addded", Toast.LENGTH_LONG).show()
+                        startActivity(Intent(activity, DriverActivity::class.java))
                     }
                 },
                         object : Response.ErrorListener {

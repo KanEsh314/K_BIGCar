@@ -216,6 +216,15 @@
                         android:textSize="@dimen/smallUniversalText"
                         android:textColor="@color/colorDark"/>
 
+                    <EditText
+                        android:id="@+id/remarks"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dip"
+                        android:inputType="textShortMessage"
+                        android:hint="Remark"
+                        android:textSize="@dimen/smallUniversalText"
+                        android:textColor="@color/colorDark"/>
+
                 </LinearLayout>
             </RelativeLayout>
 

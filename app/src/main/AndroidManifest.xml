@@ -52,7 +52,8 @@
         <activity android:name=".PlaceActivity" />
         <activity android:name=".TypeActivity" />
         <activity android:name=".PaymentActivity" />
-        <activity android:name=".DriverActivity"></activity>
+        <activity android:name=".DriverActivity" />
+        <activity android:name=".BookingDetailActivity"></activity>
     </application>
 
 </manifest>

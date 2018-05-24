@@ -3,6 +3,7 @@ package my.com.itrain.big_car
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -50,7 +51,13 @@ class CompletedFragment : Fragment() {
 
         val completedAdapter = BookingContent(activity, object: BookingContent.OnItemClickListener{
             override fun onItemClick(position: Int) {
-                Log.d("Next Page","Will Have Soon")
+                val intent = Intent(activity, BookingDetailActivity::class.java)
+                try {
+                    intent.putExtra("booking_id", completedMaterial.get(position).getInt("booking_id"))
+                } catch (e: JSONException){
+                    e.printStackTrace()
+                }
+                startActivity(intent);
             }
         })
         val completedLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, true)

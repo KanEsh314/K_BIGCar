@@ -9,6 +9,7 @@
         android:id="@+id/vehicleIcon"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/mediumMargin"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_action_seats"/>
@@ -16,10 +17,10 @@
     <TextView
         android:id="@+id/vehicleTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
         android:text="4 Seats"
-        android:textSize="@dimen/smallUniversalText"
-        android:layout_gravity="center_vertical"/>
+        android:textSize="@dimen/smallUniversalText" />
 
 </LinearLayout>
 

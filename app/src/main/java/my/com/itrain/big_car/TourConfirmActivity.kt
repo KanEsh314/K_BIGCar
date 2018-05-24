@@ -183,7 +183,7 @@ class TourConfirmActivity : AppCompatActivity() {
                     params.put("travel_date", travel_date)
                     params.put("travel_day", travel_day_id)
                     params.put("travel_time", travel_time_id)
-                    params.put("remark", "Just Try")
+                    params.put("remark", remarks.text.toString())
                     params.put("booking_name", name_booking)
                     params.put("mobile_number", mobile_number)
                     params.put("email", user_email)

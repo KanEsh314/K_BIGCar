@@ -30,6 +30,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 import java.util.zip.Inflater
+import kotlin.collections.ArrayList
 
 
 /**
@@ -38,12 +39,15 @@ import java.util.zip.Inflater
 class ExploreContentFragment : Fragment() {
 
     var toursURL = "https://gentle-atoll-11837.herokuapp.com/api/tours"
-    var popularssURL = "https://gentle-atoll-11837.herokuapp.com/api/populartour"
+    var popularsURL = "https://gentle-atoll-11837.herokuapp.com/api/populartour"
     var categoriesURL = "http://gentle-atoll-11837.herokuapp.com/api/categories"
     var bannerURl = "https://gentle-atoll-11837.herokuapp.com/api/banners"
     private val toursMaterial = ArrayList<JSONObject>()
     private val bannerMaterial = ArrayList<JSONObject>()
     private val categoriesMaterial = ArrayList<JSONObject>()
+    private val popularMaterial = ArrayList<JSONObject>()
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -88,7 +92,7 @@ class ExploreContentFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 val intent = Intent(activity, TourDetailActivity::class.java)
                 try {
-                    intent.putExtra("service_id", toursMaterial.get(position).getInt("service_id"))
+                    intent.putExtra("service_id", popularMaterial.get(position).getInt("service_id"))
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }
@@ -169,14 +173,14 @@ class ExploreContentFragment : Fragment() {
 
         requestVolley.add(jsonObjectRequestTour)
 
-        var jsonObjectRequestPopular = JsonObjectRequest(Request.Method.GET, popularssURL,null, object : Response.Listener<JSONObject>{
+        var jsonObjectRequestPopular = JsonObjectRequest(Request.Method.GET, popularsURL,null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) = try {
 
                 val toursData = response.getJSONArray("data")
 
                 for (i in 0 until toursData.length()){
                     popularAdapter.addJsonObject(toursData.getJSONObject(i))
-                    toursMaterial.add(toursData.getJSONObject(i))
+                    popularMaterial.add(toursData.getJSONObject(i))
                 }
                 popularAdapter.notifyDataSetChanged()
                 progressDialog.dismiss()
