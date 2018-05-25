@@ -41,15 +41,12 @@ import org.json.JSONObject
 class TourDetailActivity : AppCompatActivity() {
 
     var tourURL = "https://gentle-atoll-11837.herokuapp.com/api/tour/"
-    var commentURL = "http://gentle-atoll-11837.herokuapp.com/api/review/"
+
     var favoriteURL = "http://gentle-atoll-11837.herokuapp.com/api/favoritetour"
     private val tourMaterial = ArrayList<JSONObject>()
     private val tourGalleryMaterial = ArrayList<JSONObject>()
-    var CheckEditText:Boolean = false
     var service_id:Int = 0
     var product_name:String = ""
-    var commentHolder:String = ""
-    var ratingHolder: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,25 +117,6 @@ class TourDetailActivity : AppCompatActivity() {
             }
 
         })
-
-//        postcomment.setOnClickListener(object : View.OnClickListener{
-//            override fun onClick(v: View?) {
-//
-//                if(applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).contains("myToken")){
-//                    CheckEditTextIsEmptyOrNot()
-//                    if (CheckEditText){
-//                        commentPost()
-//                        Toast.makeText(applicationContext, "Thank You For Your Review", Toast.LENGTH_LONG).show()
-//                    }else{
-//                        Toast.makeText(applicationContext, "Please fill all form fields.", Toast.LENGTH_LONG).show()
-//                    }
-//                }else{
-//                    startActivity(Intent(applicationContext, StartActivity::class.java))
-//                }
-//
-//
-//            }
-//        })
 
         val checkDates = findViewById<View>(R.id.add_to_cart_btn)
         checkDates.setOnClickListener(object : View.OnClickListener {
@@ -231,54 +209,6 @@ class TourDetailActivity : AppCompatActivity() {
                 })
 
         requestVolley.add(jsonObjectRequest)
-    }
-
-    private fun CheckEditTextIsEmptyOrNot() {
-        commentHolder = comment.text.toString()
-        ratingHolder = ratingcomment.rating.toString()
-
-        if (TextUtils.isEmpty(commentHolder)){
-            CheckEditText = false
-        }else {
-            CheckEditText = true
-        }
-    }
-
-    private fun commentPost() {
-        val progressDialog = ProgressDialog(this, R.style.DialogTheme)
-        progressDialog.setMessage("Please Wait, We are Inserting Your Data on Server")
-        progressDialog.show()
-
-        val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
-        val stringRequest = object : StringRequest(Request.Method.POST, commentURL+service_id, object : Response.Listener<String>{
-            override fun onResponse(response: String?) {
-                Log.d("Debug", response)
-                progressDialog.dismiss()
-                //Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
-            }
-        }, object : Response.ErrorListener{
-            override fun onErrorResponse(error: VolleyError?) {
-                progressDialog.dismiss()
-                Log.d("Debug", error.toString())
-            }
-        }){
-            @Throws(AuthFailureError::class)
-            override fun getHeaders():Map<String,String>{
-                val headers = HashMap<String, String>()
-                headers.put("Authorization", "Bearer "+sharedPreferences)
-                return headers
-            }
-            override fun getParams():Map<String, String> {
-                val params = HashMap<String, String>()
-                params.put("user_comment", commentHolder)
-                params.put("rating_id", ratingHolder)
-                params.put("service_id", service_id.toString())
-                return params
-            }
-        }
-
-        val requestVolley = Volley.newRequestQueue(this)
-        requestVolley.add(stringRequest)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

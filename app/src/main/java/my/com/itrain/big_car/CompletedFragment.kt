@@ -29,7 +29,7 @@ import org.json.JSONObject
  */
 class CompletedFragment : Fragment() {
 
-    var completedbookingURL = "http://gentle-atoll-11837.herokuapp.com/api/userhistory"
+    var completedbookingURL = "https://gentle-atoll-11837.herokuapp.com/api/usercompletehistory"
     private val completedMaterial = ArrayList<JSONObject>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

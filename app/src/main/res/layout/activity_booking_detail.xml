@@ -87,15 +87,14 @@
                 android:id="@+id/bookingName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/mediumPadding"
                 android:textAlignment="center"
                 android:textSize="20sp"/>
 
             <View
                 android:layout_height="5dp"
                 android:layout_width="match_parent"
-                android:background="#90909090"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp" />
+                android:background="#90909090"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,15 +109,17 @@
 
                 <TextView
                     android:id="@+id/booked_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/mediumPadding"
                     android:textSize="16sp"
                     android:textColor="@color/colorDark"/>
 
                 <TextView
                     android:id="@+id/booked_location"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/mediumPadding"
                     android:textSize="12sp"
                     android:textColor="@color/colorDark"/>
 
@@ -131,6 +132,122 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/mediumPadding">
+
+                <TextView
+                    android:id="@+id/booked_package_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/mediumPadding"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RM "
+                        android:textSize="@dimen/smallUniversalText"
+                        android:textColor="@color/colorDark"/>
+
+                    <TextView
+                        android:id="@+id/booked_package_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/smallUniversalText"
+                        android:textColor="@color/colorDark"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_action_datetime"/>
+
+                    <TextView
+                        android:id="@+id/booked_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/smallPadding"
+                        android:textSize="@dimen/smallUniversalText"
+                        android:textColor="@color/colorDark"/>
+
+                    <TextView
+                        android:id="@+id/booked_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:padding="@dimen/smallPadding"
+                        android:textSize="@dimen/smallUniversalText"
+                        android:textColor="@color/colorDark"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/commentZone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <View
+                    android:layout_height="5dp"
+                    android:layout_width="match_parent"
+                    android:background="#90909090"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/mediumPadding">
+
+                    <RatingBar
+                        android:id="@+id/postRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        style="?attr/ratingBarStyle"
+                        android:numStars="5"
+                        android:stepSize="0.5"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:progressTint="@color/colorBlue"/>
+
+                    <EditText
+                        android:id="@+id/postText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textAutoCorrect|textShortMessage"
+                        android:textSize="@dimen/smallUniversalText"
+                        android:textColor="@color/colorDark"
+                        android:hint="Write a review..." />
+
+                    <Button
+                        android:id="@+id/postComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary"
+                        android:text="Submit"/>
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

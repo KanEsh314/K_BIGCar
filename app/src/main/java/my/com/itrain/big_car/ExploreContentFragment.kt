@@ -3,12 +3,14 @@ package my.com.itrain.big_car
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v4.view.PagerAdapter
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
@@ -205,7 +207,6 @@ class ExploreContentFragment : Fragment() {
 
                 for (i in 0 until bannerData.length()){
                     bannerMaterial.add(bannerData.getJSONObject(i))
-                    //Log.d("Debug", bannerData.getJSONObject(i).toString())
                 }
                 bannerAdapter.notifyDataSetChanged()
                 progressDialog.dismiss()
@@ -269,7 +270,6 @@ class BannerAdapter(private val context: Context, private val banner: ArrayList<
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as View)
-        //super.destroyItem(container, position, `object`)
     }
 
     override fun getCount(): Int {

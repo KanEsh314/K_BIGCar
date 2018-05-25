@@ -3,6 +3,7 @@ package my.com.itrain.big_car
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -28,7 +29,7 @@ import org.json.JSONObject
  */
 class NewFragment : Fragment() {
 
-    var newbookingURL = "http://gentle-atoll-11837.herokuapp.com/api/userhistory"
+    var newbookingURL = "https://gentle-atoll-11837.herokuapp.com/api/usernewhistory"
     private val newMaterial = ArrayList<JSONObject>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +51,13 @@ class NewFragment : Fragment() {
 
         val bookingAdapter = BookingContent(activity, object: BookingContent.OnItemClickListener{
             override fun onItemClick(position: Int) {
-                Log.d("Next Page","Will Have Soon")
+                val intent = Intent(activity, BookingDetailActivity::class.java)
+                try {
+                    intent.putExtra("booking_id", newMaterial.get(position).getInt("booking_id"))
+                } catch (e: JSONException){
+                    e.printStackTrace()
+                }
+                startActivity(intent);
             }
         })
         val bookingLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, true)

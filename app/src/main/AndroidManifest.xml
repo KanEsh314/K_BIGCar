@@ -53,7 +53,7 @@
         <activity android:name=".TypeActivity" />
         <activity android:name=".PaymentActivity" />
         <activity android:name=".DriverActivity" />
-        <activity android:name=".BookingDetailActivity"></activity>
+        <activity android:name=".BookingDetailActivity"/>
     </application>
 
 </manifest>
