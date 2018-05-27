@@ -14,33 +14,35 @@ import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.android.volley.AuthFailureError
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.VolleyError
+import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.places.Place
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.book_content.*
 import kotlinx.android.synthetic.main.fragment_browse_content.*
-import my.com.itrain.big_car.R.id.textView
+import my.com.itrain.big_car.R.drawable.splash_screen
+import my.com.itrain.big_car.R.id.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
@@ -60,12 +62,16 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
     private val SECOND_ACTIVITY__TYPE_REQUEST_CODE = 1
     private val SECOND_ACTIVITY__DROP_REQUEST_CODE = 0
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var latitude:Double = 0.0
-    private var longitude:Double = 0.0
+
+    private var pick_Latitude:Double = 0.0
+    private var pick_Longitude:Double = 0.0
+    private var drop_Latitude:Double = 0.0
+    private var drop_Longitude:Double = 0.0
 
     val vehicleMaterial = ArrayList<JSONObject>()
 
     var pick_address:String = ""
+    var drop_address: String = ""
     var vehicle_type_id:String = ""
     var trip_type_id:String = ""
     var trip_pay_id:String = ""
@@ -90,8 +96,8 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
             override fun onClick(v: View?) {
                 val intent = Intent(activity, PlaceActivity::class.java)
                 try {
-                    intent.putExtra("latitude", latitude)
-                    intent.putExtra("longitude", longitude)
+                    intent.putExtra("latitude", pick_Latitude)
+                    intent.putExtra("longitude", pick_Longitude)
                 }catch (e: JSONException){
                     e.printStackTrace()
                 }
@@ -229,6 +235,7 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
                     }
                 }
 
+                stringRequest.retryPolicy = DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 5, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
                 requestVolley.add(stringRequest)
 
             }
@@ -246,8 +253,11 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
 
         if (requestCode == SECOND_ACTIVITY__DROP_REQUEST_CODE){
             if (resultCode == RESULT_OK){
-                dropoff.text = data.getStringExtra("selectedDropName")
+                drop_address = data.getStringExtra("selectedDropName")
+                dropoff.text = drop_address
                 drop_off_id = data.getStringExtra("selectedDropId")
+                drop_Latitude = data.getDoubleExtra("selectedLat", 0.0)
+                drop_Longitude = data.getDoubleExtra("selectedLng", 0.0)
             }
         }
 
@@ -283,8 +293,8 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
         fusedLocationClient.lastLocation
                 .addOnCompleteListener{ task ->
                     if (task.isSuccessful && task.result != null) {
-                        latitude = task.result.latitude
-                        longitude = task.result.longitude
+                        pick_Latitude = task.result.latitude
+                        pick_Longitude = task.result.longitude
                         try {
                             addresses = geoCoder.getFromLocation(task.result.latitude, task.result.longitude, 1)
                             if (null != addresses && !addresses!!.isEmpty()) {
@@ -325,9 +335,43 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL)
         mMap.setOnMapLoadedCallback (object : GoogleMap.OnMapLoadedCallback{
             override fun onMapLoaded() {
-                //mMap.addMarker(MarkerOptions().position(LatLng(latitude,longitude)).title("myLocation"))
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latitude,longitude),18F))
 
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(pick_Latitude,pick_Longitude),15F))
+
+                dropoff.addTextChangedListener(object : TextWatcher{
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(pick_Latitude,pick_Longitude),15F))
+                    }
+
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        onDestroy()
+                        mMap.clear()
+                    }
+
+                    override fun afterTextChanged(s: Editable?) {
+
+                        Handler().postDelayed({
+
+                            val locations = ArrayList<PICKDROP>()
+                            locations.add(PICKDROP(LatLng(pick_Latitude, pick_Longitude), BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE), pick_address))
+                            locations.add(PICKDROP(LatLng(drop_Latitude, drop_Longitude), BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED), drop_address))
+                            Log.d("Debug", locations.get(1).pick_drop_location.toString())
+                            for (i in 0 until locations.size){
+                                val pick_drop = mMap.addMarker(MarkerOptions().position(locations.get(i).pick_drop_location).title(locations.get(i).pick_drop_text).icon(locations.get(i).pick_drop_img))
+                                pick_drop.showInfoWindow()
+                            }
+
+                            val builder = LatLngBounds.Builder()
+                            builder.include(locations.get(0).pick_drop_location) //Taking Point A (First LatLng)
+                            builder.include(locations.get(1).pick_drop_location) //Taking Point B (Second LatLng)
+                            val bounds = builder.build()
+                            val cu = CameraUpdateFactory.newLatLngBounds(bounds, 200)
+                            mMap.moveCamera(cu)
+                            mMap.animateCamera(CameraUpdateFactory.zoomTo(10F), 2000, null)
+
+                        },250)
+                    }
+                })
             }
         })
     }
@@ -341,6 +385,8 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
         }
     }
 }// Required empty public constructor
+
+class PICKDROP(val pick_drop_location: LatLng, val pick_drop_img: BitmapDescriptor, val pick_drop_text: String)
 
 class VehicleAdapter(private val context: Context) : BaseAdapter() {
 

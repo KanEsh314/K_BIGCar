@@ -46,6 +46,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/smallPadding"
                     android:text="Explore BiGCar Tours by Theme"
+                    android:maxLines="1"
                     android:fontFamily="sans-serif-light"
                     android:textColor="@color/colorDark"
                     android:textSize="@dimen/typeTitle"

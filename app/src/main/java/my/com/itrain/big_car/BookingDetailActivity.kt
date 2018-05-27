@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_booking_detail.*
 import kotlinx.android.synthetic.main.post_review.*
+import my.com.itrain.big_car.R.id.*
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -81,6 +82,9 @@ class BookingDetailActivity : AppCompatActivity() {
 
                     if (bookData.getString("status") == "5"){
                         commentZone.setVisibility(LinearLayout.VISIBLE)
+                        booking_title?.text = "Completed Booking"
+                    } else {
+                        booking_title?.text = "New Booking"
                     }
 
                     bookerName?.text = bookData.getString("name")
@@ -90,6 +94,7 @@ class BookingDetailActivity : AppCompatActivity() {
                     booked_name?.text = bookData.getString("product_name")
                     booked_location?.text = bookData.getString("location")
                     booked_package_title?.text = bookData.getString("package_title")
+                    booked_package_pax?.text = bookData.getString("package_pax")+" Pax"
                     booked_package_price?.text = bookData.getString("package_price")
                     booked_date?.text = bookData.getString("travel_date")
                     booked_time?.text = bookData.getString("travel_time")

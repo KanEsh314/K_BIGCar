@@ -1,9 +1,11 @@
 package my.com.itrain.big_car
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.PorterDuff
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -19,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.app_bar_main.view.*
 import kotlinx.android.synthetic.main.content_main.*
+import my.com.itrain.big_car.R.id.*
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
 
@@ -76,25 +79,19 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
                 onBackPressed()
             }
             R.id.nav_login -> {
-                startActivity(Intent(applicationContext, StartActivity::class.java))
+                if (applicationContext.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
+                    startActivity(Intent(applicationContext, StartActivity::class.java))
+                }
             }
             R.id.nav_review -> {
-
-            }
-            R.id.nav_card -> {
-
-            }
-            R.id.nav_currency -> {
-
-            }
-            R.id.nav_language -> {
-
-            }
-            R.id.nav_notify -> {
-
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id="+packageName)))
+                }catch (e: ActivityNotFoundException){
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id="+packageName)))
+                }
             }
             R.id.nav_feedback -> {
-
+                startActivity(Intent(applicationContext, FeedbackActivity::class.java))
             }
             R.id.nav_contact_us -> {
                 startActivity(Intent(applicationContext, ContactActivity::class.java))
@@ -106,7 +103,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
                 startActivity(Intent(applicationContext, ConditionActivity::class.java))
             }
             R.id.nav_term -> {
-
+                startActivity(Intent(applicationContext, TermsActivity::class.java))
             }
             R.id.nav_careers -> {
 

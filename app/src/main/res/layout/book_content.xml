@@ -135,14 +135,21 @@
         android:id="@+id/layout_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
         android:layout_below="@+id/layout_type_payment"
         android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:src="@mipmap/ic_action_notes"/>
 
         <EditText
             android:id="@+id/trip_driver_notes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="@dimen/smallUniversalText"
+            android:textStyle="italic"
             android:background="@color/colorWhite"
             android:hint="Notes To Driver"
             android:padding="@dimen/smallPadding" />

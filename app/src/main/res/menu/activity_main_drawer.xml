@@ -17,22 +17,6 @@
             android:icon="@mipmap/ic_action_review"
             android:title="Write Review" />
         <item
-            android:id="@+id/nav_card"
-            android:icon="@mipmap/ic_action_card"
-            android:title="Credit Card" />
-        <item
-            android:id="@+id/nav_currency"
-            android:icon="@mipmap/ic_action_currency"
-            android:title="Currency" />
-        <item
-            android:id="@+id/nav_language"
-            android:icon="@mipmap/ic_action_language"
-            android:title="Language" />
-        <item
-            android:id="@+id/nav_notify"
-            android:icon="@mipmap/ic_action_notify"
-            android:title="Notification" />
-        <item
             android:id="@+id/nav_feedback"
             android:icon="@mipmap/ic_action_feedback"
             android:title="Feedback" />

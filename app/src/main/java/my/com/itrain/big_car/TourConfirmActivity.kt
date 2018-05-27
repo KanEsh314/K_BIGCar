@@ -20,6 +20,9 @@ import org.json.JSONException
 import org.json.JSONObject
 import android.widget.LinearLayout
 import java.text.DateFormatSymbols
+import com.android.volley.DefaultRetryPolicy
+
+
 
 class TourConfirmActivity : AppCompatActivity() {
 
@@ -40,6 +43,7 @@ class TourConfirmActivity : AppCompatActivity() {
     var package_title: String = ""
     var travel_time: String = ""
     var travel_date: String = ""
+    var remark: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -131,12 +135,15 @@ class TourConfirmActivity : AppCompatActivity() {
             progressDialog.isIndeterminate=true
             progressDialog.show()
 
-        val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
+            if (applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","") == ""){
+                startActivity(Intent(applicationContext, StartActivity::class.java))
+            }
+
+            val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
             val stringRequest = object : StringRequest(Request.Method.POST, bookingURL, object : Response.Listener<String> {
                 override fun onResponse(response: String) {
-                    //Log.d("Debug", response)
+                    Log.d("Debug",response)
                     progressDialog.dismiss()
-                    //Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
                     val intent = Intent(applicationContext, TourSummaryActivity::class.java)
                     try {
                         intent.putExtra("tour_name", tour_name)
@@ -148,6 +155,7 @@ class TourConfirmActivity : AppCompatActivity() {
                         intent.putExtra("mobile_number", mobile_number)
                         intent.putExtra("nationality", nationality)
                         intent.putExtra("user_email", user_email)
+                        intent.putExtra("remark", remark)
                     }catch (e: JSONException){
                         e.printStackTrace()
                     }
@@ -156,9 +164,8 @@ class TourConfirmActivity : AppCompatActivity() {
             },
                     object : Response.ErrorListener {
                         override fun onErrorResponse(error: VolleyError?) {
-                            //Log.d("Error", error.toString())
+                            Log.d("Error", error.toString())
                             progressDialog.dismiss()
-                            //Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
                         }
 
                     }){
@@ -166,7 +173,7 @@ class TourConfirmActivity : AppCompatActivity() {
                 override fun getHeaders():Map<String,String>{
                     val headers = HashMap<String, String>()
                     headers.put("Authorization", "Bearer "+sharedPreferences)
-                    headers.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
+                        headers.put("Content-Type", "application/x-www-form-urlencoded")
                     return headers
                 }
                 override fun getParams():Map<String, String> {
@@ -183,18 +190,18 @@ class TourConfirmActivity : AppCompatActivity() {
                     params.put("travel_date", travel_date)
                     params.put("travel_day", travel_day_id)
                     params.put("travel_time", travel_time_id)
-                    params.put("remark", remarks.text.toString())
+                    params.put("remark", remark)
                     params.put("booking_name", name_booking)
                     params.put("mobile_number", mobile_number)
                     params.put("email", user_email)
                     params.put("nationality",  nationality_id)
 
-                    Log.d("Debug",params.toString())
                     return params
                 }
             }
 
             val requestVolley = Volley.newRequestQueue(applicationContext)
+            stringRequest.retryPolicy = DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 5, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
             requestVolley.add(stringRequest)
     }
 
@@ -203,6 +210,7 @@ class TourConfirmActivity : AppCompatActivity() {
         name_booking = booking_name.text.toString()
         mobile_number = phoneNumber.text.toString()
         user_email = email.text.toString()
+        remark = remarks.text.toString()
 
         if (TextUtils.isEmpty(name_booking) || TextUtils.isEmpty(mobile_number) || TextUtils.isEmpty(user_email)){
             CheckEditText = false

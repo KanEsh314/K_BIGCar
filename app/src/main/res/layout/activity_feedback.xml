@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tool="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/background_light"
+    android:fitsSystemWindows="true"
+    tool:context=".FeedbackActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+            app:layout_collapseMode="pin">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/mediumPadding">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Feedback"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/mediumPadding">
+
+            <EditText
+                android:id="@+id/feedback_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:hint="Your Name"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorDark"
+                android:textStyle="italic"/>
+
+            <EditText
+                android:id="@+id/feedback_email"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:hint="Your Email"
+                android:inputType="textWebEmailAddress"
+                android:textColor="@color/colorDark"
+                android:textStyle="italic"/>
+
+            <EditText
+                android:id="@+id/feedback_mobile_number"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:hint="Mobile Number"
+                android:inputType="phone"
+                android:textColor="@color/colorDark"
+                android:textStyle="italic"/>
+            
+            <EditText
+                android:id="@+id/feedback_content"
+                android:layout_width="match_parent"
+                android:layout_height="100dip"
+                android:hint="Your Message"
+                android:inputType="textLongMessage"
+                android:textColor="@color/colorDark"
+                android:textStyle="italic"/>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/feedback_send"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:text="Send"
+            android:textColor="@color/colorWhite" />
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

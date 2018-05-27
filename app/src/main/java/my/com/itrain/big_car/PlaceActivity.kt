@@ -38,10 +38,6 @@ class PlaceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_place)
 
-        setSupportActionBar(toolbarPlace)
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
         val latitude = intent.getDoubleExtra("latitude", 0.0)
         val longitude = intent.getDoubleExtra("longitude", 0.0)
 
@@ -53,6 +49,8 @@ class PlaceActivity : AppCompatActivity() {
                 val intent = Intent()
                 intent.putExtra("selectedDropName", attractMaterial.get(position).getString("attraction"))
                 intent.putExtra("selectedDropId", attractMaterial.get(position).getString("attraction_id"))
+                intent.putExtra("selectedLat", attractMaterial.get(position).getDouble("latitude"))
+                intent.putExtra("selectedLng", attractMaterial.get(position).getDouble("longitude"))
                 setResult(Activity.RESULT_OK, intent)
                 finish()
             }

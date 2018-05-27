@@ -27,7 +27,7 @@ class TourSummaryActivity : AppCompatActivity() {
         booking_mobile_number?.text = intent.getStringExtra("mobile_number")
         booking_nationality?.text = intent.getStringExtra("nationality")
         booking_email?.text = intent.getStringExtra("user_email")
-        //Toast.makeText(applicationContext, booked_passenger.toString(), Toast.LENGTH_LONG).show()
+        booking_remark?.text = intent.getStringExtra("remark")
 
         more_trips.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {

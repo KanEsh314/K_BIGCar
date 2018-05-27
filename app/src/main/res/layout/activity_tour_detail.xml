@@ -95,6 +95,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingBottom="@dimen/mediumPadding"
+                            android:maxLines="1"
                             android:textSize="24sp"
                             android:textColor="@color/colorDark"
                             android:textStyle="bold"/>

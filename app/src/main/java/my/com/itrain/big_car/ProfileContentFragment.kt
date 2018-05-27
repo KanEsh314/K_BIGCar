@@ -104,6 +104,7 @@ class ProfileContentFragment : Fragment() {
                             .setPositiveButton("Yes", object : DialogInterface.OnClickListener {
                                 override fun onClick(dialog: DialogInterface?, which: Int) {
                                     context.getSharedPreferences("myPref", MODE_PRIVATE).edit().remove("myToken").commit()
+                                    startActivity(Intent(context, StartActivity::class.java))
                                 }
                             })
                             .setNegativeButton("No", object : DialogInterface.OnClickListener {
