@@ -19,6 +19,7 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
@@ -86,6 +87,26 @@ class ExploreContentFragment : Fragment() {
 
         val bannerAdapter = BannerAdapter(activity, bannerMaterial)
         bannerViewPager.setAdapter(bannerAdapter)
+
+        //Check Data Exist
+        Handler().postDelayed({
+
+            if (toursMaterial.size == 0 && popularMaterial.size == 0 && categoriesMaterial.size == 0 && bannerMaterial.size == 0){
+                Log.d("Debug", toursMaterial.size.toString()+" "+popularMaterial.size.toString()+" "+categoriesMaterial.size.toString()+" "+bannerMaterial.size.toString())
+                AlertDialog.Builder(activity, R.style.DialogTheme)
+                    .setCancelable(false)
+                    .setTitle("Internet Error")
+                    .setMessage("Please Connect To The Nearest WiFi")
+                    .setPositiveButton("Okay", object : DialogInterface.OnClickListener {
+                        override fun onClick(dialog: DialogInterface, which: Int) {
+                            activity.finish()
+                        }
+                    })
+                    .create()
+                    .show()
+            }
+
+        }, 2500)
 
         //VOLLEY
         val requestVolley = Volley.newRequestQueue(activity)

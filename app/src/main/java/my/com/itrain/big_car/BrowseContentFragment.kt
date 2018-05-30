@@ -2,6 +2,7 @@ package my.com.itrain.big_car
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -108,7 +109,11 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
         tripPayment.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(activity, PaymentActivity::class.java)
-                startActivityForResult(intent, SECOND_ACTIVITY__PAYMENT_REQUEST_CODE)
+                try{
+                    startActivityForResult(intent, SECOND_ACTIVITY__PAYMENT_REQUEST_CODE)
+                }catch (e: IOException){
+                    e.printStackTrace()
+                }
             }
         })
 
@@ -258,6 +263,8 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
                 drop_off_id = data.getStringExtra("selectedDropId")
                 drop_Latitude = data.getDoubleExtra("selectedLat", 0.0)
                 drop_Longitude = data.getDoubleExtra("selectedLng", 0.0)
+            } else if (resultCode == RESULT_CANCELED){
+                Log.d("Debug", "Empty")
             }
         }
 

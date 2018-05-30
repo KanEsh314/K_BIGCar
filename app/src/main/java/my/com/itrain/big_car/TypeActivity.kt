@@ -32,9 +32,9 @@ class TypeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_type)
 
-        setSupportActionBar(toolBarType)
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+//        setSupportActionBar(toolBarType)
+//        supportActionBar!!.setDisplayShowHomeEnabled(true)
+//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val typeAdapter = TypeAdapter(applicationContext, object : TypeAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {

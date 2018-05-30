@@ -186,7 +186,7 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
             override fun onMapLoaded() {
 
                 if (nearByMaterial.size == 0){
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 10F))
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 18F))
 //                    AlertDialog.Builder(activity, R.style.DialogTheme)
 //                            .setCancelable(false)
 //                            .setTitle("Nearby Tour")

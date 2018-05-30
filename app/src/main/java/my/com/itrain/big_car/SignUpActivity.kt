@@ -83,7 +83,6 @@ class SignUpActivity : AppCompatActivity() {
 
                 CheckEditTextIsEmptyOrNot()
                 if (CheckEditText){
-                    userImage()
                     userRegistration()
                     try{
 
@@ -95,10 +94,6 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
         })
-    }
-
-    private fun userImage() {
-
     }
 
     private fun CheckEditTextIsEmptyOrNot() {
@@ -142,12 +137,11 @@ class SignUpActivity : AppCompatActivity() {
             override fun getParams(): Map<String, String> {
                 val params = HashMap<String, String>()
 
-                val baos = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                var imageBytes = baos.toByteArray()
-                //profileHolder =
+//                val baos = ByteArrayOutputStream()
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+//                var imageBytes = baos.toByteArray()
+//                params.put("profilepic", Base64.encodeToString(imageBytes, Base64.DEFAULT))
 
-                params.put("profilepic", Base64.encodeToString(imageBytes, Base64.DEFAULT))
                 params.put("name", nameHolder)
                 params.put("ic", icpassportHolder)
                 params.put("email", emailHolder)

@@ -474,7 +474,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@color/colorWhite"
-                android:text="CHOOSE PACKAGE"
+                android:text="Book a Tour"
                 tools:ignore="MissingPrefix"
                 android:layout_centerInParent="true"/>
 
