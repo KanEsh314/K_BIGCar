@@ -10,8 +10,7 @@
         android:id="@+id/tourbannerImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/tour2"/>
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/tourbannerDesc"
@@ -19,7 +18,6 @@
         android:layout_height="50dip"
         android:layout_alignBottom="@id/tourbannerImage"
         android:padding="@dimen/mediumPadding"
-        android:text="Discover and book amazing things-to-do at exclusive prices"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/bannerDesc"
         android:textStyle="bold"/>

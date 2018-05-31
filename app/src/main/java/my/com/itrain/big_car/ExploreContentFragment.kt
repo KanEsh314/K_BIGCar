@@ -1,7 +1,9 @@
 package my.com.itrain.big_car
 
 
+import android.app.Activity
 import android.app.ProgressDialog
+import android.app.SearchManager
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -14,6 +16,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.SearchView
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
@@ -56,7 +59,6 @@ class ExploreContentFragment : Fragment() {
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_explore_content, container, false)
-        setHasOptionsMenu(true);
 
         var newHeight = (Resources.getSystem().displayMetrics.heightPixels)/2
         var bannerViewPager = view.findViewById<View>(R.id.bannerViewPager)
@@ -64,22 +66,6 @@ class ExploreContentFragment : Fragment() {
         bannerViewPager.layoutParams.height = newHeight
 
         return view
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.explore_main_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when(item.itemId){
-            R.id.action_search -> {
-                //startActivity(Intent(activity, SearchActivity::class.java))
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {

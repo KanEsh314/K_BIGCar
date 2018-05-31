@@ -253,6 +253,8 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
             if (resultCode == RESULT_OK){
                 tripType.text = data.getStringExtra("selectedTypeName")
                  trip_type_id = data.getStringExtra("selectedTypeId")
+            } else if (resultCode == RESULT_CANCELED){
+                //Empty
             }
         }
 
@@ -264,7 +266,7 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
                 drop_Latitude = data.getDoubleExtra("selectedLat", 0.0)
                 drop_Longitude = data.getDoubleExtra("selectedLng", 0.0)
             } else if (resultCode == RESULT_CANCELED){
-                Log.d("Debug", "Empty")
+                //Empty
             }
         }
 
@@ -272,6 +274,8 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
             if (resultCode == RESULT_OK){
                 tripPayment.text = data.getStringExtra("selectedPayName")
                 trip_pay_id = data.getStringExtra("selectedPayId")
+            } else if (resultCode == RESULT_CANCELED){
+                //Empty
             }
         }
     }

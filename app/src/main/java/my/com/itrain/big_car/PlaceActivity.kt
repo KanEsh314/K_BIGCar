@@ -1,9 +1,11 @@
 package my.com.itrain.big_car
 
+import android.app.ActionBar
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
@@ -11,12 +13,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.Response
@@ -26,6 +26,7 @@ import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_near_by.*
 import kotlinx.android.synthetic.main.activity_place.*
+import my.com.itrain.big_car.R.id.attractionRecyclerView
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -38,11 +39,12 @@ class PlaceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_place)
 
+//        setSupportActionBar(toolbarPlace)
+//        supportActionBar!!.setDisplayShowHomeEnabled(true)
+//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         val latitude = intent.getDoubleExtra("latitude", 0.0)
         val longitude = intent.getDoubleExtra("longitude", 0.0)
-
-        Log.d("Debug", latitude.toString())
-        Log.d("Debug", longitude.toString())
 
         val AttractAdapter = AttractAdapter(this, object : AttractAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
@@ -74,12 +76,24 @@ class PlaceActivity : AppCompatActivity() {
                 try {
 
                     val attractionData = response.getJSONArray("data")
+                    if (attractionData.length() == 0){
 
-                    for (i in 0 until attractionData.length()){
-                        attractMaterial.add(attractionData.getJSONObject(i))
-                        AttractAdapter.addJsonObject(attractionData.getJSONObject(i))
+                        var attractionLayout = findViewById(R.id.attractionLayout) as RelativeLayout
+                        val textView = TextView(applicationContext)
+                        val lp = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
+                        textView.layoutParams = lp
+                        textView.setText("No Destination Is Available")
+                        textView.setTextColor(Color.parseColor("#FF0000"))
+                        textView.setGravity(Gravity.CENTER)
+                        attractionLayout.addView(textView)
+
+                    }else {
+                        for (i in 0 until attractionData.length()){
+                            attractMaterial.add(attractionData.getJSONObject(i))
+                            AttractAdapter.addJsonObject(attractionData.getJSONObject(i))
+                        }
+                        AttractAdapter.notifyDataSetChanged()
                     }
-                    AttractAdapter.notifyDataSetChanged()
                     progressDialog.dismiss()
                 }catch (e : JSONException){
                     e.printStackTrace()
@@ -95,7 +109,14 @@ class PlaceActivity : AppCompatActivity() {
         requestVolley.add(jsonObjectRequest)
     }
 
-override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        val intent = Intent()
+        setResult(Activity.RESULT_CANCELED, intent)
+        finish()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         val id = item!!.itemId
 

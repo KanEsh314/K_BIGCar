@@ -1,5 +1,6 @@
 package my.com.itrain.big_car
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -64,13 +65,22 @@ class FeedbackActivity : AppCompatActivity() {
 
     private fun feedback(){
 
+        val progressDialog = ProgressDialog(this, R.style.DialogTheme)
+        progressDialog.setCancelable(false)
+        progressDialog.isIndeterminate=true
+        progressDialog.show()
+
         val stringRequest = object : StringRequest(Request.Method.POST, feedbackURL, object : Response.Listener<String>{
             override fun onResponse(response: String?) {
                 Log.d("Debug", response)
+                progressDialog.dismiss()
+                startActivity(Intent(applicationContext, MainActivity::class.java))
+                Toast.makeText(applicationContext, "Feedback Successfully Sent", Toast.LENGTH_LONG).show()
             }
         }, object : Response.ErrorListener{
             override fun onErrorResponse(error: VolleyError?) {
                 Log.d("Debug", error.toString())
+                progressDialog.dismiss()
             }
         }){
             override fun getParams():Map<String, String> {

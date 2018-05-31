@@ -1,5 +1,6 @@
 package my.com.itrain.big_car
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -34,9 +35,9 @@ class PaymentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
 
-        setSupportActionBar(toolBarPayment)
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+//        setSupportActionBar(toolBarPayment)
+//        supportActionBar!!.setDisplayShowHomeEnabled(true)
+//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val payAdapter = PayAdapter(applicationContext, object : PayAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
@@ -75,6 +76,13 @@ class PaymentActivity : AppCompatActivity() {
                 })
 
         requestVolley.add(jsonObjectRequestTour)
+    }
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        val intent = Intent()
+        setResult(Activity.RESULT_CANCELED, intent)
+        finish()
     }
 
 

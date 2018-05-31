@@ -1,5 +1,6 @@
 package my.com.itrain.big_car
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -36,6 +37,8 @@ class TypeActivity : AppCompatActivity() {
 //        supportActionBar!!.setDisplayShowHomeEnabled(true)
 //        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+
+
         val typeAdapter = TypeAdapter(applicationContext, object : TypeAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val intent = Intent()
@@ -52,6 +55,11 @@ class TypeActivity : AppCompatActivity() {
 
         val requestVolley = Volley.newRequestQueue(applicationContext)
 
+        val progressDialog = ProgressDialog(this, R.style.DialogTheme)
+        progressDialog.setCancelable(false)
+        progressDialog.isIndeterminate=true
+        progressDialog.show()
+
         var jsonObjectRequestTour = JsonObjectRequest(Request.Method.GET, typeURL,null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) = try {
 
@@ -61,18 +69,28 @@ class TypeActivity : AppCompatActivity() {
                     typeMaterial.add(typeData.getJSONObject(i))
                     typeAdapter.addJsonObject(typeData.getJSONObject(i))
                 }
+                progressDialog.dismiss()
                 typeAdapter.notifyDataSetChanged()
             } catch (e : JSONException){
+                progressDialog.dismiss()
                 e.printStackTrace()
             }
         },
                 object : Response.ErrorListener {
                     override fun onErrorResponse(error: VolleyError) {
+                        progressDialog.dismiss()
                         Log.d("Debug", error.toString())
                     }
                 })
 
         requestVolley.add(jsonObjectRequestTour)
+    }
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        val intent = Intent()
+        setResult(Activity.RESULT_CANCELED, intent)
+        finish()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
