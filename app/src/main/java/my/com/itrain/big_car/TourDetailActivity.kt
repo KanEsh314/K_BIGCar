@@ -166,10 +166,6 @@ class TourDetailActivity : AppCompatActivity() {
                     tourDesc?.text = Html.fromHtml(tourData.getString("product_desc"))
                     tourOverview?.text = Html.fromHtml(tourData.getString("overview"))
                     tourHighlight?.text = Html.fromHtml(tourData.getString("highlight"))
-                    tourExpect?.text = Html.fromHtml(tourData.getString("expect"))
-                    tourAdditional?.text = Html.fromHtml(tourData.getString("add_info"))
-                    tourCancelation?.text = Html.fromHtml(tourData.getString("cancel_policy"))
-                    tourNote?.text = Html.fromHtml(tourData.getString("important_note"))
 
                     totalReviews.text = tourData.getString("total_review")
                     collectRating.rating = tourData.getString("total_rating").toFloat()

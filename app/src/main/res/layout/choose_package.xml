@@ -37,13 +37,6 @@
                     android:textColor="@color/colorDark"
                     android:textSize="@dimen/smallUniversalText" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" Pax"
-                    android:textSize="@dimen/smallUniversalText"
-                    android:textColor="@color/colorDark"/>
-
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"

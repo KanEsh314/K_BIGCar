@@ -241,6 +241,7 @@ class CustomSpinnerAdapter(private val context: Context):BaseAdapter() {
         textView.gravity = Gravity.LEFT
         textView.setPadding(16, 16, 16, 16)
         textView.textSize = 14F
+        textView.hint = "Select Origin"
         textView.text = nationality.get(position).getString("name")
         textView.setTextColor(Color.parseColor("#000000"))
         return textView

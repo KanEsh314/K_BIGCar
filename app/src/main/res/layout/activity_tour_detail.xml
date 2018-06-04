@@ -95,7 +95,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingBottom="@dimen/mediumPadding"
-                            android:maxLines="1"
                             android:textSize="24sp"
                             android:textColor="@color/colorDark"
                             android:textStyle="bold"/>
@@ -197,6 +196,39 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/mediumPadding">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/recycleViewActivityInfo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clipToPadding="true"
+                                android:paddingBottom="16dp"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <View
+                    android:layout_height="5dp"
+                    android:layout_width="match_parent"
+                    android:background="#90909090"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/mediumPadding">
+
                     <TextView
                         android:id="@+id/reviewTitle"
                         android:layout_width="match_parent"
@@ -268,196 +300,6 @@
                     android:layout_height="wrap_content"
                     android:clipToPadding="true"
                     android:paddingBottom="16dp"/>
-
-                <View
-                    android:layout_height="5dp"
-                    android:layout_width="match_parent"
-                    android:background="#90909090"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/mediumPadding">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/mediumPadding"
-                            android:text="What To Expect"
-                            android:textColor="@color/colorDark"
-                            android:textSize="28sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tourExpect"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:lineSpacingExtra="5sp"
-                            android:textColor="@color/colorDark"
-                            android:textSize="@dimen/smallUniversalText" />
-
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <View
-                    android:layout_height="5dp"
-                    android:layout_width="match_parent"
-                    android:background="#90909090"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/mediumPadding">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/mediumPadding"
-                            android:text="Activity Information"
-                            android:textColor="@color/colorDark"
-                            android:textSize="28sp"
-                            android:textStyle="bold" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <android.support.v7.widget.RecyclerView
-                                android:id="@+id/recycleViewActivityInfo"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:clipToPadding="true"
-                                android:paddingBottom="16dp"/>
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <View
-                    android:layout_height="5dp"
-                    android:layout_width="match_parent"
-                    android:background="#90909090"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/mediumPadding">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/mediumPadding"
-                            android:text="Additional Info"
-                            android:textColor="@color/colorDark"
-                            android:textSize="28sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tourAdditional"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:lineSpacingExtra="5sp"
-                            android:textColor="@color/colorDark"
-                            android:textSize="@dimen/smallUniversalText" />
-
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <View
-                    android:layout_height="5dp"
-                    android:layout_width="match_parent"
-                    android:background="#90909090"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/mediumPadding">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/mediumPadding"
-                            android:text="Cancellation Policy"
-                            android:textColor="@color/colorDark"
-                            android:textSize="28sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tourCancelation"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:lineSpacingExtra="5sp"
-                            android:textColor="@color/colorDark"
-                            android:textSize="@dimen/smallUniversalText" />
-
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <View
-                    android:layout_height="5dp"
-                    android:layout_width="match_parent"
-                    android:background="#90909090"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/mediumPadding">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/mediumPadding"
-                            android:text="Important Note"
-                            android:textColor="@color/colorDark"
-                            android:textSize="28sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tourNote"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:lineSpacingExtra="5sp"
-                            android:textColor="@color/colorDark"
-                            android:textSize="@dimen/smallUniversalText" />
-
-                    </LinearLayout>
-                </RelativeLayout>
 
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
