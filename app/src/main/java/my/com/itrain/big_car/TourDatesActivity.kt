@@ -34,6 +34,7 @@ class TourDatesActivity : AppCompatActivity() {
 
     var packageURL = "https://gentle-atoll-11837.herokuapp.com/api/tour/"
     val packageMaterial = ArrayList<JSONObject>()
+    val timeMaterial = ArrayList<JSONObject>()
     val calender = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,21 +62,34 @@ class TourDatesActivity : AppCompatActivity() {
 
                         val simpledateformat = SimpleDateFormat("EEEE")
                         val date = Date(year, month, dayOfMonth-1)
-                        val dayOfWeek = simpledateformat.format(date)
+                        val dayOfWeek = simpledateformat.format(date.time)
+                        Log.d("Debug", dayOfWeek)
 
-                        val intent = Intent(this@TourDatesActivity, TourCountActivity::class.java)
-                        try {
-                            intent.putExtra("service_id", service_id)
-                            intent.putExtra("package_id", packageMaterial.get(position).getString("package_id"))
-                            intent.putExtra("package_title", packageMaterial.get(position).getString("package_title"))
-                            intent.putExtra("package_pax", packageMaterial.get(position).getString("package_pax"))
-                            intent.putExtra("selectedYear", year)
-                            intent.putExtra("selectedMonth", month+1)
-                            intent.putExtra("selectedDay", dayOfMonth)
-                        }catch (e : Exception){
-                            e.printStackTrace()
+                        for (i in 0 until timeMaterial.size){
+
+                            Log.d("Debug", timeMaterial.get(i).getString("day") )
+
+                            if (dayOfWeek == timeMaterial.get(i).getString("day") || "Everyday" == timeMaterial.get(i).getString("day")){
+                                val intent = Intent(this@TourDatesActivity, TourCountActivity::class.java)
+                                try {
+                                    intent.putExtra("service_id", service_id)
+                                    intent.putExtra("package_id", packageMaterial.get(position).getString("package_id"))
+                                    intent.putExtra("package_title", packageMaterial.get(position).getString("package_title"))
+                                    intent.putExtra("package_pax", packageMaterial.get(position).getString("package_pax"))
+                                    intent.putExtra("package_time", timeMaterial.get(i).getString("day"))
+                                    intent.putExtra("dayOfWeek", dayOfWeek)
+                                    intent.putExtra("selectedYear", year)
+                                    intent.putExtra("selectedMonth", month+1)
+                                    intent.putExtra("selectedDay", dayOfMonth)
+                                }catch (e : Exception){
+                                    e.printStackTrace()
+                                }
+                                startActivity(intent)
+                            } else {
+                                Toast.makeText(applicationContext, "Not Found", Toast.LENGTH_LONG).show()
+                            }
+
                         }
-                        startActivity(intent)
                     }
                 }, mYear, mMonth, mDate)
                 dateListener.show()
@@ -97,6 +111,13 @@ class TourDatesActivity : AppCompatActivity() {
             override fun onResponse(response: JSONObject) = try {
 
                 val packageData = response.getJSONObject("data")
+
+                val tourTimeData = packageData.getJSONArray("times")
+
+                for (i in 0 until tourTimeData.length()){
+                    timeMaterial.add(tourTimeData.getJSONObject(i))
+                }
+
                 val tourPackageData = packageData.getJSONArray("tour_packages")
 
                 for (i in 0 until tourPackageData.length()){

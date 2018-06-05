@@ -45,11 +45,15 @@ class TourCountActivity : AppCompatActivity() {
         val package_id = intent.getStringExtra("package_id")
         val package_title = intent.getStringExtra("package_title")
         val package_pax = intent.getStringExtra("package_pax")
+        val package_time = intent.getStringExtra("package_time")
+        val onDay = intent.getStringExtra("dayOfWeek")
         val onDateYear = intent.getIntExtra("selectedYear",0)
         val onDateMonth = intent.getIntExtra("selectedMonth", 0)
         val onDateDay = intent.getIntExtra("selectedDay", 0)
         packageConfirmName?.text = package_title
         packageConfirmDate?.text = onDateDay.toString() + " " + DateFormatSymbols().getMonths()[onDateMonth - 1] + " " + onDateYear.toString()
+
+        Log.d("Debug", package_time)
 
         editPackage.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
@@ -60,7 +64,7 @@ class TourCountActivity : AppCompatActivity() {
         //VOLLEY
         val requestVolley = Volley.newRequestQueue(this)
 
-        val tourTimeAdapter = SelectTimeAdapter(this)
+        val tourTimeAdapter = SelectTimeAdapter(this, onDay)
         val tourTimeLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
         recycleTourTime!!.layoutManager = tourTimeLayoutManager
         recycleTourTime!!.itemAnimator = DefaultItemAnimator()

@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             style="?attr/ratingBarStyle"
             android:numStars="5"
-            android:stepSize="0.5"
+            android:stepSize="0.1"
             android:backgroundTint="@color/colorPrimary"
             android:progressTint="@color/colorBlue"/>
 

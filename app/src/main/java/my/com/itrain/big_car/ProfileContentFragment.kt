@@ -5,16 +5,11 @@ import android.app.ProgressDialog
 import android.content.Context.MODE_PRIVATE
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
-import android.widget.Button
-import android.widget.RelativeLayout
-import android.widget.Toast
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -22,18 +17,13 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.dialog_login.*
 import kotlinx.android.synthetic.main.fragment_profile_content.*
-import my.com.itrain.big_car.R.id.*
-import org.json.JSONException
 import org.json.JSONObject
-import org.jetbrains.anko.*
-import java.lang.reflect.Method
-
 
 /**
  * A simple [Fragment] subclass.
  */
+
 class ProfileContentFragment : Fragment() {
 
     var userURL = "http://gentle-atoll-11837.herokuapp.com/user"
@@ -128,13 +118,15 @@ class ProfileContentFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         val progressDialog = ProgressDialog(activity, R.style.DialogTheme)
-        progressDialog.setMessage("Please Wait")
+        progressDialog.setCancelable(false)
+        progressDialog.isIndeterminate=true
+        progressDialog.show()
 
         val sharedPreferences = context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","")
         var jsonRequest = object  : JsonObjectRequest(Request.Method.GET, userURL, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
                 val userInfo = response.getJSONObject("data")
-                name_user.text = userInfo.getString("name")
+                name_user.text = userInfo.getString("name") //Error
 
                 if (userInfo.getString("profilepic") == ""){
                     user_dp.setImageResource(R.mipmap.ic_app_user)

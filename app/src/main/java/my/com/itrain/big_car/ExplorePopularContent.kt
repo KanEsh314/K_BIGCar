@@ -24,13 +24,13 @@ class ExplorePopularContent(private val context: Context, private val listener: 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var popImg: ImageView
         var popName: TextView
-        var popDesc: TextView
+        var popRating: RatingBar
         var popLocation: TextView
 
         init {
             popImg = itemView.findViewById(R.id.popularImg)
             popName = itemView.findViewById(R.id.popularName)
-            popDesc = itemView.findViewById(R.id.popularDesc)
+            popRating = itemView.findViewById(R.id.popularRating)
             popLocation = itemView.findViewById(R.id.popularLocation)
         }
 
@@ -56,7 +56,7 @@ class ExplorePopularContent(private val context: Context, private val listener: 
             Picasso.with(context).load(byCategory.get(position).getString("grid_image")).into(holder?.popImg)
         }
         holder?.popName?.text = Html.fromHtml(byCategory.get(position).getString("product_name"))
-        holder?.popDesc?.text = Html.fromHtml(byCategory.get(position).getString("short_desc"))
+        holder?.popRating?.rating = byCategory.get(position).getString("total_rating").toFloat()
         holder?.popLocation?.text = Html.fromHtml(byCategory.get(position).getString("short_prod_code"))
 
         holder?.bind(position,listener)

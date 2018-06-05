@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.view.MenuItemCompat
 import android.app.AlertDialog
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v4.view.PagerAdapter
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -24,19 +25,15 @@ import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_tour_detail.*
-import kotlinx.android.synthetic.main.activity_tour_detail.view.*
-import kotlinx.android.synthetic.main.post_review.*
-import my.com.itrain.big_car.R.id.*
-import org.json.JSONArray
+import kotlinx.android.synthetic.main.fragment_explore_content.*
 import org.json.JSONException
 import org.json.JSONObject
+import java.util.*
 
 class TourDetailActivity : AppCompatActivity() {
 
@@ -58,6 +55,8 @@ class TourDetailActivity : AppCompatActivity() {
 
         val tourGallerAdapter = TourGalleryAdapter(applicationContext, tourGalleryMaterial)
         tourGalleryViewPager.setAdapter(tourGallerAdapter)
+        indicatorGallery.setViewPager(tourGalleryViewPager)
+        tourGallerAdapter.registerDataSetObserver(indicatorGallery.getDataSetObserver())
 
         service_id = intent.getIntExtra("service_id", 0)
         Log.d("Debug",service_id.toString())
@@ -171,7 +170,7 @@ class TourDetailActivity : AppCompatActivity() {
                     collectRating.rating = tourData.getString("total_rating").toFloat()
                     collectRatingText.text = tourData.getString("total_rating")
 
-                    val tourActivity = tourData.getJSONArray("activity_information")
+                    val tourActivity = tourData.getJSONArray("service_information")
                     for (i in 0 until tourActivity.length()){
                         activityAdapter.addJsonObject(tourActivity.getJSONObject(i))
                         //Log.d("Debug", tourActivity.getJSONObject(i).toString())
@@ -189,7 +188,6 @@ class TourDetailActivity : AppCompatActivity() {
                         reviewAdapter.addJsonObject(tourReviewData.getJSONObject(i))
                         //Log.d("Debug", tourReviewData.getJSONObject(i).toString())
                     }
-
                     reviewAdapter.notifyDataSetChanged()
                     progressDialog.dismiss()
                 }catch (e : JSONException){

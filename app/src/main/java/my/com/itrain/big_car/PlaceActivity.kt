@@ -32,7 +32,7 @@ import org.json.JSONObject
 
 class PlaceActivity : AppCompatActivity() {
 
-    var attractionTourURL = "https://gentle-atoll-11837.herokuapp.com/api/nearbyattraction/"
+    var attractionTourURL = "https://gentle-atoll-11837.herokuapp.com/api/tripnearby/"
     private val attractMaterial = java.util.ArrayList<JSONObject>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

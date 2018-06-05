@@ -40,7 +40,8 @@
                 android:layout_height="wrap_content"
                 style="?android:attr/ratingBarStyleSmall"
                 android:numStars="5"
-                android:stepSize="1"
+                android:stepSize="0.5"
+                android:backgroundTint="@color/colorPrimary"
                 android:progressTint="@color/colorBlue"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"/>

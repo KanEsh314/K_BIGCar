@@ -45,8 +45,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-places:11.8.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
-    implementation 'org.jetbrains.anko:anko-commons:0.10.4'
-    implementation 'org.jetbrains.anko:anko-design:0.10.4'
+    implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation files('sdk-packages-gh-pages/MPL/PayPal_MPL_1.5.6.58_Android-Developer-Package.zip')
 }

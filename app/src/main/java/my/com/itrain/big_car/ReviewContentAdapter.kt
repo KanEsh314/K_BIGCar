@@ -40,7 +40,7 @@ class ReviewContentAdapter(private val context: Context) : RecyclerView.Adapter<
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.userPic?.setImageResource(R.mipmap.ic_app_user)
         holder?.userName?.text = userreview.get(position).getString("user_id")
-        holder?.reviewRatingStar?.rating = userreview.get(position).getInt("rating").toFloat()
+        holder?.reviewRatingStar?.rating = userreview.get(position).getString("rating").toFloat()
         holder?.userReview?.text = userreview.get(position).getString("user_comment")
     }
 

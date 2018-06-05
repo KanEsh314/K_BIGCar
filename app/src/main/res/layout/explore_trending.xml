@@ -8,12 +8,11 @@
     android:layout_marginBottom="@dimen/largeMargin"
     app:cardCornerRadius="8dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/placeContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/mediumPadding">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/popularImg"
@@ -24,46 +23,50 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@id/popularImg"
-            android:layout_alignStart="@id/popularImg"
-            android:layout_alignEnd="@id/popularImg"
-            android:paddingTop="@dimen/mediumPadding"
-            android:paddingLeft="@dimen/mediumPadding">
+            android:padding="@dimen/mediumPadding"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/popularName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorDark"
-                android:textSize="@dimen/mediumUniversalText"
-                android:textAlignment="textStart"
-                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@mipmap/ic_tour_destination"/>
 
             <TextView
                 android:id="@+id/popularLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorDark"
-                android:textSize="@dimen/smallUniversalText"
-                android:textAlignment="textStart"/>
+                android:paddingLeft="@dimen/smallPadding"
+                android:layout_gravity="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/smallUniversalText"/>
 
-            <LinearLayout
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/mediumPadding"
+            android:orientation="vertical"
+            android:layout_below="@id/popularImg">
+
+            <TextView
+                android:id="@+id/popularName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/smallPadding"
+                android:textColor="@color/colorDark"
+                android:textStyle="bold"/>
+
+            <RatingBar
+                android:id="@+id/popularRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/popularLocation">
+                style="?attr/ratingBarStyleSmall"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:backgroundTint="@color/colorPrimary"
+                android:progressTint="@color/colorBlue"/>
 
-                <TextView
-                    android:id="@+id/popularDesc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:textColor="@color/colorDark"
-                    android:textSize="@dimen/mediumUniversalText" />
-
-            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

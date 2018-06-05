@@ -1,7 +1,6 @@
 package my.com.itrain.big_car
 
 import android.app.ProgressDialog
-import android.app.VoiceInteractor
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -15,27 +14,25 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_category.*
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_city.*
 import org.json.JSONException
 import org.json.JSONObject
-import java.util.ArrayList
 
-class CategoryActivity : AppCompatActivity() {
+class CityActivity : AppCompatActivity() {
 
-    var categoryURL = "https://gentle-atoll-11837.herokuapp.com/api/category/"
-    private val categoryMaterial = ArrayList<JSONObject>()
+    var cityURL = "https://gentle-atoll-11837.herokuapp.com/api/tourlocation/"
+    private val cityMaterial = ArrayList<JSONObject>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_category)
+        setContentView(R.layout.activity_city)
 
-        setSupportActionBar(toolbarActivity)
+        setSupportActionBar(toolbarCity)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val catservice_id = intent.getIntExtra("servicecatid",0)
-        titleCat?.text = intent.getStringExtra("categoryTitle")
+        val stateservice_id = intent.getIntExtra("servicestateid",0)
+        titleCity?.text = intent.getStringExtra("stateTitle")
 
         //VOLLEY
         val requestVolley = Volley.newRequestQueue(this)
@@ -49,7 +46,7 @@ class CategoryActivity : AppCompatActivity() {
             override fun onItemClick(position: Int) {
                 val intent = Intent(applicationContext, TourDetailActivity::class.java)
                 try{
-                    intent.putExtra("service_id", categoryMaterial.get(position).getInt("service_id"))
+                    intent.putExtra("service_id", cityMaterial.get(position).getInt("service_id"))
                 }catch (e :JSONException){
                     e.printStackTrace()
                 }
@@ -57,11 +54,11 @@ class CategoryActivity : AppCompatActivity() {
             }
         })
         val trendingLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
-        recycleViewCategory!!.layoutManager = trendingLayoutManager
-        recycleViewCategory!!.itemAnimator = DefaultItemAnimator()
-        recycleViewCategory!!.adapter = trendingAdapter
+        recycleViewCity!!.layoutManager = trendingLayoutManager
+        recycleViewCity!!.itemAnimator = DefaultItemAnimator()
+        recycleViewCity!!.adapter = trendingAdapter
 
-        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, categoryURL+catservice_id, null, object : Response.Listener<JSONObject>{
+        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, cityURL+stateservice_id, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
                 try {
 
@@ -69,7 +66,7 @@ class CategoryActivity : AppCompatActivity() {
 
                     for (i in 0 until categoryData.length()){
                         trendingAdapter.addJsonObject(categoryData.getJSONObject(i))
-                        categoryMaterial.add(categoryData.getJSONObject(i))
+                        cityMaterial.add(categoryData.getJSONObject(i))
                     }
                     trendingAdapter.notifyDataSetChanged()
                     progressDialog.dismiss()
@@ -87,6 +84,7 @@ class CategoryActivity : AppCompatActivity() {
                 })
 
         requestVolley.add(jsonObjectRequest)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

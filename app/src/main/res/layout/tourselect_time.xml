@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/tourSelectTime"
             android:layout_toEndOf="@+id/tourSelectTime"
-            android:text="12:00"
             android:textColor="@color/colorDark"
             android:textSize="@dimen/smallUniversalText" />
 

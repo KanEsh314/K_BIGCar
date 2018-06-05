@@ -1,9 +1,6 @@
 package my.com.itrain.big_car
 
-
-import android.app.Activity
 import android.app.ProgressDialog
-import android.app.SearchManager
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -16,26 +13,21 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.SearchView
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.banner_slider.*
 import kotlinx.android.synthetic.main.fragment_explore_content.*
-import my.com.itrain.big_car.R.id.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
-import java.util.zip.Inflater
 import kotlin.collections.ArrayList
 
 
@@ -44,7 +36,7 @@ import kotlin.collections.ArrayList
  */
 class ExploreContentFragment : Fragment() {
 
-    var toursURL = "https://gentle-atoll-11837.herokuapp.com/api/tours"
+    var toursURL = "http://gentle-atoll-11837.herokuapp.com/api/populardestination"
     var popularsURL = "https://gentle-atoll-11837.herokuapp.com/api/populartour"
     var categoriesURL = "http://gentle-atoll-11837.herokuapp.com/api/categories"
     var bannerURl = "https://gentle-atoll-11837.herokuapp.com/api/banners"
@@ -73,6 +65,24 @@ class ExploreContentFragment : Fragment() {
 
         val bannerAdapter = BannerAdapter(activity, bannerMaterial)
         bannerViewPager.setAdapter(bannerAdapter)
+
+        var currentPage = 0
+        val handler = Handler()
+        val Update = object:Runnable {
+            public override fun run() {
+                if (currentPage === bannerMaterial.size)
+                {
+                    currentPage = 0
+                }
+                bannerViewPager.setCurrentItem(currentPage++, true)
+            }
+        }
+        val swipeTimer = Timer()
+        swipeTimer.schedule(object:TimerTask() {
+            override fun run() {
+                handler.post(Update)
+            }
+        }, 2500, 2500)
 
         //Check Data Exist
         Handler().postDelayed({
@@ -118,9 +128,10 @@ class ExploreContentFragment : Fragment() {
 
         val destinationAdapter = ExplorePlaceContentAdapter(activity ,object: ExplorePlaceContentAdapter.OnItemClickListener{
             override fun onItemClick(position:Int){
-                val intent = Intent(activity, TourDetailActivity::class.java)
+                val intent = Intent(activity, CityActivity::class.java)
                 try {
-                    intent.putExtra("service_id", toursMaterial.get(position).getInt("service_id"))
+                    intent.putExtra("servicestateid", toursMaterial.get(position).getInt("state_id"))
+                    intent.putExtra("stateTitle", toursMaterial.get(position).getString("state_name"))
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }
@@ -263,10 +274,12 @@ class BannerAdapter(private val context: Context, private val banner: ArrayList<
 
         val view = inflater.inflate(R.layout.banner_slider, container, false)
         val bannerImage = view.findViewById<ImageView>(R.id.tourbannerImage)
-        val bannerDesc = view?.findViewById<TextView>(R.id.tourbannerDesc)
+        val bannerDesc = view.findViewById<TextView>(R.id.tourbannerDesc)
+        val bannerTitle = view.findViewById<TextView>(R.id.tourbannerTitle)
 
         Picasso.with(context).load(banner.get(position).getString("banner_image")).into(bannerImage)
-        bannerDesc?.text = banner.get(position).getString("banner_title")
+        bannerDesc?.text = banner.get(position).getString("banner_title2")
+        bannerTitle?.text = banner.get(position).getString("banner_title")
         container.addView(view)
         return view
     }

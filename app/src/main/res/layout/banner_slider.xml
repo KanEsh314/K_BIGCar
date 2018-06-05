@@ -12,14 +12,27 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
-    <TextView
-        android:id="@+id/tourbannerDesc"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dip"
-        android:layout_alignBottom="@id/tourbannerImage"
+        android:layout_height="wrap_content"
         android:padding="@dimen/mediumPadding"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/bannerDesc"
-        android:textStyle="bold"/>
+        android:layout_alignBottom="@id/tourbannerImage"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tourbannerTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/bannnerTitle"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tourbannerDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/bannerDesc"/>
+
+    </LinearLayout>
 </RelativeLayout>

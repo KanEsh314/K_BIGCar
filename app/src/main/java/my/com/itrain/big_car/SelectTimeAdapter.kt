@@ -16,15 +16,14 @@ import org.w3c.dom.Text
 /**
  * Created by iTrain on 10-Jan-18.
  */
-
-class SelectTimeAdapter(private val context: Context): RecyclerView.Adapter<SelectTimeAdapter.ViewHolder>(){
+class SelectTimeAdapter(private val context: Context, private val onDay: String): RecyclerView.Adapter<SelectTimeAdapter.ViewHolder>(){
 
     private val tourTime = ArrayList<JSONObject>()
     private var selectedPosition = -1
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var tourText: TextView
-            var tourTime: RadioButton
+        var tourTime: RadioButton
 
         init {
             tourText = itemView.findViewById(R.id.tourSelectText)
@@ -38,15 +37,34 @@ class SelectTimeAdapter(private val context: Context): RecyclerView.Adapter<Sele
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.tourText?.text = tourTime.get(position).getString("time")
 
-        holder?.tourTime?.setChecked(position === selectedPosition)
-        holder?.tourTime?.setTag(position)
-        holder?.tourTime?.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v: View?) {
-                itemCheckChanged(v)
+        try {
+
+            if ("Everyday" == tourTime.get(position).getString("day")){
+                holder?.tourText?.text = tourTime.get(position).getString("time")
+                holder?.tourTime?.setChecked(position === selectedPosition)
+                holder?.tourTime?.setTag(position)
+                holder?.tourTime?.setOnClickListener(object : View.OnClickListener{
+                    override fun onClick(v: View?) {
+                        itemCheckChanged(v)
+                    }
+                })
+            } else if (onDay == tourTime.get(position).getString("day")){
+                holder?.tourText?.text = tourTime.get(position).getString("time")
+                holder?.tourTime?.setChecked(position === selectedPosition)
+                holder?.tourTime?.setTag(position)
+                holder?.tourTime?.setOnClickListener(object : View.OnClickListener{
+                    override fun onClick(v: View?) {
+                        itemCheckChanged(v)
+                    }
+                })
+            } else {
+                Log.d("Debug", "To Time Available")
             }
-        })
+
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
     }
 
     private fun itemCheckChanged(v: View?) {
