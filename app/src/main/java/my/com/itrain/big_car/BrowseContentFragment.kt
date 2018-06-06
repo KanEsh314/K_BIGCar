@@ -74,8 +74,8 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
     var pick_address:String = ""
     var drop_address: String = ""
     var vehicle_type_id:String = ""
-    var trip_type_id:String = ""
-    var trip_pay_id:String = ""
+    var trip_type_id:String = "1"
+    var trip_pay_id:String = "3"
     var drop_off_id:String = ""
     var trip_time:String = ""
 

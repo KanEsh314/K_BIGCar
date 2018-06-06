@@ -94,7 +94,7 @@ class BookingDetailActivity : AppCompatActivity() {
                     booked_name?.text = bookData.getString("product_name")
                     booked_location?.text = bookData.getString("location")
                     booked_package_title?.text = bookData.getString("package_title")
-                    booked_package_pax?.text = bookData.getString("package_pax")+" Pax"
+                    booked_package_pax?.text = bookData.getString("package_pax")
                     booked_package_price?.text = bookData.getString("package_price")
                     booked_date?.text = bookData.getString("travel_date")
                     booked_time?.text = bookData.getString("travel_time")

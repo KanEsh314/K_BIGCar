@@ -41,6 +41,7 @@ class TourConfirmActivity : AppCompatActivity() {
     var tour_name: String = ""
     var package_pax: String = ""
     var package_title: String = ""
+    var package_price:String = ""
     var travel_time: String = ""
     var travel_date: String = ""
     var remark: String = ""
@@ -68,6 +69,8 @@ class TourConfirmActivity : AppCompatActivity() {
         time_travel?.text = travel_time
         package_pax = intent.getStringExtra("package_pax")
         package_service?.text = package_pax
+        package_price = intent.getStringExtra("package_price")
+        totalPrice?.text = "RM"+package_price
 
         val customSpinnerAdapter = CustomSpinnerAdapter(this)
         selectOrigin.setAdapter(customSpinnerAdapter)
@@ -241,7 +244,6 @@ class CustomSpinnerAdapter(private val context: Context):BaseAdapter() {
         textView.gravity = Gravity.LEFT
         textView.setPadding(16, 16, 16, 16)
         textView.textSize = 14F
-        textView.hint = "Select Origin"
         textView.text = nationality.get(position).getString("name")
         textView.setTextColor(Color.parseColor("#000000"))
         return textView

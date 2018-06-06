@@ -76,7 +76,7 @@ class TourDatesActivity : AppCompatActivity() {
                                     intent.putExtra("package_id", packageMaterial.get(position).getString("package_id"))
                                     intent.putExtra("package_title", packageMaterial.get(position).getString("package_title"))
                                     intent.putExtra("package_pax", packageMaterial.get(position).getString("package_pax"))
-                                    intent.putExtra("package_time", timeMaterial.get(i).getString("day"))
+                                    intent.putExtra("package_price", packageMaterial.get(position).getString("package_price"))
                                     intent.putExtra("dayOfWeek", dayOfWeek)
                                     intent.putExtra("selectedYear", year)
                                     intent.putExtra("selectedMonth", month+1)

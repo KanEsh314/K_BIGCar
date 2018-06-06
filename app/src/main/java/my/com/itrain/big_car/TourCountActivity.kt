@@ -45,7 +45,7 @@ class TourCountActivity : AppCompatActivity() {
         val package_id = intent.getStringExtra("package_id")
         val package_title = intent.getStringExtra("package_title")
         val package_pax = intent.getStringExtra("package_pax")
-        val package_time = intent.getStringExtra("package_time")
+        val package_price = intent.getStringExtra("package_price")
         val onDay = intent.getStringExtra("dayOfWeek")
         val onDateYear = intent.getIntExtra("selectedYear",0)
         val onDateMonth = intent.getIntExtra("selectedMonth", 0)
@@ -53,11 +53,9 @@ class TourCountActivity : AppCompatActivity() {
         packageConfirmName?.text = package_title
         packageConfirmDate?.text = onDateDay.toString() + " " + DateFormatSymbols().getMonths()[onDateMonth - 1] + " " + onDateYear.toString()
 
-        Log.d("Debug", package_time)
-
         editPackage.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                finish()
+                onBackPressed()
             }
         })
 
@@ -89,6 +87,7 @@ class TourCountActivity : AppCompatActivity() {
                         intent.putExtra("package_id", package_id)
                         intent.putExtra("package_title", package_title)
                         intent.putExtra("package_pax" , package_pax)
+                        intent.putExtra("package_price", package_price)
                         intent.putExtra("travel_date", onDateYear.toString() + "-" + onDateMonth.toString() + "-" + onDateDay.toString())
                         intent.putExtra("selectedYear", onDateYear)
                         intent.putExtra("selectedMonth", onDateMonth)

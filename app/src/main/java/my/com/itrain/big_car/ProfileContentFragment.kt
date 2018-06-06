@@ -49,9 +49,9 @@ class ProfileContentFragment : Fragment() {
 
         my_account.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                val intent = Intent(context, AccountActivity::class.java)
-                if (context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
-                    startActivity(Intent(context, StartActivity::class.java))
+                val intent = Intent(activity, AccountActivity::class.java)
+                if (activity.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
+                    startActivity(Intent(activity, StartActivity::class.java))
                 }else {
                     startActivity(intent)
                 }
@@ -61,9 +61,9 @@ class ProfileContentFragment : Fragment() {
 
         fav_his.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                val intent = Intent(context, FavoriteActivity::class.java)
-                if (context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
-                    startActivity(Intent(context, StartActivity::class.java))
+                val intent = Intent(activity, FavoriteActivity::class.java)
+                if (activity.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
+                    startActivity(Intent(activity, StartActivity::class.java))
                 }else {
                     startActivity(intent)
                 }
@@ -73,9 +73,9 @@ class ProfileContentFragment : Fragment() {
 
         my_booking.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                val intent = Intent(context, BookingActivity::class.java)
-                if (context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
-                    startActivity(Intent(context, StartActivity::class.java))
+                val intent = Intent(activity, BookingActivity::class.java)
+                if (activity.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
+                    startActivity(Intent(activity, StartActivity::class.java))
                 }else {
                     startActivity(intent)
                 }
@@ -93,8 +93,8 @@ class ProfileContentFragment : Fragment() {
                             .setMessage("Are Sure you Want To Logout")
                             .setPositiveButton("Yes", object : DialogInterface.OnClickListener {
                                 override fun onClick(dialog: DialogInterface?, which: Int) {
-                                    context.getSharedPreferences("myPref", MODE_PRIVATE).edit().remove("myToken").commit()
-                                    startActivity(Intent(context, StartActivity::class.java))
+                                    activity.getSharedPreferences("myPref", MODE_PRIVATE).edit().remove("myToken").commit()
+                                    startActivity(Intent(activity, StartActivity::class.java))
                                 }
                             })
                             .setNegativeButton("No", object : DialogInterface.OnClickListener {
@@ -107,7 +107,7 @@ class ProfileContentFragment : Fragment() {
                     return true
                 }
                 R.id.log_in -> {
-                    startActivity(Intent(context, StartActivity::class.java))
+                    startActivity(Intent(activity, StartActivity::class.java))
                     return true
                 }
                 else -> return super.onOptionsItemSelected(item)
@@ -122,7 +122,7 @@ class ProfileContentFragment : Fragment() {
         progressDialog.isIndeterminate=true
         progressDialog.show()
 
-        val sharedPreferences = context.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","")
+        val sharedPreferences = activity.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","")
         var jsonRequest = object  : JsonObjectRequest(Request.Method.GET, userURL, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
                 val userInfo = response.getJSONObject("data")
@@ -131,7 +131,7 @@ class ProfileContentFragment : Fragment() {
                 if (userInfo.getString("profilepic") == ""){
                     user_dp.setImageResource(R.mipmap.ic_app_user)
                 } else {
-                    Picasso.with(context).load(userInfo.getString("profilepic")).into(user_dp)
+                    Picasso.with(activity).load(userInfo.getString("profilepic")).into(user_dp)
                 }
                 progressDialog.dismiss()
             }
@@ -151,7 +151,7 @@ class ProfileContentFragment : Fragment() {
             }
         }
 
-        val requestVolley = Volley.newRequestQueue(context)
+        val requestVolley = Volley.newRequestQueue(activity)
         requestVolley.add(jsonRequest)
     }
 
@@ -173,7 +173,7 @@ class ProfileContentFragment : Fragment() {
         val log_out = menu.findItem(R.id.log_out)
         val log_in = menu.findItem(R.id.log_in)
 
-        if(context.getSharedPreferences("myPref", MODE_PRIVATE).contains("myToken")) {
+        if(activity.getSharedPreferences("myPref", MODE_PRIVATE).contains("myToken")) {
             log_in.setVisible(false)
             log_out.setVisible(true)
         }else {

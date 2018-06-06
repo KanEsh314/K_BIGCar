@@ -72,8 +72,8 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="@dimen/smallPadding"
                         android:text="Order Details"
-                        android:textSize="@dimen/mediumUniversalText"
-                        android:textColor="@color/colorDark"/>
+                        android:textColor="@color/colorDark"
+                        android:textSize="@dimen/mediumUniversalText" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -87,14 +87,14 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorDark"
                             android:textSize="@dimen/smallUniversalText"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/name_package"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorDark"
-                            android:textSize="@dimen/smallUniversalText"/>
+                            android:textSize="@dimen/smallUniversalText" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -106,21 +106,21 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorDark"
-                                android:textSize="@dimen/smallUniversalText"/>
+                                android:textSize="@dimen/smallUniversalText" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=" "
                                 android:textColor="@color/colorDark"
-                                android:textSize="@dimen/smallUniversalText"/>
+                                android:textSize="@dimen/smallUniversalText" />
 
                             <TextView
                                 android:id="@+id/time_travel"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorDark"
-                                android:textSize="@dimen/smallUniversalText"/>
+                                android:textSize="@dimen/smallUniversalText" />
 
                         </LinearLayout>
 
@@ -135,7 +135,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorDark"
-                                android:textSize="@dimen/smallUniversalText"/>
+                                android:textSize="@dimen/smallUniversalText" />
 
                         </LinearLayout>
 
@@ -168,84 +168,102 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/smallPadding"
                     android:text="Traveler's Information"
-                    android:textSize="@dimen/mediumUniversalText"
-                    android:textColor="@color/colorDark" />
+                    android:textColor="@color/colorDark"
+                    android:textSize="@dimen/mediumUniversalText" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_below="@id/travellerTitle">
+                    android:layout_below="@id/travellerTitle"
+                    android:orientation="vertical">
 
                     <EditText
                         android:id="@+id/booking_name"
                         android:layout_width="match_parent"
                         android:layout_height="50dip"
-                        android:inputType="textPersonName"
                         android:hint="Booking Name"
-                        android:textSize="@dimen/smallUniversalText"
-                        android:textColor="@color/colorDark"/>
+                        android:inputType="textPersonName"
+                        android:textColor="@color/colorDark"
+                        android:textSize="@dimen/smallUniversalText" />
 
                     <EditText
                         android:id="@+id/phoneNumber"
                         android:layout_width="match_parent"
                         android:layout_height="50dip"
-                        android:inputType="phone"
                         android:hint="Phone Number"
-                        android:textSize="@dimen/smallUniversalText"
-                        android:textColor="@color/colorDark"/>
+                        android:inputType="phone"
+                        android:textColor="@color/colorDark"
+                        android:textSize="@dimen/smallUniversalText" />
 
                     <Spinner
                         android:id="@+id/selectOrigin"
                         android:layout_width="match_parent"
-                        android:layout_height="50dip"/>
+                        android:layout_height="50dip" />
 
                     <EditText
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="50dip"
-                        android:inputType="textEmailAddress|textAutoComplete"
                         android:hint="Email"
-                        android:textSize="@dimen/smallUniversalText"
-                        android:textColor="@color/colorDark"/>
+                        android:inputType="textEmailAddress|textAutoComplete"
+                        android:textColor="@color/colorDark"
+                        android:textSize="@dimen/smallUniversalText" />
 
                     <EditText
                         android:id="@+id/remarks"
                         android:layout_width="match_parent"
                         android:layout_height="50dip"
-                        android:inputType="textShortMessage"
                         android:hint="Remark"
-                        android:textSize="@dimen/smallUniversalText"
-                        android:textColor="@color/colorDark"/>
+                        android:inputType="textShortMessage"
+                        android:textColor="@color/colorDark"
+                        android:textSize="@dimen/smallUniversalText" />
 
                 </LinearLayout>
             </RelativeLayout>
 
-            <!--<RelativeLayout-->
-                <!--android:id="@+id/PICPaymentSummary"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_below="@+id/PICDetailsLayout"-->
-                <!--android:padding="@dimen/mediumPadding">-->
+            <RelativeLayout
+                android:id="@+id/PICPaymentSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/PICDetailsLayout"
+                android:padding="@dimen/mediumPadding">
 
-                <!--<TextView-->
-                    <!--android:id="@+id/summaryTitle"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:paddingBottom="@dimen/smallPadding"-->
-                    <!--android:text="Traveller's Information"-->
-                    <!--android:textSize="@dimen/mediumUniversalText"-->
-                    <!--android:textColor="@color/colorDark" />-->
+                <TextView
+                    android:id="@+id/summaryTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/smallPadding"
+                    android:text="Payment Summary"
+                    android:textColor="@color/colorDark"
+                    android:textSize="@dimen/mediumUniversalText" />
 
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/multiplePassenger"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:animateLayoutChanges="true"-->
-                    <!--android:layout_below="@id/summaryTitle">-->
-                <!--</LinearLayout>-->
-            <!--</RelativeLayout>-->
+                <RelativeLayout
+                    android:id="@+id/multiplePassenger"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:layout_below="@id/summaryTitle"
+                    android:animateLayoutChanges="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dip"
+                        android:layout_alignParentStart="true"
+                        android:text="Total"
+                        android:textColor="@color/colorDark"
+                        android:textSize="@dimen/smallUniversalText" />
+
+                    <TextView
+                        android:id="@+id/totalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dip"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/smallUniversalText"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+            </RelativeLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
@@ -261,7 +279,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textColor="@color/colorWhite"
-            android:text="VIEW SUMMARY"
+            android:text="PAY NOW"
             android:layout_centerInParent="true"/>
 
     </RelativeLayout>

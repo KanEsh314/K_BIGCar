@@ -25,13 +25,17 @@ class ExplorePopularContent(private val context: Context, private val listener: 
         var popImg: ImageView
         var popName: TextView
         var popRating: RatingBar
+        var popRatingText: TextView
         var popLocation: TextView
+        var popPrice: TextView
 
         init {
             popImg = itemView.findViewById(R.id.popularImg)
             popName = itemView.findViewById(R.id.popularName)
             popRating = itemView.findViewById(R.id.popularRating)
+            popRatingText = itemView.findViewById(R.id.popularRatingText)
             popLocation = itemView.findViewById(R.id.popularLocation)
+            popPrice = itemView.findViewById(R.id.popularPrice)
         }
 
         fun bind(position: Int, listener: ExplorePopularContent.OnItemClickListener){
@@ -57,7 +61,12 @@ class ExplorePopularContent(private val context: Context, private val listener: 
         }
         holder?.popName?.text = Html.fromHtml(byCategory.get(position).getString("product_name"))
         holder?.popRating?.rating = byCategory.get(position).getString("total_rating").toFloat()
+        holder?.popRatingText?.text = "(" + byCategory.get(position).getString("total_review") + ")"
         holder?.popLocation?.text = Html.fromHtml(byCategory.get(position).getString("short_prod_code"))
+        if (byCategory.get(position).getString("lowest_price") == ""){
+        } else {
+            holder?.popPrice?.text = "From RM" + byCategory.get(position).getString("lowest_price")
+        }
 
         holder?.bind(position,listener)
 

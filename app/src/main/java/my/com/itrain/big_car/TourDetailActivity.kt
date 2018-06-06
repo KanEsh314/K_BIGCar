@@ -41,7 +41,7 @@ class TourDetailActivity : AppCompatActivity() {
 
     var favoriteURL = "http://gentle-atoll-11837.herokuapp.com/api/favoritetour"
     private val tourMaterial = ArrayList<JSONObject>()
-    private val tourGalleryMaterial = ArrayList<JSONObject>()
+    private val tourGalleryMaterial = ArrayList<String>()
     var service_id:Int = 0
     var product_name:String = ""
 
@@ -170,23 +170,27 @@ class TourDetailActivity : AppCompatActivity() {
                     collectRating.rating = tourData.getString("total_rating").toFloat()
                     collectRatingText.text = tourData.getString("total_rating")
 
-                    val tourActivity = tourData.getJSONArray("service_information")
+                    val tourService = tourData.getJSONArray("service_information")
+                    for (i in 0 until tourService.length()){
+                        activityAdapter.addJsonObject(tourService.getJSONObject(i))
+                    }
+
+                    val tourActivity = tourData.getJSONArray("activity_information")
                     for (i in 0 until tourActivity.length()){
                         activityAdapter.addJsonObject(tourActivity.getJSONObject(i))
-                        //Log.d("Debug", tourActivity.getJSONObject(i).toString())
                     }
                     activityAdapter.notifyDataSetChanged()
 
                     val tourGallery = tourData.getJSONArray("tour_gallery")
+                    tourGalleryMaterial.add(tourData.getString("grid_image"))
                     for (i in 0 until tourGallery.length()){
-                        tourGalleryMaterial.add(tourGallery.getJSONObject(i))
+                        tourGalleryMaterial.add(tourGallery.getJSONObject(i).getString("image"))
                     }
                     tourGallerAdapter.notifyDataSetChanged()
 
                     val tourReviewData = tourData.getJSONArray("reviews")
                     for (i in 0 until tourReviewData.length()){
                         reviewAdapter.addJsonObject(tourReviewData.getJSONObject(i))
-                        //Log.d("Debug", tourReviewData.getJSONObject(i).toString())
                     }
                     reviewAdapter.notifyDataSetChanged()
                     progressDialog.dismiss()
@@ -217,7 +221,7 @@ class TourDetailActivity : AppCompatActivity() {
     }
 }
 
-class TourGalleryAdapter(private val context: Context, private val tourGallery: ArrayList<JSONObject>):PagerAdapter() {
+class TourGalleryAdapter(private val context: Context, private val tourGallery: ArrayList<String>):PagerAdapter() {
 
     var inflater: LayoutInflater = context.getSystemService(android.content.Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -225,12 +229,10 @@ class TourGalleryAdapter(private val context: Context, private val tourGallery: 
 
         val view = inflater.inflate(R.layout.tour_gallery, container, false)
         val tourBannerImage = view.findViewById<ImageView>(R.id.tourImage)
-        if (tourGallery.get(position).getString("image") == ""){
-            tourBannerImage.setImageResource(R.drawable.no_available)
-        }else {
+        if (tourGallery.get(position) == ""){
             tourBannerImage.setImageResource(R.drawable.no_available)
         }
-        Picasso.with(context).load(tourGallery.get(position).getString("image")).into(tourBannerImage)
+        Picasso.with(context).load(tourGallery.get(position)).into(tourBannerImage)
         container.addView(view)
         return view
     }

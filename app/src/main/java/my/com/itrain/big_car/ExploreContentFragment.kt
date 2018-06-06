@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v4.view.PagerAdapter
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
@@ -64,17 +65,17 @@ class ExploreContentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val bannerAdapter = BannerAdapter(activity, bannerMaterial)
-        bannerViewPager.setAdapter(bannerAdapter)
+        var bannerViewPagerIndicator = view?.findViewById(R.id.bannerViewPager) as ViewPager
+        bannerViewPagerIndicator.adapter = bannerAdapter
 
-        var currentPage = 0
+        var currentPage = bannerMaterial.size
         val handler = Handler()
         val Update = object:Runnable {
-            public override fun run() {
-                if (currentPage === bannerMaterial.size)
-                {
+            override fun run() {
+                if (currentPage === bannerMaterial.size) {
                     currentPage = 0
                 }
-                bannerViewPager.setCurrentItem(currentPage++, true)
+                bannerViewPagerIndicator.setCurrentItem(currentPage++, true)
             }
         }
         val swipeTimer = Timer()
@@ -82,7 +83,7 @@ class ExploreContentFragment : Fragment() {
             override fun run() {
                 handler.post(Update)
             }
-        }, 2500, 2500)
+        }, 3000, 3000)
 
         //Check Data Exist
         Handler().postDelayed({
