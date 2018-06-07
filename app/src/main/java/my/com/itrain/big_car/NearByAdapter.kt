@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
@@ -18,13 +19,18 @@ class NearByAdapter(private val context: Context, private val listener: NearByAd
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var nearImg : ImageView
         var nearTitle : TextView
-        var nearDesc : TextView
+        var nearRating : RatingBar
+        var nearRatingText : TextView
+        var nearPrice : TextView
         var nearLocation : TextView
+
 
         init {
             nearImg = itemView.findViewById(R.id.nearByImg)
             nearTitle = itemView.findViewById(R.id.nearByName)
-            nearDesc = itemView.findViewById(R.id.nearByDesc)
+            nearRating = itemView.findViewById(R.id.nearByRating)
+            nearRatingText = itemView.findViewById(R.id.nearByRatingText)
+            nearPrice = itemView.findViewById(R.id.nearByPrice)
             nearLocation = itemView.findViewById(R.id.nearByLocation)
         }
 
@@ -45,8 +51,13 @@ class NearByAdapter(private val context: Context, private val listener: NearByAd
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         Picasso.with(context).load(nearBy.get(position).getString("grid_image")).into(holder?.nearImg)
         holder?.nearTitle?.text = nearBy.get(position).getString("product_name")
-        holder?.nearDesc?.text = nearBy.get(position).getString("short_desc")
+        holder?.nearRating?.rating = nearBy.get(position).getString("total_rating").toFloat()
+        holder?.nearRatingText?.text = "(" + nearBy.get(position).getString("total_review") + ")"
         holder?.nearLocation?.text = nearBy.get(position).getString("short_prod_code")
+        if (nearBy.get(position).getString("lowest_price") == ""){
+        } else {
+            holder?.nearPrice?.text = "From RM" + nearBy.get(position).getString("lowest_price")
+        }
 
         holder?.bind(position, listener)
     }

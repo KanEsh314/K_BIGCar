@@ -21,10 +21,9 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_payment.*
+import kotlinx.android.synthetic.main.activity_payment_type.*
 import org.json.JSONException
 import org.json.JSONObject
-import java.io.File
 
 class PaymentActivity : AppCompatActivity() {
 
@@ -33,7 +32,7 @@ class PaymentActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_payment)
+        setContentView(R.layout.activity_payment_type)
 
 //        setSupportActionBar(toolBarPayment)
 //        supportActionBar!!.setDisplayShowHomeEnabled(true)

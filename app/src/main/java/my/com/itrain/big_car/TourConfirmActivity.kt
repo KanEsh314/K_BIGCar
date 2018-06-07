@@ -1,11 +1,13 @@
 package my.com.itrain.big_car
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.text.TextUtils
 import android.util.Log
 import android.view.*
@@ -21,17 +23,23 @@ import org.json.JSONObject
 import android.widget.LinearLayout
 import java.text.DateFormatSymbols
 import com.android.volley.DefaultRetryPolicy
-
+import com.paypal.android.sdk.payments.*
+import com.paypal.android.sdk.payments.PaymentActivity
+import my.com.itrain.big_car.R.id.*
+import java.math.BigDecimal
 
 
 class TourConfirmActivity : AppCompatActivity() {
 
     var countryURL = "https://gentle-atoll-11837.herokuapp.com/api/countries"
     var bookingURL = "https://gentle-atoll-11837.herokuapp.com/api/booking"
-    //var bookingURL = "http://192.168.0.115/gentle-atoll-11837/public/api/booking"
-    //val bookingMaterial = ArrayList<JSONArray>()
     val countryMaterial = ArrayList<JSONObject>()
     var CheckEditText:Boolean = false
+
+    private var PAYPAL_REQUEST_CODE = 7171
+    private var paypalConfiguration = PayPalConfiguration()
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .clientId("AT8fbwr44fyzAL6KLB0nY3AujMfflCmVMI7ZCQ5g-Bu6LMyqeqYMPX4lZJqvx4PX_d4xv1QCzBTG6nO5")
 
     var name_booking : String = ""
     var mobile_number : String = ""
@@ -53,6 +61,10 @@ class TourConfirmActivity : AppCompatActivity() {
         setSupportActionBar(toolbarConfirm)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        val intentServices = Intent(applicationContext, PayPalService::class.java)
+        intentServices.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, paypalConfiguration)
+        startService(intentServices)
 
         tour_name = intent.getStringExtra("tour_name")
         name_tour?.text = tour_name
@@ -76,7 +88,7 @@ class TourConfirmActivity : AppCompatActivity() {
         selectOrigin.setAdapter(customSpinnerAdapter)
         selectOrigin.setOnItemSelectedListener(object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                //Do Nothing
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -145,24 +157,9 @@ class TourConfirmActivity : AppCompatActivity() {
             val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
             val stringRequest = object : StringRequest(Request.Method.POST, bookingURL, object : Response.Listener<String> {
                 override fun onResponse(response: String) {
-                    Log.d("Debug",response)
+                    processPayment()
                     progressDialog.dismiss()
-                    val intent = Intent(applicationContext, TourSummaryActivity::class.java)
-                    try {
-                        intent.putExtra("tour_name", tour_name)
-                        intent.putExtra("package_title", package_title)
-                        intent.putExtra("package_pax", package_pax)
-                        intent.putExtra("travel_date", travel_date)
-                        intent.putExtra("travel_time", travel_time)
-                        intent.putExtra("booking_name", name_booking)
-                        intent.putExtra("mobile_number", mobile_number)
-                        intent.putExtra("nationality", nationality)
-                        intent.putExtra("user_email", user_email)
-                        intent.putExtra("remark", remark)
-                    }catch (e: JSONException){
-                        e.printStackTrace()
-                    }
-                    startActivity(intent)
+
                 }
             },
                     object : Response.ErrorListener {
@@ -208,6 +205,14 @@ class TourConfirmActivity : AppCompatActivity() {
             requestVolley.add(stringRequest)
     }
 
+    private fun processPayment() {
+        val payPalPayment = PayPalPayment(package_price.toBigDecimal(), "USD", tour_name, PayPalPayment.PAYMENT_INTENT_SALE)
+        val intent = Intent(applicationContext, PaymentActivity::class.java)
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, paypalConfiguration)
+        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment)
+        startActivityForResult(intent, PAYPAL_REQUEST_CODE   )
+    }
+
     private fun CheckEditTextIsEmptyOrNot() {
 
         name_booking = booking_name.text.toString()
@@ -223,6 +228,42 @@ class TourConfirmActivity : AppCompatActivity() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        //super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PAYPAL_REQUEST_CODE){
+            if (resultCode == Activity.RESULT_OK){
+
+                val paymentConfirmation = data?.getParcelableExtra<Parcelable>(PaymentActivity.EXTRA_RESULT_CONFIRMATION)
+                Log.d("Debug", paymentConfirmation.toString())
+                if (paymentConfirmation != null){
+                    try {
+                            val paymentDetails = Intent(applicationContext, TourSummaryActivity::class.java)
+                            val intent = Intent(applicationContext, TourSummaryActivity::class.java)
+                                intent.putExtra("tour_name", tour_name)
+                                intent.putExtra("package_title", package_title)
+                                intent.putExtra("package_pax", package_pax)
+                                intent.putExtra("travel_date", travel_date)
+                                intent.putExtra("travel_time", travel_time)
+                                intent.putExtra("booking_name", name_booking)
+                                intent.putExtra("mobile_number", mobile_number)
+                                intent.putExtra("nationality", nationality)
+                                intent.putExtra("user_email", user_email)
+                                intent.putExtra("remark", remark)
+                                intent.putExtra("paymentDetails", paymentDetails)
+                                intent.putExtra("package_price", package_price)
+                    }catch (e: JSONException){
+                        e.printStackTrace()
+                    }
+                    startActivity(intent)
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED){
+                Toast.makeText(applicationContext, "This Payment Has Been Cancelled", Toast.LENGTH_LONG).show()
+            } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID){
+                Toast.makeText(applicationContext, "Invalid", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         val id = item!!.itemId
@@ -232,6 +273,11 @@ class TourConfirmActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        stopService(Intent(applicationContext, PayPalService::class.java))
+        super.onDestroy()
     }
 }
 

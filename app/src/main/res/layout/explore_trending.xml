@@ -42,7 +42,7 @@
 
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/ratingLayout"
+            android:id="@+id/popularratingLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/mediumPadding"
@@ -84,8 +84,6 @@
 
             </LinearLayout>
 
-
-
         </LinearLayout>
         <LinearLayout
             android:id="@+id/priceLayout"
@@ -93,7 +91,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/mediumPadding"
             android:orientation="vertical"
-            android:layout_below="@id/ratingLayout">
+            android:layout_below="@id/popularratingLayout">
 
             <TextView
                 android:id="@+id/popularPrice"

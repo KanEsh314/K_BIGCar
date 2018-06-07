@@ -28,9 +28,11 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.paypal.android.sdk.ex
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_tour_detail.*
 import kotlinx.android.synthetic.main.fragment_explore_content.*
+import kotlinx.android.synthetic.main.tour_gallery.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
@@ -67,15 +69,25 @@ class TourDetailActivity : AppCompatActivity() {
                 val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
                 if(applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).contains("myToken")){
 
-                    val stringRequest = object : StringRequest(Request.Method.POST, favoriteURL, object : Response.Listener<String>{
-                        override fun onResponse(response: String?) {
-                            Log.d("Debug", response)
-                            Toast.makeText(applicationContext, "Successfully Added", Toast.LENGTH_LONG).show()
-//                            progressDialog.dismiss()
+                    val jsonBody = JSONObject()
+                    try
+                    {
+                        jsonBody.put("service_id", service_id.toString())
+                    }
+                    catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+
+                    val stringRequest = object : JsonObjectRequest(Request.Method.POST, favoriteURL, jsonBody,object : Response.Listener<JSONObject>{
+                        override fun onResponse(response: JSONObject) {
+                            if (response.getString("status") == "true"){
+                                favourite.setBackgroundResource(R.mipmap.ic_action_like)
+                            } else if (response.getString("status") == "false"){
+                                favourite.setBackgroundResource(R.mipmap.ic_action_unlike)
+                            }
                         }
                     }, object : Response.ErrorListener{
                         override fun onErrorResponse(error: VolleyError?) {
-//                            progressDialog.dismiss()
                             Log.d("Debug", error.toString())
                         }
                     }){
@@ -84,11 +96,6 @@ class TourDetailActivity : AppCompatActivity() {
                             val headers = HashMap<String, String>()
                             headers.put("Authorization", "Bearer "+sharedPreferences)
                             return headers
-                        }
-                        override fun getParams():Map<String, String> {
-                            val params = HashMap<String, String>()
-                            params.put("service_id", service_id.toString())
-                            return params
                         }
                     }
 
@@ -152,12 +159,20 @@ class TourDetailActivity : AppCompatActivity() {
         recycleTourReview!!.itemAnimator = DefaultItemAnimator()
         recycleTourReview!!.adapter = reviewAdapter
 
-        var jsonObjectRequest = JsonObjectRequest(Request.Method.GET,tourURL+service_id,null, object : Response.Listener<JSONObject>{
+        val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
+        var jsonObjectRequest = object : JsonObjectRequest(Request.Method.GET,tourURL+service_id,null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
                 try {
 
                     val tourData = response.getJSONObject("data")
                     tourMaterial.add(tourData)
+
+                    val tourGallery = tourData.getJSONArray("tour_gallery")
+                    tourGalleryMaterial.add(tourData.getString("grid_image"))
+                    for (i in 0 until tourGallery.length()){
+                        tourGalleryMaterial.add(tourGallery.getJSONObject(i).getString("image"))
+                    }
+                    tourGallerAdapter.notifyDataSetChanged()
 
                     product_name = tourData.getString("product_name")
 
@@ -170,23 +185,25 @@ class TourDetailActivity : AppCompatActivity() {
                     collectRating.rating = tourData.getString("total_rating").toFloat()
                     collectRatingText.text = tourData.getString("total_rating")
 
+                    if (tourData.getString("favorite") == "true"){
+                        favourite.setBackgroundResource(R.mipmap.ic_action_like)
+                    } else if (tourData.getString("favorite") == "false"){
+                        favourite.setBackgroundResource(R.mipmap.ic_action_unlike)
+                    } else {
+                        favourite.setBackgroundResource(R.mipmap.ic_action_unlike)
+                    }
+
                     val tourService = tourData.getJSONArray("service_information")
                     for (i in 0 until tourService.length()){
                         activityAdapter.addJsonObject(tourService.getJSONObject(i))
                     }
+                    activityAdapter.notifyDataSetChanged()
 
                     val tourActivity = tourData.getJSONArray("activity_information")
                     for (i in 0 until tourActivity.length()){
                         activityAdapter.addJsonObject(tourActivity.getJSONObject(i))
                     }
                     activityAdapter.notifyDataSetChanged()
-
-                    val tourGallery = tourData.getJSONArray("tour_gallery")
-                    tourGalleryMaterial.add(tourData.getString("grid_image"))
-                    for (i in 0 until tourGallery.length()){
-                        tourGalleryMaterial.add(tourGallery.getJSONObject(i).getString("image"))
-                    }
-                    tourGallerAdapter.notifyDataSetChanged()
 
                     val tourReviewData = tourData.getJSONArray("reviews")
                     for (i in 0 until tourReviewData.length()){
@@ -204,7 +221,14 @@ class TourDetailActivity : AppCompatActivity() {
                     override fun onErrorResponse(error: VolleyError) {
                         Log.d("Debug", error.toString())
                     }
-                })
+                }){
+                    @Throws(AuthFailureError::class)
+                    override fun getHeaders():Map<String,String>{
+                        val headers = HashMap<String, String>()
+                        headers.put("Authorization", "Bearer "+sharedPreferences)
+                    return headers
+                }
+        }
 
         requestVolley.add(jsonObjectRequest)
     }
@@ -221,7 +245,7 @@ class TourDetailActivity : AppCompatActivity() {
     }
 }
 
-class TourGalleryAdapter(private val context: Context, private val tourGallery: ArrayList<String>):PagerAdapter() {
+class TourGalleryAdapter(private val context: Context, private val tourGallery:ArrayList<String>):PagerAdapter() {
 
     var inflater: LayoutInflater = context.getSystemService(android.content.Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -229,9 +253,6 @@ class TourGalleryAdapter(private val context: Context, private val tourGallery: 
 
         val view = inflater.inflate(R.layout.tour_gallery, container, false)
         val tourBannerImage = view.findViewById<ImageView>(R.id.tourImage)
-        if (tourGallery.get(position) == ""){
-            tourBannerImage.setImageResource(R.drawable.no_available)
-        }
         Picasso.with(context).load(tourGallery.get(position)).into(tourBannerImage)
         container.addView(view)
         return view

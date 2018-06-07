@@ -15,10 +15,9 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="35dp"
-            android:src="@mipmap/ic_action_pick_up"
-            android:layout_gravity="center_vertical"/>
+            android:src="@mipmap/ic_action_pick_up"/>
 
-        <TextView
+        <EditText
             android:id="@+id/pickup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,6 +25,7 @@
             android:padding="@dimen/smallPadding"
             android:textSize="@dimen/smallUniversalText"
             android:hint="Where you are from?"
+            android:textColor="#9E9E9E"
             android:textStyle="italic"/>
 
     </LinearLayout>
@@ -50,6 +50,7 @@
             android:padding="@dimen/smallPadding"
             android:textSize="@dimen/smallUniversalText"
             android:hint="Where are you going?"
+            android:textColor="#9E9E9E"
             android:textStyle="italic"/>
 
     </LinearLayout>
@@ -80,6 +81,7 @@
                 android:padding="@dimen/smallPadding"
                 android:textSize="@dimen/smallUniversalText"
                 android:hint="Personal"
+                android:textColor="#9E9E9E"
                 android:textStyle="italic"/>
 
         </LinearLayout>
@@ -103,6 +105,7 @@
                 android:padding="@dimen/smallPadding"
                 android:textSize="@dimen/smallUniversalText"
                 android:hint="Cash"
+                android:textColor="#9E9E9E"
                 android:textStyle="italic"/>
 
         </LinearLayout>
@@ -126,6 +129,7 @@
                 android:padding="@dimen/smallPadding"
                 android:textSize="@dimen/smallUniversalText"
                 android:hint="Time &amp; Date"
+                android:textColor="#9E9E9E"
                 android:textStyle="italic"/>
 
         </LinearLayout>
@@ -152,6 +156,7 @@
             android:textStyle="italic"
             android:background="@color/colorWhite"
             android:hint="Notes To Driver"
+            android:textColor="#9E9E9E"
             android:padding="@dimen/smallPadding" />
 
     </LinearLayout>

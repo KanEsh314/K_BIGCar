@@ -86,7 +86,7 @@ class TourDatesActivity : AppCompatActivity() {
                                 }
                                 startActivity(intent)
                             } else {
-                                Toast.makeText(applicationContext, "Not Found", Toast.LENGTH_LONG).show()
+                                Toast.makeText(applicationContext, "No Tour Available", Toast.LENGTH_LONG).show()
                             }
 
                         }

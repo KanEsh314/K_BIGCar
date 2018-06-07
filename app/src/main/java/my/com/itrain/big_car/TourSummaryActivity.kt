@@ -11,6 +11,8 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_tour_summary.*
 import my.com.itrain.big_car.R.id.*
+import org.json.JSONException
+import org.json.JSONObject
 
 class TourSummaryActivity : AppCompatActivity() {
 
@@ -28,6 +30,13 @@ class TourSummaryActivity : AppCompatActivity() {
         booking_nationality?.text = intent.getStringExtra("nationality")
         booking_email?.text = intent.getStringExtra("user_email")
         booking_remark?.text = intent.getStringExtra("remark")
+
+        try {
+            val jsonObject = JSONObject(intent.getStringExtra("paymentDetails"))
+            Log.d("Debug", jsonObject.getJSONObject("response").toString())
+        }catch (e: JSONException){
+            e.printStackTrace()
+        }
 
         more_trips.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {

@@ -2,6 +2,7 @@
     <string name="app_name">BIGCAR</string>
 
     <string name="google_maps_key">AIzaSyC6egLAT18a0Czpbj2TRPQbNAZ7vo71nnU</string>
+    <string name="paypal_clientID">AT8fbwr44fyzAL6KLB0nY3AujMfflCmVMI7ZCQ5g-Bu6LMyqeqYMPX4lZJqvx4PX_d4xv1QCzBTG6nO5</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

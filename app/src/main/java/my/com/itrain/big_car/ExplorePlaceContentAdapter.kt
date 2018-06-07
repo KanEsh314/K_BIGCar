@@ -68,7 +68,7 @@ class ExplorePlaceContentAdapter(private val context: Context,private val listen
         fun onItemClick(position:Int)
     }
 
-    fun addJsonObject(jsonObject:JSONObject) {
+    fun addJsonObject(jsonObject: JSONObject) {
         destination.add(jsonObject)
     }
 

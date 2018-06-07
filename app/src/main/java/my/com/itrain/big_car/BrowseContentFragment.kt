@@ -311,7 +311,7 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
                             if (null != addresses && !addresses!!.isEmpty()) {
                                 address = addresses!![0]
                                 pick_address = address!!.getAddressLine(0)
-                                pickup?.text = pick_address
+                                pickup?.setText(pick_address)
                             }
                         }catch (e: IOException){
                             e.printStackTrace()
