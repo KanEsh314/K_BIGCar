@@ -62,6 +62,7 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
     private val SECOND_ACTIVITY__PAYMENT_REQUEST_CODE = 2
     private val SECOND_ACTIVITY__TYPE_REQUEST_CODE = 1
     private val SECOND_ACTIVITY__DROP_REQUEST_CODE = 0
+    private val SECOND_ACTIVITY__PICK_REQUEST_CODE = 27
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private var pick_Latitude:Double = 0.0
@@ -87,11 +88,24 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
+        if (!checkPermissions()) {
+            requestPermission()
+        }  else {
+            getLastLocation()
+        }
+
         return rootView
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        pickup.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(activity, PickActivity::class.java)
+                startActivityForResult(intent, SECOND_ACTIVITY__PICK_REQUEST_CODE)
+            }
+        })
 
         dropoff.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
@@ -270,6 +284,17 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
             }
         }
 
+        if (requestCode == SECOND_ACTIVITY__PICK_REQUEST_CODE){
+            if (resultCode == RESULT_OK){
+                pick_address = data.getStringExtra("selectedPickName")
+                pickup?.text = pick_address
+                pick_Latitude = data.getDoubleExtra("selectedPickLat", 0.0)
+                pick_Longitude = data.getDoubleExtra("selectedPickLng", 0.0)
+            } else if (resultCode == RESULT_CANCELED){
+                getLastLocation()
+            }
+        }
+
         if (requestCode == SECOND_ACTIVITY__PAYMENT_REQUEST_CODE){
             if (resultCode == RESULT_OK){
                 tripPayment.text = data.getStringExtra("selectedPayName")
@@ -311,7 +336,7 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
                             if (null != addresses && !addresses!!.isEmpty()) {
                                 address = addresses!![0]
                                 pick_address = address!!.getAddressLine(0)
-                                pickup?.setText(pick_address)
+                                pickup?.text = pick_address
                             }
                         }catch (e: IOException){
                             e.printStackTrace()
@@ -385,15 +410,6 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
                 })
             }
         })
-    }
-
-    override fun onStart() {
-        super.onStart()
-        if (!checkPermissions()) {
-            requestPermission()
-        } else {
-            getLastLocation()
-        }
     }
 }// Required empty public constructor
 

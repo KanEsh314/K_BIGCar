@@ -184,13 +184,11 @@
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/tourHighlight"
-                            android:layout_width="match_parent"
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycleViewHighlight"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:lineSpacingExtra="5sp"
-                            android:textColor="@color/colorDark"
-                            android:textSize="@dimen/smallUniversalText" />
+                            android:clipToPadding="true" />
 
                     </LinearLayout>
                 </RelativeLayout>

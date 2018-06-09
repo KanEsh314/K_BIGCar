@@ -16,6 +16,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_login.*
+import my.com.itrain.big_car.R.id.*
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -26,6 +27,8 @@ class LoginActivity : AppCompatActivity() {
 
     var emailHolder:String = ""
     var passwordHolder:String = ""
+
+    var activityName:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +54,11 @@ class LoginActivity : AppCompatActivity() {
         forgot_password.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 startActivity(Intent(this@LoginActivity,ResetPasswordActivity::class.java))
+            }
+        })
+        register_account.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
             }
         })
         back_btn.setOnClickListener(object : View.OnClickListener {
@@ -84,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
                     try{
                         val myToken = JSONObject(response)
                         sharedPreferences.edit().putString("myToken",myToken.getJSONObject("result").getString("token")).commit()
-                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                        onBackPressed()
                     }catch (e : JSONException){
                         e.printStackTrace()
                         Toast.makeText(applicationContext, "Please Check Your Email and Password", Toast.LENGTH_LONG).show()

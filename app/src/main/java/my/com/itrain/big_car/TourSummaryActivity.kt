@@ -30,24 +30,20 @@ class TourSummaryActivity : AppCompatActivity() {
         booking_nationality?.text = intent.getStringExtra("nationality")
         booking_email?.text = intent.getStringExtra("user_email")
         booking_remark?.text = intent.getStringExtra("remark")
+        booking_id?.text = intent.getStringExtra("paymentID")
+        booking_state?.text = intent.getStringExtra("paymentState")
+        booking_amount?.text = "RM"+intent.getStringExtra("package_price")
 
-        try {
-            val jsonObject = JSONObject(intent.getStringExtra("paymentDetails"))
-            Log.d("Debug", jsonObject.getJSONObject("response").toString())
-        }catch (e: JSONException){
-            e.printStackTrace()
-        }
 
         more_trips.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 startActivity(Intent(applicationContext, MainActivity::class.java))
             }
         })
+    }
 
-//        val summaryAdapter = SummaryAdapter(applicationContext)
-//        val packegeOptionLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
-//        passengerDetailsRecyclerView!!.layoutManager = packegeOptionLayoutManager
-//        passengerDetailsRecyclerView!!.itemAnimator = DefaultItemAnimator()
-//        passengerDetailsRecyclerView!!.adapter = summaryAdapter
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Toast.makeText(applicationContext, "Please Click More Tour", Toast.LENGTH_LONG).show()
     }
 }

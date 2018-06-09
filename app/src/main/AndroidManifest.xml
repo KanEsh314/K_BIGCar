@@ -56,7 +56,8 @@
         <activity android:name=".BookingDetailActivity" />
         <activity android:name=".FeedbackActivity" />
         <activity android:name=".TermsActivity" />
-        <activity android:name=".CityActivity"></activity>
+        <activity android:name=".CityActivity" />
+        <activity android:name=".PickActivity"/>
     </application>
 
 </manifest>

@@ -49,17 +49,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profilePicture"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_margin="72dp"
+                android:layout_margin="50dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:translationZ="100000dp"/>
+                android:translationZ="100000dp"
+                app:fabSize="normal"/>
 
             <TextView
-                android:id="@+id/name_title"
+                android:id="@+id/first_name_title"
                 fontPath="fonts/SourceSansPro-Regular.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,19 +68,49 @@
                 android:layout_marginBottom="10dp"
                 android:paddingLeft="20dp"
                 android:paddingTop="20dp"
-                android:text="NAME"
+                android:text="FIRST NAME"
                 android:textColor="@color/card_sub_title"
                 android:textSize="14sp"
                 tools:ignore="MissingPrefix" />
 
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/first_name"
                 fontPath="fonts/SourceSansPro-Regular.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_below="@id/name_title"
+                android:layout_below="@id/first_name_title"
                 android:background="@drawable/list_button"
-                android:hint="Your name"
+                android:hint="First Name"
+                android:inputType="textCapWords"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/product_name"
+                android:textSize="16sp"
+                tools:ignore="MissingPrefix" />
+
+            <TextView
+                android:id="@+id/last_name_title"
+                fontPath="fonts/SourceSansPro-Regular.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/first_name"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:text="LAST NAME"
+                android:textColor="@color/card_sub_title"
+                android:textSize="14sp"
+                tools:ignore="MissingPrefix" />
+
+            <EditText
+                android:id="@+id/last_name"
+                fontPath="fonts/SourceSansPro-Regular.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/last_name_title"
+                android:background="@drawable/list_button"
+                android:hint="Last Name"
                 android:inputType="textCapWords"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
@@ -93,7 +124,7 @@
                 fontPath="fonts/SourceSansPro-Regular.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/name"
+                android:layout_below="@id/last_name"
                 android:layout_marginBottom="10dp"
                 android:paddingLeft="20dp"
                 android:paddingTop="20dp"

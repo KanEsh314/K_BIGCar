@@ -5,16 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.support.v4.view.MenuItemCompat
-import android.app.AlertDialog
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v4.view.PagerAdapter
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.ShareActionProvider
+import android.support.v7.widget.RecyclerView
 import android.text.Html
-import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -26,16 +21,13 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.paypal.android.sdk.ex
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_tour_detail.*
-import kotlinx.android.synthetic.main.fragment_explore_content.*
-import kotlinx.android.synthetic.main.tour_gallery.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
+import kotlin.collections.ArrayList
 
 class TourDetailActivity : AppCompatActivity() {
 
@@ -44,6 +36,7 @@ class TourDetailActivity : AppCompatActivity() {
     var favoriteURL = "http://gentle-atoll-11837.herokuapp.com/api/favoritetour"
     private val tourMaterial = ArrayList<JSONObject>()
     private val tourGalleryMaterial = ArrayList<String>()
+    private val tourHighlightMaterial = ArrayList<JSONObject>()
     var service_id:Int = 0
     var product_name:String = ""
 
@@ -103,7 +96,7 @@ class TourDetailActivity : AppCompatActivity() {
                     requestVolley.add(stringRequest)
 
                 }else{
-                    startActivity(Intent(applicationContext, StartActivity::class.java))
+                    startActivity(Intent(applicationContext, LoginActivity::class.java))
                 }
             }
 
@@ -127,6 +120,7 @@ class TourDetailActivity : AppCompatActivity() {
         val checkDates = findViewById<View>(R.id.add_to_cart_btn)
         checkDates.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
+
                 val intent = Intent(this@TourDetailActivity, TourDatesActivity::class.java)
                 try {
                     intent.putExtra("service_id", service_id)
@@ -134,7 +128,11 @@ class TourDetailActivity : AppCompatActivity() {
                 }catch (e : JSONException){
                     e.printStackTrace()
                 }
-                startActivity(intent)
+                if (applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","") == ""){
+                    startActivity(Intent(applicationContext, LoginActivity::class.java))
+                } else {
+                    startActivity(intent)
+                }
             }
         })
 
@@ -159,6 +157,12 @@ class TourDetailActivity : AppCompatActivity() {
         recycleTourReview!!.itemAnimator = DefaultItemAnimator()
         recycleTourReview!!.adapter = reviewAdapter
 
+        val highlightAdapter = HighlightAdapter(this)
+        val hightlightLayoutManager = LinearLayoutManager(this, LinearLayout.HORIZONTAL, false)
+        recycleViewHighlight!!.layoutManager = hightlightLayoutManager
+        recycleViewHighlight!!.itemAnimator = DefaultItemAnimator()
+        recycleViewHighlight!!.adapter = highlightAdapter
+
         val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
         var jsonObjectRequest = object : JsonObjectRequest(Request.Method.GET,tourURL+service_id,null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
@@ -179,11 +183,16 @@ class TourDetailActivity : AppCompatActivity() {
                     tourName?.text = tourData.getString("product_name")
                     tourDesc?.text = Html.fromHtml(tourData.getString("product_desc"))
                     tourOverview?.text = Html.fromHtml(tourData.getString("overview"))
-                    tourHighlight?.text = Html.fromHtml(tourData.getString("highlight"))
 
                     totalReviews.text = tourData.getString("total_review")
                     collectRating.rating = tourData.getString("total_rating").toFloat()
                     collectRatingText.text = tourData.getString("total_rating")
+
+                    val tourHighlight = tourData.getJSONArray("highlight")
+                    for (i in 0 until tourHighlight.length()){
+                        highlightAdapter.addJsonObject(tourHighlight.getJSONObject(i))
+                    }
+                    highlightAdapter.notifyDataSetChanged()
 
                     if (tourData.getString("favorite") == "true"){
                         favourite.setBackgroundResource(R.mipmap.ic_action_like)
@@ -243,6 +252,44 @@ class TourDetailActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+}
+
+class HighlightAdapter(private val context: Context):RecyclerView.Adapter<HighlightAdapter.ViewHolder>() {
+
+    private val highlight = ArrayList<JSONObject>()
+
+    class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
+        var highlightImg: ImageView
+        var highlightText: TextView
+
+        init {
+            highlightImg = itemView.findViewById(R.id.highImg)
+            highlightText = itemView.findViewById(R.id.highText)
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
+        val view : View = LayoutInflater.from(parent?.context).inflate(R.layout.tour_highlight, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+        if (highlight.get(position).getString("attraction_image") == ""){
+            holder?.highlightImg?.setImageResource(R.drawable.no_available)
+        }else {
+            Picasso.with(context).load(highlight.get(position).getString("attraction_image")).into(holder?.highlightImg)
+        }
+        holder?.highlightText?.text = highlight.get(position).getString("attraction_name")
+    }
+
+    override fun getItemCount(): Int {
+        return highlight.size
+    }
+
+    fun addJsonObject(jsonObject: JSONObject) {
+        highlight.add(jsonObject)
+    }
+
 }
 
 class TourGalleryAdapter(private val context: Context, private val tourGallery:ArrayList<String>):PagerAdapter() {

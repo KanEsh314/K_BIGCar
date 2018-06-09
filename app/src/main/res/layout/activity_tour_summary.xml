@@ -129,16 +129,65 @@
                             android:textSize="@dimen/smallUniversalText"
                             android:textColor="@color/colorDark"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=" Pax"
-                            android:textColor="@color/colorDark"
-                            android:textSize="@dimen/smallUniversalText"/>
-
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/smallMargin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/mediumPadding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:text="Traveller's Information"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/mediumUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/booking_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/booking_mobile_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/booking_nationality"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/booking_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+
+                <TextView
+                    android:id="@+id/booking_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:textSize="@dimen/smallUniversalText"
+                    android:textColor="@color/colorDark"/>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -154,47 +203,35 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="50dip"
-                        android:text="Traveler's Information"
+                        android:text="Payment Information"
                         android:textStyle="bold"
                         android:textSize="@dimen/mediumUniversalText"
                         android:textColor="@color/colorDark"/>
 
                     <TextView
-                        android:id="@+id/booking_name"
+                        android:id="@+id/booking_id"
                         android:layout_width="match_parent"
                         android:layout_height="50dip"
                         android:textSize="@dimen/smallUniversalText"
                         android:textColor="@color/colorDark"/>
 
                     <TextView
-                        android:id="@+id/booking_mobile_number"
+                        android:id="@+id/booking_state"
                         android:layout_width="match_parent"
                         android:layout_height="50dip"
+                        android:textAllCaps="true"
                         android:textSize="@dimen/smallUniversalText"
                         android:textColor="@color/colorDark"/>
 
                     <TextView
-                        android:id="@+id/booking_nationality"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dip"
-                        android:textSize="@dimen/smallUniversalText"
-                        android:textColor="@color/colorDark"/>
-
-                    <TextView
-                        android:id="@+id/booking_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dip"
-                        android:textSize="@dimen/smallUniversalText"
-                        android:textColor="@color/colorDark"/>
-
-                    <TextView
-                        android:id="@+id/booking_remark"
+                        android:id="@+id/booking_amount"
                         android:layout_width="match_parent"
                         android:layout_height="50dip"
                         android:textSize="@dimen/smallUniversalText"
                         android:textColor="@color/colorDark"/>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

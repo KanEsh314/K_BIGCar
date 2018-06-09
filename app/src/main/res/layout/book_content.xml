@@ -17,7 +17,7 @@
             android:layout_height="35dp"
             android:src="@mipmap/ic_action_pick_up"/>
 
-        <EditText
+        <TextView
             android:id="@+id/pickup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +50,6 @@
             android:padding="@dimen/smallPadding"
             android:textSize="@dimen/smallUniversalText"
             android:hint="Where are you going?"
-            android:textColor="#9E9E9E"
             android:textStyle="italic"/>
 
     </LinearLayout>
@@ -81,7 +80,6 @@
                 android:padding="@dimen/smallPadding"
                 android:textSize="@dimen/smallUniversalText"
                 android:hint="Personal"
-                android:textColor="#9E9E9E"
                 android:textStyle="italic"/>
 
         </LinearLayout>
@@ -105,7 +103,6 @@
                 android:padding="@dimen/smallPadding"
                 android:textSize="@dimen/smallUniversalText"
                 android:hint="Cash"
-                android:textColor="#9E9E9E"
                 android:textStyle="italic"/>
 
         </LinearLayout>
@@ -129,7 +126,6 @@
                 android:padding="@dimen/smallPadding"
                 android:textSize="@dimen/smallUniversalText"
                 android:hint="Time &amp; Date"
-                android:textColor="#9E9E9E"
                 android:textStyle="italic"/>
 
         </LinearLayout>
@@ -190,7 +186,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:textColor="@color/colorWhite"
-            android:text="CHOOSE YOUR DROP-OFF"/>
+            android:text="BOOK NOW"/>
 
     </LinearLayout>
 </RelativeLayout>

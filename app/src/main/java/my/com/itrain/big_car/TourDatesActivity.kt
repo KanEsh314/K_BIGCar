@@ -63,11 +63,8 @@ class TourDatesActivity : AppCompatActivity() {
                         val simpledateformat = SimpleDateFormat("EEEE")
                         val date = Date(year, month, dayOfMonth-1)
                         val dayOfWeek = simpledateformat.format(date.time)
-                        Log.d("Debug", dayOfWeek)
 
                         for (i in 0 until timeMaterial.size){
-
-                            Log.d("Debug", timeMaterial.get(i).getString("day") )
 
                             if (dayOfWeek == timeMaterial.get(i).getString("day") || "Everyday" == timeMaterial.get(i).getString("day")){
                                 val intent = Intent(this@TourDatesActivity, TourCountActivity::class.java)
@@ -81,12 +78,13 @@ class TourDatesActivity : AppCompatActivity() {
                                     intent.putExtra("selectedYear", year)
                                     intent.putExtra("selectedMonth", month+1)
                                     intent.putExtra("selectedDay", dayOfMonth)
+                                    intent.putExtra("times", timeMaterial.toString())
                                 }catch (e : Exception){
                                     e.printStackTrace()
                                 }
                                 startActivity(intent)
                             } else {
-                                Toast.makeText(applicationContext, "No Tour Available", Toast.LENGTH_LONG).show()
+                                Toast.makeText(applicationContext, "No Tour Available In This Day", Toast.LENGTH_LONG).show()
                             }
 
                         }

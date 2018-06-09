@@ -8,6 +8,11 @@ import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
+import android.support.v4.content.ContextCompat.startActivity
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.text.Editable
 import android.text.TextUtils
 import android.util.Log
 import android.view.*
@@ -25,6 +30,8 @@ import java.text.DateFormatSymbols
 import com.android.volley.DefaultRetryPolicy
 import com.paypal.android.sdk.payments.*
 import com.paypal.android.sdk.payments.PaymentActivity
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_account.*
 import my.com.itrain.big_car.R.id.*
 import java.math.BigDecimal
 
@@ -32,7 +39,10 @@ import java.math.BigDecimal
 class TourConfirmActivity : AppCompatActivity() {
 
     var countryURL = "https://gentle-atoll-11837.herokuapp.com/api/countries"
+    var paymentURL = "https://gentle-atoll-11837.herokuapp.com/api/paymentmethods"
     var bookingURL = "https://gentle-atoll-11837.herokuapp.com/api/booking"
+    var userURL = "https://gentle-atoll-11837.herokuapp.com/api/user"
+
     val countryMaterial = ArrayList<JSONObject>()
     var CheckEditText:Boolean = false
 
@@ -41,7 +51,8 @@ class TourConfirmActivity : AppCompatActivity() {
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId("AT8fbwr44fyzAL6KLB0nY3AujMfflCmVMI7ZCQ5g-Bu6LMyqeqYMPX4lZJqvx4PX_d4xv1QCzBTG6nO5")
 
-    var name_booking : String = ""
+    var booking_first : String = ""
+    var booking_last : String = ""
     var mobile_number : String = ""
     var nationality_id : String = ""
     var nationality : String = ""
@@ -92,17 +103,35 @@ class TourConfirmActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectOrigin.isSelected = countryMaterial.get(position).getString("name") == "Malaysia"
                 nationality_id = countryMaterial.get(position).getString("id")
                 nationality = countryMaterial.get(position).getString("name")
             }
         })
+
+        val tourPaymentAdapter = PaymentAdapter(this)
+        val tourPaymentLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
+        recycleViewPaymentType!!.layoutManager = tourPaymentLayoutManager
+        recycleViewPaymentType!!.itemAnimator = DefaultItemAnimator()
+        recycleViewPaymentType!!.adapter = tourPaymentAdapter
 
         to_summary.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 Log.d("here","here")
                 CheckEditTextIsEmptyOrNot()
                 if (CheckEditText){
-                    sendBooking()
+                    if (tourPaymentAdapter.getSelectedItem().getString("method") == "PayPal"){
+                        processPayment()
+                    } else if (tourPaymentAdapter.getSelectedItem().getString("method") == "Cash"){
+
+                    } else if (tourPaymentAdapter.getSelectedItem().getString("method") == "Debit Card"){
+
+                    } else if (tourPaymentAdapter.getSelectedItem().getString("method") == "Credit Card"){
+
+                    } else if (tourPaymentAdapter.getSelectedItem().length() == 0){
+                        Toast.makeText(applicationContext, "Choose Payment Method", Toast.LENGTH_LONG).show()
+                    }
+
                 }else{
                     Toast.makeText(applicationContext, "Please fill all form fields.", Toast.LENGTH_LONG).show()
                 }
@@ -122,25 +151,79 @@ class TourConfirmActivity : AppCompatActivity() {
                 try {
 
                     val countryData = response.getJSONArray("data")
-
                     for (i in 0 until countryData.length()){
+                        selectOrigin.prompt = "Malaysia"
                         countryMaterial.add(countryData.getJSONObject(i))
                         customSpinnerAdapter.addJsonObject(countryData.getJSONObject(i))
                     }
                     customSpinnerAdapter.notifyDataSetChanged()
                     progressDialog.dismiss()
                 }catch (e : JSONException){
+                    progressDialog.dismiss()
                     e.printStackTrace()
                 }
             }
         },
                 object : Response.ErrorListener{
                     override fun onErrorResponse(error: VolleyError) {
+                        progressDialog.dismiss()
                         Log.d("Debug", error.toString())
                     }
                 })
 
         requestVolley.add(jsonObjectRequest)
+
+        var jsonObjectRequestPayment = JsonObjectRequest(Request.Method.GET,paymentURL,null, object : Response.Listener<JSONObject>{
+            override fun onResponse(response: JSONObject) {
+                try {
+
+                    val paymentData = response.getJSONArray("data")
+
+                    for (i in 0 until paymentData.length()){
+                        tourPaymentAdapter.addJsonObject(paymentData.getJSONObject(i))
+                    }
+                    tourPaymentAdapter.notifyDataSetChanged()
+                    progressDialog.dismiss()
+                }catch (e : JSONException){
+                    progressDialog.dismiss()
+                    e.printStackTrace()
+                }
+            }
+        },
+                object : Response.ErrorListener{
+                    override fun onErrorResponse(error: VolleyError) {
+                        progressDialog.dismiss()
+                        Log.d("Debug", error.toString())
+                    }
+                })
+
+        requestVolley.add(jsonObjectRequestPayment)
+
+        val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
+        var jsonRequest = object  : JsonObjectRequest(Request.Method.GET, userURL, null, object : Response.Listener<JSONObject>{
+            override fun onResponse(response: JSONObject) {
+                val userInfo = response.getJSONObject("data")
+                booking_first_tname?.text = Editable.Factory.getInstance().newEditable(userInfo.getString("first_name"))
+                booking_last_name?.text = Editable.Factory.getInstance().newEditable(userInfo.getString("last_name"))
+                phoneNumber?.text = Editable.Factory.getInstance().newEditable(userInfo.getString("phonenumber"))
+                email?.text = Editable.Factory.getInstance().newEditable(userInfo.getString("email"))
+            }
+
+        }, object : Response.ErrorListener{
+            override fun onErrorResponse(error: VolleyError) {
+                Log.d("Debug", error.toString())
+            }
+
+        }){
+            @Throws(AuthFailureError::class)
+            override fun getHeaders():Map<String,String>{
+                val headers = HashMap<String, String>()
+                headers.put("Authorization", "Bearer "+sharedPreferences)
+                return headers
+            }
+        }
+
+        requestVolley.add(jsonRequest)
     }
 
         private fun sendBooking() {
@@ -150,16 +233,11 @@ class TourConfirmActivity : AppCompatActivity() {
             progressDialog.isIndeterminate=true
             progressDialog.show()
 
-            if (applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","") == ""){
-                startActivity(Intent(applicationContext, StartActivity::class.java))
-            }
-
             val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
             val stringRequest = object : StringRequest(Request.Method.POST, bookingURL, object : Response.Listener<String> {
                 override fun onResponse(response: String) {
-                    processPayment()
                     progressDialog.dismiss()
-
+                    Log.d("Debug", response)
                 }
             },
                     object : Response.ErrorListener {
@@ -191,7 +269,8 @@ class TourConfirmActivity : AppCompatActivity() {
                     params.put("travel_day", travel_day_id)
                     params.put("travel_time", travel_time_id)
                     params.put("remark", remark)
-                    params.put("booking_name", name_booking)
+                    params.put("first_name", booking_first)
+                    params.put("last_name", booking_last)
                     params.put("mobile_number", mobile_number)
                     params.put("email", user_email)
                     params.put("nationality",  nationality_id)
@@ -210,17 +289,18 @@ class TourConfirmActivity : AppCompatActivity() {
         val intent = Intent(applicationContext, PaymentActivity::class.java)
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, paypalConfiguration)
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment)
-        startActivityForResult(intent, PAYPAL_REQUEST_CODE   )
+        startActivityForResult(intent, PAYPAL_REQUEST_CODE)
     }
 
     private fun CheckEditTextIsEmptyOrNot() {
 
-        name_booking = booking_name.text.toString()
+        booking_first = booking_first_tname.text.toString()
+        booking_last = booking_last_name.text.toString()
         mobile_number = phoneNumber.text.toString()
         user_email = email.text.toString()
         remark = remarks.text.toString()
 
-        if (TextUtils.isEmpty(name_booking) || TextUtils.isEmpty(mobile_number) || TextUtils.isEmpty(user_email)){
+        if (TextUtils.isEmpty(booking_first) || TextUtils.isEmpty(booking_last) || TextUtils.isEmpty(mobile_number) || TextUtils.isEmpty(user_email)){
             CheckEditText = false
         }else{
             CheckEditText = true
@@ -228,29 +308,32 @@ class TourConfirmActivity : AppCompatActivity() {
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         //super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PAYPAL_REQUEST_CODE){
             if (resultCode == Activity.RESULT_OK){
 
-                val paymentConfirmation = data?.getParcelableExtra<Parcelable>(PaymentActivity.EXTRA_RESULT_CONFIRMATION)
-                Log.d("Debug", paymentConfirmation.toString())
+                val paymentConfirmation = data.getParcelableExtra<PaymentConfirmation>(PaymentActivity.EXTRA_RESULT_CONFIRMATION)
                 if (paymentConfirmation != null){
+                    val intent = Intent(applicationContext, TourSummaryActivity::class.java)
                     try {
-                            val paymentDetails = Intent(applicationContext, TourSummaryActivity::class.java)
-                            val intent = Intent(applicationContext, TourSummaryActivity::class.java)
-                                intent.putExtra("tour_name", tour_name)
-                                intent.putExtra("package_title", package_title)
-                                intent.putExtra("package_pax", package_pax)
-                                intent.putExtra("travel_date", travel_date)
-                                intent.putExtra("travel_time", travel_time)
-                                intent.putExtra("booking_name", name_booking)
-                                intent.putExtra("mobile_number", mobile_number)
-                                intent.putExtra("nationality", nationality)
-                                intent.putExtra("user_email", user_email)
-                                intent.putExtra("remark", remark)
-                                intent.putExtra("paymentDetails", paymentDetails)
-                                intent.putExtra("package_price", package_price)
+                        sendBooking()
+                        val paymentDetail = paymentConfirmation.toJSONObject().toString(4)
+                        val jsonObj = JSONObject(paymentDetail)
+
+                        intent.putExtra("tour_name", tour_name)
+                        intent.putExtra("package_title", package_title)
+                        intent.putExtra("package_pax", package_pax)
+                        intent.putExtra("travel_date", travel_date)
+                        intent.putExtra("travel_time", travel_time)
+                        intent.putExtra("first_name", booking_first)
+                        intent.putExtra("last_name", booking_last)
+                        intent.putExtra("nationality", nationality)
+                        intent.putExtra("user_email", user_email)
+                        intent.putExtra("remark", remark)
+                        intent.putExtra("paymentID", jsonObj.getJSONObject("response").getString("id"))
+                        intent.putExtra("paymentState", jsonObj.getJSONObject("response").getString("state"))
+                        intent.putExtra("package_price", package_price)
                     }catch (e: JSONException){
                         e.printStackTrace()
                     }
@@ -260,6 +343,8 @@ class TourConfirmActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "This Payment Has Been Cancelled", Toast.LENGTH_LONG).show()
             } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID){
                 Toast.makeText(applicationContext, "Invalid", Toast.LENGTH_LONG).show()
+            } else {
+                Log.d("Debug", "Payment Problem")
             }
         }
     }
@@ -278,6 +363,59 @@ class TourConfirmActivity : AppCompatActivity() {
     override fun onDestroy() {
         stopService(Intent(applicationContext, PayPalService::class.java))
         super.onDestroy()
+    }
+}
+
+class PaymentAdapter(private val context: Context): RecyclerView.Adapter<PaymentAdapter.ViewHolder>() {
+
+    private val paymentType = ArrayList<JSONObject>()
+    private var selectedPosition = -1
+
+    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        var paymentText: TextView
+        var paymentMethod: RadioButton
+
+        init {
+            paymentText = itemView.findViewById(R.id.tourSelectText)
+            paymentMethod = itemView.findViewById(R.id.tourSelectTime)
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
+        val view : View = LayoutInflater.from(parent?.context).inflate(R.layout.tourselect_time, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+        holder?.paymentText?.text = paymentType.get(position).getString("method")
+        holder?.paymentMethod?.setChecked(position === selectedPosition)
+        holder?.paymentMethod?.setTag(position)
+        holder?.paymentMethod?.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                itemCheckChanged(v)
+            }
+        })
+    }
+
+    private fun itemCheckChanged(v: View?) {
+        selectedPosition = v?.getTag() as Int
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount(): Int {
+        return paymentType.size
+    }
+
+    fun getSelectedItem():JSONObject {
+        if (selectedPosition !== -1)
+        {
+            return paymentType.get(selectedPosition)
+        }
+        return JSONObject()
+    }
+
+    fun addJsonObject(jsonObject: JSONObject) {
+        paymentType.add(jsonObject)
     }
 }
 

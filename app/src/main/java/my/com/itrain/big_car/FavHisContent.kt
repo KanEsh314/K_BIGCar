@@ -6,6 +6,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso
@@ -20,11 +21,13 @@ class FavHisContent(private val context: Context, private val listener: OnItemCl
         var favHisImageView:ImageView
         var favHisName:TextView
         var favHisPrice: TextView
+        //var favHisButton: Button
 
         init {
             favHisImageView = itemView.findViewById(R.id.favImageView)
             favHisName = itemView.findViewById(R.id.favName)
             favHisPrice = itemView.findViewById(R.id.favPrice)
+            //favHisButton = itemView.findViewById(R.id.favLike)
         }
 
         fun bind(position: Int, listener: FavHisContent.OnItemClickListener){

@@ -126,7 +126,7 @@ class ProfileContentFragment : Fragment() {
         var jsonRequest = object  : JsonObjectRequest(Request.Method.GET, userURL, null, object : Response.Listener<JSONObject>{
             override fun onResponse(response: JSONObject) {
                 val userInfo = response.getJSONObject("data")
-                name_user.text = userInfo.getString("name") //Error
+                name_user?.text = userInfo.getString("last_name")
 
                 if (userInfo.getString("profilepic") == ""){
                     user_dp.setImageResource(R.mipmap.ic_app_user)

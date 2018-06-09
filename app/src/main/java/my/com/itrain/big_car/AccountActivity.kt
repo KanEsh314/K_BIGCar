@@ -30,7 +30,8 @@ class AccountActivity : AppCompatActivity() {
     var userURL = "https://gentle-atoll-11837.herokuapp.com/api/user"
     var updateURL = "https://gentle-atoll-11837.herokuapp.com/api/updateuser"
 
-    var nameHolder:String = ""
+    var firstnameHolder:String = ""
+    var lastnameHolder:String = ""
     var numberHolder:String = ""
     var addressHolder:String = ""
 
@@ -49,7 +50,8 @@ class AccountActivity : AppCompatActivity() {
                 }else{
                     Picasso.with(applicationContext).load(userInfo.getString("profilepic")).into(profilePicture)
                 }
-                name.text = Editable.Factory.getInstance().newEditable(userInfo.getString("name"))
+                first_name.text = Editable.Factory.getInstance().newEditable(userInfo.getString("first_name"))
+                last_name.text = Editable.Factory.getInstance().newEditable(userInfo.getString("last_name"))
                 hp_nbr.text = Editable.Factory.getInstance().newEditable(userInfo.getString("phonenumber"))
                 address.text = Editable.Factory.getInstance().newEditable(userInfo.getString("address"))
             }
@@ -109,7 +111,8 @@ class AccountActivity : AppCompatActivity() {
             }
             override fun getParams():Map<String, String> {
                 val params = HashMap<String, String>()
-                params.put("name", nameHolder)
+                params.put("first_name", firstnameHolder)
+                params.put("last_name", lastnameHolder)
                 params.put("phonenumber", numberHolder)
                 params.put("address", addressHolder)
                 Log.d("Update", params.toString())
@@ -129,11 +132,12 @@ class AccountActivity : AppCompatActivity() {
 
     fun CheckEditTextIsEmptyOrNot() {
 
-        nameHolder = name.text.toString()
+        firstnameHolder = first_name.text.toString()
+        lastnameHolder = last_name.text.toString()
         numberHolder = hp_nbr.text.toString()
         addressHolder = address.text.toString()
 
-        if (TextUtils.isEmpty(nameHolder) || TextUtils.isEmpty(numberHolder) || TextUtils.isEmpty(addressHolder)){
+        if (TextUtils.isEmpty(firstnameHolder) || TextUtils.isEmpty(lastnameHolder) || TextUtils.isEmpty(numberHolder) || TextUtils.isEmpty(addressHolder)){
             CheckEditText = false
         }else {
             CheckEditText = true

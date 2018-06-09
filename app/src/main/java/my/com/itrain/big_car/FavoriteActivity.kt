@@ -9,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -18,6 +19,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_favorite.*
+import kotlinx.android.synthetic.main.favorite_content.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.ArrayList
@@ -25,6 +27,7 @@ import java.util.ArrayList
 class FavoriteActivity : AppCompatActivity() {
 
     var favhisURL = "https://gentle-atoll-11837.herokuapp.com/api/favorite"
+    var favoriteURL = "http://gentle-atoll-11837.herokuapp.com/api/favoritetour"
     private val favhisMaterial = ArrayList<JSONObject>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +55,51 @@ class FavoriteActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
                 startActivity(intent)
+
+                favLike.setOnClickListener(object : View.OnClickListener{
+                    override fun onClick(v: View?) {
+                        val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
+                        if(applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).contains("myToken")){
+
+                            val jsonBody = JSONObject()
+                            try
+                            {
+                                jsonBody.put("service_id", favhisMaterial.get(position).getInt("service_id"))
+                            }
+                            catch (e: JSONException) {
+                                e.printStackTrace()
+                            }
+
+                            val stringRequest = object : JsonObjectRequest(Request.Method.POST, favoriteURL, jsonBody,object : Response.Listener<JSONObject>{
+                                override fun onResponse(response: JSONObject) {
+                                    if (response.getString("status") == "true"){
+                                        favLike.setBackgroundResource(R.mipmap.ic_action_like)
+                                    } else if (response.getString("status") == "false"){
+                                        favLike.setBackgroundResource(R.mipmap.ic_action_unlike)
+                                    }
+                                }
+                            }, object : Response.ErrorListener{
+                                override fun onErrorResponse(error: VolleyError?) {
+                                    Log.d("Debug", error.toString())
+                                }
+                            }){
+                                @Throws(AuthFailureError::class)
+                                override fun getHeaders():Map<String,String>{
+                                    val headers = HashMap<String, String>()
+                                    headers.put("Authorization", "Bearer "+sharedPreferences)
+                                    return headers
+                                }
+                            }
+
+                            val requestVolley = Volley.newRequestQueue(applicationContext)
+                            requestVolley.add(stringRequest)
+
+                        }else{
+                            startActivity(Intent(applicationContext, StartActivity::class.java))
+                        }
+                    }
+                })
+
             }
         })
         val favhisLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
