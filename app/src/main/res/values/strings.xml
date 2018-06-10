@@ -61,4 +61,9 @@
         No location detected. Make sure location is enabled on the device.
     </string>
 
+
+    <!--Place Activity-->
+    <string name="search_title">Search Your Attraction</string>
+    <string name="search_hint">Search Your Attraction</string>
+    <string name="place_title">Attraction</string>
 </resources>

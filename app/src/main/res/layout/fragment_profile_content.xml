@@ -63,7 +63,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="60dp">
 
             <RelativeLayout
                 android:id="@+id/profile"
@@ -75,16 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="@dimen/mediumPadding">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/user_dp"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_centerHorizontal="true"
-                        android:translationZ="100000dp"
-                        app:fabSize="normal"/>
+                    android:gravity="center">
 
                     <TextView
                         android:id="@+id/name_user"
@@ -108,7 +100,7 @@
                     android:layout_height="2dp"
                     android:background="@color/colorPrimary"
                     android:layout_below="@id/nameLayout"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="20dp"
                     android:layout_centerHorizontal="true">
 
                 </RelativeLayout>
@@ -269,4 +261,18 @@
 
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_dp"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:layout_margin="16dp"
+        android:translationZ="100000dp"
+        app:fabSize="normal"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|center"
+        android:src="@mipmap/ic_launcher_round"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/colorAccent"/>
+
 </android.support.design.widget.CoordinatorLayout>

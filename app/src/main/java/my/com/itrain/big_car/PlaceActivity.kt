@@ -1,36 +1,37 @@
 package my.com.itrain.big_car
 
-import android.app.ActionBar
 import android.app.Activity
 import android.app.ProgressDialog
+import android.app.SearchManager;
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.view.MenuCompat
+import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.util.Log
 import android.view.*
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_near_by.*
 import kotlinx.android.synthetic.main.activity_place.*
-import my.com.itrain.big_car.R.id.attractionRecyclerView
 import org.json.JSONException
 import org.json.JSONObject
 
 class PlaceActivity : AppCompatActivity() {
+
+    private var GMS_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION"
+    private val mSearchView: SearchView? = null
+    private var mQuery: String? = null
 
     var attractionTourURL = "https://gentle-atoll-11837.herokuapp.com/api/tripnearby/"
     private val attractMaterial = java.util.ArrayList<JSONObject>()
@@ -38,10 +39,9 @@ class PlaceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_place)
+        onNewIntent(intent)
 
-//        setSupportActionBar(toolbarPlace)
-//        supportActionBar!!.setDisplayShowHomeEnabled(true)
-//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        setSupportActionBar(toolbarPlace)
 
         val latitude = intent.getDoubleExtra("latitude", 0.0)
         val longitude = intent.getDoubleExtra("longitude", 0.0)
@@ -61,6 +61,8 @@ class PlaceActivity : AppCompatActivity() {
         attractionRecyclerView!!.layoutManager = nearbyLayoutManager
         attractionRecyclerView!!.itemAnimator = DefaultItemAnimator()
         attractionRecyclerView!!.adapter = AttractAdapter
+
+        onNewIntent(intent)
 
         //VOLLEY
         val requestVolley = Volley.newRequestQueue(this)
@@ -109,6 +111,26 @@ class PlaceActivity : AppCompatActivity() {
         requestVolley.add(jsonObjectRequest)
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        //super.onNewIntent(intent)
+        if (Intent.ACTION_SEARCH.equals(intent?.action)){
+            mQuery = intent?.getStringExtra(SearchManager.QUERY)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        //return super.onCreateOptionsMenu(menu)
+        val inflater = menuInflater
+        inflater.inflate(R.menu.place_main_menu, menu)
+
+        val searchManger = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val menuItem = menu?.findItem(R.id.search)
+        val searchView = MenuItemCompat.getActionView(menuItem) as SearchView
+        searchView.setSearchableInfo(searchManger.getSearchableInfo(componentName))
+
+        return true
+    }
+
     override fun onBackPressed() {
         //super.onBackPressed()
         val intent = Intent()
@@ -121,6 +143,8 @@ class PlaceActivity : AppCompatActivity() {
         val id = item!!.itemId
 
         if (id == android.R.id.home){
+            val intent = Intent()
+            setResult(Activity.RESULT_CANCELED, intent)
             finish()
         }
 

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     package="my.com.itrain.big_car">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -49,7 +51,14 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".BookingActivity" />
         <activity android:name=".NearByActivity" />
-        <activity android:name=".PlaceActivity" />
+        <activity android:name=".PlaceActivity">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity android:name=".TypeActivity" />
         <activity android:name=".PaymentActivity" />
         <activity android:name=".DriverActivity" />

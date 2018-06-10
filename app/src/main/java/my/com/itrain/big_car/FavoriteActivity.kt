@@ -55,7 +55,9 @@ class FavoriteActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
                 startActivity(intent)
-
+            }
+        }, object : FavHisContent.sOnItemClickListener{
+            override fun onItemClick(position: Int) {
                 favLike.setOnClickListener(object : View.OnClickListener{
                     override fun onClick(v: View?) {
                         val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
@@ -77,6 +79,8 @@ class FavoriteActivity : AppCompatActivity() {
                                     } else if (response.getString("status") == "false"){
                                         favLike.setBackgroundResource(R.mipmap.ic_action_unlike)
                                     }
+                                    finish();
+                                    startActivity(getIntent());
                                 }
                             }, object : Response.ErrorListener{
                                 override fun onErrorResponse(error: VolleyError?) {
@@ -99,9 +103,10 @@ class FavoriteActivity : AppCompatActivity() {
                         }
                     }
                 })
-
             }
         })
+
+
         val favhisLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
         recycleViewFavorite!!.layoutManager = favhisLayoutManager
         recycleViewFavorite!!.itemAnimator = DefaultItemAnimator()

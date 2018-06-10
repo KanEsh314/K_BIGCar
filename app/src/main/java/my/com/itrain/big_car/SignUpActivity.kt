@@ -1,6 +1,5 @@
 package my.com.itrain.big_car
 
-import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -14,10 +13,8 @@ import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import android.graphics.Bitmap;
 import android.provider.MediaStore
-import android.util.Base64
 import android.util.Log
 import org.json.JSONException
-import java.io.ByteArrayOutputStream
 import java.util.HashMap
 
 class SignUpActivity : AppCompatActivity() {
@@ -27,7 +24,8 @@ class SignUpActivity : AppCompatActivity() {
 
     var profileHolder: String = ""
     var icpassportHolder: String = ""
-    var nameHolder: String = ""
+    var lastnameHolder: String = ""
+    var firstnameHolder: String = ""
     var emailHolder: String = ""
     var addressHolder: String = ""
     var phoneHolder: String = ""
@@ -98,14 +96,15 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun CheckEditTextIsEmptyOrNot() {
 
-        nameHolder = register_name.text.toString()
+        firstnameHolder = register_first_name.text.toString()
+        lastnameHolder = register_last_name.text.toString()
         icpassportHolder = register_ic_passport.toString()
         emailHolder = register_email.text.toString()
         addressHolder = register_address.text.toString()
         phoneHolder = register_phonenumber.text.toString()
         passwordHolder = register_password.text.toString()
 
-        if (TextUtils.isEmpty(nameHolder) || TextUtils.isEmpty(icpassportHolder) || TextUtils.isEmpty(emailHolder) || TextUtils.isEmpty(addressHolder) || TextUtils.isEmpty(phoneHolder) || TextUtils.isEmpty(passwordHolder)){
+        if (TextUtils.isEmpty(firstnameHolder) || TextUtils.isEmpty(lastnameHolder) || TextUtils.isEmpty(icpassportHolder) || TextUtils.isEmpty(emailHolder) || TextUtils.isEmpty(addressHolder) || TextUtils.isEmpty(phoneHolder) || TextUtils.isEmpty(passwordHolder)){
             CheckEditText = false
         } else {
             CheckEditText = true
@@ -136,13 +135,8 @@ class SignUpActivity : AppCompatActivity() {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = HashMap<String, String>()
-
-//                val baos = ByteArrayOutputStream()
-//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-//                var imageBytes = baos.toByteArray()
-//                params.put("profilepic", Base64.encodeToString(imageBytes, Base64.DEFAULT))
-
-                params.put("name", nameHolder)
+                params.put("first_name", firstnameHolder)
+                params.put("last_name", lastnameHolder)
                 params.put("ic", icpassportHolder)
                 params.put("email", emailHolder)
                 params.put("address", emailHolder)

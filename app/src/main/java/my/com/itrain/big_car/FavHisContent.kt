@@ -7,13 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso
 import my.com.itrain.big_car.R.id.favImageView
 import org.json.JSONObject;
 
-class FavHisContent(private val context: Context, private val listener: OnItemClickListener) : RecyclerView.Adapter<FavHisContent.ViewHolder>(){
+class FavHisContent(private val context: Context, private val listener: OnItemClickListener, private val slistener: sOnItemClickListener) : RecyclerView.Adapter<FavHisContent.ViewHolder>(){
 
     private val byCategory = ArrayList<JSONObject>()
 
@@ -21,17 +22,25 @@ class FavHisContent(private val context: Context, private val listener: OnItemCl
         var favHisImageView:ImageView
         var favHisName:TextView
         var favHisPrice: TextView
-        //var favHisButton: Button
+        var favHisButton: ImageButton
 
         init {
             favHisImageView = itemView.findViewById(R.id.favImageView)
             favHisName = itemView.findViewById(R.id.favName)
             favHisPrice = itemView.findViewById(R.id.favPrice)
-            //favHisButton = itemView.findViewById(R.id.favLike)
+            favHisButton = itemView.findViewById(R.id.favLike)
         }
 
         fun bind(position: Int, listener: FavHisContent.OnItemClickListener){
             itemView.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(v: View?) {
+                    listener.onItemClick(position)
+                }
+            })
+        }
+
+        fun inBind(position: Int, listener: FavHisContent.sOnItemClickListener){
+            favHisButton.setOnClickListener(object : View.OnClickListener{
                 override fun onClick(v: View?) {
                     listener.onItemClick(position)
                 }
@@ -50,6 +59,7 @@ class FavHisContent(private val context: Context, private val listener: OnItemCl
         holder?.favHisPrice?.text = Html.fromHtml(byCategory.get(position).getString("short_prod_code"))
 
         holder?.bind(position,listener)
+        holder?.inBind(position, slistener)
     }
 
     override fun getItemCount(): Int {
@@ -58,6 +68,10 @@ class FavHisContent(private val context: Context, private val listener: OnItemCl
 
     interface OnItemClickListener{
         fun onItemClick(position:Int)
+    }
+
+    interface sOnItemClickListener{
+        fun onItemClick(position: Int)
     }
 
     fun addJsonObject(jsonObject:JSONObject) {
