@@ -32,7 +32,6 @@ import kotlin.collections.ArrayList
 class TourDetailActivity : AppCompatActivity() {
 
     var tourURL = "https://gentle-atoll-11837.herokuapp.com/api/tour/"
-
     var favoriteURL = "http://gentle-atoll-11837.herokuapp.com/api/favoritetour"
     private val tourMaterial = ArrayList<JSONObject>()
     private val tourGalleryMaterial = ArrayList<String>()
@@ -54,7 +53,6 @@ class TourDetailActivity : AppCompatActivity() {
         tourGallerAdapter.registerDataSetObserver(indicatorGallery.getDataSetObserver())
 
         service_id = intent.getIntExtra("service_id", 0)
-        Log.d("Debug",service_id.toString())
 
         favourite.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
@@ -157,7 +155,17 @@ class TourDetailActivity : AppCompatActivity() {
         recycleTourReview!!.itemAnimator = DefaultItemAnimator()
         recycleTourReview!!.adapter = reviewAdapter
 
-        val highlightAdapter = HighlightAdapter(this)
+        val highlightAdapter = HighlightAdapter(this, object : HighlightAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                val intent = Intent(applicationContext, AttractionActivity::class.java)
+                try {
+                    intent.putExtra("attraction_id", tourHighlightMaterial.get(position).getInt("attraction_id"))
+                } catch (e: Exception){
+                    e.printStackTrace()
+                }
+                startActivity(intent)
+            }
+        })
         val hightlightLayoutManager = LinearLayoutManager(this, LinearLayout.HORIZONTAL, false)
         recycleViewHighlight!!.layoutManager = hightlightLayoutManager
         recycleViewHighlight!!.itemAnimator = DefaultItemAnimator()
@@ -191,6 +199,7 @@ class TourDetailActivity : AppCompatActivity() {
                     val tourHighlight = tourData.getJSONArray("highlight")
                     for (i in 0 until tourHighlight.length()){
                         highlightAdapter.addJsonObject(tourHighlight.getJSONObject(i))
+                        tourHighlightMaterial.add(tourHighlight.getJSONObject(i))
                     }
                     highlightAdapter.notifyDataSetChanged()
 
@@ -254,7 +263,7 @@ class TourDetailActivity : AppCompatActivity() {
     }
 }
 
-class HighlightAdapter(private val context: Context):RecyclerView.Adapter<HighlightAdapter.ViewHolder>() {
+class HighlightAdapter(private val context: Context, private val listener: HighlightAdapter.OnItemClickListener):RecyclerView.Adapter<HighlightAdapter.ViewHolder>() {
 
     private val highlight = ArrayList<JSONObject>()
 
@@ -265,6 +274,14 @@ class HighlightAdapter(private val context: Context):RecyclerView.Adapter<Highli
         init {
             highlightImg = itemView.findViewById(R.id.highImg)
             highlightText = itemView.findViewById(R.id.highText)
+        }
+
+        fun bind(position: Int, listener: OnItemClickListener){
+            itemView.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(v: View?) {
+                    listener.onItemClick(position)
+                }
+            })
         }
     }
 
@@ -280,10 +297,16 @@ class HighlightAdapter(private val context: Context):RecyclerView.Adapter<Highli
             Picasso.with(context).load(highlight.get(position).getString("attraction_image")).into(holder?.highlightImg)
         }
         holder?.highlightText?.text = highlight.get(position).getString("attraction_name")
+
+        holder?.bind(position, listener)
     }
 
     override fun getItemCount(): Int {
         return highlight.size
+    }
+
+    interface OnItemClickListener{
+        fun onItemClick(position:Int)
     }
 
     fun addJsonObject(jsonObject: JSONObject) {

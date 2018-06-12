@@ -94,7 +94,7 @@ class TourDatesActivity : AppCompatActivity() {
                 dateListener.datePicker.minDate = calender.timeInMillis
             }
         })
-        val packegeOptionLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        val packegeOptionLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, true)
         packageRecyclerView!!.layoutManager = packegeOptionLayoutManager
         packageRecyclerView!!.itemAnimator = DefaultItemAnimator()
         packageRecyclerView!!.adapter = packageOptionAdapter

@@ -140,7 +140,6 @@ class TripsContentFragment : Fragment(), OnMapReadyCallback {
                             val nearbyData = response.getJSONArray("data")
 
                             for (i in 0 until nearbyData.length()){
-                                Log.d("Debug", nearbyData.toString())
                                 nearByMaterial.add(nearbyData.getJSONObject(i))
                             }
                             progressDialog.dismiss()
