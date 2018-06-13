@@ -67,7 +67,8 @@
         <activity android:name=".TermsActivity" />
         <activity android:name=".CityActivity" />
         <activity android:name=".PickActivity" />
-        <activity android:name=".AttractionActivity"></activity>
+        <activity android:name=".AttractionActivity" />
+        <activity android:name=".MyAttractionActivity"></activity>
     </application>
 
 </manifest>

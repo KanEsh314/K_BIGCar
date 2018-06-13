@@ -35,7 +35,6 @@ class NearByActivity : AppCompatActivity() {
     var attractMaterial = ArrayList<JSONObject>()
     var attractURL = "https://gentle-atoll-11837.herokuapp.com/api/attractiondetail/"
     var attractGalleryMaterial = ArrayList<String>()
-    var attraction_id:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,18 +47,18 @@ class NearByActivity : AppCompatActivity() {
         nindicatorattractGallery.setViewPager(nattractGalleryViewPager)
         nattractGallerAdapter.registerDataSetObserver(nindicatorattractGallery.getDataSetObserver())
 
-        val attractAdapter = AttractionAdapter(applicationContext, object : AttractionAdapter.OnItemClickListener{
+        val attractAdapter = ExplorePopularContent(this, object: ExplorePopularContent.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val intent = Intent(applicationContext, TourDetailActivity::class.java)
-                try {
+                try{
                     intent.putExtra("service_id", attractMaterial.get(position).getInt("service_id"))
-                } catch (e: Exception){
+                }catch (e :JSONException){
                     e.printStackTrace()
                 }
                 startActivity(intent)
             }
         })
-        val attractLayoutManager = LinearLayoutManager(applicationContext, LinearLayout.HORIZONTAL,false)
+        val attractLayoutManager = LinearLayoutManager(this, LinearLayout.HORIZONTAL, true)
         recycleViewSuggest!!.layoutManager = attractLayoutManager
         recycleViewSuggest!!.itemAnimator = DefaultItemAnimator()
         recycleViewSuggest!!.adapter = attractAdapter

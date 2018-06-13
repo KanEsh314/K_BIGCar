@@ -162,13 +162,13 @@
                     tools:ignore="MissingPrefix"/>
 
                 <Button
-                    android:id="@+id/my_booking"
+                    android:id="@+id/my_tour"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_below="@id/fav_his"
                     android:background="@drawable/list_button"
                     android:drawableEnd="@mipmap/ic_action_arrow"
-                    android:text="My Booking"
+                    android:text="My Tour"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:paddingLeft="20dp"
@@ -180,11 +180,30 @@
                     android:textAllCaps="false"
                     tools:ignore="MissingPrefix" />
 
+                <!--<Button-->
+                    <!--android:id="@+id/my_trip"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_below="@id/my_tour"-->
+                    <!--android:background="@drawable/list_button"-->
+                    <!--android:drawableEnd="@mipmap/ic_action_arrow"-->
+                    <!--android:text="My Trip"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:ellipsize="end"-->
+                    <!--android:paddingLeft="20dp"-->
+                    <!--android:paddingRight="20dp"-->
+                    <!--android:textAlignment="textStart"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:textColor="@color/product_name"-->
+                    <!--fontPath="fonts/SourceSansPro-Regular.ttf"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--tools:ignore="MissingPrefix" />-->
+
                 <Button
                     android:id="@+id/inbox"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@id/my_booking"
+                    android:layout_below="@id/my_tour"
                     android:background="@drawable/list_button"
                     android:drawableEnd="@mipmap/ic_action_arrow"
                     android:text="Inbox"

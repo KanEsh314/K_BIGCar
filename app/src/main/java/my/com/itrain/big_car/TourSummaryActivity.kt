@@ -25,13 +25,29 @@ class TourSummaryActivity : AppCompatActivity() {
         travel_date?.text = intent.getStringExtra("travel_date")
         travel_time?.text = intent.getStringExtra("travel_time")
         traveller_count?.text = intent.getStringExtra("package_pax")
-        booking_name?.text = intent.getStringExtra("booking_name")
+        booking_name?.text = intent.getStringExtra("first_name")+" "+intent.getStringExtra("last_name")
         booking_mobile_number?.text = intent.getStringExtra("mobile_number")
         booking_nationality?.text = intent.getStringExtra("nationality")
         booking_email?.text = intent.getStringExtra("user_email")
-        booking_remark?.text = intent.getStringExtra("remark")
-        booking_id?.text = intent.getStringExtra("paymentID")
-        booking_state?.text = intent.getStringExtra("paymentState")
+
+        if (intent.getStringExtra("remark") == "") {
+            booking_remark?.text = "No Remark"
+        } else {
+            booking_remark?.text = intent.getStringExtra("remark")
+        }
+
+        if (intent.getStringExtra("paymentID") == "") {
+            booking_id.text = "Payment ID is not available"
+        } else {
+            booking_id?.text = intent.getStringExtra("paymentID")
+        }
+
+        if (intent.getStringExtra("paymentState") == "") {
+            booking_state?.text = "Pending"
+        } else {
+            booking_state?.text = intent.getStringExtra("paymentState")
+        }
+
         booking_amount?.text = "RM"+intent.getStringExtra("package_price")
 
 
@@ -43,7 +59,7 @@ class TourSummaryActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        //super.onBackPressed()
         Toast.makeText(applicationContext, "Please Click More Tour", Toast.LENGTH_LONG).show()
     }
 }

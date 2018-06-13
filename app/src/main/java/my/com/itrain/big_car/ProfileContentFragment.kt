@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile_content.*
+import my.com.itrain.big_car.R.id.*
 import org.json.JSONObject
 
 /**
@@ -71,7 +72,7 @@ class ProfileContentFragment : Fragment() {
 
         })
 
-        my_booking.setOnClickListener(object : View.OnClickListener{
+        my_tour.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(activity, BookingActivity::class.java)
                 if (activity.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
@@ -81,6 +82,17 @@ class ProfileContentFragment : Fragment() {
                 }
             }
         })
+
+//        my_trip.setOnClickListener(object : View.OnClickListener{
+//            override fun onClick(v: View?) {
+//                val intent = Intent(activity, MyAttractionActivity::class.java)
+//                if (activity.getSharedPreferences("myPref", MODE_PRIVATE).getString("myToken","") == ""){
+//                    startActivity(Intent(activity, StartActivity::class.java))
+//                }else {
+//                    startActivity(intent)
+//                }
+//            }
+//        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

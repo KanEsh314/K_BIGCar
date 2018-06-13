@@ -42,7 +42,11 @@ class BookingContent (private val context: Context, private val listener: Bookin
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        Picasso.with(context).load(myBooking.get(position).getString("image")).into(holder?.bookingImageView)
+        if (myBooking.get(position).getString("image") == ""){
+            holder?.bookingImageView?.setImageResource(R.drawable.no_available)
+        } else {
+            Picasso.with(context).load(myBooking.get(position).getString("image")).into(holder?.bookingImageView)
+        }
         holder?.bokingPlaceName?.text = Html.fromHtml(myBooking.get(position).getString("product_name"))
         holder?.bookingPlace?.text = Html.fromHtml(myBooking.get(position).getString("short_prod_code"))
 

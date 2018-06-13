@@ -21,6 +21,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
@@ -71,6 +72,8 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
     private var drop_Longitude:Double = 0.0
 
     val vehicleMaterial = ArrayList<JSONObject>()
+
+    var CheckEditText:Boolean = false
 
     var pick_address:String = ""
     var drop_address: String = ""
@@ -215,50 +218,73 @@ class BrowseContentFragment : Fragment(), OnMapReadyCallback {
 
         selectTrip.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-
-                val sharedPreferences = activity.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
-                val stringRequest = object : StringRequest(Request.Method.POST, tripURL, object : Response.Listener<String> {
-                    override fun onResponse(response: String) {
-                        progressDialog.dismiss()
-                        startActivity(Intent(activity, DriverActivity::class.java))
-                    }
-                },
-                        object : Response.ErrorListener {
-                            override fun onErrorResponse(error: VolleyError?) {
-                                //Log.d("Error", error.toString())
-                                progressDialog.dismiss()
-                                //Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
-                            }
-
-                        }){
-                    @Throws(AuthFailureError::class)
-                    override fun getHeaders():Map<String,String>{
-                        val headers = HashMap<String, String>()
-                        headers.put("Authorization", "Bearer "+sharedPreferences)
-                        headers.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
-                        return headers
-                    }
-                    override fun getParams():Map<String, String> {
-                        val params = HashMap<String, String>()
-
-                        params.put("address", pick_address)
-                        params.put("attraction", drop_off_id.toString())
-                        params.put("trip_type", trip_type_id.toString())
-                        params.put("payment_method", trip_pay_id.toString())
-                        params.put("remarks", trip_driver_notes.text.toString())
-                        params.put("datetime", trip_time)
-                        params.put("vehicle_type", vehicle_type_id.toString())
-
-                        Log.d("Debug",params.toString())
-                        return params
-                    }
+                CheckEditTextIsEmptyOrNot()
+                if (CheckEditText){
+                    attractionBooking()
+                }else{
+                    Toast.makeText(activity, "Please fill all form fields.", Toast.LENGTH_LONG).show()
                 }
-
-                stringRequest.retryPolicy = DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 5, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
-                requestVolley.add(stringRequest)
-
             }
         })
+    }
+
+    private fun CheckEditTextIsEmptyOrNot() {
+
+        if (TextUtils.isEmpty(pick_address) || TextUtils.isEmpty(drop_address) || TextUtils.isEmpty(vehicle_type_id) || TextUtils.isEmpty(trip_type_id) || TextUtils.isEmpty(trip_pay_id) || TextUtils.isEmpty(drop_off_id) || TextUtils.isEmpty(trip_time)){
+            CheckEditText = false
+        }else {
+            CheckEditText = true
+        }
+    }
+
+    private fun attractionBooking(){
+
+        val progressDialog = ProgressDialog(activity, R.style.DialogTheme)
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setTitle("Please Wait")
+        progressDialog.setMessage("Loading")
+        progressDialog.show()
+
+        val sharedPreferences = activity.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
+        val stringRequest = object : StringRequest(Request.Method.POST, tripURL, object : Response.Listener<String> {
+            override fun onResponse(response: String) {
+                progressDialog.dismiss()
+                startActivity(Intent(activity, DriverActivity::class.java))
+            }
+        },
+                object : Response.ErrorListener {
+                    override fun onErrorResponse(error: VolleyError?) {
+                        //Log.d("Error", error.toString())
+                        progressDialog.dismiss()
+                        //Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
+                    }
+
+                }){
+            @Throws(AuthFailureError::class)
+            override fun getHeaders():Map<String,String>{
+                val headers = HashMap<String, String>()
+                headers.put("Authorization", "Bearer "+sharedPreferences)
+                headers.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
+                return headers
+            }
+            override fun getParams():Map<String, String> {
+                val params = HashMap<String, String>()
+
+                params.put("address", pick_address)
+                params.put("attraction", drop_off_id)
+                params.put("trip_type", trip_type_id)
+                params.put("payment_method", trip_pay_id)
+                params.put("remarks", trip_driver_notes.text.toString())
+                params.put("datetime", trip_time)
+                params.put("vehicle_type", vehicle_type_id)
+
+                Log.d("Debug",params.toString())
+                return params
+            }
+        }
+        val requestVolley = Volley.newRequestQueue(activity)
+        stringRequest.retryPolicy = DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 5, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        requestVolley.add(stringRequest)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {

@@ -28,8 +28,6 @@ class LoginActivity : AppCompatActivity() {
     var emailHolder:String = ""
     var passwordHolder:String = ""
 
-    var activityName:String = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)

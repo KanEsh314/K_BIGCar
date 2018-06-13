@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
+import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -64,6 +65,8 @@ class TourConfirmActivity : AppCompatActivity() {
     var travel_time: String = ""
     var travel_date: String = ""
     var remark: String = ""
+
+    var paymentDetail: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,7 +126,7 @@ class TourConfirmActivity : AppCompatActivity() {
                     if (tourPaymentAdapter.getSelectedItem().getString("method") == "PayPal"){
                         processPayment()
                     } else if (tourPaymentAdapter.getSelectedItem().getString("method") == "Cash"){
-
+                        sendBooking()
                     } else if (tourPaymentAdapter.getSelectedItem().getString("method") == "Debit Card"){
 
                     } else if (tourPaymentAdapter.getSelectedItem().getString("method") == "Credit Card"){
@@ -236,7 +239,28 @@ class TourConfirmActivity : AppCompatActivity() {
             val sharedPreferences = applicationContext.getSharedPreferences("myPref", Context.MODE_PRIVATE).getString("myToken","")
             val stringRequest = object : StringRequest(Request.Method.POST, bookingURL, object : Response.Listener<String> {
                 override fun onResponse(response: String) {
-                    progressDialog.dismiss()
+                    val intent = Intent(applicationContext, TourSummaryActivity::class.java)
+                    try {
+                        intent.putExtra("tour_name", tour_name)
+                        intent.putExtra("package_title", package_title)
+                        intent.putExtra("package_pax", package_pax)
+                        intent.putExtra("travel_date", travel_date)
+                        intent.putExtra("travel_time", travel_time)
+                        intent.putExtra("first_name", booking_first)
+                        intent.putExtra("last_name", booking_last)
+                        intent.putExtra("mobile_number", mobile_number)
+                        intent.putExtra("nationality", nationality)
+                        intent.putExtra("user_email", user_email)
+                        intent.putExtra("remark", remark)
+                        intent.putExtra("package_price", package_price)
+                        var jsonObj = JSONObject(paymentDetail)
+                        intent.putExtra("paymentID", jsonObj.getJSONObject("response").getString("id"))
+                        intent.putExtra("paymentState", jsonObj.getJSONObject("response").getString("state"))
+
+                    }catch (e: Exception){
+                        e.printStackTrace()
+                    }
+                    startActivity(intent)
                     Log.d("Debug", response)
                 }
             },
@@ -251,7 +275,7 @@ class TourConfirmActivity : AppCompatActivity() {
                 override fun getHeaders():Map<String,String>{
                     val headers = HashMap<String, String>()
                     headers.put("Authorization", "Bearer "+sharedPreferences)
-                        headers.put("Content-Type", "application/x-www-form-urlencoded")
+                    headers.put("Content-Type", "application/x-www-form-urlencoded")
                     return headers
                 }
                 override fun getParams():Map<String, String> {
@@ -274,7 +298,6 @@ class TourConfirmActivity : AppCompatActivity() {
                     params.put("mobile_number", mobile_number)
                     params.put("email", user_email)
                     params.put("nationality",  nationality_id)
-
                     return params
                 }
             }
@@ -315,29 +338,8 @@ class TourConfirmActivity : AppCompatActivity() {
 
                 val paymentConfirmation = data.getParcelableExtra<PaymentConfirmation>(PaymentActivity.EXTRA_RESULT_CONFIRMATION)
                 if (paymentConfirmation != null){
-                    val intent = Intent(applicationContext, TourSummaryActivity::class.java)
-                    try {
-                        sendBooking()
-                        val paymentDetail = paymentConfirmation.toJSONObject().toString(4)
-                        val jsonObj = JSONObject(paymentDetail)
-
-                        intent.putExtra("tour_name", tour_name)
-                        intent.putExtra("package_title", package_title)
-                        intent.putExtra("package_pax", package_pax)
-                        intent.putExtra("travel_date", travel_date)
-                        intent.putExtra("travel_time", travel_time)
-                        intent.putExtra("first_name", booking_first)
-                        intent.putExtra("last_name", booking_last)
-                        intent.putExtra("nationality", nationality)
-                        intent.putExtra("user_email", user_email)
-                        intent.putExtra("remark", remark)
-                        intent.putExtra("paymentID", jsonObj.getJSONObject("response").getString("id"))
-                        intent.putExtra("paymentState", jsonObj.getJSONObject("response").getString("state"))
-                        intent.putExtra("package_price", package_price)
-                    }catch (e: JSONException){
-                        e.printStackTrace()
-                    }
-                    startActivity(intent)
+                    paymentDetail = paymentConfirmation.toJSONObject().toString(4)
+                    sendBooking()
                 }
             } else if (resultCode == Activity.RESULT_CANCELED){
                 Toast.makeText(applicationContext, "This Payment Has Been Cancelled", Toast.LENGTH_LONG).show()

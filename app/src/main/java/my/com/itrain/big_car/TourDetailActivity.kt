@@ -73,6 +73,7 @@ class TourDetailActivity : AppCompatActivity() {
                         override fun onResponse(response: JSONObject) {
                             if (response.getString("status") == "true"){
                                 favourite.setBackgroundResource(R.mipmap.ic_action_like)
+                                Toast.makeText(applicationContext, "Added to Favourite", Toast.LENGTH_LONG).show()
                             } else if (response.getString("status") == "false"){
                                 favourite.setBackgroundResource(R.mipmap.ic_action_unlike)
                             }

@@ -140,7 +140,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="@dimen/mediumPadding"
-                        android:text="Suggestion for you"
+                        android:text="Tour includes this attraction"
                         android:textColor="@color/colorDark"
                         android:textSize="@dimen/mediumUniversalText"
                         android:textStyle="bold" />

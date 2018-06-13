@@ -70,12 +70,12 @@ class CompletedFragment : Fragment() {
             override fun onResponse(response: JSONObject) {
                 try {
 
-                    val favhisData = response.getJSONArray("data");
+                    val completedData = response.getJSONArray("data");
 
-                    for (i in 0 until favhisData.length()){
-                        completedAdapter.addJsonObject(favhisData.getJSONObject(i))
-                        completedMaterial.add(favhisData.getJSONObject(i))
-                        Log.d("Debug", favhisData.getJSONObject(i).toString())
+                    for (i in 0 until completedData.length()){
+                        completedAdapter.addJsonObject(completedData.getJSONObject(i))
+                        completedMaterial.add(completedData.getJSONObject(i))
+                        Log.d("Debug", completedData.getJSONObject(i).toString())
                     }
                     completedAdapter.notifyDataSetChanged()
                     progressDialog.dismiss()
